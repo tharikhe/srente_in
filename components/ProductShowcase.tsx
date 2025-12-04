@@ -73,13 +73,13 @@ export default function ProductShowcase() {
                         <Link
                             href="/products"
                             key={product.id}
-                            className="group relative"
+                            className="group relative h-full block"
                             onMouseEnter={() => setHoveredId(product.id)}
                             onMouseLeave={() => setHoveredId(null)}
                         >
-                            <div className="relative bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-brand-teal/30">
+                            <div className="relative bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-brand-teal/30 h-full flex flex-col">
                                 {/* Image Container */}
-                                <div className="relative h-48 sm:h-56 overflow-hidden bg-gray-50">
+                                <div className="relative h-48 sm:h-56 overflow-hidden bg-gray-50 flex-shrink-0">
                                     <Image
                                         src={product.image}
                                         alt={product.title}
@@ -106,11 +106,11 @@ export default function ProductShowcase() {
                                 </div>
 
                                 {/* Content */}
-                                <div className="p-5 sm:p-6">
+                                <div className="p-5 sm:p-6 flex flex-col flex-grow">
                                     <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-brand-teal transition-colors">
                                         {product.title}
                                     </h3>
-                                    <p className="text-sm text-gray-600 line-clamp-2">
+                                    <p className="text-sm text-gray-600 line-clamp-2 flex-grow">
                                         {product.description}
                                     </p>
 

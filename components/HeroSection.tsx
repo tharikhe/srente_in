@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { Star, Shield, Truck, Award, ChevronRight, Zap, Globe, CheckCircle2, ArrowRight, Play } from 'lucide-react';
+import { Star, Shield, Truck, Award, ChevronRight, Zap, Globe, CheckCircle2, ArrowRight, Play, BarChart3, Users, Activity } from 'lucide-react';
 import Link from 'next/link';
+import { ContainerScroll } from './ui/container-scroll-animation';
 
 // Types for component props
 interface HeroProps {
@@ -410,54 +411,6 @@ const HeroSection: React.FC<HeroProps> = ({
         <div className={`relative w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-black mb-6 sm:mb-10 ${className}`}>
             {/* Custom Animations */}
             <style jsx>{`
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px) rotate(0deg); }
-                    50% { transform: translateY(-20px) rotate(5deg); }
-                }
-                @keyframes float-delayed {
-                    0%, 100% { transform: translateY(0px) rotate(0deg); }
-                    50% { transform: translateY(-15px) rotate(-5deg); }
-                }
-                @keyframes shimmer {
-                    0% { transform: translateX(-100%); }
-                    100% { transform: translateX(100%); }
-                }
-                @keyframes pulse-ring {
-                    0% { transform: scale(0.8); opacity: 1; }
-                    100% { transform: scale(2); opacity: 0; }
-                }
-                @keyframes slide-up {
-                    from { opacity: 0; transform: translateY(40px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                @keyframes slide-down {
-                    from { opacity: 0; transform: translateY(-30px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                @keyframes scale-in {
-                    from { opacity: 0; transform: scale(0.9); }
-                    to { opacity: 1; transform: scale(1); }
-                }
-                @keyframes glow-pulse {
-                    0%, 100% { box-shadow: 0 0 30px rgba(196, 150, 12, 0.3), 0 0 60px rgba(196, 150, 12, 0.1); }
-                    50% { box-shadow: 0 0 50px rgba(196, 150, 12, 0.5), 0 0 100px rgba(196, 150, 12, 0.2); }
-                }
-                .animate-float { animation: float 6s ease-in-out infinite; }
-                .animate-float-delayed { animation: float-delayed 5s ease-in-out infinite; animation-delay: 1s; }
-                .animate-shimmer { animation: shimmer 3s infinite; }
-                .animate-pulse-ring { animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite; }
-                .animate-slide-up { animation: slide-up 0.8s ease-out forwards; }
-                .animate-slide-down { animation: slide-down 0.8s ease-out forwards; }
-                .animate-scale-in { animation: scale-in 0.6s ease-out forwards; }
-                .animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
-                .delay-100 { animation-delay: 100ms; }
-                .delay-200 { animation-delay: 200ms; }
-                .delay-300 { animation-delay: 300ms; }
-                .delay-400 { animation-delay: 400ms; }
-                .delay-500 { animation-delay: 500ms; }
-                .delay-600 { animation-delay: 600ms; }
-                .delay-700 { animation-delay: 700ms; }
-
                 /* Custom Skew Button Styles */
                 .btn-skew {
                     --color: #C4960C;
@@ -524,167 +477,123 @@ const HeroSection: React.FC<HeroProps> = ({
                 style={{ background: 'black' }}
             />
 
-            {/* Decorative Elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {/* Floating Orbs */}
-                <div className="absolute top-20 left-10 w-32 h-32 bg-brand-gold/10 rounded-full blur-3xl animate-float" />
-                <div className="absolute top-40 right-20 w-40 h-40 bg-brand-teal/10 rounded-full blur-3xl animate-float-delayed" />
-                <div className="absolute bottom-32 left-1/4 w-24 h-24 bg-white/5 rounded-full blur-2xl animate-float" />
-
-                {/* Corner Decorations */}
-                <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-brand-gold/5 to-transparent" />
-                <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-brand-teal/5 to-transparent" />
-
-                {/* Grid Pattern Overlay */}
-                <div className="absolute inset-0 opacity-[0.02]" style={{
-                    backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-                    backgroundSize: '50px 50px'
-                }} />
-            </div>
-
             {/* Gradient Overlays */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
 
-            {/* Main Content */}
-            <div className="relative z-10 min-h-[500px] sm:min-h-[600px] md:min-h-[700px] flex flex-col">
-
-                {/* Hero Content */}
-                <div className="flex-grow flex items-center justify-center px-4 sm:px-8 py-12 sm:py-16">
-                    <div className="max-w-6xl mx-auto w-full">
-                        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-
-                            {/* Left Content */}
-                            <div className="text-center lg:text-left">
-                                {/* Trust Badge */}
-                                {trustBadge && (
-                                    <div className={`inline-flex mb-6 sm:mb-8 ${isLoaded ? 'animate-slide-down' : 'opacity-0'}`}>
-                                        <div className="relative group cursor-pointer">
-                                            {/* Glow Effect */}
-                                            <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold via-amber-400 to-brand-gold rounded-full blur-md opacity-40 group-hover:opacity-60 transition-opacity animate-glow-pulse" />
-
-                                            <div className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full">
-                                                <div className="flex gap-0.5">
-                                                    {[1, 2, 3].map((i) => (
-                                                        <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 text-brand-gold fill-brand-gold" />
-                                                    ))}
-                                                </div>
-                                                <span className="text-white font-semibold tracking-wide text-xs sm:text-sm">
-                                                    {trustBadge.text}
-                                                </span>
-                                                <ChevronRight className="w-4 h-4 text-brand-gold group-hover:translate-x-1 transition-transform" />
+            {/* Main Content with Container Scroll Animation */}
+            <div className="relative z-10">
+                <ContainerScroll
+                    titleComponent={
+                        <div className="flex flex-col items-center justify-center">
+                            {/* Trust Badge */}
+                            {trustBadge && (
+                                <div className="inline-flex mb-6 sm:mb-8 animate-fade-in-up">
+                                    <div className="relative group cursor-pointer">
+                                        <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold via-amber-400 to-brand-gold rounded-full blur-md opacity-40 group-hover:opacity-60 transition-opacity" />
+                                        <div className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full">
+                                            <div className="flex gap-0.5">
+                                                {[1, 2, 3].map((i) => (
+                                                    <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 text-brand-gold fill-brand-gold" />
+                                                ))}
                                             </div>
+                                            <span className="text-white font-semibold tracking-wide text-xs sm:text-sm">
+                                                {trustBadge.text}
+                                            </span>
+                                            <ChevronRight className="w-4 h-4 text-brand-gold group-hover:translate-x-1 transition-transform" />
                                         </div>
                                     </div>
-                                )}
-
-                                {/* Headlines */}
-                                <div className="space-y-2 sm:space-y-4 mb-6 sm:mb-8">
-                                    <h1 className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight ${isLoaded ? 'animate-slide-up delay-100' : 'opacity-0'}`}>
-                                        <span className="bg-gradient-to-r from-brand-gold via-amber-300 to-brand-gold bg-clip-text text-transparent" style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic' }}>
-                                            {headline.line1}
-                                        </span>
-                                    </h1>
-                                    <h2 className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight ${isLoaded ? 'animate-slide-up delay-200' : 'opacity-0'}`}>
-                                        <span className="bg-gradient-to-r from-brand-teal-light via-teal-300 to-brand-teal-light bg-clip-text text-transparent">
-                                            {headline.line2}
-                                        </span>
-                                    </h2>
                                 </div>
+                            )}
 
-                                {/* Subtitle */}
-                                <p className={`text-sm sm:text-lg md:text-xl text-gray-300 font-light leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8 sm:mb-10 ${isLoaded ? 'animate-slide-up delay-300' : 'opacity-0'}`}>
-                                    {subtitle}
-                                </p>
+                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
+                                <span className="bg-gradient-to-r from-brand-gold via-amber-300 to-brand-gold bg-clip-text text-transparent italic font-serif block mb-2">
+                                    {headline.line1}
+                                </span>
+                                <span className="bg-gradient-to-r from-brand-teal-light via-teal-300 to-brand-teal-light bg-clip-text text-transparent">
+                                    {headline.line2}
+                                </span>
+                            </h1>
 
-                                {/* CTA Buttons */}
-                                {buttons && (
-                                    <div className={`flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start ${isLoaded ? 'animate-slide-up delay-400' : 'opacity-0'}`}>
-                                        {buttons.primary && (
-                                            <Link href="/products">
-                                                <button
-                                                    onClick={buttons.primary.onClick}
-                                                    className="btn-skew flex items-center justify-center gap-3"
-                                                >
-                                                    <span>{buttons.primary.text}</span>
-                                                    <ArrowRight className="w-5 h-5" />
-                                                </button>
-                                            </Link>
-                                        )}
+                            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+                                {subtitle}
+                            </p>
 
-                                        {buttons.secondary && (
-                                            <Link href="/bom">
-                                                <button
-                                                    onClick={buttons.secondary.onClick}
-                                                    className="btn-skew btn-skew-secondary flex items-center justify-center gap-3"
-                                                >
-                                                    <Zap className="w-5 h-5" />
-                                                    <span>{buttons.secondary.text}</span>
-                                                </button>
-                                            </Link>
-                                        )}
-                                    </div>
-                                )}
-
-
-                            </div>
-
-                            {/* Right Content - Stats Card */}
-                            <div className={`hidden lg:block ${isLoaded ? 'animate-scale-in delay-400' : 'opacity-0'}`}>
-                                <div className="relative">
-                                    {/* Card Glow */}
-                                    <div className="absolute -inset-4 bg-gradient-to-r from-brand-gold/20 via-brand-teal/20 to-brand-gold/20 rounded-3xl blur-2xl" />
-
-                                    {/* Stats Card */}
-                                    <div className="relative bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl">
-                                        <div className="grid grid-cols-2 gap-6">
-                                            {stats.map((stat, index) => (
-                                                <div
-                                                    key={index}
-                                                    className="group text-center p-6 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-brand-gold/30 transition-all duration-300 cursor-pointer"
-                                                >
-                                                    <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-brand-gold/20 to-brand-gold/5 mb-4 group-hover:scale-110 transition-transform">
-                                                        <stat.icon className="w-6 h-6 text-brand-gold" />
-                                                    </div>
-                                                    <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-1">
-                                                        {stat.value}
-                                                    </div>
-                                                    <div className="text-sm text-gray-400 font-medium">
-                                                        {stat.label}
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        {/* CTA in Card */}
-                                        <div className="mt-8 pt-6 border-t border-white/10">
-                                            <Link
-                                                href="/about"
-                                                className="flex items-center justify-center gap-2 text-brand-gold hover:text-white font-semibold transition-colors group"
+                            {/* Buttons */}
+                            {buttons && (
+                                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-12">
+                                    {buttons.primary && (
+                                        <Link href="/products">
+                                            <button
+                                                onClick={buttons.primary.onClick}
+                                                className="btn-skew flex items-center justify-center gap-3"
                                             >
-                                                <Play className="w-5 h-5 p-0.5 bg-brand-gold/20 rounded-full group-hover:bg-brand-gold group-hover:text-black transition-all" />
-                                                <span>Learn More About Us</span>
-                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                            </Link>
-                                        </div>
+                                                <span>{buttons.primary.text}</span>
+                                                <ArrowRight className="w-5 h-5" />
+                                            </button>
+                                        </Link>
+                                    )}
+
+                                    {buttons.secondary && (
+                                        <Link href="/bom">
+                                            <button
+                                                onClick={buttons.secondary.onClick}
+                                                className="btn-skew btn-skew-secondary flex items-center justify-center gap-3"
+                                            >
+                                                <Zap className="w-5 h-5" />
+                                                <span>{buttons.secondary.text}</span>
+                                            </button>
+                                        </Link>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    }
+                >
+                    {/* Dashboard Mockup Card */}
+                    <div className="w-full h-full bg-gradient-to-br from-gray-900 to-black p-6 flex flex-col gap-6">
+                        {/* Header Bar */}
+                        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                            <div className="flex items-center gap-3">
+                                <div className="w-3 h-3 rounded-full bg-red-500" />
+                                <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                                <div className="w-3 h-3 rounded-full bg-green-500" />
+                            </div>
+                            <div className="text-gray-400 text-sm font-mono">seretech-dashboard.exe</div>
+                        </div>
+
+                        {/* Dashboard Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-full">
+                            {stats.map((stat, index) => (
+                                <div key={index} className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-brand-gold/50 transition-colors group flex flex-col items-center justify-center text-center">
+                                    <div className="p-3 bg-brand-gold/10 rounded-full mb-4 group-hover:scale-110 transition-transform">
+                                        <stat.icon className="w-8 h-8 text-brand-gold" />
                                     </div>
+                                    <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
+                                    <div className="text-sm text-gray-400">{stat.label}</div>
+                                </div>
+                            ))}
+
+                            {/* Chart Placeholder */}
+                            <div className="col-span-1 md:col-span-2 lg:col-span-4 bg-white/5 rounded-xl p-6 border border-white/10 flex items-center justify-center relative overflow-hidden group">
+                                <div className="absolute inset-0 bg-gradient-to-r from-brand-teal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <div className="flex items-end gap-2 h-32 w-full px-8 pb-4">
+                                    {[40, 70, 45, 90, 65, 85, 50, 75, 60, 95, 80, 55].map((h, i) => (
+                                        <div
+                                            key={i}
+                                            className="flex-1 bg-brand-gold/30 hover:bg-brand-gold transition-colors rounded-t-sm"
+                                            style={{ height: `${h}%` }}
+                                        />
+                                    ))}
+                                </div>
+                                <div className="absolute top-4 left-6 text-white font-medium flex items-center gap-2">
+                                    <BarChart3 className="w-4 h-4 text-brand-gold" />
+                                    Monthly Growth
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                {/* Bottom Stats Bar - Mobile */}
-                <div className={`lg:hidden px-4 pb-6 ${isLoaded ? 'animate-slide-up delay-600' : 'opacity-0'}`}>
-                    <div className="grid grid-cols-4 gap-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4">
-                        {stats.map((stat, index) => (
-                            <div key={index} className="text-center">
-                                <div className="text-lg sm:text-xl font-bold text-brand-gold">{stat.value}</div>
-                                <div className="text-[10px] sm:text-xs text-gray-400">{stat.label}</div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                </ContainerScroll>
             </div>
 
             {/* Bottom Gradient Fade */}

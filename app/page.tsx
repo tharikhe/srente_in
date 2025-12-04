@@ -45,10 +45,10 @@ export default function Home() {
           icons: [<span key="1">★</span>, <span key="2">★</span>, <span key="3">★</span>]
         }}
         headline={{
-          line1: "Legacy of Excellence",
-          line2: "Electronics Distribution"
+          line1: "Welcome To",
+          line2: "Serente Electronics HK LTD"
         }}
-        subtitle="We (Serente Electronics) are one of the leading independent Distributors in INDIA & Hong Kong. Serente has Prestigious OEM and EMS Clients in the Power Sector, Railways, TELCOM 5G, EVs/Consumer Electronics, IoT and many more."
+        subtitle="We source top industrial electronic components globally, ensuring reliability and performance."
         buttons={{
           primary: { text: "Browse Catalog" },
           secondary: { text: "Upload BOM" }

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Search, ShoppingCart, Menu, Phone, Mail, ChevronDown, X, Zap, Clock, MapPin, ArrowRight, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
+import { categories } from '@/data/products';
 
 export default function Navbar() {
     const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -180,47 +181,68 @@ export default function Navbar() {
             </div>
 
             {/* Premium Navigation Bar - Desktop */}
-            <div className="relative hidden lg:block">
-                {/* Gradient Background with Pattern */}
-                <div className="absolute inset-0 bg-gradient-to-r from-brand-gold via-amber-500 to-brand-gold" />
-                <div className="absolute inset-0 opacity-20" style={{
-                    backgroundImage: 'linear-gradient(135deg, transparent 25%, rgba(0,0,0,0.05) 25%, rgba(0,0,0,0.05) 50%, transparent 50%, transparent 75%, rgba(0,0,0,0.05) 75%)',
-                    backgroundSize: '20px 20px'
-                }} />
-
+            <div className="relative hidden lg:block border-t border-gray-100">
                 <div className="container mx-auto px-4 flex items-center relative">
                     {/* Premium Product Catalog Button */}
-                    <div className="w-64 flex-shrink-0 py-4 px-6 bg-gradient-to-r from-brand-teal to-brand-teal-dark text-white font-bold flex items-center gap-3 cursor-pointer hover:from-brand-teal-dark hover:to-brand-teal transition-all duration-500 group relative overflow-hidden">
-                        {/* Animated Shine */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                        <Menu className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500 relative" />
-                        <span className="tracking-wide relative">Product Catalog</span>
-                        <ChevronDown className="w-4 h-4 ml-auto group-hover:rotate-180 transition-transform duration-300 relative" />
+                    <div className="w-64 flex-shrink-0 py-3 px-0 mr-6 group relative z-50">
+                        <button className="w-full bg-brand-teal text-white font-bold py-3 px-6 rounded-xl flex items-center justify-between hover:bg-brand-teal-dark transition-all duration-300 shadow-md hover:shadow-lg relative z-20">
+                            <div className="flex items-center gap-3">
+                                <Menu className="w-5 h-5" />
+                                <span className="tracking-wide">Product Catalog</span>
+                            </div>
+                            <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform duration-300" />
+                        </button>
+
+                        {/* Dropdown Menu */}
+                        <div className="absolute top-full left-0 w-[600px] bg-white rounded-xl shadow-2xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-10 p-6 grid grid-cols-2 gap-4 mt-2">
+                            {categories.map((category) => (
+                                <Link
+                                    key={category}
+                                    href={`/products?category=${encodeURIComponent(category)}`}
+                                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-brand-surface transition-colors group/item"
+                                >
+                                    <div className="w-10 h-10 rounded-lg bg-brand-teal/10 flex items-center justify-center text-brand-teal group-hover/item:bg-brand-teal group-hover/item:text-white transition-colors">
+                                        <Sparkles className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-semibold text-gray-900 group-hover/item:text-brand-teal transition-colors">{category}</h4>
+                                        <p className="text-xs text-gray-500">Browse {category}</p>
+                                    </div>
+                                    <ArrowRight className="w-4 h-4 text-gray-400 ml-auto opacity-0 group-hover/item:opacity-100 transition-all -translate-x-2 group-hover/item:translate-x-0" />
+                                </Link>
+                            ))}
+                            <div className="col-span-2 mt-2 pt-4 border-t border-gray-100">
+                                <Link
+                                    href="/products"
+                                    className="flex items-center justify-center gap-2 text-brand-gold font-semibold hover:text-brand-gold-dark transition-colors"
+                                >
+                                    <span>View All Categories</span>
+                                    <ArrowRight className="w-4 h-4" />
+                                </Link>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Main Navigation Links */}
-                    <nav className="flex-grow flex items-center px-4 font-semibold text-sm">
+                    <nav className="flex-grow flex items-center justify-center gap-1 font-semibold text-sm">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.label}
                                 href={link.href}
-                                className="relative px-5 py-4 text-brand-teal-dark hover:text-white transition-all duration-300 tracking-wide group"
+                                className="relative px-4 py-3 text-gray-600 hover:text-brand-teal transition-colors duration-300 tracking-wide group"
                             >
-                                {/* Hover Background */}
-                                <span className="absolute inset-0 bg-brand-teal scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center rounded-lg mx-1" />
-
                                 {/* Link Text */}
                                 <span className="relative z-10 flex items-center gap-1.5">
                                     {link.label}
                                     {link.badge && (
-                                        <span className="px-1.5 py-0.5 bg-red-500 text-white text-[10px] font-bold rounded-full animate-pulse">
+                                        <span className="px-1.5 py-0.5 bg-brand-gold text-white text-[10px] font-bold rounded-full">
                                             {link.badge}
                                         </span>
                                     )}
                                 </span>
 
                                 {/* Bottom Indicator */}
-                                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-white group-hover:w-8 transition-all duration-300 rounded-full" />
+                                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-brand-gold group-hover:w-full transition-all duration-300 rounded-full opacity-0 group-hover:opacity-100" />
                             </Link>
                         ))}
                     </nav>
@@ -228,7 +250,7 @@ export default function Navbar() {
                     {/* Quick Contact Button */}
                     <Link
                         href="/contact"
-                        className="flex items-center gap-2 px-5 py-2.5 bg-white/20 hover:bg-white text-brand-teal-dark hover:text-brand-teal rounded-full transition-all duration-300 font-bold text-sm border-2 border-white/30 hover:border-white group backdrop-blur-sm"
+                        className="flex items-center gap-2 px-5 py-2.5 ml-6 text-brand-gold hover:text-white border-2 border-brand-gold hover:bg-brand-gold rounded-xl transition-all duration-300 font-bold text-sm group"
                     >
                         <Phone className="w-4 h-4 group-hover:animate-bounce" />
                         <span>Call Now</span>
