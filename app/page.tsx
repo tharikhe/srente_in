@@ -39,6 +39,7 @@ export default function Home() {
 
   return (
     <div className="w-full">
+      {/* Hero Section with 3D Animation */}
       <HeroSection
         trustBadge={{
           text: "ISO 9001:2015 Certified Distributor",
