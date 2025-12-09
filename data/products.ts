@@ -548,12 +548,13 @@ export const getProductsByCategory = (category: string): Product[] => {
 
 // Search products
 export const searchProducts = (query: string): Product[] => {
-    const lowerQuery = query.toLowerCase();
-    return products.filter(p =>
-        p.partNumber.toLowerCase().includes(lowerQuery) ||
-        p.description.toLowerCase().includes(lowerQuery) ||
-        (p.manufacturer && p.manufacturer.toLowerCase().includes(lowerQuery))
-    );
+    const terms = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
+
+    return products.filter(p => {
+        const searchText = `${p.partNumber} ${p.description} ${p.manufacturer || ''} ${p.category}`.toLowerCase();
+        // All terms must be found in the product text
+        return terms.every(term => searchText.includes(term));
+    });
 };
 
 // Get featured products (random selection)

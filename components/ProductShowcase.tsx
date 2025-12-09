@@ -10,7 +10,7 @@ const productShowcase = [
         id: 1,
         title: 'Board-to-Board Connectors',
         description: 'High-quality SMD connectors for reliable PCB connections',
-        image: '/products/connectors-white.jpg',
+        image: '/products-img/board-to-board-connector.webp',
         category: 'Connectors',
         stats: '500+ SKUs',
     },
@@ -18,7 +18,7 @@ const productShowcase = [
         id: 2,
         title: 'Power Inductors',
         description: 'SMD inductors for power management applications',
-        image: '/products/inductors.jpg',
+        image: '/products-img/power-inductor.jpg',
         category: 'Inductors',
         stats: '1000+ SKUs',
     },
@@ -26,7 +26,7 @@ const productShowcase = [
         id: 3,
         title: 'Automotive Connectors',
         description: 'Rugged connectors for automotive and industrial use',
-        image: '/products/connectors-auto.jpg',
+        image: '/products-img/automotive -connector.jpg',
         category: 'Automotive',
         stats: '300+ SKUs',
     },
@@ -34,7 +34,7 @@ const productShowcase = [
         id: 4,
         title: 'Tactile Switches',
         description: 'Precision switches for consumer electronics',
-        image: '/products/switches.jpg',
+        image: '/products-img/tackle switch.webp',
         category: 'Switches',
         stats: '200+ SKUs',
     },
@@ -84,6 +84,7 @@ export default function ProductShowcase() {
                                         src={product.image}
                                         alt={product.title}
                                         fill
+                                        loading="lazy"
                                         className="object-contain p-4 transition-transform duration-700 group-hover:scale-110"
                                     />
 
@@ -170,9 +171,10 @@ export default function ProductShowcase() {
                             {/* Image Side */}
                             <div className="relative h-64 sm:h-80 lg:h-[500px] order-1 lg:order-2">
                                 <Image
-                                    src="/products/components-mix.png"
-                                    alt="Electronic Components"
+                                    src="/products-img/inventory.jpg"
+                                    alt="Electronic Components Inventory"
                                     fill
+                                    loading="lazy"
                                     className="object-contain lg:object-cover object-right-bottom"
                                 />
                                 {/* Gradient Overlay */}

@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, Bot, User, Search, Package, HelpCircle } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, User, Search, Package, HelpCircle, Trash2, ThumbsUp, ThumbsDown, Sparkles, ExternalLink, Smartphone, Mail, ChevronRight, Info } from 'lucide-react';
 import { searchProducts, categories, getProductsByCategory, Product } from '@/data/products';
 import { ExpandableChat, ExpandableChatHeader, ExpandableChatBody, ExpandableChatFooter } from '@/components/ui/expandable-chat';
+import { Button } from '@/components/ui/button';
+import ProductDetailPopup from './ProductDetailPopup';
 
 interface Message {
     id: number;
@@ -11,163 +13,155 @@ interface Message {
     content: string;
     products?: Product[];
     timestamp: Date;
+    reactions?: {
+        helpful?: boolean;
+    };
+    relatedQuestions?: string[];
 }
 
 const quickActions = [
-    { icon: <Search className="w-4 h-4" />, label: 'Search Products', action: 'search' },
-    { icon: <Package className="w-4 h-4" />, label: 'View Categories', action: 'categories' },
-    { icon: <HelpCircle className="w-4 h-4" />, label: 'Get Help', action: 'help' },
+    { icon: <Search className="w-3.5 h-3.5" />, label: 'Search Parts', action: 'search' },
+    { icon: <Package className="w-3.5 h-3.5" />, label: 'Categories', action: 'categories' },
+    { icon: <Smartphone className="w-3.5 h-3.5" />, label: 'WhatsApp', action: 'whatsapp' },
 ];
 
+const WHATSAPP_NUMBER = "919353413620"; // Removed spaces/symbols for link
+
 export default function Chatbot() {
+    // State
     const [messages, setMessages] = useState<Message[]>([
         {
             id: 1,
             type: 'bot',
-            content: "👋 Hi! I'm your Serente Electronics assistant. I can help you find electronic components, check stock, and answer questions. How can I help you today?",
+            content: "👋 Hi! I'm your Serente Electronics assistant. I can help you find components (e.g., '10K resistor', '0805 capacitor'), check stock, or connect via WhatsApp.",
             timestamp: new Date(),
+            relatedQuestions: ["Show me resistors", "Check stock for RC0805", "Contact sales"]
         }
     ]);
     const [input, setInput] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    // Refs
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const chatBodyRef = useRef<HTMLDivElement>(null);
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    };
-
+    // Initial mount
     useEffect(() => {
         setIsMounted(true);
     }, []);
 
+    // Scroll to bottom on new messages
     useEffect(() => {
-        scrollToBottom();
-    }, [messages]);
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [messages, isTyping]);
 
-    const processMessage = (userMessage: string): { content: string; products?: Product[] } => {
+    // Parse advanced search query
+    const parseSearchQuery = (query: string) => {
+        const lowerQuery = query.toLowerCase();
+
+        // Extract potential package sizes
+        const packageMatch = lowerQuery.match(/(0402|0603|0805|1206|1210|2010|2512)/);
+        const packageSize = packageMatch ? packageMatch[0] : null;
+
+        // Extract potential values (simplified regex for demo)
+        const valueMatch = lowerQuery.match(/(\d+[.]?\d*)\s*([kkmmuunnpp]?)(ohm|f|h|v)/);
+
+        // Basic search first
+        let results = searchProducts(query);
+
+        // Apply filters if we found specific criteria and have too many results
+        if (results.length > 5 && packageSize) {
+            results = results.filter(p => p.description.includes(packageSize) || p.partNumber.includes(packageSize));
+        }
+
+        return results;
+    };
+
+    const processMessage = (userMessage: string): Message => {
         const lowerMessage = userMessage.toLowerCase();
 
-        // Greeting responses
-        if (lowerMessage.match(/^(hi|hello|hey|good morning|good afternoon|good evening)/)) {
+        // Clear chat command
+        if (lowerMessage === 'clear' || lowerMessage === 'reset') {
+            return { id: 0, type: 'bot', content: '', timestamp: new Date() }; // Special signal
+        }
+
+        // WhatsApp Info
+        if (lowerMessage.includes('whatsapp') || lowerMessage.includes('number')) {
             return {
-                content: "Hello! 👋 Welcome to Serente Electronics. I can help you:\n\n• **Search for components** - Just type a part number or description\n• **Browse categories** - Ask about resistors, capacitors, ICs, etc.\n• **Check availability** - Tell me what you're looking for\n\nWhat can I help you find today?"
+                id: Date.now(),
+                type: 'bot',
+                content: "📱 **WhatsApp Support**\n\nYou can chat with our sales team directly on WhatsApp for quotes and bulk orders.\n\nNumber: +91 93534 13620",
+                timestamp: new Date(),
+                relatedQuestions: ["Send inquiry on WhatsApp", "Email sales"]
             };
         }
 
-        // Help request
-        if (lowerMessage.includes('help') || lowerMessage === '?') {
-            return {
-                content: "Here's what I can help you with:\n\n🔍 **Search Products** - Type a part number like 'RC0805' or description like '10K resistor'\n\n📦 **Browse Categories** - Ask 'show me capacitors' or 'what ICs do you have'\n\n📋 **Product Info** - Ask about specific components\n\n📞 **Contact** - Ask 'how to contact' for sales team info\n\n💡 **Tip**: Try searching for specific values like '100uF capacitor' or '3.3V regulator'"
-            };
-        }
+        // Search logic
+        if (lowerMessage.length > 2 && !lowerMessage.includes('category')) {
+            const products = parseSearchQuery(userMessage);
 
-        // Contact information
-        if (lowerMessage.includes('contact') || lowerMessage.includes('phone') || lowerMessage.includes('email') || lowerMessage.includes('sales')) {
-            return {
-                content: "📞 **Contact Our Sales Team:**\n\n• **Email:** Info@serentehk.com\n• **Phone:** +91 93534 13620\n• **Landline:** +91 86607 44258\n• **Working Hours:** Mon-Fri, 9AM - 6PM\n\nFor bulk orders or custom requirements, our team is ready to assist you!"
-            };
+            if (products.length > 0) {
+                const category = products[0].category;
+                return {
+                    id: Date.now(),
+                    type: 'bot',
+                    content: `🔍 I found **${products.length}** matches for "${userMessage}".\n\nHere are the top results:`,
+                    products: products.slice(0, 5),
+                    timestamp: new Date(),
+                    relatedQuestions: [`Show more ${category}`, "Filter by in-stock", "Start new search"]
+                };
+            }
         }
 
         // Category browsing
-        if (lowerMessage.includes('categories') || lowerMessage.includes('what do you have') || lowerMessage.includes('what products')) {
-            const categoryList = categories.map(cat => {
-                const count = getProductsByCategory(cat).length;
-                return `• **${cat}** (${count} products)`;
-            }).join('\n');
-
+        if (lowerMessage.includes('categories') || lowerMessage.includes('browse') || lowerMessage.includes('show me')) {
+            const categoryList = categories.slice(0, 8).map(c => `• ${c}`).join('\n');
             return {
-                content: `📦 **Our Product Categories:**\n\n${categoryList}\n\nTell me which category you'd like to explore!`
+                id: Date.now(),
+                type: 'bot',
+                content: `📦 **Categories**\n\n${categoryList}\n\nType a category name to see products.`,
+                timestamp: new Date(),
+                relatedQuestions: categories.slice(0, 3)
             };
-        }
-
-        // Search for specific categories
-        for (const category of categories) {
-            if (lowerMessage.includes(category.toLowerCase())) {
-                const categoryProducts = getProductsByCategory(category).slice(0, 5);
-                return {
-                    content: `🔍 Found **${getProductsByCategory(category).length}** products in **${category}**. Here are some examples:`,
-                    products: categoryProducts
-                };
-            }
-        }
-
-        // Stock/availability check
-        if (lowerMessage.includes('in stock') || lowerMessage.includes('available') || lowerMessage.includes('availability')) {
-            const partMatch = userMessage.match(/[A-Z0-9]{4,}/gi);
-            if (partMatch) {
-                const results = searchProducts(partMatch[0]);
-                if (results.length > 0) {
-                    const inStock = results.filter(p => p.inStock);
-                    return {
-                        content: `📊 Found **${results.length}** matching products. **${inStock.length}** are currently in stock:`,
-                        products: results.slice(0, 5)
-                    };
-                }
-            }
-            return {
-                content: "I can check stock for specific part numbers. Please provide a part number like 'RC0805FR-07120RL' or search term like '10K resistor'."
-            };
-        }
-
-        // BOM upload info
-        if (lowerMessage.includes('bom') || lowerMessage.includes('bill of materials') || lowerMessage.includes('bulk') || lowerMessage.includes('quote')) {
-            return {
-                content: "📋 **BOM Upload Tool:**\n\nWe have a dedicated BOM (Bill of Materials) tool that allows you to:\n\n• Upload Excel files with your component list\n• Get instant availability check\n• Request quotes for your entire BOM\n\n👉 Visit our **BOM Tool** page or ask to be connected to our sales team for personalized assistance!"
-            };
-        }
-
-        // Search for products
-        const searchTerms = userMessage.replace(/^(search|find|show|look for|looking for|need|want|do you have)/i, '').trim();
-        if (searchTerms.length >= 3) {
-            const results = searchProducts(searchTerms);
-
-            if (results.length > 0) {
-                return {
-                    content: `🔍 Found **${results.length}** products matching "${searchTerms}":`,
-                    products: results.slice(0, 5)
-                };
-            } else {
-                // Try finding similar products
-                const words = searchTerms.split(/\s+/);
-                let alternativeResults: Product[] = [];
-
-                for (const word of words) {
-                    if (word.length >= 3) {
-                        const partial = searchProducts(word);
-                        alternativeResults = [...alternativeResults, ...partial];
-                    }
-                }
-
-                if (alternativeResults.length > 0) {
-                    const unique = Array.from(new Set(alternativeResults.map(p => p.partNumber)))
-                        .map(pn => alternativeResults.find(p => p.partNumber === pn)!)
-                        .slice(0, 5);
-                    return {
-                        content: `I couldn't find an exact match for "${searchTerms}", but here are some related products:`,
-                        products: unique
-                    };
-                }
-
-                return {
-                    content: `I couldn't find products matching "${searchTerms}". Try:\n\n• Using a part number (e.g., RC0805)\n• Describing the component (e.g., '100K resistor')\n• Specifying a manufacturer\n\nOr contact our sales team for help finding specialized components!`
-                };
-            }
         }
 
         // Default response
         return {
-            content: "I'm not sure I understood that. You can:\n\n• **Search** - Type a part number or description\n• **Browse** - Ask about categories like 'resistors' or 'capacitors'\n• **Get Help** - Type 'help' for more options\n\nHow can I assist you?"
+            id: Date.now(),
+            type: 'bot',
+            content: "I didn't find specific products matching that. You can trying searching by:\n\n• Part Number (e.g., RC0805)\n• Description (e.g., 10K Resistor)\n• Category (e.g., Capacitors)",
+            timestamp: new Date(),
+            relatedQuestions: ["Help me search", "Contact support", "View categories"]
         };
     };
 
-    const handleSend = async () => {
-        if (!input.trim()) return;
+    const handleSend = async (manualInput?: string) => {
+        const messageText = manualInput || input;
+        if (!messageText.trim()) return;
 
+        // Reset logic for clear command
+        if (messageText.toLowerCase() === 'clear') {
+            setInput('');
+            setMessages([{
+                id: Date.now(),
+                type: 'bot',
+                content: "Chat cleared! How can I help you now?",
+                timestamp: new Date(),
+                relatedQuestions: ["Search products", "Browse categories"]
+            }]);
+            return;
+        }
+
+        // User Message
         const userMessage: Message = {
             id: Date.now(),
             type: 'user',
-            content: input,
+            content: messageText,
             timestamp: new Date(),
         };
 
@@ -175,38 +169,70 @@ export default function Chatbot() {
         setInput('');
         setIsTyping(true);
 
-        // Simulate typing delay
-        await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 500));
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 600));
 
-        const response = processMessage(input);
-
-        const botMessage: Message = {
-            id: Date.now() + 1,
-            type: 'bot',
-            content: response.content,
-            products: response.products,
-            timestamp: new Date(),
-        };
+        const response = processMessage(messageText);
 
         setIsTyping(false);
-        setMessages(prev => [...prev, botMessage]);
+        setMessages(prev => [...prev, response]);
     };
 
     const handleQuickAction = (action: string) => {
-        let message = '';
         switch (action) {
             case 'search':
-                message = 'I want to search for a product';
+                handleSend("I want to search for parts");
                 break;
             case 'categories':
-                message = 'Show me all categories';
+                handleSend("Show me categories");
                 break;
-            case 'help':
-                message = 'help';
+            case 'whatsapp':
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank');
                 break;
+            default:
+                if (action.startsWith('sq:')) {
+                    handleSend(action.substring(3));
+                }
         }
-        setInput(message);
-        handleSend();
+    };
+
+    const handleProductClick = (product: Product) => {
+        setSelectedProduct(product);
+        setIsPopupOpen(true);
+    };
+
+    const handleAddToInquiry = (product: Product) => {
+        // In a real app, addToCart(product)
+        const inquiryMsg: Message = {
+            id: Date.now(),
+            type: 'bot',
+            content: `✅ Added **${product.partNumber}** to your inquiry list.\n\nWould you like to send this inquiry via WhatsApp?`,
+            timestamp: new Date(),
+            relatedQuestions: ["Send inquiry", "Continue Searching"]
+        };
+
+        // Check if the last message was the same type to avoid spamming if user clicks multiple
+        setMessages(prev => [...prev, inquiryMsg]);
+
+        // Auto open WhatsApp with pre-filled message
+        const text = `Hi, I'm interested in ${product.partNumber} (${product.description}). Is it available?`;
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+    };
+
+    const handleReaction = (msgId: number, helpful: boolean) => {
+        setMessages(prev => prev.map(m =>
+            m.id === msgId ? { ...m, reactions: { helpful } } : m
+        ));
+    };
+
+    const clearChat = () => {
+        setMessages([{
+            id: Date.now(),
+            type: 'bot',
+            content: "Chat cleared. Ready for a fresh start!",
+            timestamp: new Date(),
+            relatedQuestions: ["Search products", "View categories"]
+        }]);
     };
 
     const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -217,142 +243,204 @@ export default function Chatbot() {
     };
 
     return (
-        <ExpandableChat size="md" position="bottom-right" icon={<MessageCircle className="w-6 h-6" />}>
-            <ExpandableChatHeader className="bg-brand-teal text-white">
-                <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                        <Bot className="w-6 h-6" />
+        <>
+            <ExpandableChat size="md" position="bottom-right" icon={<MessageCircle className="w-6 h-6" />}>
+                <ExpandableChatHeader className="bg-brand-teal text-white flex justify-between items-center p-4">
+                    <div className="flex items-center gap-3">
+                        <div className="relative">
+                            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center border border-white/20">
+                                <Bot className="w-6 h-6 text-brand-gold" />
+                            </div>
+                            <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-brand-teal rounded-full"></span>
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-base">Serente AI</h3>
+                            <p className="text-xs text-brand-gold/90 font-medium">Always Online</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 className="font-bold">Serente Assistant</h3>
-                        <p className="text-xs text-brand-yellow">Online • Ready to help</p>
+                    <div className="flex gap-2">
+                        <Button variant="ghost" size="icon" className="text-white/70 hover:text-white hover:bg-white/10" onClick={clearChat} title="Clear Chat">
+                            <Trash2 className="w-4 h-4" />
+                        </Button>
                     </div>
-                </div>
-            </ExpandableChatHeader>
+                </ExpandableChatHeader>
 
-            <ExpandableChatBody className="bg-gray-50 p-4 space-y-4">
-                {messages.map(message => (
-                    <div
-                        key={message.id}
-                        className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-                    >
-                        <div className={`max-w-[85%] ${message.type === 'user' ? 'order-1' : ''}`}>
-                            <div className={`flex items-end gap-2 ${message.type === 'user' ? 'flex-row-reverse' : ''}`}>
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${message.type === 'user'
-                                    ? 'bg-brand-orange text-white'
-                                    : 'bg-brand-teal text-white'
+                <ExpandableChatBody className="bg-slate-50 p-4 space-y-5" ref={chatBodyRef}>
+                    {messages.map((message, idx) => (
+                        <div key={message.id} className={`flex flex-col ${message.type === 'user' ? 'items-end' : 'items-start'} animate-slide-up`}>
+
+                            <div className={`flex gap-3 max-w-[90%] ${message.type === 'user' ? 'flex-row-reverse' : ''}`}>
+                                {/* Avatar */}
+                                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center mt-1 shadow-sm ${message.type === 'user' ? 'bg-brand-gold/90' : 'bg-brand-teal'
                                     }`}>
-                                    {message.type === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
+                                    {message.type === 'user' ? <User className="w-4 h-4 text-white" /> : <Sparkles className="w-4 h-4 text-brand-gold" />}
                                 </div>
-                                <div className={`rounded-2xl px-4 py-2 ${message.type === 'user'
-                                    ? 'bg-brand-orange text-white rounded-br-none'
-                                    : 'bg-white border border-gray-200 rounded-bl-none shadow-sm'
-                                    }`}>
-                                    <div className="text-sm whitespace-pre-wrap">
-                                        {message.content.split('\n').map((line, lineIdx) => (
-                                            <p key={lineIdx} className={lineIdx > 0 ? 'mt-1' : ''}>
-                                                {line.split(/(\*\*[^*]+\*\*)/).map((part, partIdx) => {
-                                                    if (part.startsWith('**') && part.endsWith('**')) {
-                                                        return <strong key={partIdx}>{part.slice(2, -2)}</strong>;
-                                                    }
-                                                    return <span key={partIdx}>{part}</span>;
-                                                })}
+
+                                {/* Bubble */}
+                                <div className={`flex flex-col gap-1 ${message.type === 'user' ? 'items-end' : 'items-start'}`}>
+                                    <div className={`rounded-2xl px-4 py-3 shadow-sm text-sm leading-relaxed ${message.type === 'user'
+                                        ? 'bg-brand-teal text-white rounded-tr-sm'
+                                        : 'bg-white border border-slate-200 text-slate-800 rounded-tl-sm'
+                                        }`}>
+                                        {message.content.split('\n').map((line, i) => (
+                                            <p key={i} className={`min-h-[1.2em] ${i > 0 ? 'mt-1' : ''}`}>
+                                                {line.split(/(\*\*[^*]+\*\*)/).map((part, pIdx) => (
+                                                    part.startsWith('**') && part.endsWith('**')
+                                                        ? <strong key={pIdx} className="font-bold">{part.slice(2, -2)}</strong>
+                                                        : <span key={pIdx}>{part}</span>
+                                                ))}
                                             </p>
                                         ))}
                                     </div>
 
-                                    {/* Product Results */}
+                                    {/* Products Grid */}
                                     {message.products && message.products.length > 0 && (
-                                        <div className="mt-3 space-y-2">
-                                            {message.products.map((product, idx) => (
+                                        <div className="mt-2 w-full grid gap-2">
+                                            {message.products.map((product, pIdx) => (
                                                 <div
-                                                    key={idx}
-                                                    className="bg-gray-50 rounded-lg p-2 border border-gray-100"
+                                                    key={pIdx}
+                                                    onClick={() => handleProductClick(product)}
+                                                    className="bg-white p-3 rounded-xl border border-slate-200 hover:border-brand-gold/50 hover:shadow-md hover:scale-[1.02] transition-all cursor-pointer group"
                                                 >
-                                                    <p className="font-mono text-xs font-bold text-brand-teal">{product.partNumber}</p>
-                                                    <p className="text-xs text-gray-600 line-clamp-1">{product.description}</p>
-                                                    <div className="flex items-center justify-between mt-1">
-                                                        <span className="text-xs text-gray-500">{product.manufacturer || 'N/A'}</span>
-                                                        <span className={`text-xs px-2 py-0.5 rounded-full ${product.inStock
-                                                            ? 'bg-green-100 text-green-700'
-                                                            : 'bg-red-100 text-red-700'
-                                                            }`}>
-                                                            {product.inStock ? 'In Stock' : 'Out of Stock'}
-                                                        </span>
+                                                    <div className="flex justify-between items-start">
+                                                        <div>
+                                                            <div className="text-xs font-bold text-brand-teal bg-brand-teal/10 px-2 py-0.5 rounded-full inline-block mb-1">
+                                                                {product.category}
+                                                            </div>
+                                                            <div className="font-bold text-slate-800 text-sm group-hover:text-brand-gold transition-colors">
+                                                                {product.partNumber}
+                                                            </div>
+                                                            <div className="text-xs text-slate-500 line-clamp-1 mt-0.5">
+                                                                {product.description}
+                                                            </div>
+                                                        </div>
+                                                        <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-brand-gold" />
                                                     </div>
                                                 </div>
                                             ))}
+                                            {message.products.length >= 5 && (
+                                                <button className="text-xs text-brand-teal font-medium hover:underline text-center w-full mt-1">
+                                                    View all results
+                                                </button>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {/* Bot Message Footer (Reactions & Time) */}
+                                    {message.type === 'bot' && (
+                                        <div className="flex items-center gap-4 mt-1 px-1">
+                                            <span className="text-[10px] text-slate-400">
+                                                {isMounted ? message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
+                                            </span>
+                                            <div className="flex gap-2">
+                                                <button
+                                                    onClick={() => handleReaction(message.id, true)}
+                                                    className={`hover:bg-slate-100 p-1 rounded transition-colors ${message.reactions?.helpful === true ? 'text-green-600' : 'text-slate-400'}`}
+                                                >
+                                                    <ThumbsUp className="w-3 h-3" />
+                                                </button>
+                                                <button
+                                                    onClick={() => handleReaction(message.id, false)}
+                                                    className={`hover:bg-slate-100 p-1 rounded transition-colors ${message.reactions?.helpful === false ? 'text-red-500' : 'text-slate-400'}`}
+                                                >
+                                                    <ThumbsDown className="w-3 h-3" />
+                                                </button>
+                                            </div>
                                         </div>
                                     )}
                                 </div>
                             </div>
-                            <p className={`text-xs text-gray-400 mt-1 ${message.type === 'user' ? 'text-right mr-10' : 'ml-10'}`}>
-                                {isMounted ? message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
-                            </p>
-                        </div>
-                    </div>
-                ))}
 
-                {/* Typing Indicator */}
-                {isTyping && (
-                    <div className="flex justify-start">
-                        <div className="flex items-end gap-2">
-                            <div className="w-8 h-8 rounded-full bg-brand-teal text-white flex items-center justify-center">
-                                <Bot className="w-4 h-4" />
+                            {/* Related Questions Chips - Only for latest bot message */}
+                            {message.type === 'bot' && idx === messages.length - 1 && message.relatedQuestions && (
+                                <div className="flex flex-wrap gap-2 mt-3 ml-11 animate-fade-in">
+                                    {message.relatedQuestions.map((q, qIdx) => (
+                                        <button
+                                            key={qIdx}
+                                            onClick={() => handleSend(q)}
+                                            className="text-xs bg-white border border-brand-teal/20 text-brand-teal px-3 py-1.5 rounded-full hover:bg-brand-teal hover:text-white transition-all shadow-sm"
+                                        >
+                                            {q}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+
+                    {/* Typing Indicator */}
+                    {isTyping && (
+                        <div className="flex items-end gap-3 animate-fade-in">
+                            <div className="w-8 h-8 rounded-full bg-brand-teal flex items-center justify-center flex-shrink-0">
+                                <Bot className="w-4 h-4 text-white" />
                             </div>
-                            <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-none px-4 py-3 shadow-sm">
+                            <div className="bg-white border border-slate-200 rounded-2xl rounded-bl-none px-4 py-3 shadow-sm">
                                 <div className="flex gap-1">
-                                    <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                                    <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                                    <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                                    <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                                    <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                                    <span className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"></span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                    <div ref={messagesEndRef} />
+                </ExpandableChatBody>
 
-                <div ref={messagesEndRef} />
-            </ExpandableChatBody>
-
-            <ExpandableChatFooter className="bg-white">
-                {/* Quick Actions */}
-                {messages.length <= 2 && (
-                    <div className="mb-3">
-                        <p className="text-xs text-gray-500 mb-2">Quick actions:</p>
-                        <div className="flex gap-2 flex-wrap">
-                            {quickActions.map((action, idx) => (
+                <ExpandableChatFooter className="bg-white p-3 border-t border-slate-100">
+                    {/* Quick Input Actions */}
+                    {messages.length < 2 && (
+                        <div className="flex gap-2 mb-3 overflow-x-auto pb-1 scrollbar-hide">
+                            {quickActions.map((action, i) => (
                                 <button
-                                    key={idx}
+                                    key={i}
                                     onClick={() => handleQuickAction(action.action)}
-                                    className="flex items-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-brand-yellow/20 text-gray-700 rounded-full text-xs font-medium transition-colors"
+                                    className="flex items-center gap-1.5 px-3 py-2 bg-slate-50 hover:bg-brand-gold/10 hover:text-brand-gold hover:border-brand-gold/30 border border-slate-200 rounded-lg text-xs font-medium text-slate-600 transition-all whitespace-nowrap"
                                 >
                                     {action.icon}
                                     {action.label}
                                 </button>
                             ))}
                         </div>
-                    </div>
-                )}
+                    )}
 
-                {/* Input */}
-                <div className="flex gap-2">
-                    <input
-                        type="text"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                        placeholder="Type a message or part number..."
-                        className="flex-grow px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-teal text-sm"
-                    />
-                    <button
-                        onClick={handleSend}
-                        disabled={!input.trim()}
-                        className="w-10 h-10 bg-brand-orange text-white rounded-full flex items-center justify-center hover:bg-brand-orange/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        <Send className="w-5 h-5" />
-                    </button>
-                </div>
-            </ExpandableChatFooter>
-        </ExpandableChat>
+                    <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-full border border-slate-200 focus-within:border-brand-teal/50 focus-within:ring-2 focus-within:ring-brand-teal/10 transition-all">
+                        <input
+                            type="text"
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyPress={handleKeyPress}
+                            placeholder="Type a message or part number..."
+                            className="flex-grow px-3 py-2 bg-transparent text-sm focus:outline-none placeholder:text-slate-400"
+                        />
+                        <button
+                            onClick={() => handleSend()}
+                            disabled={!input.trim()}
+                            className="w-9 h-9 bg-brand-teal text-white rounded-full flex items-center justify-center hover:bg-brand-teal-light disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow active:scale-95"
+                        >
+                            <Send className="w-4 h-4 ml-0.5" />
+                        </button>
+                    </div>
+                    <div className="text-center mt-2">
+                        <a
+                            href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[10px] text-slate-400 hover:text-green-600 flex items-center justify-center gap-1 transition-colors"
+                        >
+                            <Smartphone className="w-3 h-3" />
+                            Support available on WhatsApp
+                        </a>
+                    </div>
+                </ExpandableChatFooter>
+            </ExpandableChat>
+
+            {/* Product Detail Popup */}
+            <ProductDetailPopup
+                product={selectedProduct}
+                isOpen={isPopupOpen}
+                onClose={() => setIsPopupOpen(false)}
+                onAddToInquiry={handleAddToInquiry}
+            />
+        </>
     );
 }

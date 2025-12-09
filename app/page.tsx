@@ -83,52 +83,117 @@ export default function Home() {
       {/* Featured Products */}
       <FeaturedProducts />
 
-      {/* Quick Links Section */}
-      <section className="mb-10 sm:mb-16">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-text mb-6 sm:mb-8">Quick Access</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-          {[
-            {
-              title: 'New Arrivals',
-              description: 'Check out the latest components added to our inventory',
-              icon: '🆕',
-              gradient: 'from-blue-500 to-cyan-500',
-              link: '/products'
-            },
-            {
-              title: 'Hard to Find',
-              description: 'Obsolete & specialty parts sourced globally',
-              icon: '🔍',
-              gradient: 'from-emerald-500 to-teal-500',
-              link: '/products'
-            },
-            {
-              title: 'BOM Tool',
-              description: 'Upload your BOM and get instant quotes',
-              icon: '📋',
-              gradient: 'from-brand-gold to-amber-500',
-              link: '/bom'
-            },
-          ].map((item, i) => (
-            <Link
-              key={i}
-              href={item.link}
-              className="group relative bg-white rounded-xl sm:rounded-2xl p-5 sm:p-8 shadow-soft hover:shadow-strong transition-all duration-300 border border-brand-border overflow-hidden"
-            >
-              {/* Gradient Accent */}
-              <div className={`absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-gradient-to-br ${item.gradient} opacity-10 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-500`} />
+      {/* Quick Links Section - Premium Redesign */}
+      <section className="mb-10 sm:mb-16 relative">
+        {/* Background Glow Effects */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-20 left-1/4 w-96 h-96 bg-brand-teal/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute -bottom-20 right-1/4 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        </div>
 
-              <span className="text-2xl sm:text-4xl mb-2 sm:mb-4 block">{item.icon}</span>
-              <h3 className="font-bold text-lg sm:text-xl text-brand-text mb-1 sm:mb-2 group-hover:text-brand-teal transition-colors">
-                {item.title}
-              </h3>
-              <p className="text-brand-text-muted text-xs sm:text-sm mb-2 sm:mb-4">{item.description}</p>
-              <span className="text-brand-gold font-semibold text-xs sm:text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-                Learn More
-                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
-              </span>
-            </Link>
-          ))}
+        <div className="relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-teal/10 to-brand-gold/10 rounded-full mb-4 border border-brand-teal/20">
+              <div className="w-2 h-2 bg-brand-gold rounded-full animate-pulse" />
+              <span className="text-sm font-semibold text-brand-teal uppercase tracking-wider">Quick Access</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-text">
+              Explore Our
+              <span className="bg-gradient-to-r from-brand-teal to-brand-gold bg-clip-text text-transparent"> Services</span>
+            </h2>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+            {[
+              {
+                title: 'New Arrivals',
+                description: 'Check out the latest components added to our inventory',
+                Icon: Truck,
+                gradient: 'from-blue-500 via-cyan-500 to-teal-500',
+                bgGlow: 'bg-blue-500/20',
+                iconBg: 'bg-gradient-to-br from-blue-500 to-cyan-500',
+                link: '/products',
+                badge: 'FRESH',
+                badgeColor: 'bg-blue-500'
+              },
+              {
+                title: 'Hard to Find',
+                description: 'Obsolete & specialty parts sourced globally',
+                Icon: Shield,
+                gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
+                bgGlow: 'bg-emerald-500/20',
+                iconBg: 'bg-gradient-to-br from-emerald-500 to-teal-500',
+                link: '/products',
+                badge: 'GLOBAL',
+                badgeColor: 'bg-emerald-500'
+              },
+              {
+                title: 'BOM Tool',
+                description: 'Upload your BOM and get instant quotes',
+                Icon: Award,
+                gradient: 'from-brand-gold via-amber-500 to-orange-500',
+                bgGlow: 'bg-brand-gold/20',
+                iconBg: 'bg-gradient-to-br from-brand-gold to-amber-500',
+                link: '/bom',
+                badge: 'INSTANT',
+                badgeColor: 'bg-brand-gold'
+              },
+            ].map((item, i) => (
+              <Link
+                key={i}
+                href={item.link}
+                className="group relative"
+              >
+                {/* Animated Gradient Border */}
+                <div className="absolute -inset-0.5 bg-gradient-to-r opacity-0 group-hover:opacity-100 rounded-2xl sm:rounded-3xl blur-sm transition-all duration-500" style={{ backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))` }} />
+
+                {/* Card Container */}
+                <div className="relative bg-white/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100/50 overflow-hidden group-hover:border-transparent group-hover:-translate-y-1 h-full flex flex-col">
+
+                  {/* Background Glow on Hover */}
+                  <div className={`absolute top-0 right-0 w-32 h-32 ${item.bgGlow} rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 transform translate-x-8 -translate-y-8`} />
+
+                  {/* Decorative Gradient Circle */}
+                  <div className={`absolute -top-12 -right-12 w-24 h-24 bg-gradient-to-br ${item.gradient} opacity-10 rounded-full transform group-hover:scale-150 transition-transform duration-700`} />
+
+                  {/* Badge */}
+                  <div className={`absolute top-4 right-4 ${item.badgeColor} text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg`}>
+                    {item.badge}
+                  </div>
+
+                  {/* Icon Container */}
+                  <div className="relative mb-4 sm:mb-5">
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 ${item.iconBg} rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
+                      <item.Icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                    </div>
+                    {/* Pulsing Ring */}
+                    <div className={`absolute inset-0 w-12 h-12 sm:w-14 sm:h-14 ${item.iconBg} rounded-xl sm:rounded-2xl opacity-30 animate-ping`} style={{ animationDuration: '2s' }} />
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="font-bold text-lg sm:text-xl text-gray-900 mb-2 group-hover:text-brand-teal transition-colors duration-300">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 text-xs sm:text-sm mb-4 leading-relaxed flex-grow">
+                    {item.description}
+                  </p>
+
+                  {/* CTA Button */}
+                  <div className="flex items-center gap-3 mt-auto">
+                    <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r ${item.gradient} text-white text-xs font-semibold rounded-full shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300`}>
+                      Explore
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
+
+                  {/* Bottom Gradient Line */}
+                  <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${item.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`} />
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

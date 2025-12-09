@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
-import { Star, Shield, Truck, Award, ChevronRight, Zap, Globe, CheckCircle2, ArrowRight, Play, BarChart3, Users, Activity } from 'lucide-react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { Star, Award, ChevronRight, Zap, Globe, CheckCircle2, ArrowRight, BarChart3 } from 'lucide-react';
 import Link from 'next/link';
 import { ContainerScroll } from './ui/container-scroll-animation';
 
@@ -29,359 +29,72 @@ interface HeroProps {
     className?: string;
 }
 
-const defaultShaderSource = `#version 300 es
-/*********
-* made by Matthias Hurrle (@atzedent)
-*/
-precision highp float;
-out vec4 O;
-uniform vec2 resolution;
-uniform float time;
-#define FC gl_FragCoord.xy
-#define T time
-#define R resolution
-#define MN min(R.x,R.y)
-float rnd(vec2 p) {
-  p=fract(p*vec2(12.9898,78.233));
-  p+=dot(p,p+34.56);
-  return fract(p.x*p.y);
-}
-float noise(in vec2 p) {
-  vec2 i=floor(p), f=fract(p), u=f*f*(3.-2.*f);
-  float
-  a=rnd(i),
-  b=rnd(i+vec2(1,0)),
-  c=rnd(i+vec2(0,1)),
-  d=rnd(i+1.);
-  return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
-}
-float fbm(vec2 p) {
-  float t=.0, a=1.; mat2 m=mat2(1.,-.5,.2,1.2);
-  for (int i=0; i<5; i++) {
-    t+=a*noise(p);
-    p*=2.*m;
-    a*=.5;
-  }
-  return t;
-}
-float clouds(vec2 p) {
-	float d=1., t=.0;
-	for (float i=.0; i<3.; i++) {
-		float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);
-		t=mix(t,d,a);
-		d=a;
-		p*=2./(i+1.);
-	}
-	return t;
-}
-void main(void) {
-	vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
-	vec3 col=vec3(0);
-	float bg=clouds(vec2(st.x+T*.5,-st.y));
-	uv*=1.-.3*(sin(T*.2)*.5+.5);
-	for (float i=1.; i<12.; i++) {
-		uv+=.1*cos(i*vec2(.1+.01*i, .8)+i*i+T*.5+.1*uv.x);
-		vec2 p=uv;
-		float d=length(p);
-		col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);
-		float b=noise(i+p+bg*1.731);
-		col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));
-		col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);
-	}
-	O=vec4(col,1);
-}`;
+// Video sources for the hero section
+const heroVideos = [
+    '/hero-sec/A_professional_woman_202512091328.webm',
+    '/hero-sec/Female_engineer_in_202512091328.webm',
+];
 
-// Reusable Shader Background Hook
-const useShaderBackground = () => {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const animationFrameRef = useRef<number>(0);
-    const rendererRef = useRef<any>(null);
-    const pointersRef = useRef<any>(null);
+// Video Background Hook with smooth crossfade transitions
+const useVideoBackground = () => {
+    const video1Ref = useRef<HTMLVideoElement>(null);
+    const video2Ref = useRef<HTMLVideoElement>(null);
+    const [activeVideo, setActiveVideo] = useState<1 | 2>(1);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    const [videosLoaded, setVideosLoaded] = useState({ video1: false, video2: false });
 
-    // WebGL Renderer class
-    class WebGLRenderer {
-        private canvas: HTMLCanvasElement;
-        private gl: WebGL2RenderingContext;
-        private program: WebGLProgram | null = null;
-        private vs: WebGLShader | null = null;
-        private fs: WebGLShader | null = null;
-        private buffer: WebGLBuffer | null = null;
-        private scale: number;
-        private shaderSource: string;
-        private mouseMove = [0, 0];
-        private mouseCoords = [0, 0];
-        private pointerCoords = [0, 0];
-        private nbrOfPointers = 0;
+    const handleVideoEnd = useCallback(() => {
+        setIsTransitioning(true);
 
-        private vertexSrc = `#version 300 es
-precision highp float;
-in vec4 position;
-void main(){gl_Position=position;}`;
-
-        private vertices = [-1, 1, -1, -1, 1, 1, 1, -1];
-
-        constructor(canvas: HTMLCanvasElement, scale: number) {
-            this.canvas = canvas;
-            this.scale = scale;
-            this.gl = canvas.getContext('webgl2')!;
-            this.gl.viewport(0, 0, canvas.width * scale, canvas.height * scale);
-            this.shaderSource = defaultShaderSource;
+        // Start playing the next video slightly before the transition
+        const nextVideo = activeVideo === 1 ? video2Ref.current : video1Ref.current;
+        if (nextVideo) {
+            nextVideo.currentTime = 0;
+            nextVideo.play().catch(console.error);
         }
 
-        updateShader(source: string) {
-            this.reset();
-            this.shaderSource = source;
-            this.setup();
-            this.init();
-        }
-
-        updateMove(deltas: number[]) {
-            this.mouseMove = deltas;
-        }
-
-        updateMouse(coords: number[]) {
-            this.mouseCoords = coords;
-        }
-
-        updatePointerCoords(coords: number[]) {
-            this.pointerCoords = coords;
-        }
-
-        updatePointerCount(nbr: number) {
-            this.nbrOfPointers = nbr;
-        }
-
-        updateScale(scale: number) {
-            this.scale = scale;
-            this.gl.viewport(0, 0, this.canvas.width * scale, this.canvas.height * scale);
-        }
-
-        compile(shader: WebGLShader, source: string) {
-            const gl = this.gl;
-            gl.shaderSource(shader, source);
-            gl.compileShader(shader);
-
-            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-                const error = gl.getShaderInfoLog(shader);
-                console.error('Shader compilation error:', error);
-            }
-        }
-
-        test(source: string) {
-            let result = null;
-            const gl = this.gl;
-            const shader = gl.createShader(gl.FRAGMENT_SHADER)!;
-            gl.shaderSource(shader, source);
-            gl.compileShader(shader);
-
-            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-                result = gl.getShaderInfoLog(shader);
-            }
-            gl.deleteShader(shader);
-            return result;
-        }
-
-        reset() {
-            const gl = this.gl;
-            if (this.program && !gl.getProgramParameter(this.program, gl.DELETE_STATUS)) {
-                if (this.vs) {
-                    gl.detachShader(this.program, this.vs);
-                    gl.deleteShader(this.vs);
-                }
-                if (this.fs) {
-                    gl.detachShader(this.program, this.fs);
-                    gl.deleteShader(this.fs);
-                }
-                gl.deleteProgram(this.program);
-            }
-        }
-
-        setup() {
-            const gl = this.gl;
-            this.vs = gl.createShader(gl.VERTEX_SHADER)!;
-            this.fs = gl.createShader(gl.FRAGMENT_SHADER)!;
-            this.compile(this.vs, this.vertexSrc);
-            this.compile(this.fs, this.shaderSource);
-            this.program = gl.createProgram()!;
-            gl.attachShader(this.program, this.vs);
-            gl.attachShader(this.program, this.fs);
-            gl.linkProgram(this.program);
-
-            if (!gl.getProgramParameter(this.program, gl.LINK_STATUS)) {
-                console.error(gl.getProgramInfoLog(this.program));
-            }
-        }
-
-        init() {
-            const gl = this.gl;
-            const program = this.program!;
-
-            this.buffer = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
-
-            const position = gl.getAttribLocation(program, 'position');
-            gl.enableVertexAttribArray(position);
-            gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-
-            (program as any).resolution = gl.getUniformLocation(program, 'resolution');
-            (program as any).time = gl.getUniformLocation(program, 'time');
-            (program as any).move = gl.getUniformLocation(program, 'move');
-            (program as any).touch = gl.getUniformLocation(program, 'touch');
-            (program as any).pointerCount = gl.getUniformLocation(program, 'pointerCount');
-            (program as any).pointers = gl.getUniformLocation(program, 'pointers');
-        }
-
-        render(now = 0) {
-            const gl = this.gl;
-            const program = this.program;
-
-            if (!program || gl.getProgramParameter(program, gl.DELETE_STATUS)) return;
-
-            gl.clearColor(0, 0, 0, 1);
-            gl.clear(gl.COLOR_BUFFER_BIT);
-            gl.useProgram(program);
-            gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
-
-            gl.uniform2f((program as any).resolution, this.canvas.width, this.canvas.height);
-            gl.uniform1f((program as any).time, now * 1e-3);
-            gl.uniform2f((program as any).move, this.mouseMove[0], this.mouseMove[1]);
-            gl.uniform2f((program as any).touch, this.mouseCoords[0], this.mouseCoords[1]);
-            gl.uniform1i((program as any).pointerCount, this.nbrOfPointers);
-            gl.uniform2fv((program as any).pointers, this.pointerCoords);
-            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-        }
-    }
-
-    // Pointer Handler class
-    class PointerHandler {
-        private scale: number;
-        private active = false;
-        private pointers = new Map<number, number[]>();
-        private lastCoords = [0, 0];
-        private moves = [0, 0];
-
-        constructor(element: HTMLCanvasElement, scale: number) {
-            this.scale = scale;
-
-            const map = (element: HTMLCanvasElement, scale: number, x: number, y: number) =>
-                [x * scale, element.height - y * scale];
-
-            element.addEventListener('pointerdown', (e) => {
-                this.active = true;
-                this.pointers.set(e.pointerId, map(element, this.getScale(), e.clientX, e.clientY));
-            });
-
-            element.addEventListener('pointerup', (e) => {
-                if (this.count === 1) {
-                    this.lastCoords = this.first;
-                }
-                this.pointers.delete(e.pointerId);
-                this.active = this.pointers.size > 0;
-            });
-
-            element.addEventListener('pointerleave', (e) => {
-                if (this.count === 1) {
-                    this.lastCoords = this.first;
-                }
-                this.pointers.delete(e.pointerId);
-                this.active = this.pointers.size > 0;
-            });
-
-            element.addEventListener('pointermove', (e) => {
-                if (!this.active) return;
-                this.lastCoords = [e.clientX, e.clientY];
-                this.pointers.set(e.pointerId, map(element, this.getScale(), e.clientX, e.clientY));
-                this.moves = [this.moves[0] + e.movementX, this.moves[1] + e.movementY];
-            });
-        }
-
-        getScale() {
-            return this.scale;
-        }
-
-        updateScale(scale: number) {
-            this.scale = scale;
-        }
-
-        get count() {
-            return this.pointers.size;
-        }
-
-        get move() {
-            return this.moves;
-        }
-
-        get coords() {
-            return this.pointers.size > 0
-                ? Array.from(this.pointers.values()).flat()
-                : [0, 0];
-        }
-
-        get first() {
-            return this.pointers.values().next().value || this.lastCoords;
-        }
-    }
-
-    const resize = () => {
-        if (!canvasRef.current) return;
-
-        const canvas = canvasRef.current;
-        const dpr = Math.max(1, 0.5 * window.devicePixelRatio);
-
-        canvas.width = window.innerWidth * dpr;
-        canvas.height = window.innerHeight * dpr;
-
-        if (rendererRef.current) {
-            rendererRef.current.updateScale(dpr);
-        }
-    };
-
-    const loop = (now: number) => {
-        if (!rendererRef.current || !pointersRef.current) return;
-
-        rendererRef.current.updateMouse(pointersRef.current.first);
-        rendererRef.current.updatePointerCount(pointersRef.current.count);
-        rendererRef.current.updatePointerCoords(pointersRef.current.coords);
-        rendererRef.current.updateMove(pointersRef.current.move);
-        rendererRef.current.render(now);
-        animationFrameRef.current = requestAnimationFrame(loop);
-    };
+        // Smooth crossfade transition
+        setTimeout(() => {
+            setActiveVideo(prev => prev === 1 ? 2 : 1);
+            setIsTransitioning(false);
+        }, 800); // Match with CSS transition duration
+    }, [activeVideo]);
 
     useEffect(() => {
-        if (!canvasRef.current) return;
+        const video1 = video1Ref.current;
+        const video2 = video2Ref.current;
 
-        const canvas = canvasRef.current;
-        const dpr = Math.max(1, 0.5 * window.devicePixelRatio);
+        if (!video1 || !video2) return;
 
-        rendererRef.current = new WebGLRenderer(canvas, dpr);
-        pointersRef.current = new PointerHandler(canvas, dpr);
+        // Set up video sources
+        video1.src = heroVideos[0];
+        video2.src = heroVideos[1];
 
-        rendererRef.current.setup();
-        rendererRef.current.init();
+        // Handle video loaded events
+        const handleVideo1Loaded = () => setVideosLoaded(prev => ({ ...prev, video1: true }));
+        const handleVideo2Loaded = () => setVideosLoaded(prev => ({ ...prev, video2: true }));
 
-        resize();
+        video1.addEventListener('loadeddata', handleVideo1Loaded);
+        video2.addEventListener('loadeddata', handleVideo2Loaded);
 
-        if (rendererRef.current.test(defaultShaderSource) === null) {
-            rendererRef.current.updateShader(defaultShaderSource);
-        }
+        // Start playing the first video when it's loaded
+        video1.addEventListener('canplay', () => {
+            video1.play().catch(console.error);
+        });
 
-        loop(0);
-
-        window.addEventListener('resize', resize);
+        // Handle video end for transitions
+        video1.addEventListener('ended', handleVideoEnd);
+        video2.addEventListener('ended', handleVideoEnd);
 
         return () => {
-            window.removeEventListener('resize', resize);
-            if (animationFrameRef.current) {
-                cancelAnimationFrame(animationFrameRef.current);
-            }
-            if (rendererRef.current) {
-                rendererRef.current.reset();
-            }
+            video1.removeEventListener('loadeddata', handleVideo1Loaded);
+            video2.removeEventListener('loadeddata', handleVideo2Loaded);
+            video1.removeEventListener('ended', handleVideoEnd);
+            video2.removeEventListener('ended', handleVideoEnd);
         };
-    }, []);
+    }, [handleVideoEnd]);
 
-    return canvasRef;
+    return { video1Ref, video2Ref, activeVideo, isTransitioning, videosLoaded };
 };
 
 // Stats Data
@@ -400,7 +113,7 @@ const HeroSection: React.FC<HeroProps> = ({
     buttons,
     className = ""
 }) => {
-    const canvasRef = useShaderBackground();
+    const { video1Ref, video2Ref, activeVideo, isTransitioning, videosLoaded } = useVideoBackground();
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -411,6 +124,38 @@ const HeroSection: React.FC<HeroProps> = ({
         <div className={`relative w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-black mb-6 sm:mb-10 ${className}`}>
             {/* Custom Animations */}
             <style jsx>{`
+                /* Video Transition Styles */
+                .video-layer {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+
+                .video-active {
+                    opacity: 1;
+                    z-index: 2;
+                }
+
+                .video-inactive {
+                    opacity: 0;
+                    z-index: 1;
+                }
+
+                /* Cinematic overlay for video enhancement */
+                .cinematic-overlay {
+                    background: 
+                        linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0.5) 100%),
+                        radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+                }
+
+                /* Subtle vignette effect */
+                .vignette {
+                    box-shadow: inset 0 0 150px rgba(0,0,0,0.5);
+                }
+
                 /* Custom Skew Button Styles */
                 .btn-skew {
                     --color: #C4960C;
@@ -468,21 +213,62 @@ const HeroSection: React.FC<HeroProps> = ({
                     --color: #0D9488;
                     --color-hover: #ffffff;
                 }
+
+                /* Video loading pulse animation */
+                @keyframes subtle-pulse {
+                    0%, 100% { opacity: 0.3; }
+                    50% { opacity: 0.5; }
+                }
+
+                .loading-bg {
+                    animation: subtle-pulse 2s ease-in-out infinite;
+                }
             `}</style>
 
-            {/* Shader Background */}
-            <canvas
-                ref={canvasRef}
-                className="absolute inset-0 w-full h-full object-cover touch-none"
-                style={{ background: 'black' }}
-            />
+            {/* Video Background Container */}
+            <div className="absolute inset-0 overflow-hidden">
+                {/* Loading background */}
+                {(!videosLoaded.video1 || !videosLoaded.video2) && (
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900 loading-bg z-0" />
+                )}
+
+                {/* Video 1 */}
+                <video
+                    ref={video1Ref}
+                    className={`video-layer ${activeVideo === 1 ? 'video-active' : 'video-inactive'}`}
+                    muted
+                    playsInline
+                    preload="auto"
+                />
+
+                {/* Video 2 */}
+                <video
+                    ref={video2Ref}
+                    className={`video-layer ${activeVideo === 2 ? 'video-active' : 'video-inactive'}`}
+                    muted
+                    playsInline
+                    preload="auto"
+                />
+
+                {/* Cinematic overlay */}
+                <div className="absolute inset-0 cinematic-overlay z-10" />
+
+                {/* Vignette effect */}
+                <div className="absolute inset-0 vignette z-10 pointer-events-none" />
+            </div>
 
             {/* Gradient Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 z-10" />
+
+            {/* Video Progress Indicators */}
+            <div className="absolute bottom-32 sm:bottom-40 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+                <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activeVideo === 1 ? 'bg-white scale-125' : 'bg-white/40'}`} />
+                <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activeVideo === 2 ? 'bg-white scale-125' : 'bg-white/40'}`} />
+            </div>
 
             {/* Main Content with Container Scroll Animation */}
-            <div className="relative z-10">
+            <div className="relative z-20">
                 <ContainerScroll
                     titleComponent={
                         <div className="flex flex-col items-center justify-center">
@@ -506,7 +292,7 @@ const HeroSection: React.FC<HeroProps> = ({
                                 </div>
                             )}
 
-                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
+                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight drop-shadow-2xl">
                                 <span className="bg-gradient-to-r from-brand-gold via-amber-300 to-brand-gold bg-clip-text text-transparent italic font-serif block mb-2">
                                     {headline.line1}
                                 </span>
@@ -515,7 +301,7 @@ const HeroSection: React.FC<HeroProps> = ({
                                 </span>
                             </h1>
 
-                            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+                            <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow-lg">
                                 {subtitle}
                             </p>
 
@@ -559,7 +345,7 @@ const HeroSection: React.FC<HeroProps> = ({
                                 <div className="w-3 h-3 rounded-full bg-yellow-500" />
                                 <div className="w-3 h-3 rounded-full bg-green-500" />
                             </div>
-                            <div className="text-gray-400 text-sm font-mono">seretech-dashboard.exe</div>
+                            <div className="text-gray-400 text-sm font-mono">serente-dashboard.exe</div>
                         </div>
 
                         {/* Dashboard Grid */}
@@ -597,7 +383,7 @@ const HeroSection: React.FC<HeroProps> = ({
             </div>
 
             {/* Bottom Gradient Fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-[#FAFAFA] via-[#FAFAFA]/80 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-[#FAFAFA] via-[#FAFAFA]/80 to-transparent z-20" />
         </div>
     );
 };

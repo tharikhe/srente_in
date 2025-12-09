@@ -246,3 +246,13 @@ body {
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
 }
+
+/* Hide Scrollbar but allow scrolling */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin, ArrowRight, Send } from 'lucide-react';
 
 export default function Footer() {
@@ -149,15 +150,44 @@ export default function Footer() {
                 <div className="container mx-auto px-4 py-6">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                         {/* Payment Icons */}
-                        <div className="flex items-center gap-3">
-                            {['VISA', 'MC', 'PayPal', 'Alipay'].map((payment) => (
-                                <div
-                                    key={payment}
-                                    className="px-3 py-1.5 bg-white/10 rounded text-xs font-medium text-white/70"
-                                >
-                                    {payment}
-                                </div>
-                            ))}
+                        {/* Payment Icons */}
+                        <div className="flex items-center gap-4">
+                            <div className="h-8 w-auto relative grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                                <Image
+                                    src="/payment-methods/visa-mastercard.png"
+                                    alt="Visa Mastercard"
+                                    width={100}
+                                    height={32}
+                                    className="h-full w-auto object-contain"
+                                />
+                            </div>
+                            <div className="h-8 w-auto relative grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                                <Image
+                                    src="/payment-methods/paypal.png"
+                                    alt="PayPal"
+                                    width={80}
+                                    height={32}
+                                    className="h-full w-auto object-contain"
+                                />
+                            </div>
+                            <div className="h-8 w-auto relative grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                                <Image
+                                    src="/payment-methods/alipay.png"
+                                    alt="Alipay"
+                                    width={80}
+                                    height={32}
+                                    className="h-full w-auto object-contain"
+                                />
+                            </div>
+                            <div className="h-10 w-auto relative ml-2 group">
+                                <Image
+                                    src="/payment-methods/iso-certified.png"
+                                    alt="ISO Certified"
+                                    width={40}
+                                    height={40}
+                                    className="h-full w-auto object-contain brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity"
+                                />
+                            </div>
                         </div>
 
                         {/* Copyright */}

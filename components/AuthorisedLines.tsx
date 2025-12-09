@@ -46,6 +46,7 @@ export default function AuthorisedLines() {
                                             src={brand.logo}
                                             alt={`${brand.name} logo`}
                                             fill
+                                            loading="lazy"
                                             className="object-contain"
                                             sizes="180px"
                                         />

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Search, ShoppingCart, Menu, Phone, Mail, ChevronDown, X, Zap, Clock, MapPin, ArrowRight, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
@@ -25,7 +26,6 @@ export default function Navbar() {
         { href: '/', label: 'HOME' },
         { href: '/products', label: 'PRODUCTS' },
         { href: '/bom', label: 'BOM TOOL', badge: 'NEW' },
-        { href: '#', label: 'MANUFACTURERS' },
         { href: '/blog', label: 'BLOG' },
         { href: '/about', label: 'ABOUT US' },
         { href: '/contact', label: 'CONTACT' },
@@ -92,9 +92,12 @@ export default function Navbar() {
                     <Link href="/" className="flex items-center gap-3 sm:gap-4 group flex-shrink-0">
                         <div className="relative">
                             <div className="absolute -inset-2 bg-gradient-to-r from-brand-teal/20 to-brand-gold/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <img
+                            <Image
                                 src="/logo.png"
                                 alt="Serente Electronics"
+                                width={56}
+                                height={56}
+                                priority
                                 className="h-10 sm:h-14 w-auto relative transition-transform duration-300 group-hover:scale-105"
                             />
                         </div>
