@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import ProductTable from '@/components/ProductTable';
 
 export default function ProductsPage() {
@@ -9,7 +10,9 @@ export default function ProductsPage() {
                     <p className="text-gray-600 mt-1">Browse our inventory of electronic components.</p>
                 </div>
             </div>
-            <ProductTable />
+            <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
+                <ProductTable />
+            </Suspense>
         </div>
     );
 }

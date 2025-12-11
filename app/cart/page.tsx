@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
+import { submitToGoogleSheets } from '@/lib/google-sheets';
 import { Trash2, Plus, Minus, ArrowRight, ShoppingBag, Send, CheckCircle, AlertCircle, X, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -24,24 +25,21 @@ export default function CartPage() {
         setSubmitStatus('idle');
 
         try {
-            const response = await fetch('/api/send-quote', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    customerInfo: formData,
-                    items: items.map(item => ({
-                        partNumber: item.partNumber,
-                        description: item.description,
-                        category: item.category,
-                        manufacturer: item.manufacturer,
-                        quantity: item.quantity,
-                    })),
-                }),
-            });
+            const submissionData = {
+                type: 'quote',
+                customerInfo: formData,
+                items: items.map(item => ({
+                    partNumber: item.partNumber,
+                    description: item.description,
+                    category: item.category,
+                    manufacturer: item.manufacturer,
+                    quantity: item.quantity,
+                })),
+            };
 
-            if (response.ok) {
+            const result = await submitToGoogleSheets(submissionData);
+
+            if (result.success) {
                 setSubmitStatus('success');
                 // Clear the cart after successful submission
                 setTimeout(() => {

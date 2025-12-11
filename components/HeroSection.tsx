@@ -238,7 +238,7 @@ const HeroSection: React.FC<HeroProps> = ({
                     className={`video-layer ${activeVideo === 1 ? 'video-active' : 'video-inactive'}`}
                     muted
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                 />
 
                 {/* Video 2 */}
@@ -247,7 +247,7 @@ const HeroSection: React.FC<HeroProps> = ({
                     className={`video-layer ${activeVideo === 2 ? 'video-active' : 'video-inactive'}`}
                     muted
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                 />
 
                 {/* Cinematic overlay */}

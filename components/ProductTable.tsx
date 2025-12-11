@@ -1,18 +1,50 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { products, categories, searchProducts, Product } from '@/data/products';
 import { Search, FileText, ShoppingCart, Filter, ChevronLeft, Check, Package, ChevronDown, ChevronUp } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 export default function ProductTable() {
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
+    const categoryParam = searchParams.get('category');
+
+    // Initialize state from URL params if available, otherwise default to 'All'
     const [searchQuery, setSearchQuery] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('All');
+    const [selectedCategory, setSelectedCategory] = useState(categoryParam || 'All');
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedRow, setExpandedRow] = useState<string | null>(null);
     const itemsPerPage = 20;
     const { addToCart } = useCart();
     const [addedItems, setAddedItems] = useState<string[]>([]);
+
+    // Sync state with URL params when they change
+    useEffect(() => {
+        if (categoryParam) {
+            setSelectedCategory(categoryParam);
+        } else {
+            setSelectedCategory('All');
+        }
+    }, [categoryParam]);
+
+    // Handle category change
+    const handleCategoryChange = (newCategory: string) => {
+        setSelectedCategory(newCategory);
+        setCurrentPage(1);
+
+        // Update URL
+        const params = new URLSearchParams(searchParams);
+        if (newCategory === 'All') {
+            params.delete('category');
+        } else {
+            params.set('category', newCategory);
+        }
+        router.replace(`${pathname}?${params.toString()}`);
+    };
 
     const handleAddToCart = (product: Product) => {
         addToCart(product);
@@ -97,7 +129,7 @@ export default function ProductTable() {
                         <Filter className="w-4 h-4 sm:w-5 sm:h-5 text-brand-text-muted" />
                         <select
                             value={selectedCategory}
-                            onChange={(e) => { setSelectedCategory(e.target.value); setCurrentPage(1); }}
+                            onChange={(e) => handleCategoryChange(e.target.value)}
                             className="bg-transparent focus:outline-none text-brand-text font-medium cursor-pointer flex-grow text-sm"
                         >
                             <option value="All">All Categories</option>
@@ -140,11 +172,15 @@ export default function ProductTable() {
                                 <td className="px-4 lg:px-6 py-4">
                                     <div className="w-12 h-12 rounded-lg bg-white border border-brand-border flex items-center justify-center overflow-hidden">
                                         {product.image ? (
-                                            <img
-                                                src={product.image}
-                                                alt={product.partNumber}
-                                                className="w-full h-full object-contain"
-                                            />
+                                            <div className="relative w-full h-full">
+                                                <Image
+                                                    src={product.image}
+                                                    alt={product.partNumber}
+                                                    fill
+                                                    sizes="48px"
+                                                    className="object-contain"
+                                                />
+                                            </div>
                                         ) : (
                                             <span className="text-[10px] text-brand-text-muted text-center px-1 break-all leading-tight">
                                                 {product.partNumber}
@@ -211,11 +247,15 @@ export default function ProductTable() {
                             {/* Product Image */}
                             <div className="w-14 h-14 rounded-lg bg-white border border-brand-border flex items-center justify-center overflow-hidden flex-shrink-0">
                                 {product.image ? (
-                                    <img
-                                        src={product.image}
-                                        alt={product.partNumber}
-                                        className="w-full h-full object-contain"
-                                    />
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={product.image}
+                                            alt={product.partNumber}
+                                            fill
+                                            sizes="56px"
+                                            className="object-contain"
+                                        />
+                                    </div>
                                 ) : (
                                     <span className="text-[8px] text-brand-text-muted text-center px-1 break-all leading-tight">
                                         {product.partNumber.substring(0, 10)}

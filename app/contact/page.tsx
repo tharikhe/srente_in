@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Send, Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { submitToGoogleSheets } from '@/lib/google-sheets';
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -19,12 +20,21 @@ export default function ContactPage() {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate form submission
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        const submissionData = {
+            type: 'contact',
+            ...formData
+        };
 
-        setIsSubmitting(false);
-        setSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
+        const result = await submitToGoogleSheets(submissionData);
+
+        if (result.success) {
+            setIsSubmitting(false);
+            setSubmitted(true);
+            setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
+        } else {
+            setIsSubmitting(false);
+            alert('Failed to send message. Please try again.');
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

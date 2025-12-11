@@ -1,13 +1,16 @@
 
 import HeroSection from '@/components/HeroSection';
-import CategoryGrid from '@/components/CategoryGrid';
-import FeaturedProducts from '@/components/FeaturedProducts';
-import ProductShowcase from '@/components/ProductShowcase';
-import FAQ from '@/components/FAQ';
 import Link from 'next/link';
 import { ArrowRight, Shield, Truck, Headphones, Award } from 'lucide-react';
+import dynamic from 'next/dynamic';
 
-import AuthorisedLines from '@/components/AuthorisedLines';
+const CategoryGrid = dynamic(() => import('@/components/CategoryGrid'));
+const FeaturedProducts = dynamic(() => import('@/components/FeaturedProducts'));
+const ProductShowcase = dynamic(() => import('@/components/ProductShowcase'));
+const FAQ = dynamic(() => import('@/components/FAQ'));
+const AuthorisedLines = dynamic(() => import('@/components/AuthorisedLines'));
+
+import { Suspense } from 'react';
 
 export default function Home() {
   const features = [

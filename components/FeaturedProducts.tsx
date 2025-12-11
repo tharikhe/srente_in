@@ -3,6 +3,7 @@
 import { getFeaturedProducts, Product } from '@/data/products';
 import { ShoppingCart, FileText, Check, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useMemo, useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
 
@@ -66,11 +67,15 @@ export default function FeaturedProducts() {
                             )}
 
                             {product.image ? (
-                                <img
-                                    src={product.image}
-                                    alt={product.partNumber}
-                                    className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500"
-                                />
+                                <div className="relative w-full h-full">
+                                    <Image
+                                        src={product.image}
+                                        alt={product.partNumber}
+                                        fill
+                                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                                        className="object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                </div>
                             ) : (
                                 <div className="text-center">
                                     <div className="w-10 h-10 sm:w-16 sm:h-16 bg-brand-border/30 rounded-full flex items-center justify-center mx-auto mb-1 sm:mb-2">
