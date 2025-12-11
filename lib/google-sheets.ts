@@ -6,7 +6,8 @@ export interface SubmissionResult {
 }
 
 export async function submitToGoogleSheets(data: any): Promise<SubmissionResult> {
-    if (GOOGLE_SCRIPT_URL === 'PASTE_YOUR_WEB_APP_URL_HERE' || !GOOGLE_SCRIPT_URL) {
+    // URL is hardcoded, so no validation needed
+    if (!GOOGLE_SCRIPT_URL) {
         console.error('Google Script URL is not configured.');
         return { success: false, message: 'Configuration Error: Script URL not set.' };
     }
