@@ -2,10 +2,37 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, ShoppingCart, Menu, Phone, Mail, ChevronDown, X, Zap, Clock, MapPin, ArrowRight, Sparkles } from 'lucide-react';
+import { Search, ShoppingCart, Menu, Phone, Mail, ChevronDown, X, Zap, Clock, MapPin, ArrowRight, Sparkles, Cpu, Activity, Battery, Plug, Speaker, Gem, Monitor, Fan, ZapOff, Lightbulb, Box, Sliders, ToggleLeft, Eye, Repeat, Share2, Wrench, Layers } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
 import { categories } from '@/data/products';
+
+
+const getCategoryIcon = (category: string) => {
+    switch (category) {
+        case 'Resistors': return Activity;
+        case 'Capacitors': return Battery;
+        case 'ICs': return Cpu;
+        case 'Diodes': return Layers;
+        case 'Connectors': return Plug;
+        case 'Inductors': return Activity;
+        case 'Transistors': return Share2;
+        case 'Audio': return Speaker;
+        case 'Crystals': return Gem;
+        case 'Displays': return Monitor;
+        case 'Fans': return Fan;
+        case 'Fuses': return ZapOff;
+        case 'LEDs': return Lightbulb;
+        case 'Potentiometers': return Sliders;
+        case 'Power': return Zap;
+        case 'Relays': return ToggleLeft;
+        case 'Sensors': return Eye;
+        case 'Tools': return Wrench;
+        case 'Transformers': return Repeat;
+        case 'Modules': return Box;
+        default: return Sparkles;
+    }
+};
 
 export default function Navbar() {
     const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -197,23 +224,28 @@ export default function Navbar() {
                         </button>
 
                         {/* Dropdown Menu */}
-                        <div className="absolute top-full left-0 w-[600px] bg-white rounded-xl shadow-2xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-10 p-6 grid grid-cols-2 gap-4 mt-2">
-                            {categories.map((category) => (
-                                <Link
-                                    key={category}
-                                    href={`/products?category=${encodeURIComponent(category)}`}
-                                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-brand-surface transition-colors group/item"
-                                >
-                                    <div className="w-10 h-10 rounded-lg bg-brand-teal/10 flex items-center justify-center text-brand-teal group-hover/item:bg-brand-teal group-hover/item:text-white transition-colors">
-                                        <Sparkles className="w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <h4 className="font-semibold text-gray-900 group-hover/item:text-brand-teal transition-colors">{category}</h4>
-                                        <p className="text-xs text-gray-500">Browse {category}</p>
-                                    </div>
-                                    <ArrowRight className="w-4 h-4 text-gray-400 ml-auto opacity-0 group-hover/item:opacity-100 transition-all -translate-x-2 group-hover/item:translate-x-0" />
-                                </Link>
-                            ))}
+                        <div
+                            onWheel={(e) => e.stopPropagation()}
+                            className="absolute top-full left-0 w-[600px] bg-white rounded-xl shadow-2xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 p-6 grid grid-cols-2 gap-4 mt-2 max-h-[80vh] overflow-y-auto overscroll-contain">
+                            {categories.map((category) => {
+                                const Icon = getCategoryIcon(category);
+                                return (
+                                    <Link
+                                        key={category}
+                                        href={`/products?category=${encodeURIComponent(category)}`}
+                                        className="flex items-center gap-3 p-3 rounded-lg hover:bg-brand-surface transition-colors group/item"
+                                    >
+                                        <div className="w-10 h-10 rounded-lg bg-brand-teal/10 flex items-center justify-center text-brand-teal group-hover/item:bg-brand-teal group-hover/item:text-white transition-colors">
+                                            <Icon className="w-5 h-5" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900 group-hover/item:text-brand-teal transition-colors">{category}</h4>
+                                            <p className="text-xs text-gray-500">Browse {category}</p>
+                                        </div>
+                                        <ArrowRight className="w-4 h-4 text-gray-400 ml-auto opacity-0 group-hover/item:opacity-100 transition-all -translate-x-2 group-hover/item:translate-x-0" />
+                                    </Link>
+                                );
+                            })}
                             <div className="col-span-2 mt-2 pt-4 border-t border-gray-100">
                                 <Link
                                     href="/products"

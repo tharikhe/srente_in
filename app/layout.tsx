@@ -18,7 +18,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Serente Electronics - Premium Electronic Components Distributor",
   description: "Your trusted partner for electronic components distribution. Browse our extensive inventory of ICs, capacitors, resistors, and more.",
-  keywords: "electronic components, ICs, capacitors, resistors, semiconductors, distributor, electronics",
+  keywords: "SUPPLY CHAIN, EV SECTOR, AUTOMOTIVE INDUSTRY, RAILWAYS, IOT, MEDICAL INDUSTRY, NETWORK CABLES, LIGHTING INDUSTRY, LEDS, LCDS, ELECTRONIC COMPONENTS DISTRIBUTOR HONGKONG, ELECTRONIC COMPONENTS DISTRIBUTOR INDIA, ANTENK CONNECTORS, GREENCON CONNECTORS, ORABO CONNECTORS, YM DISPLAYS, GL FIBRE CABLES, ISOCOM OPTOCOUPLERS, TOPDIODE DIODE, JB CAPACITORS, SONYTEK DISPLAYS, YEEBO DISPLAYS, DWIN DISPLAYS, SCONDAR CONNECTORS, SERENTE ELECTRONICS HK LTD, AUTHORISED DISTRIBUTOR, GLOBAL SOURCING, INVENTORY MANAGEMENT, ABSOLUTE COMPONENTS, OEM & ODM",
 };
 
 export default function RootLayout({

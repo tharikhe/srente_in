@@ -1,6 +1,13 @@
 import { Suspense } from 'react';
 import ProductTable from '@/components/ProductTable';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Product Catalog | Buy Electronic Components Online - Serente Electronics",
+    description: "Browse our extensive catalog of electronic components including resistors, capacitors, ICs, connectors, and displays. Check stock and request quotes instantly.",
+};
+
 export default function ProductsPage() {
     return (
         <div className="space-y-6">

@@ -118,6 +118,63 @@ export default function Chatbot() {
             }
         }
 
+        // Filter by in-stock logic
+        if (lowerMessage.includes('filter by in-stock') || lowerMessage.includes('in stock')) {
+            // Find the last search query from user messages
+            const lastUserSearch = [...messages].reverse().find(m =>
+                m.type === 'user' &&
+                !m.content.toLowerCase().includes('filter') &&
+                !m.content.toLowerCase().includes('help')
+            );
+
+            const queryToFilter = lastUserSearch ? lastUserSearch.content : '';
+            let results = queryToFilter ? parseSearchQuery(queryToFilter) : [];
+
+            // Filter results
+            results = results.filter(p => p.inStock);
+
+            if (results.length > 0) {
+                return {
+                    id: Date.now(),
+                    type: 'bot',
+                    content: `✅ Showing **${results.length}** in-stock items${queryToFilter ? ` for "${queryToFilter}"` : ''}:`,
+                    products: results.slice(0, 5),
+                    timestamp: new Date(),
+                    relatedQuestions: ["Show all results", "Start new search"]
+                };
+            } else {
+                return {
+                    id: Date.now(),
+                    type: 'bot',
+                    content: `No in-stock items found${queryToFilter ? ` for "${queryToFilter}"` : ''}. Try searching for something else!`,
+                    timestamp: new Date(),
+                    relatedQuestions: ["View categories", "Contact support"]
+                };
+            }
+        }
+
+        // Help me search logic
+        if (lowerMessage.includes('help me search') || lowerMessage.includes('how to search')) {
+            return {
+                id: Date.now(),
+                type: 'bot',
+                content: "Here are some ways you can search:\n\n• **Part Number**: Type exact parts like 'RC0805'\n• **Description**: Type '10k resistor' or '0.1uF capacitor'\n• **Category**: Type 'Resistors', 'ICs', etc.\n\nTry typing a part number now!",
+                timestamp: new Date(),
+                relatedQuestions: ["Show categories", "Browse products"]
+            };
+        }
+
+        // Contact support logic
+        if (lowerMessage.includes('contact support') || lowerMessage.includes('sales')) {
+            return {
+                id: Date.now(),
+                type: 'bot',
+                content: "📞 **Contact Support**\n\nOur team is available to help you!\n\n• Email: Info@serentehk.com\n• Phone: +91 93534 13620\n• WhatsApp: Click the button below",
+                timestamp: new Date(),
+                relatedQuestions: ["Open WhatsApp", "Back to search"]
+            };
+        }
+
         // Category browsing
         if (lowerMessage.includes('categories') || lowerMessage.includes('browse') || lowerMessage.includes('show me')) {
             const categoryList = categories.slice(0, 8).map(c => `• ${c}`).join('\n');
@@ -134,7 +191,7 @@ export default function Chatbot() {
         return {
             id: Date.now(),
             type: 'bot',
-            content: "I didn't find specific products matching that. You can trying searching by:\n\n• Part Number (e.g., RC0805)\n• Description (e.g., 10K Resistor)\n• Category (e.g., Capacitors)",
+            content: "I didn't find specific products matching that. You can try searching by:\n\n• Part Number (e.g., RC0805)\n• Description (e.g., 10K Resistor)\n• Category (e.g., Capacitors)",
             timestamp: new Date(),
             relatedQuestions: ["Help me search", "Contact support", "View categories"]
         };

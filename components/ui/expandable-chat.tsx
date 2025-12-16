@@ -57,6 +57,7 @@ const ExpandableChat: React.FC<ExpandableChatProps> = ({
         >
             <div
                 ref={chatRef}
+                onWheel={(e) => e.stopPropagation()}
                 className={cn(
                     "flex flex-col bg-background border sm:rounded-lg shadow-md overflow-hidden transition-all duration-250 ease-out sm:absolute sm:w-[90vw] sm:h-[80vh] fixed inset-0 w-full h-full sm:inset-auto",
                     chatConfig.chatPositions[position],
@@ -100,7 +101,7 @@ ExpandableChatHeader.displayName = "ExpandableChatHeader";
 
 const ExpandableChatBody = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
     ({ className, ...props }, ref) => (
-        <div ref={ref} className={cn("flex-grow overflow-y-auto overscroll-y-contain", className)} {...props} />
+        <div ref={ref} className={cn("flex-1 w-full overflow-y-auto overscroll-contain min-h-0", className)} {...props} />
     )
 );
 

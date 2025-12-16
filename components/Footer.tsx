@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin, ArrowRight, Send } from 'lucide-react';
+import { submitToGoogleSheets } from '@/lib/google-sheets';
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
@@ -15,16 +18,55 @@ export default function Footer() {
                             <h3 className="text-2xl font-bold mb-2">Stay Updated</h3>
                             <p className="text-white/80">Subscribe to our newsletter for the latest products and offers</p>
                         </div>
-                        <div className="flex w-full md:w-auto">
-                            <input
-                                type="email"
-                                placeholder="Enter your email"
-                                className="flex-grow md:w-80 px-5 py-3.5 rounded-l-xl bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:bg-white/20 transition-colors"
-                            />
-                            <button className="px-6 py-3.5 bg-brand-gold hover:bg-brand-gold-dark text-white font-semibold rounded-r-xl transition-all duration-200 flex items-center gap-2 hover:shadow-glow-gold">
-                                <Send className="w-5 h-5" />
-                                <span className="hidden sm:inline">Subscribe</span>
-                            </button>
+                        <div className="flex w-full md:w-auto flex-col gap-2">
+                            <form
+                                onSubmit={async (e) => {
+                                    e.preventDefault();
+                                    const form = e.target as HTMLFormElement;
+                                    const emailInput = form.elements.namedItem('email') as HTMLInputElement;
+                                    const email = emailInput.value;
+
+                                    if (!email) return;
+
+                                    const btn = form.querySelector('button');
+                                    if (btn) {
+                                        btn.disabled = true;
+                                        btn.textContent = 'Subscribing...';
+                                    }
+
+                                    try {
+                                        await submitToGoogleSheets({
+                                            type: 'contact',
+                                            name: 'Newsletter Subscriber',
+                                            email: email,
+                                            subject: 'Newsletter Subscription',
+                                            message: 'User requested to subscribe to the newsletter via website footer.'
+                                        });
+                                        alert('Thank you for subscribing!');
+                                        emailInput.value = '';
+                                    } catch (error) {
+                                        alert('Something went wrong. Please try again.');
+                                    } finally {
+                                        if (btn) {
+                                            btn.disabled = false;
+                                            btn.innerHTML = '<span class="hidden sm:inline">Subscribe</span>';
+                                        }
+                                    }
+                                }}
+                                className="flex w-full md:w-auto"
+                            >
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Enter your email"
+                                    required
+                                    className="flex-grow md:w-80 px-5 py-3.5 rounded-l-xl bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:bg-white/20 transition-colors"
+                                />
+                                <button type="submit" className="px-6 py-3.5 bg-brand-gold hover:bg-brand-gold-dark text-white font-semibold rounded-r-xl transition-all duration-200 flex items-center gap-2 hover:shadow-glow-gold disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <Send className="w-5 h-5" />
+                                    <span className="hidden sm:inline">Subscribe</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -64,11 +106,11 @@ export default function Footer() {
                         <ul className="space-y-3">
                             {[
                                 { label: 'Product Catalog', href: '/products' },
-                                { label: 'All Manufacturers A-Z', href: '#' },
-                                { label: 'Popular Parts', href: '#' },
-                                { label: 'Posts & Blogs', href: '#' },
-                                { label: 'About Us', href: '#' },
-                                { label: 'Quality Control', href: '#' },
+                                { label: 'Manufacturers', href: '/manufacturers' },
+                                { label: 'Popular Parts', href: '/popular-parts' },
+                                { label: 'Blog', href: '/blog' },
+                                { label: 'About Us', href: '/about' },
+                                { label: 'Quality Control', href: '/quality-control' },
                             ].map((link) => (
                                 <li key={link.label}>
                                     <Link
@@ -88,12 +130,10 @@ export default function Footer() {
                         <h3 className="text-lg font-bold text-white mb-6">Support</h3>
                         <ul className="space-y-3">
                             {[
-                                { label: 'Request for Quotation', href: '#' },
-                                { label: 'Delivery Information', href: '#' },
-                                { label: 'Payment Information', href: '#' },
-                                { label: 'Help Center', href: '#' },
-                                { label: 'Track Your Order', href: '#' },
-                                { label: 'Return Policy', href: '#' },
+                                { label: 'Request for Quotation', href: '/rfq' },
+                                { label: 'Upload BOM', href: '/bom' },
+                                { label: 'Help Center', href: '/help-center' },
+                                { label: 'Contact Us', href: '/contact' },
                             ].map((link) => (
                                 <li key={link.label}>
                                     <Link
@@ -197,10 +237,10 @@ export default function Footer() {
 
                         {/* Legal Links */}
                         <div className="flex items-center gap-6 text-sm">
-                            <Link href="#" className="text-white/50 hover:text-brand-gold transition-colors">
+                            <Link href="/terms" className="text-white/50 hover:text-brand-gold transition-colors">
                                 Terms & Conditions
                             </Link>
-                            <Link href="#" className="text-white/50 hover:text-brand-gold transition-colors">
+                            <Link href="/privacy-policy" className="text-white/50 hover:text-brand-gold transition-colors">
                                 Privacy Policy
                             </Link>
                         </div>

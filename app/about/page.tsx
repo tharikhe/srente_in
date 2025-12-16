@@ -1,7 +1,11 @@
-'use client';
-
+import { Metadata } from 'next';
 import { Shield, Truck, Headphones, Award, Globe, Users, Target, History } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: "About Us | Serente Electronics - Global Electronic Components Distributor",
+    description: "Learn about Serente Electronics, a premier global distributor of electronic components since 2020. ISO 9001:2015 certified, serving OEMs, EMS, and research institutions in over 100 countries.",
+};
 
 export default function AboutPage() {
     return (

@@ -85,6 +85,12 @@ export default function ProductTable() {
         setExpandedRow(expandedRow === partNumber ? null : partNumber);
     };
 
+    const getCategoryImage = (category: string) => {
+        // Map special chars or spaces if needed, generally lowercase is safe for filenames
+        const slug = category.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        return `/categories/${slug}.jpg`;
+    };
+
     return (
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-medium overflow-hidden border border-brand-border">
             {/* Header */}
@@ -170,22 +176,21 @@ export default function ProductTable() {
                                 className="hover:bg-brand-surface transition-colors duration-150 group"
                             >
                                 <td className="px-4 lg:px-6 py-4">
-                                    <div className="w-12 h-12 rounded-lg bg-white border border-brand-border flex items-center justify-center overflow-hidden">
-                                        {product.image ? (
-                                            <div className="relative w-full h-full">
-                                                <Image
-                                                    src={product.image}
-                                                    alt={product.partNumber}
-                                                    fill
-                                                    sizes="48px"
-                                                    className="object-contain"
-                                                />
-                                            </div>
-                                        ) : (
-                                            <span className="text-[10px] text-brand-text-muted text-center px-1 break-all leading-tight">
-                                                {product.partNumber}
-                                            </span>
-                                        )}
+                                    <div className="w-12 h-12 rounded-lg bg-white border border-brand-border flex items-center justify-center overflow-hidden relative">
+                                        <Image
+                                            src={product.image || getCategoryImage(product.category)}
+                                            alt={product.partNumber}
+                                            fill
+                                            sizes="48px"
+                                            className="object-contain p-1"
+                                            onError={(e) => {
+                                                // Fallback if category image is missing - hide image and show initial?
+                                                // For now, next/image handles errors gracefully in newer versions, but we can set a state if needed.
+                                                // Simpler: Just ensure the user uploads the files.
+                                                const target = e.target as HTMLImageElement;
+                                                target.style.opacity = '0.3'; // Placeholder effect
+                                            }}
+                                        />
                                     </div>
                                 </td>
                                 <td className="px-4 lg:px-6 py-4">
@@ -245,22 +250,14 @@ export default function ProductTable() {
                     >
                         <div className="flex items-start gap-3">
                             {/* Product Image */}
-                            <div className="w-14 h-14 rounded-lg bg-white border border-brand-border flex items-center justify-center overflow-hidden flex-shrink-0">
-                                {product.image ? (
-                                    <div className="relative w-full h-full">
-                                        <Image
-                                            src={product.image}
-                                            alt={product.partNumber}
-                                            fill
-                                            sizes="56px"
-                                            className="object-contain"
-                                        />
-                                    </div>
-                                ) : (
-                                    <span className="text-[8px] text-brand-text-muted text-center px-1 break-all leading-tight">
-                                        {product.partNumber.substring(0, 10)}
-                                    </span>
-                                )}
+                            <div className="w-14 h-14 rounded-lg bg-white border border-brand-border flex items-center justify-center overflow-hidden flex-shrink-0 relative">
+                                <Image
+                                    src={product.image || getCategoryImage(product.category)}
+                                    alt={product.partNumber}
+                                    fill
+                                    sizes="56px"
+                                    className="object-contain p-1"
+                                />
                             </div>
 
                             {/* Product Info */}

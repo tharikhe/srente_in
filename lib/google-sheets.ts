@@ -1,4 +1,4 @@
-export const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUyj5z2N5CsPWb77oiun9eNsLMyz4BAUXPDwf1ubz9TKh94ibxK9TTvLLfDjF4waxmBg/exec';
+export const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxTqjuPbX6MEl11b01ld8sIqDEN4wRv-HQ8TEYEGfzg3eta4r_U3lKzD7d8DnW8-oRMVQ/exec';
 
 export interface SubmissionResult {
     success: boolean;

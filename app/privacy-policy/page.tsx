@@ -1,92 +1,105 @@
-'use client';
+import Link from 'next/link';
+import { ArrowLeft, Shield, Lock, Eye, FileText, Database } from 'lucide-react';
 
-import { Lock, Eye, Database, Shield } from 'lucide-react';
-
-export default function PrivacyPolicyPage() {
+export default function PrivacyPolicy() {
     return (
-        <div className="max-w-4xl mx-auto pb-16 space-y-12">
+        <div className="min-h-screen bg-gray-50 pb-20">
             {/* Header */}
-            <section className="text-center py-12 border-b border-gray-100">
-                <h1 className="text-4xl font-bold text-brand-teal mb-4">Privacy Policy</h1>
-                <p className="text-gray-600">Last updated: December 8, 2024</p>
-            </section>
-
-            {/* Content */}
-            <div className="prose prose-lg max-w-none text-gray-600">
-                <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-xl mb-8">
-                    <p className="m-0 text-green-800 font-medium">
-                        At Serente Electronics, we are committed to protecting your privacy and ensuring the security of your personal information.
+            <div className="bg-brand-teal text-white py-16">
+                <div className="container mx-auto px-4 text-center">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
+                    <p className="text-brand-teal-light text-lg max-w-2xl mx-auto">
+                        Your privacy is important to us. This policy outlines how Serente Electronics HK Ltd. collects, uses, and protects your information.
                     </p>
-                </div>
-
-                <div className="space-y-8">
-                    <section>
-                        <h2 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-4">
-                            <Database className="w-6 h-6 text-brand-gold" />
-                            1. Information We Collect
-                        </h2>
-                        <p>
-                            We collect information that you provide directly to us, such as when you create an account, request a quote, make a purchase, or contact our support team. This may include:
-                        </p>
-                        <ul className="list-disc pl-5 space-y-2 mt-4">
-                            <li>Name, email address, phone number, and company details.</li>
-                            <li>Billing and shipping addresses.</li>
-                            <li>Payment information (processed securely by third-party providers).</li>
-                            <li>Files you upload (e.g., BOM lists).</li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h2 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-4">
-                            <Eye className="w-6 h-6 text-brand-gold" />
-                            2. How We Use Your Information
-                        </h2>
-                        <p>
-                            We use the information we collect to:
-                        </p>
-                        <ul className="list-disc pl-5 space-y-2 mt-4">
-                            <li>Process and fulfill your orders and quote requests.</li>
-                            <li>Communicate with you about your account, orders, and products.</li>
-                            <li>Send you technical notices, updates, and support messages.</li>
-                            <li>Detect and prevent fraudulent transactions and other illegal activities.</li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h2 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-4">
-                            <Lock className="w-6 h-6 text-brand-gold" />
-                            3. Data Security
-                        </h2>
-                        <p>
-                            We implement appropriate technical and organizational measures to protect the security of your personal information. We use SSL/TLS encryption for data transmission and store data in secure data centers.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2 className="flex items-center gap-3 text-2xl font-bold text-gray-900 mb-4">
-                            <Shield className="w-6 h-6 text-brand-gold" />
-                            4. Sharing of Information
-                        </h2>
-                        <p>
-                            We do not sell, rent, or trade your personal information to third parties. We may share your information with trusted third-party service providers who assist us in operating our website, conducting our business, or serving our users (e.g., shipping carriers, payment processors), so long as those parties agree to keep this information confidential.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Cookies</h2>
-                        <p>
-                            We use cookies and similar tracking technologies to track the activity on our service and hold certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.
-                        </p>
-                    </section>
                 </div>
             </div>
 
-            <div className="bg-gray-50 rounded-2xl p-8 text-center mt-12">
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Privacy Concerns?</h3>
-                <p className="text-gray-600 mb-4">If you have any questions about this Privacy Policy, please contact our Data Protection Officer.</p>
-                <a href="mailto:privacy@serente.com" className="inline-block px-6 py-3 bg-brand-teal text-white rounded-xl font-bold hover:bg-brand-teal-dark transition-colors">
-                    Contact Privacy Team
-                </a>
+            <div className="container mx-auto px-4 -mt-8">
+                <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 max-w-4xl mx-auto">
+
+                    <Link href="/" className="inline-flex items-center text-brand-teal hover:text-brand-gold transition-colors mb-8 font-medium">
+                        <ArrowLeft className="w-4 h-4 mr-2" />
+                        Back to Home
+                    </Link>
+
+                    <div className="prose prose-lg max-w-none text-gray-700">
+                        <p className="text-sm text-gray-400 mb-8">Last Updated: December 11, 2025</p>
+
+                        <section className="mb-10">
+                            <div className="flex items-center gap-3 mb-4 text-brand-teal">
+                                <Database className="w-6 h-6" />
+                                <h2 className="text-2xl font-bold m-0">1. Information We Collect</h2>
+                            </div>
+                            <p>
+                                We collect information necessary to provide our services and process your orders. This includes:
+                            </p>
+                            <ul className="list-disc pl-6 space-y-2 mt-4">
+                                <li><strong>Personal Information:</strong> Name, email address, phone number, and shipping address when you request a quote or contact us.</li>
+                                <li><strong>Usage Data:</strong> Information about how you interact with our website, such as IP address, browser type, and pages visited.</li>
+                                <li><strong>Order Details:</strong> Information regarding the products you inquire about or purchase (Part Numbers, Quantities).</li>
+                            </ul>
+                        </section>
+
+                        <section className="mb-10">
+                            <div className="flex items-center gap-3 mb-4 text-brand-teal">
+                                <Eye className="w-6 h-6" />
+                                <h2 className="text-2xl font-bold m-0">2. How We Use Your Information</h2>
+                            </div>
+                            <p>
+                                We use the collected information for the following purposes:
+                            </p>
+                            <ul className="list-disc pl-6 space-y-2 mt-4">
+                                <li>To process and respond to your quote requests and orders.</li>
+                                <li>To communicate with you regarding your inquiries or account.</li>
+                                <li>To improve our website functionality and user experience.</li>
+                                <li>To send periodic emails regarding new products or services (only if you opt-in).</li>
+                            </ul>
+                        </section>
+
+                        <section className="mb-10">
+                            <div className="flex items-center gap-3 mb-4 text-brand-teal">
+                                <Lock className="w-6 h-6" />
+                                <h2 className="text-2xl font-bold m-0">3. Data Security</h2>
+                            </div>
+                            <p>
+                                We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet is 100% secure.
+                            </p>
+                        </section>
+
+                        <section className="mb-10">
+                            <div className="flex items-center gap-3 mb-4 text-brand-teal">
+                                <Shield className="w-6 h-6" />
+                                <h2 className="text-2xl font-bold m-0">4. Third-Party Disclosure</h2>
+                            </div>
+                            <p>
+                                We do not sell, trade, or otherwise transfer your Personally Identifiable Information to outside parties. This does not include trusted third parties who assist us in operating our website, conducting our business, or servicing you, so long as those parties agree to keep this information confidential.
+                            </p>
+                        </section>
+
+                        <section className="mb-10">
+                            <div className="flex items-center gap-3 mb-4 text-brand-teal">
+                                <FileText className="w-6 h-6" />
+                                <h2 className="text-2xl font-bold m-0">5. Cookies</h2>
+                            </div>
+                            <p>
+                                Our website uses cookies to enhance your browsing experience. Cookies are small files that a site or its service provider transfers to your computer's hard drive through your Web browser (if you allow) that enables the site's systems to recognize your browser and capture and remember certain information.
+                            </p>
+                            <p className="mt-4">
+                                You can choose to have your computer warn you each time a cookie is being sent, or you can choose to turn off all cookies via your browser settings.
+                            </p>
+                        </section>
+
+                        <div className="border-t border-gray-200 pt-8 mt-12">
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">Contact Us</h3>
+                            <p className="mb-4">If there are any questions regarding this privacy policy, you may contact us using the information below:</p>
+                            <address className="not-italic bg-gray-50 p-6 rounded-xl border border-gray-100">
+                                <strong>Serente Electronics HK Ltd.</strong><br />
+                                Email: <a href="mailto:Info@serentehk.com" className="text-brand-teal hover:underline">Info@serentehk.com</a><br />
+                                Phone: +91 93534 13620
+                            </address>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

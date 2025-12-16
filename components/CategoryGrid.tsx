@@ -1,20 +1,34 @@
 'use client';
 
 import { categories, getProductsByCategory } from '@/data/products';
-import { Cpu, Zap, CircuitBoard, Radio, Plug, Gauge, Shield, Volume2, Box, Layers } from 'lucide-react';
+import { Cpu, Activity, Battery, Plug, Speaker, Gem, Monitor, Fan, ZapOff, Lightbulb, Box, Sliders, ToggleLeft, Eye, Repeat, Share2, Wrench, Layers, Sparkles, Zap } from 'lucide-react';
 import Link from 'next/link';
 
-const categoryIcons: { [key: string]: React.ReactNode } = {
-    'Resistors': <Gauge className="w-6 h-6 sm:w-8 sm:h-8" />,
-    'Capacitors': <CircuitBoard className="w-6 h-6 sm:w-8 sm:h-8" />,
-    'ICs': <Cpu className="w-6 h-6 sm:w-8 sm:h-8" />,
-    'Diodes': <Zap className="w-6 h-6 sm:w-8 sm:h-8" />,
-    'Transistors': <Radio className="w-6 h-6 sm:w-8 sm:h-8" />,
-    'Connectors': <Plug className="w-6 h-6 sm:w-8 sm:h-8" />,
-    'Inductors': <Layers className="w-6 h-6 sm:w-8 sm:h-8" />,
-    'Protection': <Shield className="w-6 h-6 sm:w-8 sm:h-8" />,
-    'Audio': <Volume2 className="w-6 h-6 sm:w-8 sm:h-8" />,
-    'Others': <Box className="w-6 h-6 sm:w-8 sm:h-8" />,
+// Helper to get consistent icons (same as Navbar)
+const getCategoryIcon = (category: string) => {
+    switch (category) {
+        case 'Resistors': return <Activity className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Capacitors': return <Battery className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'ICs': return <Cpu className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Diodes': return <Layers className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Connectors': return <Plug className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Inductors': return <Activity className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Transistors': return <Share2 className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Audio': return <Speaker className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Crystals': return <Gem className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Displays': return <Monitor className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Fans': return <Fan className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Fuses': return <ZapOff className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'LEDs': return <Lightbulb className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Potentiometers': return <Sliders className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Power': return <Zap className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Relays': return <ToggleLeft className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Sensors': return <Eye className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Tools': return <Wrench className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Transformers': return <Repeat className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Modules': return <Box className="w-6 h-6 sm:w-8 sm:h-8" />;
+        default: return <Sparkles className="w-6 h-6 sm:w-8 sm:h-8" />;
+    }
 };
 
 export default function CategoryGrid() {
@@ -41,7 +55,7 @@ export default function CategoryGrid() {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-5">
                 {categories.slice(0, 10).map((category, index) => {
                     const count = getProductsByCategory(category).length;
-                    const Icon = categoryIcons[category] || <Box className="w-6 h-6 sm:w-8 sm:h-8" />;
+                    const Icon = getCategoryIcon(category);
 
                     return (
                         <Link

@@ -12,6 +12,13 @@ const AuthorisedLines = dynamic(() => import('@/components/AuthorisedLines'));
 
 import { Suspense } from 'react';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Serente Electronics | Global Electronic Components Distributor",
+  description: "Leading distributor of electronic components. Specializing in supply chain solutions, EV sector, automotive, medical, and IoT industries. ISO 9001:2015 Certified.",
+};
+
 export default function Home() {
   const features = [
     {
