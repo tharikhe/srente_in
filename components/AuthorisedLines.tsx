@@ -39,7 +39,7 @@ export default function AuthorisedLines() {
                             {brands.map((brand, index) => (
                                 <div
                                     key={`1-${index}`}
-                                    className="w-[180px] h-24 flex-shrink-0 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 hover:scale-105"
+                                    className="w-[180px] h-24 flex-shrink-0 flex items-center justify-center transition-all duration-300 hover:scale-105"
                                 >
                                     <div className="relative w-full h-full">
                                         <Image
@@ -59,7 +59,7 @@ export default function AuthorisedLines() {
                             {brands.map((brand, index) => (
                                 <div
                                     key={`2-${index}`}
-                                    className="w-[180px] h-24 flex-shrink-0 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 hover:scale-105"
+                                    className="w-[180px] h-24 flex-shrink-0 flex items-center justify-center transition-all duration-300 hover:scale-105"
                                 >
                                     <div className="relative w-full h-full">
                                         <Image

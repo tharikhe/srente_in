@@ -5,6 +5,7 @@ import { products, categories, searchProducts, Product } from '@/data/products';
 import { Search, FileText, ShoppingCart, Filter, ChevronLeft, Check, Package, ChevronDown, ChevronUp } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { getCategoryImage } from '@/lib/product-images';
 import Image from 'next/image';
 
 export default function ProductTable() {
@@ -12,9 +13,10 @@ export default function ProductTable() {
     const router = useRouter();
     const pathname = usePathname();
     const categoryParam = searchParams.get('category');
+    const searchParam = searchParams.get('search'); // Get search param
 
-    // Initialize state from URL params if available, otherwise default to 'All'
-    const [searchQuery, setSearchQuery] = useState('');
+    // Initialize state from URL params if available
+    const [searchQuery, setSearchQuery] = useState(searchParam || '');
     const [selectedCategory, setSelectedCategory] = useState(categoryParam || 'All');
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedRow, setExpandedRow] = useState<string | null>(null);
@@ -30,6 +32,15 @@ export default function ProductTable() {
             setSelectedCategory('All');
         }
     }, [categoryParam]);
+
+    // Sync search query with URL param
+    useEffect(() => {
+        if (searchParam) {
+            setSearchQuery(searchParam);
+        } else {
+            setSearchQuery('');
+        }
+    }, [searchParam]);
 
     // Handle category change
     const handleCategoryChange = (newCategory: string) => {
@@ -83,12 +94,6 @@ export default function ProductTable() {
 
     const toggleRowExpand = (partNumber: string) => {
         setExpandedRow(expandedRow === partNumber ? null : partNumber);
-    };
-
-    const getCategoryImage = (category: string) => {
-        // Map special chars or spaces if needed, generally lowercase is safe for filenames
-        const slug = category.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-        return `/categories/${slug}.jpg`;
     };
 
     return (
@@ -182,6 +187,7 @@ export default function ProductTable() {
                                             alt={product.partNumber}
                                             fill
                                             sizes="48px"
+                                            loading="lazy"
                                             className="object-contain p-1"
                                             onError={(e) => {
                                                 // Fallback if category image is missing - hide image and show initial?
@@ -256,6 +262,7 @@ export default function ProductTable() {
                                     alt={product.partNumber}
                                     fill
                                     sizes="56px"
+                                    loading="lazy"
                                     className="object-contain p-1"
                                 />
                             </div>

@@ -25,7 +25,7 @@ const quickActions = [
     { icon: <Smartphone className="w-3.5 h-3.5" />, label: 'WhatsApp', action: 'whatsapp' },
 ];
 
-const WHATSAPP_NUMBER = "919353413620"; // Removed spaces/symbols for link
+const WHATSAPP_NUMBER = "91808813136"; // Removed spaces/symbols for link
 
 export default function Chatbot() {
     // State
@@ -95,7 +95,7 @@ export default function Chatbot() {
             return {
                 id: Date.now(),
                 type: 'bot',
-                content: "📱 **WhatsApp Support**\n\nYou can chat with our sales team directly on WhatsApp for quotes and bulk orders.\n\nNumber: +91 93534 13620",
+                content: "📱 **WhatsApp Support**\n\nYou can chat with our sales team directly on WhatsApp for quotes and bulk orders.\n\nNumber: +91 80881 3136",
                 timestamp: new Date(),
                 relatedQuestions: ["Send inquiry on WhatsApp", "Email sales"]
             };
@@ -169,7 +169,7 @@ export default function Chatbot() {
             return {
                 id: Date.now(),
                 type: 'bot',
-                content: "📞 **Contact Support**\n\nOur team is available to help you!\n\n• Email: Info@serentehk.com\n• Phone: +91 93534 13620\n• WhatsApp: Click the button below",
+                content: "📞 **Contact Support**\n\nOur team is available to help you!\n\n• Email: sales@serenthk.com\n• Phone: +91 80881 3136\n• WhatsApp: Click the button below",
                 timestamp: new Date(),
                 relatedQuestions: ["Open WhatsApp", "Back to search"]
             };

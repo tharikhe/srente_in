@@ -258,6 +258,7 @@ const HeroSection: React.FC<HeroProps> = ({
             </div>
 
             {/* Gradient Overlays */}
+            <div className="absolute inset-0 bg-black/50 z-10" /> {/* Added darkness */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 z-10" />
 

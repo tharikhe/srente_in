@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, ShoppingCart, Menu, Phone, Mail, ChevronDown, X, Zap, Clock, MapPin, ArrowRight, Sparkles, Cpu, Activity, Battery, Plug, Speaker, Gem, Monitor, Fan, ZapOff, Lightbulb, Box, Sliders, ToggleLeft, Eye, Repeat, Share2, Wrench, Layers } from 'lucide-react';
+import { Search, ShoppingCart, Menu, Phone, Mail, ChevronDown, X, Zap, Clock, MapPin, ArrowRight, Sparkles, Cpu, Activity, Battery, Plug, Speaker, Gem, Monitor, Fan, ZapOff, Lightbulb, Box, Sliders, ToggleLeft, Eye, Repeat, Share2, Wrench, Layers, Fuel } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
-import { categories } from '@/data/products';
+import { categories, searchProducts, Product } from '@/data/products';
+import { useRouter } from 'next/navigation';
 
 
 const getCategoryIcon = (category: string) => {
@@ -30,11 +31,16 @@ const getCategoryIcon = (category: string) => {
         case 'Tools': return Wrench;
         case 'Transformers': return Repeat;
         case 'Modules': return Box;
+        case 'Fuel Dispenser': return Fuel;
         default: return Sparkles;
     }
 };
 
 export default function Navbar() {
+    const router = useRouter();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [suggestions, setSuggestions] = useState<Product[]>([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
     const [isSearchFocused, setIsSearchFocused] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -49,17 +55,50 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navLinks = [
+    // Search Suggestions Logic
+    useEffect(() => {
+        if (searchQuery.length > 1) {
+            const results = searchProducts(searchQuery).slice(0, 8);
+            setSuggestions(results);
+            setShowSuggestions(true);
+        } else {
+            setSuggestions([]);
+            setShowSuggestions(false);
+        }
+    }, [searchQuery]);
+
+    const handleSuggestionClick = (product: Product) => {
+        setSearchQuery(product.partNumber);
+        setShowSuggestions(false);
+        router.push(`/products?search=${encodeURIComponent(product.partNumber)}`);
+    };
+
+    const handleSearch = (e?: React.FormEvent) => {
+        if (e) e.preventDefault();
+        if (!searchQuery.trim()) return;
+
+        router.push(`/products?search=${encodeURIComponent(searchQuery)}`);
+        setIsMobileMenuOpen(false); // Close mobile menu if open
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
+    const navLinks: { href: string; label: string; badge?: string }[] = [
         { href: '/', label: 'HOME' },
         { href: '/products', label: 'PRODUCTS' },
-        { href: '/bom', label: 'BOM TOOL', badge: 'NEW' },
+        { href: '/manufacturers', label: 'LINE CARD' },
         { href: '/blog', label: 'BLOG' },
+        { href: '/events', label: 'EVENTS' },
         { href: '/about', label: 'ABOUT US' },
         { href: '/contact', label: 'CONTACT' },
     ];
 
     return (
-        <header className={`flex flex-col w-full sticky top-0 z-50 transition-all duration-500 ${isScrolled ? 'shadow-2xl' : ''}`}>
+        <header className={`flex flex-col w-full sticky top-0 z-50 transition-all duration-500 bg-white ${isScrolled ? 'shadow-2xl' : ''}`}>
             {/* Premium Top Banner with Animation */}
 
 
@@ -67,17 +106,17 @@ export default function Navbar() {
             <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white text-xs py-2.5 hidden md:block border-b border-gray-700/50">
                 <div className="container mx-auto px-4 flex justify-between items-center">
                     <div className="flex items-center divide-x divide-gray-600">
-                        <a href="mailto:Info@serentehk.com" className="flex items-center gap-2 hover:text-brand-gold transition-all duration-300 pr-5 group">
+                        <a href="mailto:sales@serenthk.com" className="flex items-center gap-2 hover:text-brand-gold transition-all duration-300 pr-5 group">
                             <div className="p-1.5 bg-brand-teal/20 rounded-full group-hover:bg-brand-gold/20 transition-colors">
                                 <Mail className="w-3 h-3" />
                             </div>
-                            <span className="font-medium">Info@serentehk.com</span>
+                            <span className="font-medium">sales@serenthk.com</span>
                         </a>
-                        <a href="tel:+919353413620" className="flex items-center gap-2 hover:text-brand-gold transition-all duration-300 px-5 group">
+                        <a href="tel:+91808813136" className="flex items-center gap-2 hover:text-brand-gold transition-all duration-300 px-5 group">
                             <div className="p-1.5 bg-brand-teal/20 rounded-full group-hover:bg-brand-gold/20 transition-colors">
                                 <Phone className="w-3 h-3" />
                             </div>
-                            <span className="font-medium">+91 93534 13620</span>
+                            <span className="font-medium">+91 80881 3136</span>
                         </a>
                         <div className="flex items-center gap-2 px-5 text-gray-400">
                             <div className="p-1.5 bg-gray-700 rounded-full">
@@ -101,7 +140,7 @@ export default function Navbar() {
             </div>
 
             {/* Main Header - Premium Design */}
-            <div className={`bg-white py-3 sm:py-4 transition-all duration-300 ${isScrolled ? 'shadow-lg' : 'shadow-soft'}`}>
+            <div className={`relative z-[60] bg-white py-3 sm:py-4 transition-all duration-300 ${isScrolled ? 'shadow-lg' : 'shadow-soft'}`}>
                 <div className="container mx-auto px-4 flex items-center justify-between gap-2 sm:gap-4 lg:gap-8">
                     {/* Mobile Menu Button */}
                     <button
@@ -128,11 +167,11 @@ export default function Navbar() {
                                 className="h-10 sm:h-14 w-auto relative transition-transform duration-300 group-hover:scale-105"
                             />
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex flex-row items-baseline gap-1">
                             <span className="text-base sm:text-xl font-bold text-brand-teal tracking-tight leading-none group-hover:text-brand-teal-dark transition-colors">
                                 Serente Electronics
                             </span>
-                            <span className="text-xs sm:text-sm font-semibold text-brand-gold tracking-widest uppercase">
+                            <span className="text-base sm:text-lg font-bold text-brand-teal tracking-tight leading-none group-hover:text-brand-teal-dark transition-colors">
                                 HK LTD
                             </span>
                         </div>
@@ -140,7 +179,7 @@ export default function Navbar() {
 
                     {/* Premium Search Bar */}
                     <div className={`hidden lg:block flex-grow max-w-2xl transition-all duration-500 ${isSearchFocused ? 'scale-[1.02]' : ''}`}>
-                        <div className="relative">
+                        <div className="relative z-50">
                             {/* Glow Effect on Focus */}
                             <div className={`absolute -inset-1 bg-gradient-to-r from-brand-teal to-brand-gold rounded-2xl blur-md transition-opacity duration-300 ${isSearchFocused ? 'opacity-40' : 'opacity-0'}`} />
 
@@ -150,15 +189,69 @@ export default function Navbar() {
                                     <input
                                         type="text"
                                         placeholder="Search by Part Number, Manufacturer, or Description..."
-                                        onFocus={() => setIsSearchFocused(true)}
-                                        onBlur={() => setIsSearchFocused(false)}
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        onKeyDown={handleKeyDown}
+                                        onFocus={() => {
+                                            setIsSearchFocused(true);
+                                            if (searchQuery.length > 1) setShowSuggestions(true);
+                                        }}
+                                        onBlur={() => {
+                                            setIsSearchFocused(false);
+                                            // Delay hiding to allow click event on suggestion
+                                            setTimeout(() => setShowSuggestions(false), 200);
+                                        }}
                                         className={`w-full pl-12 pr-4 py-4 border-2 rounded-l-2xl transition-all duration-300 text-sm placeholder:text-gray-400 ${isSearchFocused
                                             ? 'border-brand-teal bg-white shadow-lg'
                                             : 'border-gray-200 bg-gray-50/80 hover:border-gray-300 hover:bg-white'
                                             } focus:outline-none`}
                                     />
+
+                                    {/* Search Suggestions Dropdown */}
+                                    {showSuggestions && suggestions.length > 0 && (
+                                        <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[100]">
+                                            <div className="max-h-[400px] overflow-y-auto custom-scrollbar">
+                                                {suggestions.map((product, idx) => (
+                                                    <div
+                                                        key={idx}
+                                                        onMouseDown={(e) => {
+                                                            e.preventDefault();
+                                                            handleSuggestionClick(product);
+                                                        }}
+                                                        className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-0 transition-colors group/item"
+                                                    >
+                                                        <div className="flex justify-between items-start">
+                                                            <div>
+                                                                <p className="text-sm font-semibold text-gray-900 group-hover/item:text-brand-teal">
+                                                                    {product.partNumber}
+                                                                </p>
+                                                                <p className="text-xs text-gray-500 line-clamp-1">{product.description}</p>
+                                                            </div>
+                                                            <span className="text-[10px] uppercase font-bold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+                                                                {product.category}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div className="p-2 bg-gray-50 border-t border-gray-100 text-center">
+                                                <button
+                                                    onMouseDown={(e) => {
+                                                        e.preventDefault(); // Prevent blur
+                                                        handleSearch();
+                                                    }}
+                                                    className="text-xs font-semibold text-brand-teal hover:text-brand-gold transition-colors"
+                                                >
+                                                    View all results for "{searchQuery}"
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
-                                <button className="bg-gradient-to-r from-brand-gold to-brand-gold-dark hover:from-brand-gold-dark hover:to-brand-gold text-white px-8 rounded-r-2xl transition-all duration-300 hover:shadow-lg hover:shadow-brand-gold/30 font-semibold flex items-center gap-2 group">
+                                <button
+                                    onClick={() => handleSearch()}
+                                    className="bg-gradient-to-r from-brand-gold to-brand-gold-dark hover:from-brand-gold-dark hover:to-brand-gold text-white px-8 rounded-r-2xl transition-all duration-300 hover:shadow-lg hover:shadow-brand-gold/30 font-semibold flex items-center gap-2 group"
+                                >
                                     <Search className="w-5 h-5 group-hover:scale-110 transition-transform" />
                                     <span>Search</span>
                                 </button>
@@ -200,10 +293,54 @@ export default function Navbar() {
                             <input
                                 type="text"
                                 placeholder="Search parts..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onKeyDown={handleKeyDown}
+                                onFocus={() => {
+                                    if (searchQuery.length > 1) setShowSuggestions(true);
+                                }}
+                                onBlur={() => {
+                                    setTimeout(() => setShowSuggestions(false), 200);
+                                }}
                                 className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-l-xl focus:outline-none focus:border-brand-teal bg-gray-50 text-sm transition-colors"
                             />
+
+                            {/* Mobile Search Suggestions */}
+                            {showSuggestions && suggestions.length > 0 && (
+                                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[100]">
+                                    <div className="max-h-[300px] overflow-y-auto">
+                                        {suggestions.map((product, idx) => (
+                                            <div
+                                                key={idx}
+                                                onMouseDown={(e) => {
+                                                    e.preventDefault();
+                                                    handleSuggestionClick(product);
+                                                }}
+                                                className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-0"
+                                            >
+                                                <p className="text-sm font-semibold text-gray-900">{product.partNumber}</p>
+                                                <p className="text-xs text-gray-500 line-clamp-1">{product.description}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="p-2 bg-gray-50 border-t border-gray-100 text-center">
+                                        <button
+                                            onMouseDown={(e) => {
+                                                e.preventDefault();
+                                                handleSearch();
+                                            }}
+                                            className="text-xs font-semibold text-brand-teal"
+                                        >
+                                            View all results
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                        <button className="bg-gradient-to-r from-brand-gold to-brand-gold-dark text-white px-5 rounded-r-xl font-semibold flex items-center">
+                        <button
+                            onClick={() => handleSearch()}
+                            className="bg-gradient-to-r from-brand-gold to-brand-gold-dark text-white px-5 rounded-r-xl font-semibold flex items-center"
+                        >
                             <Search className="w-5 h-5" />
                         </button>
                     </div>
@@ -343,22 +480,22 @@ export default function Navbar() {
                         {/* Mobile Contact Info */}
                         <div className="mt-8 pt-8 border-t border-gray-200 space-y-4">
                             <h4 className="text-sm font-bold text-gray-500 uppercase tracking-wider">Contact Info</h4>
-                            <a href="mailto:Info@serentehk.com" className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-soft">
+                            <a href="mailto:sales@serenthk.com" className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-soft">
                                 <div className="p-3 bg-brand-teal/10 rounded-xl">
                                     <Mail className="w-5 h-5 text-brand-teal" />
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500">Email us at</p>
-                                    <p className="font-semibold text-gray-800">Info@serentehk.com</p>
+                                    <p className="font-semibold text-gray-800">sales@serenthk.com</p>
                                 </div>
                             </a>
-                            <a href="tel:+919353413620" className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-soft">
+                            <a href="tel:+91808813136" className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-soft">
                                 <div className="p-3 bg-brand-gold/10 rounded-xl">
                                     <Phone className="w-5 h-5 text-brand-gold" />
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500">Call us at</p>
-                                    <p className="font-semibold text-gray-800">+91 93534 13620</p>
+                                    <p className="font-semibold text-gray-800">+91 80881 3136</p>
                                 </div>
                             </a>
                         </div>

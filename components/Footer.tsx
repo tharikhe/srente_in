@@ -158,8 +158,7 @@ export default function Footer() {
                                 </div>
                                 <div>
                                     <p className="text-white/50 text-xs mb-1">Contact</p>
-                                    <p className="text-white font-medium text-sm">Landline: +91 86607 44258</p>
-                                    <p className="text-white font-medium text-sm">Phone: +91 93534 13620</p>
+                                    <p className="text-white font-medium text-sm">Phone: +91 80881 3136</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-4">
@@ -168,7 +167,7 @@ export default function Footer() {
                                 </div>
                                 <div>
                                     <p className="text-white/50 text-xs mb-1">Email</p>
-                                    <p className="text-white font-medium">Info@serentehk.com</p>
+                                    <p className="text-white font-medium">sales@serenthk.com</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-4">
@@ -177,7 +176,7 @@ export default function Footer() {
                                 </div>
                                 <div>
                                     <p className="text-white/50 text-xs mb-1">Address</p>
-                                    <p className="text-white font-medium">123 Tech Park, Shenzhen, China</p>
+                                    <p className="text-white font-medium text-sm">2/F Tern Ctr Tower 1, 237 Queen's Rd Central, Hong Kong</p>
                                 </div>
                             </li>
                         </ul>

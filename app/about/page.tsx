@@ -1,116 +1,104 @@
-import { Metadata } from 'next';
-import { Shield, Truck, Headphones, Award, Globe, Users, Target, History } from 'lucide-react';
-import Link from 'next/link';
-
-export const metadata: Metadata = {
-    title: "About Us | Serente Electronics - Global Electronic Components Distributor",
-    description: "Learn about Serente Electronics, a premier global distributor of electronic components since 2020. ISO 9001:2015 certified, serving OEMs, EMS, and research institutions in over 100 countries.",
-};
+import React from 'react';
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
 export default function AboutPage() {
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="container mx-auto py-12 px-4 space-y-12">
             {/* Hero Section */}
-            <div className="relative rounded-3xl overflow-hidden mb-16 bg-brand-teal-dark text-white p-12 md:p-24 text-center">
-                <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-                <div className="relative z-10 max-w-3xl mx-auto">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-6">Empowering Innovation Through Electronics</h1>
-                    <p className="text-xl text-white/80 leading-relaxed">
-                        Serente Electronics is a premier global distributor of electronic components, dedicated to fueling the future of technology with quality, speed, and reliability.
-                    </p>
-                </div>
-            </div>
-
-            {/* Legacy of Excellence */}
-            <div className="bg-white rounded-3xl shadow-soft border border-brand-border p-8 md:p-12 mb-20">
-                <div className="max-w-4xl mx-auto">
-                    <div className="text-center mb-10">
-                        <h2 className="text-3xl md:text-4xl font-bold text-brand-text mb-2">Legacy of Excellence</h2>
-                        <h3 className="text-xl text-brand-gold font-medium tracking-wide uppercase">Electronics Distribution</h3>
-                    </div>
-
-                    <div className="space-y-6 text-brand-text-muted leading-relaxed text-lg">
-                        <p>
-                            <strong className="text-brand-text font-semibold">SERENTE ELECTRONICS</strong> is a well-known electronic components distributor. The company was founded in 2020 and is headquartered in Bangalore. Geared to the needs of industrial partners, accumulating more capacity, optimising the industrial supply chain, reducing costs and providing the most cost-effective professional services, this is our pursuit of the goal.
-                        </p>
-                        <p>
-                            SERENTE has relationships with several famous international semiconductor manufacturers/distributors all over the world. The company is committed to the industry partners to provide a full range of semiconductor products technical services, professional agent distribution companies and other international well-known semiconductor products.
-                        </p>
-                        <p>
-                            The company has a group of experienced professional sales and technical teams, to meet the needs of the growing customers at the same time, the company has been in Bangalore, to set up an operation with regional sales-technical representatives. Our logical goal is to become one of the world's best electronic components distributors.
-                        </p>
-                        <p>
-                            Under the joint efforts of all staff, the company will continue to carry forward the <span className="italic text-brand-teal font-medium">"integrity, unity and progress, strives for realism the innovation, achievement of excellence"</span> spirit of enterprise, adhering to the <span className="italic text-brand-teal font-medium">"professional, enthusiastic, efficient"</span> service concept, continue to strengthen exchanges and cooperation with industry partners at home and abroad, as always for the terminal customers provide the most advanced product technology, the optimization of solution, the most flexible logistics services, the most competitive prices. Because of speciality, so the lead!
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            {/* Why Choose Us */}
-            <div className="mb-20">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold text-brand-text mb-4">Why Choose Serente?</h2>
-                    <p className="text-brand-text-muted max-w-2xl mx-auto">
-                        We go beyond simple distribution. We are your strategic partner in navigating the complex world of electronic components.
-                    </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {[
-                        { icon: Shield, title: 'Quality Guaranteed', desc: 'ISO 9001:2015 certified with rigorous anti-counterfeit testing labs.' },
-                        { icon: Truck, title: 'Global Logistics', desc: 'Fast, reliable shipping to over 100 countries with real-time tracking.' },
-                        { icon: Headphones, title: 'Expert Support', desc: 'Dedicated account managers and technical engineers at your service.' },
-                        { icon: History, title: 'Proven Track Record', desc: 'Over 15 years of experience serving OEMs, EMS, and research institutions.' },
-                    ].map((item, i) => (
-                        <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-brand-border hover:shadow-medium transition-all text-center">
-                            <div className="w-12 h-12 mx-auto bg-brand-surface rounded-xl flex items-center justify-center mb-4 text-brand-teal">
-                                <item.icon className="w-6 h-6" />
-                            </div>
-                            <h3 className="font-bold text-lg text-brand-text mb-2">{item.title}</h3>
-                            <p className="text-sm text-brand-text-muted">{item.desc}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Stats Section */}
-            <div className="bg-brand-text text-white rounded-3xl p-12 mb-20">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
-                    {[
-                        { label: 'Products in Stock', value: '5M+' },
-                        { label: 'Manufacturers', value: '800+' },
-                        { label: 'Countries Served', value: '100+' },
-                        { label: 'Happy Clients', value: '10k+' },
-                    ].map((stat, i) => (
-                        <div key={i} className="p-4">
-                            <div className="text-4xl md:text-5xl font-bold text-brand-gold mb-2">{stat.value}</div>
-                            <div className="text-white/60 text-sm uppercase tracking-wider font-medium">{stat.label}</div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* CTA */}
-            <div className="text-center bg-gradient-to-br from-brand-teal to-brand-teal-light rounded-3xl p-12 md:p-16 text-white shadow-glow-teal">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Project?</h2>
-                <p className="text-white/80 max-w-2xl mx-auto mb-10 text-lg">
-                    Browse our extensive catalog or upload your Bill of Materials (BOM) for a quick, competitive quote.
+            <section className="text-center space-y-4 max-w-4xl mx-auto">
+                <h1 className="text-4xl font-bold tracking-tight text-primary">About Serente Electronics HK Ltd</h1>
+                <p className="text-lg text-muted-foreground">
+                    Bridging the gap between global electronic component supply and innovative manufacturing solutions.
                 </p>
-                <div className="flex justify-center gap-4 flex-wrap">
-                    <Link
-                        href="/products"
-                        className="px-8 py-4 bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-glow-gold hover:scale-105"
-                    >
-                        Browse Catalog
-                    </Link>
-                    <Link
-                        href="/contact"
-                        className="px-8 py-4 bg-white/10 hover:bg-white/20 border-2 border-white/30 hover:border-white text-white rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105"
-                    >
-                        Contact Sales
-                    </Link>
+            </section>
+
+            <Separator />
+
+            {/* Our Story Section */}
+            <section className="grid md:grid-cols-2 gap-8 items-center">
+                <div className="space-y-4">
+                    <Badge variant="secondary" className="text-sm">Our Story</Badge>
+                    <h2 className="text-3xl font-semibold">Who We Are</h2>
+                    <div className="space-y-4 text-muted-foreground leading-relaxed">
+                        <p>
+                            Serente Electronics HK Ltd is a Hong Kong-based electronic distribution company established in October 2023, specializing in the global supply of electronic components and solutions for OEM and ODM projects. We operate as a worldwide distributor with a focus on providing electronic components, connectors, and related products to international markets, including India and other key regions.
+                        </p>
+                        <p>
+                            We prioritize project-based requirements, backed by a robust marketing and engineering team poised to embrace new challenges. Offering sourcing, distribution, and supply chain management services for a wide range of electronics industries, our expertise extends to reverse engineering, component supply, and customized solutions for clients seeking global partnerships and reliable supply chains. We maintain an active presence in both import and export markets, serving as a key partner for electronics manufacturers and distributors worldwide.
+                        </p>
+                    </div>
                 </div>
-            </div>
+                <div className="relative h-[400px] rounded-xl overflow-hidden bg-muted flex items-center justify-center">
+                    {/* Placeholder for an Image - ideally a warehouse or office shot */}
+                    <div className="text-muted-foreground/50 text-xl font-medium">Serente Global Hub</div>
+                    {/* If you have an image, replace the above div with: 
+                <Image src="/your-image.jpg" alt="About Serente" fill className="object-cover" /> 
+             */}
+                </div>
+            </section>
+
+            {/* The Difference Section */}
+            <section className="bg-muted/30 p-8 rounded-2xl space-y-6">
+                <div className="text-center max-w-3xl mx-auto space-y-4">
+                    <h2 className="text-3xl font-semibold">The Serente Difference</h2>
+                    <p className="text-muted-foreground">
+                        We distinguish ourselves by offering pin-to-pin replacement solutions for global brands in connectors, LCDs, and other electronic components.
+                    </p>
+                </div>
+                <div className="grid md:grid-cols-3 gap-6">
+                    <Card>
+                        <CardContent className="pt-6 space-y-2">
+                            <h3 className="font-semibold text-lg">Pin-to-Pin Compatibility</h3>
+                            <p className="text-sm text-muted-foreground">
+                                We supply compatible components that match the exact specifications, form factor, and electrical connections of leading brands, enabling seamless integration into existing designs without redesigns.
+                            </p>
+                        </CardContent>
+                    </Card>
+                    <Card>
+                        <CardContent className="pt-6 space-y-2">
+                            <h3 className="font-semibold text-lg">Reverse Engineering</h3>
+                            <p className="text-sm text-muted-foreground">
+                                Our engineering expertise allows us to provide reliable alternatives for connectors, LCDs, and other parts, making us a valuable partner for cost-effective, drop-in replacements.
+                            </p>
+                        </CardContent>
+                    </Card>
+                    <Card>
+                        <CardContent className="pt-6 space-y-2">
+                            <h3 className="font-semibold text-lg">Legacy Support</h3>
+                            <p className="text-sm text-muted-foreground">
+                                We help companies maintain legacy systems and reduce dependency on single-brand suppliers, ensuring continuity and flexibility in global supply chains.
+                            </p>
+                        </CardContent>
+                    </Card>
+                </div>
+            </section>
+
+            {/* Mission & Vision */}
+            <section className="grid md:grid-cols-2 gap-12">
+                <div className="space-y-4 p-6 border rounded-xl bg-card shadow-sm">
+                    <Badge className="w-fit">MISSION</Badge>
+                    <h3 className="text-2xl font-bold">Reliable & Innovative Solutions</h3>
+                    <p className="text-muted-foreground">
+                        Serente Electronics HK Ltd’s mission is to deliver reliable, innovative, and cost‑effective electronic components and solutions to OEM and ODM customers worldwide. The company focuses on pin‑to‑pin replacements and customised, project‑based support for connectors, LCDs, and other key components.
+                    </p>
+                    <p className="text-muted-foreground">
+                        We aim to build a robust global supply chain with trusted partners, ensuring continuity, flexibility, and timely delivery. Backed by a strong marketing and engineering team, Serente enables customers to maintain legacy systems and stay competitive in global markets.
+                    </p>
+                </div>
+
+                <div className="space-y-4 p-6 border rounded-xl bg-card shadow-sm">
+                    <Badge variant="outline" className="w-fit">VISION</Badge>
+                    <h3 className="text-2xl font-bold">Global Expansion & Service</h3>
+                    <p className="text-muted-foreground">
+                        Serente Electronics HK Ltd will expand across APAC and Europe in the next five years, establishing branches in India, China, Japan, South Korea, Singapore, Dubai, Vietnam, Germany, UK, France, Italy, and the Netherlands.
+                    </p>
+                    <p className="text-muted-foreground">
+                        With a focus on pin-to-pin replacements and customized solutions, the company will deliver rapid, reliable service to OEMs and ODMs.
+                    </p>
+                </div>
+            </section>
         </div>
     );
 }

@@ -34,26 +34,20 @@ export default function FloatingMenu() {
         {
             icon: Phone,
             label: 'Call Us',
-            href: 'tel:+919353413620',
+            href: 'tel:+91808813136',
             color: 'text-[#F39800]', // Orange
         },
         {
             icon: Mail,
             label: 'Email Us',
-            href: 'mailto:Info@serentehk.com',
+            href: 'mailto:sales@serenthk.com',
             color: 'text-[#448ACA]', // Blue
         },
         {
             icon: WhatsAppIcon,
             label: 'WhatsApp',
-            href: 'https://wa.me/1234567890',
+            href: 'https://wa.me/+91808813136',
             color: '', // Image has its own color
-        },
-        {
-            icon: MessageSquare,
-            label: 'Chat',
-            href: '#',
-            color: 'text-[#FFC107]', // Yellow
         },
     ];
 

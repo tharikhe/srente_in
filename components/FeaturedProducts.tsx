@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useMemo, useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
+import { getCategoryImage } from '@/lib/product-images';
 
 export default function FeaturedProducts() {
     // Initialize with empty array to match server render, then populate on client
@@ -66,26 +67,16 @@ export default function FeaturedProducts() {
                                 </div>
                             )}
 
-                            {product.image ? (
-                                <div className="relative w-full h-full">
-                                    <Image
-                                        src={product.image}
-                                        alt={product.partNumber}
-                                        fill
-                                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-                                        className="object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                </div>
-                            ) : (
-                                <div className="text-center">
-                                    <div className="w-10 h-10 sm:w-16 sm:h-16 bg-brand-border/30 rounded-full flex items-center justify-center mx-auto mb-1 sm:mb-2">
-                                        <span className="text-lg sm:text-2xl font-bold text-brand-text-light">
-                                            {product.partNumber.charAt(0)}
-                                        </span>
-                                    </div>
-                                    <span className="text-[10px] sm:text-xs text-brand-text-muted font-mono">{product.partNumber.substring(0, 12)}</span>
-                                </div>
-                            )}
+                            <div className="relative w-full h-full">
+                                <Image
+                                    src={product.image || getCategoryImage(product.category)}
+                                    alt={product.partNumber}
+                                    fill
+                                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                                    loading="lazy"
+                                    className="object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500"
+                                />
+                            </div>
                         </div>
 
                         {/* Content */}

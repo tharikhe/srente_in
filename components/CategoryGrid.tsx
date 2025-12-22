@@ -1,7 +1,7 @@
 'use client';
 
 import { categories, getProductsByCategory } from '@/data/products';
-import { Cpu, Activity, Battery, Plug, Speaker, Gem, Monitor, Fan, ZapOff, Lightbulb, Box, Sliders, ToggleLeft, Eye, Repeat, Share2, Wrench, Layers, Sparkles, Zap } from 'lucide-react';
+import { Cpu, Activity, Battery, Plug, Speaker, Gem, Monitor, Fan, ZapOff, Lightbulb, Box, Sliders, ToggleLeft, Eye, Repeat, Share2, Wrench, Layers, Sparkles, Zap, Fuel } from 'lucide-react';
 import Link from 'next/link';
 
 // Helper to get consistent icons (same as Navbar)
@@ -27,6 +27,7 @@ const getCategoryIcon = (category: string) => {
         case 'Tools': return <Wrench className="w-6 h-6 sm:w-8 sm:h-8" />;
         case 'Transformers': return <Repeat className="w-6 h-6 sm:w-8 sm:h-8" />;
         case 'Modules': return <Box className="w-6 h-6 sm:w-8 sm:h-8" />;
+        case 'Fuel Dispenser': return <Fuel className="w-6 h-6 sm:w-8 sm:h-8" />;
         default: return <Sparkles className="w-6 h-6 sm:w-8 sm:h-8" />;
     }
 };
