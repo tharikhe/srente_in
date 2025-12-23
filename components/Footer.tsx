@@ -132,8 +132,6 @@ export default function Footer() {
                             {[
                                 { label: 'Request for Quotation', href: '/rfq' },
                                 { label: 'Upload BOM', href: '/bom' },
-                                { label: 'Help Center', href: '/help-center' },
-                                { label: 'Contact Us', href: '/contact' },
                             ].map((link) => (
                                 <li key={link.label}>
                                     <Link
