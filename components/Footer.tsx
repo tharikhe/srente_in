@@ -167,7 +167,7 @@ export default function Footer() {
                                 </div>
                                 <div>
                                     <p className="text-white/50 text-xs mb-1">Email</p>
-                                    <p className="text-white font-medium">sales@serenthk.com</p>
+                                    <p className="text-white font-medium">sales@serentehk.com</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-4">

@@ -82,8 +82,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-gray-900 dark:text-white">Phone</h3>
-                                        <p className="text-gray-600 dark:text-gray-300">+852 2380 0338</p>
-                                        <p className="text-gray-600 dark:text-gray-300">+852 6888 9138</p>
+                                        <p className="text-gray-600 dark:text-gray-300">+91 80881 3136</p>
                                     </div>
                                 </div>
 
@@ -93,8 +92,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-gray-900 dark:text-white">Email</h3>
-                                        <p className="text-gray-600 dark:text-gray-300">sales@serente.com</p>
-                                        <p className="text-gray-600 dark:text-gray-300">info@serente.com</p>
+                                        <p className="text-gray-600 dark:text-gray-300">sales@serentehk.com</p>
                                     </div>
                                 </div>
 
@@ -105,10 +103,9 @@ export default function ContactPage() {
                                     <div>
                                         <h3 className="font-semibold text-gray-900 dark:text-white">Address</h3>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            Unit 1603, 16/F, Tower 2<br />
-                                            Cheung Sha Wan Plaza<br />
-                                            833 Cheung Sha Wan Road<br />
-                                            Kowloon, Hong Kong
+                                            2/F Tern Ctr Tower 1<br />
+                                            237 Queen's Rd Central<br />
+                                            Hong Kong
                                         </p>
                                     </div>
                                 </div>
@@ -297,7 +294,7 @@ export default function ContactPage() {
                     </h2>
                     <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.1984476456466!2d114.14887731495428!3d22.336976785297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x340400c2b5e3e0a9%3A0x9e0c5c0e3e6a6e0a!2sCheung%20Sha%20Wan%20Plaza!5e0!3m2!1sen!2shk!4v1620000000000!5m2!1sen!2shk"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.688657697472!2d114.1517865759521!3d22.28983634237146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34040063260cbed9%3A0x6fda752f9c340d21!2sTern%20Centre%20Tower%201!5e0!3m2!1sen!2shk!4v1703640000000!5m2!1sen!2shk"
                             width="100%"
                             height="450"
                             style={{ border: 0 }}
