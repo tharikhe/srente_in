@@ -16,7 +16,9 @@ export default function SmoothScroll() {
         });
 
         function raf(time: number) {
-            lenis.raf(time);
+            if (!document.body.classList.contains('lenis-stopped')) {
+                lenis.raf(time);
+            }
             requestAnimationFrame(raf);
         }
 

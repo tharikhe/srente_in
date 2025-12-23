@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
 import { submitToGoogleSheets } from '@/lib/google-sheets';
 import { Trash2, Plus, Minus, ArrowRight, ShoppingBag, Send, CheckCircle, AlertCircle, X, Loader2 } from 'lucide-react';
@@ -18,6 +18,24 @@ export default function CartPage() {
         company: '',
         message: '',
     });
+
+    // Prevent background scrolling when modal is open
+    useEffect(() => {
+        if (showForm) {
+            document.body.classList.add('lenis-stopped');
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
+        } else {
+            document.body.classList.remove('lenis-stopped');
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+        }
+        return () => {
+            document.body.classList.remove('lenis-stopped');
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+        };
+    }, [showForm]);
 
     const handleSubmitQuote = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -159,9 +177,24 @@ export default function CartPage() {
                                     >
                                         <Minus className="w-4 h-4 text-brand-text" />
                                     </button>
-                                    <span className="w-8 text-center font-bold text-brand-text text-sm">
-                                        {item.quantity}
-                                    </span>
+                                    <input
+                                        type="number"
+                                        min="1"
+                                        value={item.quantity}
+                                        onChange={(e) => {
+                                            const val = parseInt(e.target.value);
+                                            // Allow empty string temporarily for typing? 
+                                            // Actually, forcing a number immediately might be annoying if they delete everything.
+                                            // But CartContext probably expects a number. 
+                                            // Let's rely on standard logic: if it's a valid number >= 1, update. 
+                                            // If they type garbage, maybe ignore or default to 1?
+                                            // Better to just update if valid.
+                                            if (!isNaN(val) && val >= 1) {
+                                                updateQuantity(item.partNumber, val);
+                                            }
+                                        }}
+                                        className="w-20 text-center font-bold text-brand-text text-sm bg-transparent border-none focus:outline-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                    />
                                     <button
                                         onClick={() => updateQuantity(item.partNumber, item.quantity + 1)}
                                         className="p-1 hover:bg-white hover:shadow-sm rounded-md transition-all"
