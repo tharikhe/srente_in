@@ -2,17 +2,10 @@
 
 import Image from 'next/image';
 
-const brands = [
-    { name: 'Firstohm', logo: '/brands/firstohm.png' },
-    { name: 'OCETA', logo: '/brands/oceta.png' },
-    { name: 'GL Fiber', logo: '/brands/gl-fiber.png' },
-    { name: 'ViTEK', logo: '/brands/vitek.png' },
-    { name: 'SONYTEK', logo: '/brands/sonytek.png' },
-    { name: 'Kingtronics', logo: '/brands/kingtronics.png' },
-    { name: 'Palm Technology', logo: '/brands/palm-technology.png' },
-    { name: 'Taimates', logo: '/brands/taimates.png' },
-    { name: 'Isocom', logo: '/brands/isocom.png' },
-];
+
+
+import Link from 'next/link';
+import { manufacturers } from '@/data/manufacturers';
 
 export default function AuthorisedLines() {
     return (
@@ -36,9 +29,10 @@ export default function AuthorisedLines() {
                     <div className="flex w-max animate-scroll">
                         {/* First Set of Logos */}
                         <div className="flex gap-16 items-center px-8">
-                            {brands.map((brand, index) => (
-                                <div
+                            {manufacturers.map((brand, index) => (
+                                <Link
                                     key={`1-${index}`}
+                                    href={`/manufacturers/${brand.slug}`}
                                     className="w-[180px] h-24 flex-shrink-0 flex items-center justify-center transition-all duration-300 hover:scale-105"
                                 >
                                     <div className="relative w-full h-full">
@@ -51,14 +45,15 @@ export default function AuthorisedLines() {
                                             sizes="180px"
                                         />
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                         {/* Duplicate Set for Seamless Loop */}
                         <div className="flex gap-16 items-center px-8">
-                            {brands.map((brand, index) => (
-                                <div
+                            {manufacturers.map((brand, index) => (
+                                <Link
                                     key={`2-${index}`}
+                                    href={`/manufacturers/${brand.slug}`}
                                     className="w-[180px] h-24 flex-shrink-0 flex items-center justify-center transition-all duration-300 hover:scale-105"
                                 >
                                     <div className="relative w-full h-full">
@@ -70,7 +65,7 @@ export default function AuthorisedLines() {
                                             sizes="180px"
                                         />
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     </div>

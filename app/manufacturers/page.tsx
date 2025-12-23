@@ -5,24 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Search, ArrowRight, ShieldCheck } from 'lucide-react';
 
-const authorisedLines = [
-    { name: 'Firstohm', logo: '/brands/firstohm.png', description: 'Specialized Resistors', country: 'Taiwan' },
-    { name: 'OCETA', logo: '/brands/oceta.png', description: 'Connector Solutions', country: 'Taiwan' },
-    { name: 'GL Fiber', logo: '/brands/gl-fiber.png', description: 'Optical Components', country: 'China' },
-    { name: 'ViTEK', logo: '/brands/vitek.png', description: 'LCD & Displays', country: 'Taiwan' },
-    { name: 'SONYTEK', logo: '/brands/sonytek.png', description: 'Semiconductors', country: 'Japan' },
-    { name: 'Kingtronics', logo: '/brands/kingtronics.png', description: 'Potentiometers & Capacitors', country: 'Hong Kong' },
-    { name: 'Palm Technology', logo: '/brands/palm-technology.png', description: 'LCD Modules', country: 'Taiwan' },
-    { name: 'Taimates', logo: '/brands/taimates.png', description: 'Battery Holders', country: 'Taiwan' },
-    { name: 'Isocom', logo: '/brands/isocom.png', description: 'Optocouplers', country: 'UK' },
-];
-
-const otherBrands = [
-    'YAGEO', 'Samsung', 'Murata', 'TDK', 'Vishay', 'KEMET', 'AVX', 'Panasonic',
-    'Texas Instruments', 'STMicroelectronics', 'NXP', 'Infineon', 'Microchip',
-    'Analog Devices', 'Onsemi', 'Diodes Inc', 'Bourns', 'TE Connectivity',
-    'Molex', 'JST', 'Hirose', 'Wurth Elektronik'
-];
+import { manufacturers as authorisedLines, otherBrands } from '@/data/manufacturers';
 
 export default function ManufacturersPage() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -76,7 +59,7 @@ export default function ManufacturersPage() {
                         {filteredAuthorised.map((brand) => (
                             <Link
                                 key={brand.name}
-                                href={`/products?search=${brand.name}`}
+                                href={`/manufacturers/${brand.slug}`}
                                 className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg hover:border-brand-teal/30 transition-all duration-300 flex items-center justify-between"
                             >
                                 <div className="flex items-center gap-6">
