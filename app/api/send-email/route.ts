@@ -3,18 +3,28 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
+    console.log('📧 Email API called');
+
     try {
         const body = await request.json();
         const { type, ...data } = body;
 
+        console.log('📧 Request type:', type);
+
         // basic validation of env vars
         if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
-            console.error('SMTP configuration missing');
+            console.error('❌ SMTP configuration missing:', {
+                hasHost: !!process.env.SMTP_HOST,
+                hasUser: !!process.env.SMTP_USER,
+                hasPass: !!process.env.SMTP_PASS
+            });
             return NextResponse.json(
                 { success: false, message: 'Server configuration error' },
                 { status: 500 }
             );
         }
+
+        console.log('✅ SMTP config found, attempting to send...');
 
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
