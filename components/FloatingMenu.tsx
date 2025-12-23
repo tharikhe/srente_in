@@ -34,7 +34,7 @@ export default function FloatingMenu() {
         {
             icon: Phone,
             label: 'Call Us',
-            href: 'tel:+91808813136',
+            href: 'tel:+918088131316',
             color: 'text-[#F39800]', // Orange
         },
         {
@@ -46,7 +46,7 @@ export default function FloatingMenu() {
         {
             icon: WhatsAppIcon,
             label: 'WhatsApp',
-            href: 'https://wa.me/+91808813136',
+            href: 'https://wa.me/+918088131316',
             color: '', // Image has its own color
         },
     ];

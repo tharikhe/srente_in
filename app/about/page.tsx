@@ -287,7 +287,7 @@ export default function AboutPage() {
                         <Button className="bg-brand-gold hover:bg-brand-gold-dark text-white text-lg px-8 py-6 rounded-xl">
                             Request a Quote
                         </Button>
-                        <Button variant="outline" className="border-white text-white hover:bg-white/10 text-lg px-8 py-6 rounded-xl">
+                        <Button className="bg-white text-brand-teal hover:bg-gray-100 text-lg px-8 py-6 rounded-xl">
                             View Line Card
                         </Button>
                     </div>

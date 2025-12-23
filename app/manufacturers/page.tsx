@@ -116,7 +116,7 @@ export default function ManufacturersPage() {
                                     </div>
 
                                     <div className="p-8">
-                                        <div className="h-24 w-full relative mb-6 grayscale group-hover:grayscale-0 transition-all duration-300">
+                                        <div className="h-24 w-full relative mb-6 transition-all duration-300">
                                             <Image
                                                 src={brand.logo}
                                                 alt={brand.name}

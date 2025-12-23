@@ -92,7 +92,7 @@ export default function TermsAndConditions() {
                             <address className="not-italic bg-gray-50 p-6 rounded-xl border border-gray-100">
                                 <strong>Serente Electronics HK Ltd.</strong><br />
                                 Email: <a href="mailto:sales@serenthk.com" className="text-brand-teal hover:underline">sales@serenthk.com</a><br />
-                                Phone: +91 80881 3136
+                                Phone: +91 80881 31316
                             </address>
                         </div>
                     </div>

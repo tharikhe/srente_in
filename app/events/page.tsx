@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, MapPin, Clock, ArrowRight, Ticket, Share2, Users, Star } from 'lucide-react';
 
@@ -165,9 +166,9 @@ export default function EventsPage() {
                         <p className="text-brand-surface/90 text-lg">
                             Looking for a sponsor or a keynote speaker for your next electronics conference? we'd love to collaborate.
                         </p>
-                        <button className="bg-white text-brand-teal font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl hover:bg-brand-gold hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                        <Link href="/contact" className="inline-block bg-white text-brand-teal font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl hover:bg-brand-gold hover:text-white transition-all duration-300 transform hover:-translate-y-1">
                             Get in Touch
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
