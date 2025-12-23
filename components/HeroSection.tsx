@@ -294,10 +294,10 @@ const HeroSection: React.FC<HeroProps> = ({
                             )}
 
                             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight drop-shadow-2xl">
-                                <span className="bg-gradient-to-r from-brand-gold via-amber-300 to-brand-gold bg-clip-text text-transparent italic font-serif block mb-2">
+                                <span className="text-brand-gold italic font-serif block mb-2">
                                     {headline.line1}
                                 </span>
-                                <span className="bg-gradient-to-r from-brand-teal-light via-teal-300 to-brand-teal-light bg-clip-text text-transparent">
+                                <span className="text-brand-teal">
                                     {headline.line2}
                                 </span>
                             </h1>
