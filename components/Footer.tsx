@@ -86,7 +86,7 @@ export default function Footer() {
                                 { icon: Twitter, href: '#', label: 'Twitter' },
                                 { icon: Facebook, href: '#', label: 'Facebook' },
                                 { icon: Linkedin, href: '#', label: 'LinkedIn' },
-                                { icon: Instagram, href: '#', label: 'Instagram' },
+                                { icon: Instagram, href: 'https://www.instagram.com/serenteelectronics_2020?igsh=MTQ0MndjbHpudmM2OA==', label: 'Instagram' },
                             ].map((social) => (
                                 <a
                                     key={social.label}
