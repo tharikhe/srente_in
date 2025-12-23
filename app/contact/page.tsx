@@ -82,7 +82,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-gray-900 dark:text-white">Phone</h3>
-                                        <p className="text-gray-600 dark:text-gray-300">+91 80881 3136</p>
+                                        <p className="text-gray-600 dark:text-gray-300">+91 80881 31316</p>
                                     </div>
                                 </div>
 
@@ -116,8 +116,8 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-gray-900 dark:text-white">Business Hours</h3>
-                                        <p className="text-gray-600 dark:text-gray-300">Monday - Friday: 9:00 AM - 6:00 PM</p>
-                                        <p className="text-gray-600 dark:text-gray-300">Saturday: 9:00 AM - 1:00 PM</p>
+                                        <p className="text-gray-600 dark:text-gray-300">Monday - Saturday: 9:00 AM - 5:30 PM</p>
+                                        <p className="text-gray-600 dark:text-gray-300">Sunday: Closed</p>
                                         <p className="text-gray-500 dark:text-gray-400 text-sm">Hong Kong Time (GMT+8)</p>
                                     </div>
                                 </div>

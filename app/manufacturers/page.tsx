@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Search, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Search, ArrowRight, ShieldCheck, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-import { manufacturers as authorisedLines, otherBrands } from '@/data/manufacturers';
+import { manufacturers as authorisedLines } from '@/data/manufacturers';
 
 export default function ManufacturersPage() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -14,102 +15,161 @@ export default function ManufacturersPage() {
         brand.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const filteredOther = otherBrands.filter(brand =>
-        brand.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                type: "spring",
+                stiffness: 100
+            } as const
+        }
+    };
 
     return (
-        <div className="space-y-12 pb-16">
-            {/* Header */}
-            <section className="text-center py-12 md:py-20 bg-gradient-to-b from-brand-teal/5 to-transparent rounded-3xl relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-64 h-64 bg-brand-teal/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-                <div className="absolute bottom-0 right-0 w-64 h-64 bg-brand-gold/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+        <div className="min-h-screen bg-gray-50/50 pb-24">
+            {/* Premium Hero Section */}
+            <section className="relative py-24 md:py-32 bg-[#0F172A] overflow-hidden">
+                {/* Abstract Background Elements */}
+                <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+                    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-teal/20 rounded-full blur-[100px] opacity-40 animate-pulse" />
+                    <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-gold/20 rounded-full blur-[100px] opacity-40 animate-pulse" style={{ animationDelay: '2s' }} />
+                </div>
 
-                <h1 className="text-4xl md:text-5xl font-bold text-brand-teal mb-6 relative z-10">
-                    Trusted Manufacturers
-                </h1>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8 px-4 relative z-10">
-                    We partner with world-class manufacturers to bring you high-quality electronic components with full traceability and reliability.
-                </p>
+                <div className="container mx-auto px-4 relative z-10 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <span className="inline-block py-1 px-3 rounded-full bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-sm font-medium mb-6">
+                            Global Supply Chain Partners
+                        </span>
+                        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                            Authorised <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-200">Distributors</span>
+                        </h1>
+                        <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                            We partner directly with world-class manufacturers to ensure 100% authenticity, full traceability, and reliable supply for your production needs.
+                        </p>
+                    </motion.div>
 
-                {/* Search Bar */}
-                <div className="max-w-md mx-auto relative px-4 z-10">
-                    <div className="relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                        <input
-                            type="text"
-                            placeholder="Search manufacturers..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 transition-all outline-none shadow-sm"
-                        />
-                    </div>
+                    {/* Floating Search Bar */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="max-w-xl mx-auto relative group"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-r from-brand-teal to-brand-gold rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300" />
+                        <div className="relative bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-2 flex items-center shadow-2xl">
+                            <Search className="text-gray-400 w-6 h-6 ml-4" />
+                            <input
+                                type="text"
+                                placeholder="Search our manufacturers..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full bg-transparent border-none text-white placeholder-gray-400 px-4 py-3 focus:ring-0 focus:outline-none text-lg"
+                            />
+                        </div>
+                    </motion.div>
                 </div>
             </section>
 
-            {/* Authorised Lines Grid */}
-            <section>
-                <div className="flex items-center gap-3 mb-8">
-                    <ShieldCheck className="w-6 h-6 text-brand-gold" />
-                    <h2 className="text-2xl font-bold text-gray-800">Authorised Lines</h2>
+            {/* List Section */}
+            <div className="container mx-auto px-4 -mt-16 relative z-20">
+                <div className="flex items-center gap-3 mb-8 ml-2">
+                    <div className="p-2 bg-brand-gold/10 rounded-lg">
+                        <ShieldCheck className="w-6 h-6 text-brand-gold" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-900">Verified Partners</h2>
+                    <span className="bg-brand-teal/10 text-brand-teal text-xs font-bold px-2.5 py-1 rounded-full border border-brand-teal/20">
+                        {filteredAuthorised.length} Brands
+                    </span>
                 </div>
 
                 {filteredAuthorised.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <motion.div
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                    >
                         {filteredAuthorised.map((brand) => (
-                            <Link
-                                key={brand.name}
-                                href={`/manufacturers/${brand.slug}`}
-                                className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg hover:border-brand-teal/30 transition-all duration-300 flex items-center justify-between"
-                            >
-                                <div className="flex items-center gap-6">
-                                    <div className="w-20 h-20 relative bg-gray-50 rounded-xl p-2 flex items-center justify-center">
-                                        <Image
-                                            src={brand.logo}
-                                            alt={brand.name}
-                                            fill
-                                            className="object-contain p-2"
-                                            sizes="80px"
-                                        />
+                            <motion.div key={brand.name} variants={itemVariants}>
+                                <Link
+                                    href={`/manufacturers/${brand.slug}`}
+                                    className="group block h-full bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-gold/30 transition-all duration-300 relative"
+                                >
+                                    <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <ArrowRight className="w-5 h-5 text-brand-gold -translate-x-4 group-hover:translate-x-0 transition-transform duration-300" />
                                     </div>
-                                    <div>
-                                        <h3 className="font-bold text-lg text-gray-900 group-hover:text-brand-teal transition-colors">
-                                            {brand.name}
-                                        </h3>
-                                        <p className="text-sm text-gray-500 mb-1">{brand.description}</p>
-                                        <p className="text-xs text-brand-text-muted bg-gray-100 px-2 py-0.5 rounded-full inline-block">
-                                            {brand.country}
-                                        </p>
-                                    </div>
-                                </div>
-                                <ArrowRight className="w-5 h-5 text-gray-300 group-hover:text-brand-teal group-hover:translate-x-1 transition-all" />
-                            </Link>
-                        ))}
-                    </div>
-                ) : (
-                    <p className="text-gray-500 italic">No authorised distributors found matching "{searchQuery}"</p>
-                )}
-            </section>
 
-            {/* Other Brands */}
-            <section>
-                <h2 className="text-2xl font-bold text-gray-800 mb-8">Other Leading Brands Distributed</h2>
-                {filteredOther.length > 0 ? (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                        {filteredOther.map((brand) => (
-                            <Link
-                                key={brand}
-                                href={`/products?search=${brand}`}
-                                className="bg-white p-4 rounded-xl border border-gray-100 text-center font-medium text-gray-600 hover:text-brand-teal hover:border-brand-teal/30 hover:shadow-md transition-all truncate"
-                            >
-                                {brand}
-                            </Link>
+                                    <div className="p-8">
+                                        <div className="h-24 w-full relative mb-6 grayscale group-hover:grayscale-0 transition-all duration-300">
+                                            <Image
+                                                src={brand.logo}
+                                                alt={brand.name}
+                                                fill
+                                                className="object-contain object-left md:object-center"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-3">
+                                            <h3 className="text-xl font-bold text-gray-900 group-hover:text-brand-teal transition-colors">
+                                                {brand.name}
+                                            </h3>
+                                            <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
+                                                {brand.description}
+                                            </p>
+
+                                            <div className="pt-4 flex items-center gap-2">
+                                                <div className="h-px flex-1 bg-gray-100 group-hover:bg-brand-gold/20 transition-colors" />
+                                                <span className="text-xs font-semibold text-brand-teal bg-brand-teal/5 px-2 py-1 rounded border border-brand-teal/10 group-hover:bg-brand-gold/10 group-hover:text-brand-gold group-hover:border-brand-gold/20 transition-all">
+                                                    {brand.country}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="h-1 w-0 bg-brand-gold group-hover:w-full transition-all duration-500" />
+                                </Link>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 ) : (
-                    <p className="text-gray-500 italic">No other brands found matching "{searchQuery}"</p>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="bg-white rounded-3xl p-12 text-center border border-gray-100 shadow-sm"
+                    >
+                        <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Search className="w-8 h-8 text-gray-300" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-2">No manufacturers found</h3>
+                        <p className="text-gray-500">
+                            We couldn't find any verified partners matching "{searchQuery}".
+                        </p>
+                        <button
+                            onClick={() => setSearchQuery('')}
+                            className="mt-6 text-brand-teal font-medium hover:text-brand-gold transition-colors"
+                        >
+                            View all manufacturers
+                        </button>
+                    </motion.div>
                 )}
-            </section>
+            </div>
         </div>
     );
 }

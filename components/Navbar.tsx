@@ -112,11 +112,11 @@ export default function Navbar() {
                             </div>
                             <span className="font-medium">sales@serenthk.com</span>
                         </a>
-                        <a href="tel:+91808813136" className="flex items-center gap-2 hover:text-brand-gold transition-all duration-300 px-5 group">
+                        <a href="tel:+918088131316" className="flex items-center gap-2 hover:text-brand-gold transition-all duration-300 px-5 group">
                             <div className="p-1.5 bg-brand-teal/20 rounded-full group-hover:bg-brand-gold/20 transition-colors">
                                 <Phone className="w-3 h-3" />
                             </div>
-                            <span className="font-medium">+91 80881 3136</span>
+                            <span className="font-medium">+91 80881 31316</span>
                         </a>
                         <div className="flex items-center gap-2 px-5 text-gray-400">
                             <div className="p-1.5 bg-gray-700 rounded-full">
@@ -128,7 +128,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2 text-gray-400">
                             <MapPin className="w-3.5 h-3.5" />
-                            <span>India & Hong Kong</span>
+                            <span>Hong Kong</span>
                         </div>
                         <div className="h-4 w-px bg-gray-600" />
                         <Link href="/contact" className="flex items-center gap-1.5 text-brand-gold hover:text-brand-gold-light transition-colors font-medium group">
@@ -489,13 +489,13 @@ export default function Navbar() {
                                     <p className="font-semibold text-gray-800">sales@serenthk.com</p>
                                 </div>
                             </a>
-                            <a href="tel:+91808813136" className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-soft">
+                            <a href="tel:+918088131316" className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-soft">
                                 <div className="p-3 bg-brand-gold/10 rounded-xl">
                                     <Phone className="w-5 h-5 text-brand-gold" />
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500">Call us at</p>
-                                    <p className="font-semibold text-gray-800">+91 80881 3136</p>
+                                    <p className="font-semibold text-gray-800">+91 80881 31316</p>
                                 </div>
                             </a>
                         </div>
