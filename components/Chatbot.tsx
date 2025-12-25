@@ -315,11 +315,7 @@ export default function Chatbot() {
                             <p className="text-xs text-brand-gold/90 font-medium">Always Online</p>
                         </div>
                     </div>
-                    <div className="flex gap-2">
-                        <Button variant="ghost" size="icon" className="text-white/70 hover:text-white hover:bg-white/10" onClick={clearChat} title="Clear Chat">
-                            <Trash2 className="w-4 h-4" />
-                        </Button>
-                    </div>
+
                 </ExpandableChatHeader>
 
                 <ExpandableChatBody className="bg-slate-50 p-4 space-y-5" ref={chatBodyRef}>

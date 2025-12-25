@@ -273,6 +273,71 @@ export default function AboutPage() {
                 </div>
             </section>
 
+            {/* Map Section */}
+            <section className="py-24 bg-gray-50 dark:bg-gray-800/50">
+                <div className="container mx-auto px-4">
+                    <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Our Location / 我們的地址</h2>
+                        <div className="text-gray-600 dark:text-gray-300 text-lg space-y-2">
+                            <p>2/F, Tern Centre Tower 1, 237 Queen's Road Central, Hong Kong</p>
+                            <p className="font-medium">香港皇后大道中237號太興中心第一座2樓</p>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {/* Google Maps */}
+                        <div className="space-y-4">
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                                Google Maps (Global)
+                            </h3>
+                            <div className="rounded-3xl overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700 h-[400px] relative group">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.688657697472!2d114.1517865759521!3d22.28983634237146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34040063260cbed9%3A0x6fda752f9c340d21!2sTern%20Centre%20Tower%201!5e0!3m2!1sen!2shk!4v1703640000000!5m2!1sen!2shk"
+                                    width="100%"
+                                    height="100%"
+                                    style={{ border: 0 }}
+                                    allowFullScreen
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                    title="Serente Electronics Location - Google Maps"
+                                    className="grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
+                                ></iframe>
+                            </div>
+                        </div>
+
+                        {/* Baidu Maps - Link Card */}
+                        <div className="space-y-4">
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-red-500"></span>
+                                Baidu Maps (China)
+                            </h3>
+                            <a
+                                href="https://map.baidu.com/search/香港皇后大道中237號/@12706890.545,2569660.355,17z?querytype=s&wd=香港皇后大道中237號"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block rounded-3xl overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700 h-[400px] relative group bg-gradient-to-br from-red-50 via-white to-red-50 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 hover:shadow-2xl transition-all duration-500"
+                            >
+                                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                                    <div className="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                        <svg className="w-10 h-10 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                                        </svg>
+                                    </div>
+                                    <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">View on Baidu Maps</h4>
+                                    <p className="text-gray-600 dark:text-gray-300 mb-4">香港皇后大道中237號太興中心第一座2樓</p>
+                                    <span className="inline-flex items-center gap-2 px-6 py-3 bg-red-500 text-white rounded-full font-semibold group-hover:bg-red-600 transition-colors">
+                                        Open in Baidu Maps
+                                        <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* CTA Section */}
             <section className="py-24 bg-brand-teal-dark relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>

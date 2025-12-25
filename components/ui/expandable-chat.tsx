@@ -179,6 +179,7 @@ const ExpandableChatToggle: React.FC<ExpandableChatToggleProps> = ({
                 "hover:border-brand-gold",
                 "active:scale-95",
                 "group",
+                isOpen ? "hidden sm:flex" : "",
                 className,
             )}
             {...props}

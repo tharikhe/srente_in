@@ -155,7 +155,11 @@ export default function Navbar() {
                     </button>
 
                     {/* Logo with Hover Effect */}
-                    <Link href="/" className="flex items-center gap-3 sm:gap-4 group flex-shrink-0">
+                    <Link
+                        href="/"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center gap-3 sm:gap-4 group flex-shrink-0 relative z-50"
+                    >
                         <div className="relative">
                             <div className="absolute -inset-2 bg-gradient-to-r from-brand-teal/20 to-brand-gold/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             <Image
@@ -432,7 +436,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Overlay - Premium Design */}
             {isMobileMenuOpen && (
-                <div className="lg:hidden fixed inset-0 top-[60px] sm:top-[72px] bg-gradient-to-b from-white to-gray-50 z-40 overflow-y-auto">
+                <div className="lg:hidden fixed inset-0 top-[135px] sm:top-[150px] bg-gradient-to-b from-white to-gray-50 z-40 overflow-y-auto">
                     <nav className="container mx-auto px-4 py-6">
                         {/* Mobile Nav Links */}
                         <div className="space-y-2">

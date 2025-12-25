@@ -81,6 +81,86 @@ export const manufacturers: Manufacturer[] = [
         longDescription: 'Isocom Components is a leading manufacturer of high-performance infrared optoelectronic devices. They specialize in optocouplers and optoswitches for demanding industrial applications.',
         country: 'UK'
     },
+    {
+        name: 'Greenconn',
+        slug: 'greenconn',
+        logo: '/brands/Greenconn--.png',
+        description: 'Connector Solutions',
+        longDescription: 'Greenconn is a leading provider of connector solutions, known for their reliability and innovative designs.',
+        country: 'International'
+    },
+    {
+        name: 'JB Capacitors',
+        slug: 'jb-capacitors',
+        logo: '/brands/JB.webp',
+        description: 'Capacitors',
+        longDescription: 'JB Capacitors manufactures high-quality capacitors for various electronic applications.',
+        country: 'China'
+    },
+    {
+        name: 'Disen',
+        slug: 'disen',
+        logo: '/brands/disen.png',
+        description: 'Display Modules',
+        longDescription: 'Disen specializes in LCD display modules and touch screen solutions.',
+        country: 'China'
+    },
+    {
+        name: 'Hongda',
+        slug: 'hongda',
+        logo: '/brands/hongda.png',
+        description: 'Electronic Components',
+        longDescription: 'Hongda is a professional distributor of electronic components.',
+        country: 'China'
+    },
+    {
+        name: 'Microtech',
+        slug: 'microtech',
+        logo: '/brands/microtech-technology-company-limited-v2.jpg',
+        description: 'Technology Solutions',
+        longDescription: 'Microtech Technology Company Limited provides various technology solutions and components.',
+        country: 'Hong Kong'
+    },
+    {
+        name: 'Romtronic',
+        slug: 'romtronic',
+        logo: '/brands/romtronic.avif',
+        description: 'Cable Assemblies',
+        longDescription: 'Romtronic specializes in cable assemblies and wire harnesses.',
+        country: 'China'
+    },
+    {
+        name: 'Smico',
+        slug: 'smico',
+        logo: '/brands/smico.png',
+        description: 'Connectors',
+        longDescription: 'Smico is a manufacturer of heavy-duty connectors and terminals.',
+        country: 'China'
+    },
+    {
+        name: 'Wipin',
+        slug: 'wipin',
+        logo: '/brands/wipin.avif',
+        description: 'Industrial Tools',
+        longDescription: 'Wipin manufactures hydraulic tools and equipment for industrial use.',
+        country: 'China'
+    },
+    {
+        name: 'Yeebo',
+        slug: 'yeebo',
+        logo: '/brands/yeebo.png',
+        description: 'Display Solutions',
+        longDescription: 'Yeebo Display Ltd specializes in high-quality monochrome LCD and LCM displays.',
+        country: 'Hong Kong'
+    },
+    {
+        name: 'YM Tech',
+        slug: 'ym-tech',
+        logo: '/brands/ym-tech.png',
+        description: 'Relays',
+        longDescription: 'YM Tech is a leading manufacturer of DC high voltage relays.',
+        country: 'South Korea'
+    },
 ];
 
 export const otherBrands = [
