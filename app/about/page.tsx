@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Target, Globe, Award, Zap, Users, ShieldCheck, ArrowRight, LayoutGrid, Cog } from 'lucide-react';
@@ -349,12 +350,16 @@ export default function AboutPage() {
                         Partner with Serente Electronics today and experience the difference of a truly global distributor.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button className="bg-brand-gold hover:bg-brand-gold-dark text-white text-lg px-8 py-6 rounded-xl">
-                            Request a Quote
-                        </Button>
-                        <Button className="bg-white text-brand-teal hover:bg-gray-100 text-lg px-8 py-6 rounded-xl">
-                            View Line Card
-                        </Button>
+                        <Link href="/contact">
+                            <Button className="bg-brand-gold hover:bg-brand-gold-dark text-white text-lg px-8 py-6 rounded-xl w-full sm:w-auto">
+                                Request a Quote
+                            </Button>
+                        </Link>
+                        <Link href="/manufacturers">
+                            <Button className="bg-white text-brand-teal hover:bg-gray-100 text-lg px-8 py-6 rounded-xl w-full sm:w-auto">
+                                View Line Card
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </section>

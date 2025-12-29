@@ -9,6 +9,7 @@ const FeaturedProducts = dynamic(() => import('@/components/FeaturedProducts'));
 const ProductShowcase = dynamic(() => import('@/components/ProductShowcase'));
 const FAQ = dynamic(() => import('@/components/FAQ'));
 const AuthorisedLines = dynamic(() => import('@/components/AuthorisedLines'));
+const ProductBannerSlider = dynamic(() => import('@/components/ProductBannerSlider'));
 
 import { Suspense } from 'react';
 
@@ -65,6 +66,9 @@ export default function Home() {
           secondary: { text: "Upload BOM" }
         }}
       />
+
+      {/* Product Banner Slider */}
+      <ProductBannerSlider />
 
       <AuthorisedLines />
 

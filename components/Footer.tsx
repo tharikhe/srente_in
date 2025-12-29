@@ -129,7 +129,7 @@ export default function Footer() {
                         <h3 className="text-lg font-bold text-white mb-6">Support</h3>
                         <ul className="space-y-3">
                             {[
-                                { label: 'Request for Quotation', href: '/rfq' },
+                                { label: 'Request for Quotation', href: '/contact' },
                                 { label: 'Upload BOM', href: '/bom' },
                             ].map((link) => (
                                 <li key={link.label}>
