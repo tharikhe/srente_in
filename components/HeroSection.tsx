@@ -66,12 +66,23 @@ const useVideoBackground = () => {
 
         if (!video1 || !video2) return;
 
-        // Set up video sources
+        // Set up video 1 immediately
         video1.src = heroVideos[0];
-        video2.src = heroVideos[1];
+
+        // Lazy load video 2
+        const loadVideo2 = () => {
+            if (!video2.src) {
+                video2.src = heroVideos[1];
+                video2.load(); // Explicitly load
+            }
+        };
 
         // Handle video loaded events
-        const handleVideo1Loaded = () => setVideosLoaded(prev => ({ ...prev, video1: true }));
+        const handleVideo1Loaded = () => {
+            setVideosLoaded(prev => ({ ...prev, video1: true }));
+            // Start loading video 2 shortly after video 1 is ready
+            setTimeout(loadVideo2, 3000);
+        };
         const handleVideo2Loaded = () => setVideosLoaded(prev => ({ ...prev, video2: true }));
 
         video1.addEventListener('loadeddata', handleVideo1Loaded);
