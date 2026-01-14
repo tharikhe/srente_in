@@ -16,8 +16,8 @@ import { Suspense } from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Serente Electronics | Global Electronic Components Distributor",
-  description: "Leading distributor of electronic components. Specializing in supply chain solutions, EV sector, automotive, medical, and IoT industries. ISO 9001:2015 Certified.",
+  title: "Serente Electronics | Top Semiconductor distributors Hong Kong",
+  description: "Leading electronic components distributor of Hong Kong. Specializing in supply chain solutions, EV sector, automotive and IoT industries. ISO 9001:2015 Certified.",
 };
 
 export default function Home() {

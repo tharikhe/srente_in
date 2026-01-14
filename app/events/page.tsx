@@ -1,4 +1,10 @@
-'use client';
+
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Serente Electronics HK - Semiconductor Companies in Hong Kong",
+    description: "Trusted distributor partners Such as Firstohm, Isocom and many more for BOM sourcing and electronics supply. Shop our extensive inventory here.",
+};
 
 import React from 'react';
 import Link from 'next/link';

@@ -1,8 +1,14 @@
-'use client';
 
 import { getAllPosts } from '@/data/blog';
 import BlogCard from '@/components/BlogCard';
 import { Newspaper } from 'lucide-react';
+
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Serente Electronics - Electronics supply chain partner Hong Kong",
+    description: "We are a devoted partner of Sonytek and Palm Technology for Hong Kong semiconductor distributor. Browse our extensive inventory of ICs, capacitors, resistors etc.",
+};
 
 export default function BlogPage() {
     const posts = getAllPosts();

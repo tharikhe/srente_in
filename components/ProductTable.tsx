@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { products, categories, searchProducts, Product } from '@/data/products';
-import { Search, FileText, ShoppingCart, Filter, ChevronLeft, Check, Package, ChevronDown, ChevronUp } from 'lucide-react';
+import { products as staticProducts, categories as staticCategories, searchProducts, Product } from '@/data/products';
+import { Search, FileText, ShoppingCart, Filter, ChevronLeft, Check, Package, ChevronDown, ChevronUp, RefreshCw } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { getCategoryImage } from '@/lib/product-images';
@@ -15,7 +15,9 @@ export default function ProductTable() {
     const categoryParam = searchParams.get('category');
     const searchParam = searchParams.get('search'); // Get search param
 
-    // Initialize state from URL params if available
+    // Initialize state
+    const [allProducts, setAllProducts] = useState<Product[]>(staticProducts);
+    const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState(searchParam || '');
     const [selectedCategory, setSelectedCategory] = useState(categoryParam || 'All');
     const [currentPage, setCurrentPage] = useState(1);
@@ -23,6 +25,54 @@ export default function ProductTable() {
     const itemsPerPage = 20;
     const { addToCart } = useCart();
     const [addedItems, setAddedItems] = useState<string[]>([]);
+
+    // Live data categories (derived from merged products)
+    const activeCategories = ['All', ...Array.from(new Set(allProducts.map(p => p.category))).sort()];
+
+    // Fetch live data
+    useEffect(() => {
+        const fetchStock = async () => {
+            try {
+                const res = await fetch('/api/products');
+                const data = await res.json();
+
+                if (data.success && Array.isArray(data.products)) {
+                    // Merge logic:
+                    // 1. Map existing products to update stock/desc if found in live data
+                    // 2. Add new products from live data if not in existing
+
+                    const liveDataMap = new Map<string, Product>(
+                        (data.products as Product[]).map((p) => [p.partNumber.toLowerCase(), p])
+                    );
+
+                    const mergedProducts = staticProducts.map(localProd => {
+                        const liveProd = liveDataMap.get(localProd.partNumber.toLowerCase());
+                        if (liveProd) {
+                            return {
+                                ...localProd,
+                                inStock: liveProd.inStock,
+                                description: liveProd.description || localProd.description, // Prefer live description if present
+                                // manufacturer: liveProd.manufacturer || localProd.manufacturer // Use local manufacturer as sheet might lack it
+                            };
+                        }
+                        return localProd;
+                    });
+
+                    // Find new products in live data that weren't in static
+                    const localMpns = new Set(staticProducts.map(p => p.partNumber.toLowerCase()));
+                    const newProducts = (data.products as Product[]).filter((p) => !localMpns.has(p.partNumber.toLowerCase()));
+
+                    setAllProducts([...mergedProducts, ...newProducts]);
+                }
+            } catch (error) {
+                console.error('Failed to update stock data:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchStock();
+    }, []);
 
     // Sync state with URL params when they change
     useEffect(() => {
@@ -67,10 +117,14 @@ export default function ProductTable() {
 
     // Filter products based on search and category
     const filteredProducts = (() => {
-        let result = products;
+        let result = allProducts;
 
         if (searchQuery) {
-            result = searchProducts(searchQuery);
+            const query = searchQuery.toLowerCase();
+            result = result.filter(p =>
+                p.partNumber.toLowerCase().includes(query) ||
+                p.description.toLowerCase().includes(query)
+            );
         }
 
         if (selectedCategory !== 'All') {
@@ -101,11 +155,28 @@ export default function ProductTable() {
             {/* Header */}
             <div className="bg-gradient-to-r from-brand-teal to-brand-teal-light text-white p-4 sm:p-8">
                 <div className="flex items-center gap-3 sm:gap-4">
-                    <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white/10 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                    <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white/10 rounded-xl sm:rounded-2xl flex items-center justify-center relative">
                         <Package className="w-5 h-5 sm:w-7 sm:h-7" />
+                        {isLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 rounded-xl sm:rounded-2xl">
+                                <RefreshCw className="w-4 h-4 sm:w-6 sm:h-6 animate-spin text-white" />
+                            </div>
+                        )}
                     </div>
                     <div>
-                        <h2 className="text-lg sm:text-2xl font-bold mb-0.5 sm:mb-1">Product Catalog</h2>
+                        <div className="flex items-center gap-3">
+                            <h2 className="text-lg sm:text-2xl font-bold mb-0.5 sm:mb-1">Product Catalog</h2>
+                            {isLoading ? (
+                                <span className="text-xs bg-brand-gold/20 text-brand-gold px-2 py-0.5 rounded-full animate-pulse border border-brand-gold/30">
+                                    Updating Stocks...
+                                </span>
+                            ) : (
+                                <span className="text-xs bg-emerald-500/20 text-emerald-100 px-2 py-0.5 rounded-full border border-emerald-500/30 flex items-center gap-1">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                                    Live
+                                </span>
+                            )}
+                        </div>
                         <p className="text-brand-gold font-medium text-xs sm:text-base">Browse our extensive inventory of electronic components</p>
                     </div>
                 </div>
@@ -144,7 +215,7 @@ export default function ProductTable() {
                             className="bg-transparent focus:outline-none text-brand-text font-medium cursor-pointer flex-grow text-sm"
                         >
                             <option value="All">All Categories</option>
-                            {categories.map(cat => (
+                            {activeCategories.filter(cat => cat !== 'All').map(cat => (
                                 <option key={cat} value={cat}>{cat}</option>
                             ))}
                         </select>

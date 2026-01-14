@@ -4,8 +4,8 @@ import ProductTable from '@/components/ProductTable';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Product Catalog | Buy Electronic Components Online - Serente Electronics",
-    description: "Browse our extensive catalog of electronic components including resistors, capacitors, ICs, connectors, and displays. Check stock and request quotes instantly.",
+    title: "Product Catalog | Electronics Parts Suppliers - Serente Electronics",
+    description: "Go to our extensive catalog of electronic components including capacitors,Ic's, IGBTs connectors, LCD / OLED displays and touch panels, semiconductor discrete parts.",
 };
 
 export default function ProductsPage() {
