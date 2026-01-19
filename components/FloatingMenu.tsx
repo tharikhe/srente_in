@@ -22,34 +22,33 @@ export default function FloatingMenu() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const menuItems = [
-        {
-            icon: ShoppingCart,
-            label: 'Cart',
-            href: '/cart',
-            color: 'text-[#00A0E9]', // Light Blue
-            badge: cartCount > 0 ? cartCount.toString() : undefined,
-            badgeColor: 'bg-[#E60012]' // Red
-        },
-        {
-            icon: Phone,
-            label: 'Call Us',
-            href: 'tel:+918088131316',
-            color: 'text-[#F39800]', // Orange
-        },
-        {
-            icon: Mail,
-            label: 'Email Us',
-            href: 'mailto:sales@serenthk.com',
-            color: 'text-[#448ACA]', // Blue
-        },
-        {
-            icon: WhatsAppIcon,
-            label: 'WhatsApp',
-            href: 'https://wa.me/+918088131316',
-            color: '', // Image has its own color
-        },
-    ];
+    const menuItems: {
+        icon: any;
+        label: string;
+        href: string;
+        color: string;
+        badge?: string;
+        badgeColor?: string;
+    }[] = [
+            {
+                icon: Phone,
+                label: 'Call Us',
+                href: 'tel:+918088131316',
+                color: 'text-[#F39800]', // Orange
+            },
+            {
+                icon: Mail,
+                label: 'Email Us',
+                href: 'mailto:sales@serenthk.com',
+                color: 'text-[#448ACA]', // Blue
+            },
+            {
+                icon: WhatsAppIcon,
+                label: 'WhatsApp',
+                href: 'https://wa.me/+918088131316',
+                color: '', // Image has its own color
+            },
+        ];
 
     return (
         <div className="fixed right-0 top-1/2 -translate-y-1/2 z-50 flex flex-col shadow-lg bg-white rounded-l-lg overflow-hidden border border-gray-100">

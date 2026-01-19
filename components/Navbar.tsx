@@ -274,14 +274,16 @@ export default function Navbar() {
                         </Link>
                         <Link
                             href="/cart"
-                            className="relative flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-brand-teal to-brand-teal-dark text-white rounded-xl hover:shadow-lg hover:shadow-brand-teal/30 transition-all duration-300 font-medium text-sm group overflow-hidden"
+                            className="relative group block"
                         >
-                            {/* Shine Effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                            <ShoppingCart className="w-5 h-5 group-hover:scale-110 transition-transform relative" />
-                            <span className="hidden sm:inline relative">Cart</span>
+                            <div className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-brand-teal to-brand-teal-dark text-white rounded-xl hover:shadow-lg hover:shadow-brand-teal/30 transition-all duration-300 font-medium text-sm relative overflow-hidden">
+                                {/* Shine Effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                                <ShoppingCart className="w-5 h-5 group-hover:scale-110 transition-transform relative" />
+                                <span className="hidden sm:inline relative">Cart</span>
+                            </div>
                             {cartCount > 0 && (
-                                <span className="absolute -top-1.5 -right-1.5 bg-brand-gold text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-bounce shadow-lg">
+                                <span className="absolute -top-1.5 -right-1.5 bg-brand-gold text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-bounce shadow-lg z-10">
                                     {cartCount}
                                 </span>
                             )}
