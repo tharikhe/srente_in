@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingMenu from "@/components/FloatingMenu";
 import Chatbot from "@/components/Chatbot";
+import Schema from "@/components/Schema";
 import { CartProvider } from "@/context/CartContext";
 
 import SmoothScroll from "@/components/SmoothScroll";
@@ -60,6 +61,7 @@ export default function RootLayout({
           src="https://www.googletagmanager.com/gtag/js?id=G2DREGRF1CB"
           strategy="afterInteractive"
         />
+        <Schema />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
