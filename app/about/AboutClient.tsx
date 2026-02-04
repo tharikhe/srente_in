@@ -126,7 +126,7 @@ export default function AboutClient() {
                         <div className="absolute inset-0 bg-brand-teal rounded-3xl rotate-3 opacity-10"></div>
                         <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-700 aspect-[4/3] group">
                             <Image
-                                src="/products-img/about-us1.webp"
+                                src="/about2.jpeg"
                                 alt="Serente Global Hub"
                                 fill
                                 className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -198,7 +198,7 @@ export default function AboutClient() {
                                 className="space-y-4"
                             >
                                 <div className="h-64 relative rounded-2xl overflow-hidden shadow-lg">
-                                    <Image src="/products-img/about-us2.webp" alt="Quality Control" fill className="object-cover" />
+                                    <Image src="/about3.jpeg" alt="Partnership with Tech Company" fill className="object-cover" />
                                 </div>
                                 <div className="h-48 relative rounded-2xl overflow-hidden shadow-lg bg-gray-900 flex items-center justify-center p-6 text-center">
                                     <div>
@@ -218,7 +218,7 @@ export default function AboutClient() {
                                     </div>
                                 </div>
                                 <div className="h-64 relative rounded-2xl overflow-hidden shadow-lg">
-                                    <Image src="/products-img/aboutus-3.webp" alt="Warehouse" fill className="object-cover" />
+                                    <Image src="/about7.jpeg" alt="Partnership with Greenconn" fill className="object-cover" />
                                 </div>
                             </motion.div>
                         </div>
@@ -270,6 +270,54 @@ export default function AboutClient() {
                                 </motion.div>
                             ))}
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Partnership Gallery Section */}
+            <section className="py-24 bg-gray-50 dark:bg-gray-800/50">
+                <div className="container mx-auto px-4">
+                    <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                        <span className="inline-block py-1 px-3 rounded-full bg-brand-teal/10 text-brand-teal border border-brand-teal/20 text-sm font-medium tracking-wide">
+                            GLOBAL NETWORK
+                        </span>
+                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Our Manufacturing Partners</h2>
+                        <p className="text-gray-600 dark:text-gray-300 text-lg">
+                            Building strong relationships with leading manufacturers across Asia to ensure quality and reliability.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {[
+                            { src: '/about1.jpeg', alt: 'Partnership at Mega Source', label: 'Mega Source' },
+                            { src: '/about2.jpeg', alt: 'Partnership at YB Corporation', label: 'YB Corporation' },
+                            { src: '/about3.jpeg', alt: 'Partnership with Tech Company', label: 'Tech Partner' },
+                            { src: '/about4.jpeg', alt: 'Partnership at Antenk Electronics', label: 'Antenk Electronics' },
+                            { src: '/about5.jpeg', alt: 'Partnership at Technology Co., Ltd', label: 'Technology Co.' },
+                            { src: '/about6.jpeg', alt: 'Business Meeting with Partners', label: 'Strategic Partners' },
+                            { src: '/about7.jpeg', alt: 'Partnership at Greenconn Shenzhen', label: 'Greenconn' },
+                            { src: '/about8.jpeg', alt: 'Team Building Event', label: 'Team Building' },
+                        ].map((partner, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                whileHover={{ scale: 1.03 }}
+                                className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg group cursor-pointer"
+                            >
+                                <Image
+                                    src={partner.src}
+                                    alt={partner.alt}
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <p className="text-white font-semibold text-sm">{partner.label}</p>
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
             </section>
