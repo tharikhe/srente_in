@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
     const posts = getAllPosts();
+    // Latest blog posts fetched from data source
 
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
