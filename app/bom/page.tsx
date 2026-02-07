@@ -1,4 +1,13 @@
 import BomUploader from '@/components/BomUploader';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "BOM Upload Tool | Serente Electronics",
+    description: "Upload your Bill of Materials (Excel) to quickly check stock and pricing for multiple electronic components at once.",
+    alternates: {
+        canonical: '/bom',
+    },
+};
 
 export default function BomPage() {
     return (

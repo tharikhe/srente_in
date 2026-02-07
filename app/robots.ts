@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next';
 export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = 'https://serentehk-hoh3.vercel.app';
+    const baseUrl = 'https://www.serentehk.com';
 
     return {
         rules: {

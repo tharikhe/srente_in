@@ -18,9 +18,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Serente Electronics - Premium Electronic Components Distributor",
-  description: "Your trusted partner for electronic components distribution. Browse our extensive inventory of ICs, capacitors, resistors, and more.",
-  keywords: "SUPPLY CHAIN, EV SECTOR, AUTOMOTIVE INDUSTRY, RAILWAYS, IOT, MEDICAL INDUSTRY, NETWORK CABLES, LIGHTING INDUSTRY, LEDS, LCDS, ELECTRONIC COMPONENTS DISTRIBUTOR HONGKONG, ELECTRONIC COMPONENTS DISTRIBUTOR INDIA, ANTENK CONNECTORS, GREENCON CONNECTORS, ORABO CONNECTORS, YM DISPLAYS, GL FIBRE CABLES, ISOCOM OPTOCOUPLERS, TOPDIODE DIODE, JB CAPACITORS, SONYTEK DISPLAYS, YEEBO DISPLAYS, DWIN DISPLAYS, SCONDAR CONNECTORS, SERENTE ELECTRONICS HK LTD, AUTHORISED DISTRIBUTOR, GLOBAL SOURCING, INVENTORY MANAGEMENT, ABSOLUTE COMPONENTS, OEM & ODM",
+  metadataBase: new URL('https://www.serentehk.com'),
+  title: "Serente Electronics | Top Semiconductor distributors Hong Kong",
+  description: "Leading electronic components distributor of Hong Kong. Specializing in supply chain solutions, EV sector, automotive and IoT industries. ISO 9001:2015 Certified.",
+  keywords: ['SUPPLY CHAIN', 'EV SECTOR', 'AUTOMOTIVE INDUSTRY', 'RAILWAYS', 'IOT', 'MEDICAL INDUSTRY', 'NETWORK CABLES', 'LIGHTING INDUSTRY', 'LEDS', 'LCDS', 'ELECTRONIC COMPONENTS DISTRIBUTOR HONGKONG', 'ELECTRONIC COMPONENTS DISTRIBUTOR INDIA', 'ANTENK CONNECTORS', 'GREENCON CONNECTORS', 'ORABO CONNECTORS', 'YM DISPLAYS', 'GL FIBRE CABLES', 'ISOCOM OPTOCOUPLERS', 'TOPDIODE DIODE', 'JB CAPACITORS', 'SONYTEK DISPLAYS', 'YEEBO DISPLAYS', 'DWIN DISPLAYS', 'SCONDAR CONNECTORS', 'SERENTE ELECTRONICS HK LTD', 'AUTHORISED DISTRIBUTOR', 'GLOBAL SOURCING', 'INVENTORY MANAGEMENT', 'ABSOLUTE COMPONENTS', 'OEM & ODM'],
+  robots: {
+    index: true,
+    follow: true,
+    'max-image-preview': 'large',
+    'max-snippet': -1,
+  },
+  alternates: {
+    canonical: '/',
+  },
   verification: {
     google: "_u8APxPK3cf1IIjlGr6bwENduySXwnwunSNU8J4fn-A",
   },

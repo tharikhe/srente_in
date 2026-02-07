@@ -6,6 +6,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
     title: "Product Catalog | Electronics Parts Suppliers - Serente Electronics",
     description: "Go to our extensive catalog of electronic components including capacitors,Ic's, IGBTs connectors, LCD / OLED displays and touch panels, semiconductor discrete parts.",
+    alternates: {
+        canonical: '/products',
+    },
 };
 
 export default function ProductsPage() {
