@@ -6,6 +6,7 @@ import { Search, FileText, ShoppingCart, Filter, ChevronLeft, Check, Package, Ch
 import { useCart } from '@/context/CartContext';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { getCategoryImage } from '@/lib/product-images';
+import { getCategoryPath, slugToCategory } from '@/lib/category-url';
 import Image from 'next/image';
 
 export default function ProductTable() {
@@ -13,13 +14,17 @@ export default function ProductTable() {
     const router = useRouter();
     const pathname = usePathname();
     const categoryParam = searchParams.get('category');
-    const searchParam = searchParams.get('search'); // Get search param
+    const searchParam = searchParams.get('search');
+    const categorySlugFromPath = pathname?.startsWith('/products/category/')
+        ? pathname.replace('/products/category/', '').split('/')[0]
+        : null;
+    const categoryFromPath = categorySlugFromPath ? slugToCategory(decodeURIComponent(categorySlugFromPath)) : null;
 
     // Initialize state
     const [allProducts, setAllProducts] = useState<Product[]>(staticProducts);
     const [isLoading, setIsLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState(searchParam || '');
-    const [selectedCategory, setSelectedCategory] = useState(categoryParam || 'All');
+    const [selectedCategory, setSelectedCategory] = useState(categoryFromPath || categoryParam || 'All');
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedRow, setExpandedRow] = useState<string | null>(null);
     const itemsPerPage = 20;
@@ -76,12 +81,25 @@ export default function ProductTable() {
 
     // Sync state with URL params when they change
     useEffect(() => {
-        if (categoryParam) {
+        if (categoryFromPath) {
+            setSelectedCategory(categoryFromPath);
+        } else if (categoryParam) {
             setSelectedCategory(categoryParam);
         } else {
             setSelectedCategory('All');
         }
-    }, [categoryParam]);
+    }, [categoryFromPath, categoryParam]);
+
+    // Keep legacy ?category= links working by converting them to /products/category/<slug>
+    useEffect(() => {
+        if (!categoryParam || categoryFromPath) return;
+
+        const params = new URLSearchParams(searchParams.toString());
+        params.delete('category');
+        const query = params.toString();
+        const categoryPath = getCategoryPath(categoryParam);
+        router.replace(query ? `${categoryPath}?${query}` : categoryPath);
+    }, [categoryFromPath, categoryParam, router, searchParams]);
 
     // Sync search query with URL param
     useEffect(() => {
@@ -97,14 +115,17 @@ export default function ProductTable() {
         setSelectedCategory(newCategory);
         setCurrentPage(1);
 
-        // Update URL
-        const params = new URLSearchParams(searchParams);
+        const params = new URLSearchParams(searchParams.toString());
+        params.delete('category');
+        const query = params.toString();
+
         if (newCategory === 'All') {
-            params.delete('category');
-        } else {
-            params.set('category', newCategory);
+            router.replace(query ? `/products?${query}` : '/products');
+            return;
         }
-        router.replace(`${pathname}?${params.toString()}`);
+
+        const categoryPath = getCategoryPath(newCategory);
+        router.replace(query ? `${categoryPath}?${query}` : categoryPath);
     };
 
     const handleAddToCart = (product: Product) => {

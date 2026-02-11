@@ -63,11 +63,33 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
             <div className="container mx-auto px-4 mt-12">
                 <div className="max-w-3xl mx-auto">
                     <div
-                        className="prose prose-lg prose-headings:text-brand-teal prose-a:text-brand-teal hover:prose-a:text-brand-gold prose-img:rounded-xl max-w-none"
+                        className="prose prose-lg prose-headings:text-brand-teal prose-img:rounded-xl prose-img:shadow-lg prose-img:mx-auto prose-img:my-8 prose-li:marker:text-brand-teal prose-strong:text-gray-800 prose-p:text-gray-700 prose-p:leading-relaxed max-w-none [&_.blog-banner-image]:w-full [&_.blog-banner-image]:max-w-2xl [&_.blog-banner-image]:mx-auto [&_.blog-banner-image]:rounded-xl [&_.blog-banner-image]:shadow-md [&_.blog-banner-image]:mb-8 [&_.blog-banner-image]:border [&_.blog-banner-image]:border-gray-100 [&_a]:text-blue-600 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-blue-400 [&_a:hover]:text-blue-800 [&_a:hover]:decoration-blue-600 [&_a]:transition-colors [&_a]:duration-200 [&_ul]:space-y-2 [&_h3]:mt-8 [&_h3]:mb-4 [&_h3]:text-xl [&_h3]:font-bold"
                         dangerouslySetInnerHTML={{ __html: post.content }}
                     />
 
-                    <div className="mt-12 pt-8 border-t border-gray-200 flex justify-between items-center">
+                    {/* CTA Section */}
+                    <div className="mt-12 bg-gradient-to-br from-brand-teal/5 to-brand-gold/5 rounded-2xl p-8 border border-brand-teal/10">
+                        <h3 className="text-xl font-bold text-brand-teal mb-3">Looking for Quality Components?</h3>
+                        <p className="text-gray-600 mb-5 leading-relaxed">
+                            Serente Electronics HK LTD is your trusted partner for semiconductor components, connectors, resistors, displays, and more. Get in touch with us for competitive pricing and fast delivery.
+                        </p>
+                        <div className="flex flex-wrap gap-4">
+                            <Link
+                                href="/products"
+                                className="inline-flex items-center px-6 py-3 bg-brand-teal text-white rounded-lg font-semibold hover:bg-brand-teal/90 transition-colors shadow-md hover:shadow-lg"
+                            >
+                                Browse Products
+                            </Link>
+                            <Link
+                                href="/contact"
+                                className="inline-flex items-center px-6 py-3 bg-white text-brand-teal rounded-lg font-semibold border-2 border-brand-teal hover:bg-brand-teal hover:text-white transition-colors"
+                            >
+                                Contact Us
+                            </Link>
+                        </div>
+                    </div>
+
+                    <div className="mt-8 pt-8 border-t border-gray-200 flex justify-between items-center">
                         <div className="text-gray-500 text-sm">
                             Share this article:
                         </div>

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { getCategoryPath } from '@/lib/category-url';
 
 const banners = [
     {
@@ -14,7 +15,7 @@ const banners = [
         description: "Discover our premium range of connectors designed for durability and signal integrity.",
         image: "/products-img/board-to-board-connector.webp",
         bgGradient: "from-blue-600 to-cyan-500",
-        link: "/products?category=Connectors"
+        link: getCategoryPath('Connectors')
     },
     {
         id: 2,
@@ -23,7 +24,7 @@ const banners = [
         description: "Heavy-duty relays for industrial control systems and automation.",
         image: "/products-img/relays.jpg",
         bgGradient: "from-emerald-600 to-teal-500",
-        link: "/products?category=Relays"
+        link: getCategoryPath('Relays')
     },
     {
         id: 3,
@@ -32,7 +33,7 @@ const banners = [
         description: "Keep your systems running at optimal temperatures with our advanced cooling fans.",
         image: "/products-img/fan.jpg",
         bgGradient: "from-indigo-600 to-purple-500",
-        link: "/products?category=Cooling"
+        link: getCategoryPath('Fans')
     },
     {
         id: 4,

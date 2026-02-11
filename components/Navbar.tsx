@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
 import { categories, searchProducts, Product } from '@/data/products';
 import { useRouter } from 'next/navigation';
+import { getCategoryPath } from '@/lib/category-url';
 
 
 const getCategoryIcon = (category: string) => {
@@ -375,7 +376,7 @@ export default function Navbar() {
                                 return (
                                     <Link
                                         key={category}
-                                        href={`/products?category=${encodeURIComponent(category)}`}
+                                        href={getCategoryPath(category)}
                                         className="flex items-center gap-2 px-2.5 py-2 rounded-md hover:bg-brand-surface transition-colors group/item"
                                     >
                                         <div className="w-7 h-7 rounded-md bg-brand-teal/10 flex items-center justify-center text-brand-teal group-hover/item:bg-brand-teal group-hover/item:text-white transition-colors flex-shrink-0">

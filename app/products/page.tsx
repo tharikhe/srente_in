@@ -1,5 +1,7 @@
 import { Suspense } from 'react';
 import ProductTable from '@/components/ProductTable';
+import { redirect } from 'next/navigation';
+import { getCategoryPath } from '@/lib/category-url';
 
 import { Metadata } from 'next';
 
@@ -11,7 +13,35 @@ export const metadata: Metadata = {
     },
 };
 
-export default function ProductsPage() {
+export default async function ProductsPage({
+    searchParams,
+}: {
+    searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+    const resolvedSearchParams = await searchParams;
+    const categoryParam = resolvedSearchParams.category;
+    const categoryValue = Array.isArray(categoryParam) ? categoryParam[0] : categoryParam;
+
+    if (categoryValue) {
+        const params = new URLSearchParams();
+
+        for (const [key, value] of Object.entries(resolvedSearchParams)) {
+            if (key === 'category' || value === undefined) continue;
+
+            if (Array.isArray(value)) {
+                value.forEach((item) => {
+                    if (item) params.append(key, item);
+                });
+            } else if (value) {
+                params.set(key, value);
+            }
+        }
+
+        const categoryPath = getCategoryPath(categoryValue);
+        const query = params.toString();
+        redirect(query ? `${categoryPath}?${query}` : categoryPath);
+    }
+
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-end">

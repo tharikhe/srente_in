@@ -3,6 +3,7 @@
 import { categories, getProductsByCategory } from '@/data/products';
 import { Cpu, Activity, Battery, Plug, Speaker, Gem, Monitor, Fan, ZapOff, Lightbulb, Box, Sliders, ToggleLeft, Eye, Repeat, Share2, Wrench, Layers, Sparkles, Zap, Fuel } from 'lucide-react';
 import Link from 'next/link';
+import { getCategoryPath } from '@/lib/category-url';
 
 // Helper to get consistent icons (same as Navbar)
 const getCategoryIcon = (category: string) => {
@@ -61,7 +62,7 @@ export default function CategoryGrid() {
                     return (
                         <Link
                             key={category}
-                            href={`/products?category=${encodeURIComponent(category)}`}
+                            href={getCategoryPath(category)}
                             className="group relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-soft hover:shadow-strong transition-all duration-300 border border-brand-border hover:border-brand-gold overflow-hidden"
                             style={{ animationDelay: `${index * 50}ms` }}
                         >
