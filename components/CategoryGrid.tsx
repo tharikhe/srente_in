@@ -39,8 +39,8 @@ export default function CategoryGrid() {
             {/* Section Header */}
             <div className="flex items-center justify-between mb-6 sm:mb-8">
                 <div>
-                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-text">Browse by Category</h2>
-                    <p className="text-brand-text-muted mt-1 text-sm sm:text-base">Find components across all major categories</p>
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-text">Browse Electronic Components by Category</h2>
+                    <p className="text-brand-text-muted mt-1 text-sm sm:text-base">Find semiconductor components, ICs, MOSFETs, diodes, passive components and more across all major categories</p>
                 </div>
                 <Link
                     href="/products"

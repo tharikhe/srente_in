@@ -7,13 +7,15 @@ export default function Schema() {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Serente Electronics",
+        "alternateName": ["Serente Electronics HK", "Serente Electronics Pvt Ltd", "Serente Electronics Private Limited"],
         "url": "https://www.serentehk.com/",
         "logo": "https://www.serentehk.com/icon.png",
+        "description": "Serente Electronics is a top semiconductor distributor in Hong Kong, specializing in electronic components distribution, integrated circuits (ICs), MOSFETs, IGBTs, diodes, transistors, passive components, LCD/OLED displays, and connector & cable harnessing solutions. Authorized semiconductor distributor offering OEM & ODM solutions, BOM sourcing, and global electronics supply chain services.",
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+91 80881 31316",
             "contactType": "technical support",
-            "areaServed": "HK",
+            "areaServed": ["HK", "IN", "CN", "US", "GB"],
             "availableLanguage": "en"
         },
         "sameAs": [
@@ -30,6 +32,7 @@ export default function Schema() {
         "url": "https://www.serentehk.com/",
         "telephone": "+91 80881 31316",
         "email": "sales@serentehk.com",
+        "description": "Leading semiconductor distributors in Hong Kong. Authorized distributor of electronic components including integrated circuits, power semiconductor devices, MOSFETs, IGBTs, diodes, transistors, passive components (capacitors, resistors, inductors), LCD/OLED displays and touch panels. Industrial & electronic systems solutions provider with connector & cable harnessing expertise.",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "2/F Tern Ctr Tower 1, 237 Queen's Rd Central",
@@ -52,66 +55,9 @@ export default function Schema() {
             ],
             "opens": "09:00",
             "closes": "18:00"
-        }
+        },
+        "priceRange": "$$"
     };
-
-    const categoryProductSchemas = [
-        {
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            "name": "Varistors",
-            "image": "https://www.serentehk.com/products/category/varistors",
-            "description": "Thermally Protected Varistor 14Mm Rohs/ T&r Rohs Compliant: Yes |Littelfuse TMOV14RP200EL2T7",
-            "brand": {
-                "@type": "Brand",
-                "name": "Serente Electronics"
-            }
-        },
-        {
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            "name": "Resistors",
-            "image": "https://www.serentehk.com/products/category/resistors",
-            "description": "Thick Film Resistors -SMD; YAGEO; 220 Ohm; 0603; 1%",
-            "brand": {
-                "@type": "Brand",
-                "name": "Serente Electronics"
-            }
-        },
-        {
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            "name": "Tools",
-            "image": "https://www.serentehk.com/products/category/tools",
-            "description": "Spanner 13mm Combination",
-            "brand": {
-                "@type": "Brand",
-                "name": "Serente Electronics"
-            }
-        },
-        {
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            "name": "Transistors",
-            "image": "https://www.serentehk.com/products/category/transistors",
-            "description": "Transistor MOSFET P-Ch. -0,46A/-25V SOT23 FDV 304 P",
-            "brand": {
-                "@type": "Brand",
-                "name": "Serente Electronics"
-            }
-        },
-        {
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            "name": "Audio",
-            "image": "https://www.serentehk.com/products?category=Audio",
-            "description": "8 Ohms General Purpose Speaker 5 W 220 Hz 10 kHz Top Round, Square Frame",
-            "brand": {
-                "@type": "Brand",
-                "name": "Serente Electronics"
-            }
-        }
-    ];
 
     const faqSchema = {
         "@context": "https://schema.org",
@@ -122,7 +68,7 @@ export default function Schema() {
                 "name": "What Shipping Options do you Offer?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "We offer worldwide shipping with multiple options including express delivery (1-3 days), standard shipping (5-7 days), and economy shipping (10-15 days). We ship from our warehouses in India and Hong Kong for faster regional delivery. We are Top BOM sourcing and electronics supply in Hong Kong."
+                    "text": "We offer worldwide shipping with multiple options including express delivery (1-3 days), standard shipping (5-7 days), and economy shipping (10-15 days). We ship from our warehouses in India and Hong Kong for faster regional delivery. As a top semiconductor distributor and electronics supply chain partner in Hong Kong, we ensure reliable global logistics."
                 }
             },
             {
@@ -130,15 +76,15 @@ export default function Schema() {
                 "name": "Can you Source Obsolete or Hard-to-Find Components?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes! We specialize in sourcing obsolete, end-of-life, and hard-to-find electronic components. Our global network of suppliers allows us to locate rare parts. Submit your requirements and we'll do our best to find what you need. We are a distributor Partner with Companies like Firstohm, Octea, GL Fiber, VITEK, Sonytek, Kingtronics, Palm Technology , Taimates, Isocom, Greenconn, JB Capacitors, Disen, Hongda, Microtech, Romtronic, Smico, Wipin, Yeebo, YM Tech Companies."
+                    "text": "Yes! We specialize in sourcing obsolete, end-of-life, and hard-to-find electronic components including integrated circuits, MOSFETs, IGBTs, and discrete semiconductor parts. Our global network of suppliers allows us to locate rare parts. We are authorized distributor partners with Firstohm, Octea, GL Fiber, VITEK, Sonytek, Kingtronics, Palm Technology, Taimates, Isocom, Greenconn, JB Capacitors, Disen, Hongda, Microtech, Romtronic, Smico, Wipin, Yeebo, and YM Tech."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Do you Provide Technical Datasheet?",
+                "name": "Do you Provide Technical Datasheets?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Absolutely, We provide complete technical documentation including datasheets, application notes, and compliance certificates for all products. These can be downloaded directly from product pages or requested from our support team. We are Best semiconductor components suppliers."
+                    "text": "Absolutely. We provide complete technical documentation including datasheets, application notes, and compliance certificates for all semiconductor components and electronic parts. These can be downloaded directly from product pages or requested from our support team. As one of the best semiconductor components suppliers in Hong Kong, we ensure full traceability."
                 }
             },
             {
@@ -146,7 +92,23 @@ export default function Schema() {
                 "name": "What Payment Methods do you accept?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "We accept various payment methods including bank transfers, credit/debit cards, PayPal, and letters of credit for large orders. For established customers, we also offer flexible payment terms. Contact us for more details."
+                    "text": "We accept various payment methods including bank transfers, credit/debit cards, PayPal, and letters of credit for large orders. For established customers, we also offer flexible payment terms. Contact our semiconductor distribution company in Hong Kong for more details."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What types of semiconductor components do you distribute?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "As an authorized semiconductor distributor in Hong Kong, we supply a comprehensive range including: MOSFET transistors, IGBT modules, power MOSFETs, NPN/PNP transistors, Schottky diodes, Zener diodes, rectifier diodes, microcontroller ICs, analog/digital ICs, power management ICs (PMIC), RF ICs, SiC MOSFETs, GaN semiconductor devices, wide bandgap semiconductors, automotive grade semiconductors, AI chip components, and power electronics semiconductors."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which industries do you serve with semiconductor components?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We serve automotive semiconductor components for EV and traditional vehicles, industrial semiconductor devices, semiconductors for solar inverters, telecom equipment components, consumer electronics semiconductors, and IoT device components. Our industrial & electronic systems solutions cover railways, medical industry, lighting, and network infrastructure."
                 }
             }
         ]
@@ -160,16 +122,6 @@ export default function Schema() {
             <Script id="local-business-schema" type="application/ld+json" strategy="afterInteractive">
                 {JSON.stringify(localBusinessSchema)}
             </Script>
-            {categoryProductSchemas.map((schema, index) => (
-                <Script
-                    key={schema.name}
-                    id={`product-category-schema-${schema.name.toLowerCase()}-${index}`}
-                    type="application/ld+json"
-                    strategy="afterInteractive"
-                >
-                    {JSON.stringify(schema)}
-                </Script>
-            ))}
             <Script id="faq-schema" type="application/ld+json" strategy="afterInteractive">
                 {JSON.stringify(faqSchema)}
             </Script>

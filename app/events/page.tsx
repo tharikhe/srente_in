@@ -2,8 +2,12 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Serente Electronics HK - Semiconductor Companies in Hong Kong",
-    description: "Trusted distributor partners Such as Firstohm, Isocom and many more for BOM sourcing and electronics supply. Shop our extensive inventory here.",
+    title: "Industry Events & Expos | Serente Electronics HK - Semiconductor Companies Hong Kong",
+    description: "Connect with Serente Electronics at global electronics expos, EV component summits, and semiconductor industry events. Trusted semiconductor companies in Hong Kong, BOM sourcing and electronics supply partner. Distributor of Firstohm, Isocom, and leading semiconductor brands.",
+    keywords: ['semiconductor companies in hong kong', 'electronics supply chain partner', 'semiconductor distribution companies in hong kong', 'BOM sourcing and electronics supply', 'Firstohm', 'Isocom', 'semiconductor for EV', 'automotive semiconductor components'],
+    alternates: {
+        canonical: '/events',
+    },
 };
 
 import React from 'react';

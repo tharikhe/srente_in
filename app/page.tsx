@@ -16,8 +16,9 @@ import { Suspense } from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Serente Electronics | Top Semiconductor distributors Hong Kong",
-  description: "Leading electronic components distributor of Hong Kong. Specializing in supply chain solutions, EV sector, automotive and IoT industries. ISO 9001:2015 Certified.",
+  title: "Serente Electronics HK | Top Semiconductor Distributors Hong Kong | Electronic Components Supplier",
+  description: "Serente Electronics — top semiconductor distributors in Hong Kong. Authorized electronic components supplier of integrated circuits, MOSFETs, IGBTs, diodes, passive components, LCD/OLED displays, and connectors. OEM & ODM semiconductor distribution company. ISO 9001:2015 Certified.",
+  keywords: ['semiconductor distributors hong kong', 'electronic component distributor Hong Kong', 'serente electronics hong kong', 'authorized semiconductor distributor', 'buy semiconductor components online', 'electronic components supplier'],
 };
 
 export default function Home() {
@@ -25,13 +26,13 @@ export default function Home() {
     {
       icon: Shield,
       title: 'Quality Assured',
-      description: 'ISO 9001:2015 certified with full traceability',
+      description: 'ISO 9001:2015 certified authorized semiconductor distributor with full traceability',
       color: 'bg-emerald-100 text-emerald-600',
     },
     {
       icon: Truck,
       title: 'Fast Delivery',
-      description: 'Global shipping with express options available',
+      description: 'Global semiconductor components shipping with express options available',
       color: 'bg-blue-100 text-blue-600',
     },
     {
@@ -43,7 +44,7 @@ export default function Home() {
     {
       icon: Award,
       title: 'Best Prices',
-      description: 'Competitive pricing with volume discounts',
+      description: 'Competitive semiconductor components pricing with volume discounts',
       color: 'bg-amber-100 text-amber-600',
     },
   ];
@@ -231,8 +232,8 @@ export default function Home() {
             Ready to Get Started?
           </h2>
           <p className="text-sm sm:text-xl text-white/80 mb-6 sm:mb-10 leading-relaxed">
-            Your trusted partner for electronic components distribution.
-            We provide high-quality parts with full traceability.
+            Your trusted semiconductor distributors and electronic components supplier in Hong Kong.
+            We provide high-quality semiconductor devices with full traceability.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
             <Link

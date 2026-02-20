@@ -7,35 +7,43 @@ import Link from 'next/link';
 const faqs = [
     {
         question: 'What type of electronic components do you supply?',
-        answer: 'We are top semiconductor distributors in Hong Kong, we supply a comprehensive range of electronic components including resistors, capacitors, inductors, ICs, diodes, transistors, connectors, switches and more. Our inventory covers both active and passive components from leading manufacturers worldwide.',
+        answer: 'As top semiconductor distributors in Hong Kong, we supply a comprehensive range of electronic components including integrated circuits (ICs), MOSFET transistors, IGBT modules, Schottky diodes, Zener diodes, rectifier diodes, NPN/PNP transistors, capacitors, resistors, inductors, connectors, and optocoupler transistors. Our inventory covers semiconductor discrete parts, passive components, power semiconductor modules, LCD/OLED displays, touch panels, and connector & cable harnessing solutions from leading manufacturers worldwide.',
     },
     {
         question: 'Do you offer warranty on your products?',
-        answer: 'Yes, all our products come with a manufacturer warranty. We are ISO 9001:2015 certified and provide full traceability documentation. If you receive any defective components, we offer hassle-free returns and replacements. We are Electronics Parts Suppliers in Hong Kong.',
+        answer: 'Yes, all our semiconductor components and electronic parts come with a manufacturer warranty. We are ISO 9001:2015 certified and provide full traceability documentation. If you receive any defective components, we offer hassle-free returns and replacements. As authorized semiconductor distributor and electronics parts suppliers in Hong Kong, quality assurance is our top priority.',
     },
     {
         question: 'What is the minimum order quantity (MOQ)?',
-        answer: 'Our MOQ varies by product. For most standard components, we offer flexible quantities starting from 1 piece. For bulk orders, we provide significant volume discounts. Contact our sales team for specific MOQ details. Top industrial semiconductor supplier Hong Kong.',
+        answer: 'Our MOQ varies by product. For most standard semiconductor components, we offer flexible quantities starting from 1 piece. For bulk semiconductor components and wholesale orders, we provide significant volume discounts. Contact our sales team for specific MOQ details and semiconductor components price list.',
     },
     {
         question: 'How do I use the BOM Upload Tool?',
-        answer: 'Our BOM (Bill of Materials) tool allows you to upload your component list in Excel or CSV format. Simply navigate to the BOM Tool page, upload your file, and receive instant quotes for all components. Our team will review and respond within 24 hours. We are Hong Kong semiconductor distributor.',
+        answer: 'Our BOM (Bill of Materials) sourcing tool allows you to upload your component list in Excel or CSV format. Simply navigate to the BOM Tool page, upload your file, and receive instant quotes for all semiconductor and electronic components. Our electronics procurement team will review and respond within 24 hours with pricing and availability.',
     },
     {
         question: 'What are your Shipping Options and Delivery Time?',
-        answer: 'We offer worldwide shipping with multiple options including express delivery (1-3 days), standard shipping (5-7 days), and economy shipping (10-15 days). We ship from our warehouses in India and Hong Kong for faster regional delivery. We are Top BOM sourcing and electronics supply in Hong Kong.',
+        answer: 'We offer worldwide shipping with multiple options including express delivery (1-3 days), standard shipping (5-7 days), and economy shipping (10-15 days). We ship from our warehouses in India and Hong Kong for faster regional delivery. As your electronics supply chain partner, we ensure reliable global logistics for all semiconductor components.',
     },
     {
         question: 'Can you Source Obsolete or Hard-to-Find Components?',
-        answer: 'Yes! We specialize in sourcing obsolete, end-of-life, and hard-to-find electronic components. Our global network of suppliers allows us to locate rare parts. Submit your requirements and we\'ll do our best to find what you need. We are a distributor Partner with Companies like Firstohm, Octea, GL Fiber, VITEK, Sonytek, Kingtronics, Palm Technology, Taimates, Isocom, Greenconn, JB Capacitors, Disen, Hongda, Microtech, Romtronic, Smico, Wipin, Yeebo, YM Tech Companies.',
+        answer: 'Yes! We specialize in sourcing obsolete, end-of-life, and hard-to-find electronic components including integrated circuits, MOSFETs, IGBTs, and discrete semiconductor parts. Our global network ensures we locate rare parts. We are authorized distributor partners with Firstohm, Octea, GL Fiber, VITEK, Sonytek, Kingtronics, Palm Technology, Taimates, Isocom, Greenconn, JB Capacitors, Disen, Hongda, Microtech, Romtronic, Smico, Wipin, Yeebo, and YM Tech.',
     },
     {
-        question: 'Do you Provide Technical Datasheet?',
-        answer: 'Absolutely, we provide complete technical documentation including datasheets, application notes, and compliance certificates for all products. These can be downloaded directly from product pages or requested from our support team. We are Best semiconductor components suppliers.',
+        question: 'Do you Provide Technical Datasheets?',
+        answer: 'Absolutely. We provide complete technical documentation including datasheets, application notes, and compliance certificates for all semiconductor devices and electronic components. These can be downloaded directly from product pages or requested from our support team.',
     },
     {
         question: 'What Payment Methods do you accept?',
-        answer: 'We accept various payment methods including bank transfers, credit/debit cards, PayPal, and letters of credit for large orders. For established customers, we also offer flexible payment terms. Contact us for more details.',
+        answer: 'We accept various payment methods including bank transfers, credit/debit cards, PayPal, and letters of credit for large orders. For established customers, we also offer flexible payment terms. Contact our semiconductor distribution company for more details.',
+    },
+    {
+        question: 'What types of semiconductor devices do you distribute?',
+        answer: 'We distribute a wide range of semiconductor devices: power MOSFETs, NPN and PNP transistors, SiC MOSFETs, GaN semiconductor devices, IGBT modules, power rectifier modules, thyristor modules, silicon controlled rectifiers (SCR), triacs, microcontroller ICs, microprocessor chips, analog and digital ICs, power management ICs (PMIC), RF ICs, logic ICs, memory ICs, and wide bandgap semiconductors. We also supply automotive grade semiconductors and AI chip components.',
+    },
+    {
+        question: 'Which industries do you serve?',
+        answer: 'We provide semiconductor components for automotive and EV applications, solar inverters, telecom equipment, consumer electronics, IoT devices, industrial automation, railways, medical devices, and lighting industries. Our industrial & electronic systems solutions and custom electronics solutions serve OEM & ODM manufacturers globally.',
     },
 ];
 

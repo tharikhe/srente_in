@@ -78,7 +78,7 @@ export default function Footer() {
                     <div>
                         <h3 className="text-xl font-bold text-brand-gold mb-6">Serente Electronics</h3>
                         <p className="text-white/70 text-sm mb-6 leading-relaxed">
-                            Your trusted partner for electronic components distribution. We provide high-quality parts with full traceability and exceptional service.
+                            Your trusted semiconductor distributors in Hong Kong. Authorized electronic components distributor specializing in integrated circuits, MOSFETs, IGBTs, diodes, passive components, LCD/OLED displays, and connector & cable harnessing solutions. OEM & ODM semiconductor distribution with full traceability.
                         </p>
                         <div className="flex space-x-3">
                             {[
@@ -188,7 +188,7 @@ export default function Footer() {
 
                         {/* Copyright */}
                         <p className="text-white/50 text-sm text-center">
-                            © {currentYear} Serente Electronics Limited. All Rights Reserved.
+                            © {currentYear} Serente Electronics HK Limited. All Rights Reserved. | Top Semiconductor Distributors & Electronic Components Supplier in Hong Kong
                         </p>
 
                         {/* Legal Links */}

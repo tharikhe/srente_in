@@ -6,8 +6,12 @@ import { Newspaper } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Serente Electronics - Electronics supply chain partner Hong Kong",
-    description: "We are a devoted partner of Sonytek and Palm Technology for Hong Kong semiconductor distributor. Browse our extensive inventory of ICs, capacitors, resistors etc.",
+    title: "Blog & Industry Insights | Serente Electronics - Electronics Supply Chain Partner Hong Kong",
+    description: "Stay updated with the latest trends in semiconductor distribution, electronics procurement services, and supply chain strategies. Serente Electronics — your trusted electronics supply chain partner, BOM sourcing and electronics supply company in Hong Kong. Partner of Sonytek and Palm Technology.",
+    keywords: ['electronics supply chain partner', 'BOM sourcing and electronics supply', 'electronics procurement services', 'semiconductor distribution companies hong kong', 'hong kong semiconductor distributor', 'Sonytek', 'Palm Technology', 'global electronics sourcing services'],
+    alternates: {
+        canonical: '/blog',
+    },
 };
 
 export default function BlogPage() {
