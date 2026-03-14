@@ -3,11 +3,30 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Globe, ShieldCheck } from 'lucide-react';
 import { manufacturers } from '@/data/manufacturers';
+import { Metadata } from 'next';
 
 interface PageProps {
     params: Promise<{
         slug: string;
     }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const manufacturer = manufacturers.find((m) => m.slug === slug);
+
+    if (!manufacturer) {
+        return { title: 'Manufacturer Not Found | Serente Electronics' };
+    }
+
+    return {
+        title: `${manufacturer.name} | Authorized Distributor - Serente Electronics HK | Semiconductor Distributors Hong Kong`,
+        description: `${manufacturer.name} authorized distributor — Serente Electronics HK. Buy ${manufacturer.name} electronic components from top semiconductor distributors in Hong Kong. OEM & ODM electronic component distributor with competitive pricing and full traceability.`,
+        keywords: [manufacturer.name, 'authorized semiconductor distributor', 'semiconductor distributors hong kong', 'top semiconductor distributors hong kong', 'electronic component distributor Hong Kong', 'electronic components supplier', 'electronics parts suppliers', 'OEM & ODM', 'Resistor and Condenser', 'semiconductor distributor', 'semiconductor distributors', 'hong kong semiconductor distributor', 'semiconductor companies in hong kong', 'OEM semiconductor distributor', 'industrial semiconductor supplier', 'semiconductor distribution company hong kong', 'semiconductor distributors in hong kong', 'best electronic components distributors in hong kong', 'electronic components distribution', 'semiconductor products distribution', 'semiconductor components', 'semiconductor devices', 'integrated circuits', 'semiconductor components supplier', 'semiconductor components manufacturers', 'semiconductor components exporters'],
+        alternates: {
+            canonical: `/manufacturers/${manufacturer.slug}`,
+        },
+    };
 }
 
 export default async function ManufacturerPage({ params }: PageProps) {

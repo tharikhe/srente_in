@@ -2,9 +2,9 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Industry Events & Expos | Serente Electronics HK - Semiconductor Companies Hong Kong",
-    description: "Connect with Serente Electronics at global electronics expos, EV component summits, and semiconductor industry events. Trusted semiconductor companies in Hong Kong, BOM sourcing and electronics supply partner. Distributor of Firstohm, Isocom, and leading semiconductor brands.",
-    keywords: ['semiconductor companies in hong kong', 'electronics supply chain partner', 'semiconductor distribution companies in hong kong', 'BOM sourcing and electronics supply', 'Firstohm', 'Isocom', 'semiconductor for EV', 'automotive semiconductor components'],
+    title: "Serente Electronics HK - Semiconductor Companies in Hong Kong",
+    description: "Trusted distributor partners Such as Firstohm, Isocom and many more for BOM sourcing and electronics supply. Shop our extensive inventory here.",
+    keywords: ['semiconductor companies in hong kong', 'electronics supply chain partner', 'semiconductor distribution companies in hong kong', 'BOM sourcing and electronics supply', 'semiconductor distributors hong kong', 'top semiconductor distributors hong kong', 'electronic components supplier', 'electronics parts suppliers', 'OEM & ODM', 'Firstohm', 'Isocom', 'semiconductor for EV', 'automotive semiconductor components', 'hong kong semiconductor distributor', 'semiconductor distributor', 'semiconductor distributors', 'semiconductor distribution companies hong kong', 'industrial semiconductor supplier', 'electronics procurement services', 'global electronics sourcing services', 'industrial electronics supplier', 'semiconductor devices', 'industrial semiconductor devices', 'semiconductor for solar inverter', 'semiconductor for telecom equipment', 'semiconductor for consumer electronics', 'semiconductor for IoT devices', 'SiC MOSFET', 'GaN semiconductor devices', 'wide bandgap semiconductors', 'automotive grade semiconductor', 'AI chip components', 'power electronics semiconductor'],
     alternates: {
         canonical: '/events',
     },

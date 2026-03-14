@@ -1,5 +1,15 @@
 import Link from 'next/link';
 import { ArrowLeft, Shield, Lock, Eye, FileText, Database } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Privacy Policy | Serente Electronics HK - Electronic Component Distributor Hong Kong",
+    description: "Privacy policy for Serente Electronics HK Ltd., leading semiconductor distributors and electronic components supplier in Hong Kong. Learn how we protect your data as a trusted electronic component distributor.",
+    keywords: ['semiconductor distributors hong kong', 'electronic component distributor Hong Kong', 'electronic components supplier', 'top semiconductor distributors hong kong', 'Serente Electronics', 'semiconductor distributor', 'semiconductor distributors', 'hong kong semiconductor distributor', 'semiconductor distribution company hong kong', 'semiconductor distributors in hong kong', 'electronic components distribution', 'semiconductor products distribution', 'authorized semiconductor distributor', 'semiconductor components'],
+    alternates: {
+        canonical: '/privacy-policy',
+    },
+};
 
 export default function PrivacyPolicy() {
     return (

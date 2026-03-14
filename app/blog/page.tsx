@@ -6,9 +6,9 @@ import { Newspaper } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Blog & Industry Insights | Serente Electronics - Electronics Supply Chain Partner Hong Kong",
-    description: "Stay updated with the latest trends in semiconductor distribution, electronics procurement services, and supply chain strategies. Serente Electronics — your trusted electronics supply chain partner, BOM sourcing and electronics supply company in Hong Kong. Partner of Sonytek and Palm Technology.",
-    keywords: ['electronics supply chain partner', 'BOM sourcing and electronics supply', 'electronics procurement services', 'semiconductor distribution companies hong kong', 'hong kong semiconductor distributor', 'Sonytek', 'Palm Technology', 'global electronics sourcing services'],
+    title: "Serente Electronics - Electronics supply chain partner Hong Kong",
+    description: "We are a devoted partner of Sonytek and Palm Technology for Hong Kong semiconductor distributor. Browse our extensive inventory of ICs, capacitors, resistors etc.",
+    keywords: ['electronics supply chain partner', 'BOM sourcing and electronics supply', 'electronics procurement services', 'semiconductor distribution companies hong kong', 'hong kong semiconductor distributor', 'semiconductor distributors hong kong', 'electronic components supplier', 'electronics component supplier', 'electronics parts suppliers', 'OEM & ODM', 'Sonytek', 'Palm Technology', 'global electronics sourcing services', 'semiconductor companies in hong kong', 'semiconductor distributor', 'semiconductor distributors', 'OEM semiconductor distributor', 'industrial semiconductor supplier', 'semiconductor distribution companies in hong kong', 'OEM electronics sourcing solutions', 'electronics parts procurement company', 'electronics vendor management services', 'custom electronics solutions provider', 'procurement and supply electronics solutions', 'industrial electronics supplier', 'semiconductor components', 'semiconductor devices', 'electronic components distribution', 'semiconductor products distribution', 'integrated circuits', 'power semiconductor devices', 'SiC MOSFET', 'GaN semiconductor devices', 'wide bandgap semiconductors', 'AI chip components', 'automotive semiconductor components', 'semiconductor for EV', 'semiconductor for solar inverter', 'semiconductor for IoT devices', 'power electronics semiconductor'],
     alternates: {
         canonical: '/blog',
     },

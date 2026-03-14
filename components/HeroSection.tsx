@@ -250,6 +250,8 @@ const HeroSection: React.FC<HeroProps> = ({
                     muted
                     playsInline
                     preload="metadata"
+                    title="Professional woman working"
+                    aria-label="A professional woman working in a business environment"
                 />
 
                 {/* Video 2 */}
@@ -259,6 +261,8 @@ const HeroSection: React.FC<HeroProps> = ({
                     muted
                     playsInline
                     preload="metadata"
+                    title="Female engineer working"
+                    aria-label="A female engineer working in an industrial setting"
                 />
 
                 {/* Cinematic overlay */}

@@ -1,5 +1,15 @@
 import Link from 'next/link';
 import { ArrowLeft, FileCheck, AlertCircle, Scale, DollarSign, HelpCircle } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Terms & Conditions | Serente Electronics HK - Semiconductor Distributors Hong Kong",
+    description: "Terms and conditions for Serente Electronics HK Ltd., top semiconductor distributors and electronic component distributor in Hong Kong. OEM & ODM semiconductor distribution company policies.",
+    keywords: ['semiconductor distributors hong kong', 'electronic component distributor Hong Kong', 'top semiconductor distributors hong kong', 'electronic components supplier', 'OEM & ODM', 'Serente Electronics', 'semiconductor distributor', 'semiconductor distributors', 'hong kong semiconductor distributor', 'semiconductor distribution company hong kong', 'semiconductor distributors in hong kong', 'electronic components distributors in hong kong', 'electronic components distribution', 'semiconductor products distribution', 'authorized semiconductor distributor', 'semiconductor components', 'semiconductor devices'],
+    alternates: {
+        canonical: '/terms',
+    },
+};
 
 export default function TermsAndConditions() {
     return (

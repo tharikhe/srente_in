@@ -142,6 +142,41 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.5,
     }));
 
+    // Popular part number search pages
+    const popularPartNumbers = [
+        'RC0603FR-07220RL',
+        'RC0603FR-0720KL',
+        'RC0603FR-07178KL',
+        'RC0805FR-07120RL',
+        'RC0805JR-070RL',
+        'RC0805FR-071ML',
+        'CC0402KRX7R7BB101',
+        'GRM155C71A105KE11D',
+        'CC0603KRX7R9BB103',
+        'SFR16S0008201FR500',
+        'MFR50SFTE52-10R',
+        'MAL225977221E3',
+        'PPPC102LFBN-RC',
+        'SG73S2ATTD4701F',
+        'LM1117T-3.3/NOPB',
+        'LM324N',
+        'B32529C1222J189',
+        'B32912A3473M000',
+        'UF4007GP-TP',
+        'SFR25H0001009FR500',
+        'PFR5221J100J11L4BULK',
+        '561R10TCCQ22TR',
+        'ROX3SJ18K',
+        'BU2032-1-HD-G',
+    ];
+
+    const popularPartPages: MetadataRoute.Sitemap = popularPartNumbers.map((partNumber) => ({
+        url: `${baseUrl}/products?search=${encodeURIComponent(partNumber)}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.64,
+    }));
+
     return [
         ...staticPages,
         ...categoryPages,
@@ -149,5 +184,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...manufacturerPages,
         ...productPages,
         ...manufacturerProductPages,
+        ...popularPartPages,
     ];
 }
