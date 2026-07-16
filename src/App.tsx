@@ -223,14 +223,17 @@ export default function App() {
   const [showWhatsApp, setShowWhatsApp] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.8) {
-        setShowWhatsApp(true);
-      } else {
-        setShowWhatsApp(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setShowWhatsApp(window.scrollY > window.innerHeight * 0.8);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -266,9 +269,9 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           1. HERO SECTION — Spline 3D
          ═══════════════════════════════════════════════════ */}
-      <section id="home" className="relative min-h-screen overflow-hidden bg-black">
+      <section id="home" className="relative min-h-[100dvh] overflow-hidden bg-black">
         {/* Fixed Navbar with Hamburger */}
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between pt-4 sm:pt-6 px-6 sm:px-12 md:px-20 lg:px-28 pointer-events-none">
+        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between pt-4 sm:pt-6 px-4 sm:px-12 md:px-20 lg:px-28 pointer-events-none">
           <div
             className="flex items-center justify-center rounded-full w-10 h-10 sm:w-11 sm:h-11 shrink-0 backdrop-blur-md overflow-hidden bg-white/10 pointer-events-auto"
             style={{ border: '1px solid rgba(255,255,255,0.08)' }}
@@ -297,32 +300,32 @@ export default function App() {
           </div>
         </nav>
 
-        {/* Spline 3D */}
-        <div className="absolute inset-0 left-[30%] w-[70%] h-full">
+        {/* Spline 3D — hidden on mobile, positioned right on desktop */}
+        <div className="absolute inset-0 left-0 md:left-[30%] w-full md:w-[70%] h-full">
           <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
         </div>
 
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+        {/* Gradient overlays — stronger on mobile for readability */}
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black via-black/70 to-black/30 md:from-black/80 md:via-black/40 md:to-transparent" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 via-transparent to-black/40 md:from-black/60 md:to-black/30" />
 
         {/* Left content */}
-        <div className="relative z-10 flex items-center min-h-screen px-8 sm:px-14 md:px-20 lg:px-28 pointer-events-none">
-          <div className="max-w-xl space-y-6 pointer-events-auto">
+        <div className="relative z-10 flex items-end md:items-center min-h-[100dvh] px-5 sm:px-14 md:px-20 lg:px-28 pb-24 md:pb-0 pointer-events-none">
+          <div className="max-w-xl space-y-5 sm:space-y-6 pointer-events-auto">
 
-            <h1 className="text-[2.5rem] sm:text-[3.25rem] lg:text-[3.75rem] leading-[1.05] font-semibold text-white tracking-tight">
+            <h1 className="text-[1.85rem] sm:text-[3.25rem] lg:text-[3.75rem] leading-[1.1] sm:leading-[1.05] font-semibold text-white tracking-tight">
               From schematic to scale.<br />
               <span className="bg-gradient-to-r from-white via-[#FFEA00] to-white bg-clip-text text-transparent">Engineered to last.</span>
             </h1>
-            <p className="text-[14px] sm:text-[15px] leading-relaxed text-gray-400 max-w-md">
+            <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-gray-400 max-w-md">
               Serente is a full-stack electronics manufacturing partner. We simplify your supply chain, optimize designs for manufacturing (DFM), and build with zero-tolerance quality — all from Bengaluru, India's hardware capital.
             </p>
 
-            <div className="flex items-center gap-4 pt-3">
-              <a href="#about" className="inline-flex items-center gap-2 text-[13px] sm:text-[14px] font-semibold text-black bg-[#FFEA00] rounded-full px-7 py-3 hover:bg-white transition-all duration-200 group shadow-lg shadow-[#FFEA00]/10">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-3">
+              <a href="#about" className="inline-flex items-center justify-center gap-2 text-[13px] sm:text-[14px] font-semibold text-black bg-[#FFEA00] rounded-full px-7 py-3 hover:bg-white transition-all duration-200 group shadow-lg shadow-[#FFEA00]/10">
                 Explore our process <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
               </a>
-              <a href="#contact" className="inline-flex items-center gap-2 text-[13px] sm:text-[14px] font-medium text-gray-300 border border-gray-800 rounded-full px-7 py-3 hover:border-white hover:text-white transition-all duration-200">
+              <a href="#contact" className="inline-flex items-center justify-center gap-2 text-[13px] sm:text-[14px] font-medium text-gray-300 border border-gray-800 rounded-full px-7 py-3 hover:border-white hover:text-white transition-all duration-200">
                 Get a quote
               </a>
             </div>
@@ -341,13 +344,13 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           2. VIDEO HERO SECTION — Background Video
          ═══════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen overflow-hidden bg-white">
+      <section className="relative min-h-[70vh] sm:min-h-screen overflow-hidden bg-white">
         <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover"
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4"
         />
 
         <div className="relative z-10 flex flex-col min-h-screen">
-          <div className="flex-1 flex items-end pb-10 sm:pb-16 lg:pb-20 px-6 sm:px-12 md:px-20 lg:px-28">
+          <div className="flex-1 flex items-end pb-8 sm:pb-16 lg:pb-20 px-5 sm:px-12 md:px-20 lg:px-28">
             <div className="max-w-md">
               <div className="mb-3">
                 <a href="#about" className="inline-flex items-center gap-1.5 text-[11px] font-semibold bg-black text-[#FFEA00] px-3.5 py-1.5 rounded-full transition-all hover:bg-gray-900 group">
@@ -355,7 +358,7 @@ export default function App() {
                   <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">→</span>
                 </a>
               </div>
-              <h2 className="text-[1.65rem] sm:text-[2rem] leading-[1.2] font-semibold text-gray-900 tracking-tight mb-3">
+              <h2 className="text-[1.35rem] sm:text-[2rem] leading-[1.2] font-semibold text-gray-900 tracking-tight mb-3">
                 Built to perform on the national stage.
               </h2>
               <p className="text-[14px] text-gray-600 font-medium mb-4">
@@ -374,7 +377,7 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           3. ABOUT SECTION
          ═══════════════════════════════════════════════════ */}
-      <section id="about" className="relative py-24 sm:py-32 bg-black overflow-hidden">
+      <section id="about" className="relative py-16 sm:py-24 md:py-32 bg-black overflow-hidden">
         {/* Decorative glow */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#FFEA00]/3 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/3 rounded-full blur-3xl" />
@@ -405,7 +408,7 @@ export default function App() {
                 </div>
               </div>
               {/* Floating stat */}
-              <div className="absolute -bottom-6 -right-4 sm:-right-6 bg-[#FFEA00] rounded-xl px-5 py-4 shadow-lg">
+              <div className="absolute -bottom-4 right-2 sm:-bottom-6 sm:-right-6 bg-[#FFEA00] rounded-xl px-4 py-3 sm:px-5 sm:py-4 shadow-lg">
                 <p className="text-2xl font-extrabold text-black">2017</p>
                 <p className="text-[11px] text-black/75 font-semibold uppercase tracking-wider">Founded</p>
               </div>
@@ -424,7 +427,7 @@ export default function App() {
               <p className="text-[15px] leading-relaxed text-gray-400">
                 Founded in 2017 in Bengaluru, we've built a reputation on one thing: delivering exactly what was promised, when it was promised.
               </p>
-              <div className="flex items-center gap-6 pt-2">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 pt-2">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-white/5 text-[#FFEA00] flex items-center justify-center border border-white/10">
                     <ShieldIcon />
@@ -455,7 +458,7 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           4. SERVICES SECTION
          ═══════════════════════════════════════════════════ */}
-      <section id="services" className="relative py-24 sm:py-32 bg-black">
+      <section id="services" className="relative py-16 sm:py-24 md:py-32 bg-black">
         {/* Background accent */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FFEA00]/2 rounded-full blur-3xl" />
 
@@ -483,7 +486,7 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           5. BUSINESS SECTORS SECTION
          ═══════════════════════════════════════════════════ */}
-      <section id="sectors" className="relative py-24 sm:py-32 bg-black">
+      <section id="sectors" className="relative py-16 sm:py-24 md:py-32 bg-black">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-900 to-transparent" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-12 lg:px-20">
@@ -506,13 +509,13 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           6. STATS / COUNTER SECTION
          ═══════════════════════════════════════════════════ */}
-      <section className="relative py-20 sm:py-24 overflow-hidden">
+      <section className="relative py-14 sm:py-20 md:py-24 overflow-hidden">
         {/* Bold yellow background */}
         <div className="absolute inset-0 bg-[#FFEA00]" />
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iMC4wNCI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-20" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-12">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 text-center">
             {[
               { num: '7+', label: 'Years in business' },
               { num: '200+', label: 'Projects shipped' },
@@ -531,7 +534,7 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           7. TESTIMONIALS SECTION
          ═══════════════════════════════════════════════════ */}
-      <section className="relative py-24 sm:py-32 bg-black">
+      <section className="relative py-16 sm:py-24 md:py-32 bg-black">
         <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-12 lg:px-20">
           <SectionTitle eyebrow="Client reviews" title="What partners say about us" />
 
@@ -562,7 +565,7 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           8. BLOG / INSIGHTS SECTION
          ═══════════════════════════════════════════════════ */}
-      <section id="blog" className="relative py-24 sm:py-32 bg-black">
+      <section id="blog" className="relative py-16 sm:py-24 md:py-32 bg-black">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-900 to-transparent" />
         
         <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-12 lg:px-20">
@@ -614,7 +617,7 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           9. CONTACT SECTION
          ═══════════════════════════════════════════════════ */}
-      <section id="contact" className="relative py-24 sm:py-32 bg-black">
+      <section id="contact" className="relative py-16 sm:py-24 md:py-32 bg-black">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-900 to-transparent" />
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#FFEA00]/3 rounded-full blur-3xl" />
 
@@ -759,9 +762,9 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Brutalist WhatsApp Floating Button */}
+      {/* Brutalist WhatsApp Floating Button — smaller on mobile */}
       {showWhatsApp && (
-        <div className="fixed bottom-6 right-6 z-40 animate-fade-in-up">
+        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 animate-fade-in-up">
           <a
             href="https://wa.me/918660744258?text=Hello!%20I%20visited%20your%20website%20and%20would%20like%20to%20connect."
             target="_blank"

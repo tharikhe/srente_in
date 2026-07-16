@@ -27,6 +27,8 @@ body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
 }
 
 /* Section fade-in animation */
@@ -167,12 +169,12 @@ body {
 /* Hamburger Button Styles */
 .hamburger-btn {
   position: relative;
-  width: 145px;
-  height: 48px;
+  width: 110px;
+  height: 42px;
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -183,6 +185,14 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 100;
+}
+
+@media (min-width: 640px) {
+  .hamburger-btn {
+    width: 145px;
+    height: 48px;
+    font-size: 13px;
+  }
 }
 
 .hamburger-btn:hover {
@@ -306,6 +316,16 @@ body {
   height: 90px;
   width: 90px;
   cursor: pointer;
+}
+
+@media (max-width: 639px) {
+  .whatsapp-float-btn {
+    height: 64px;
+    width: 64px;
+    border-radius: 12px;
+    border-width: 2px;
+    box-shadow: 3px 3px 0px #000000;
+  }
 }
 
 .whatsapp-float-btn::before {
@@ -505,4 +525,23 @@ body {
   }
 }
 
+/* ─── Mobile performance optimizations ─── */
+@media (max-width: 767px) {
+  /* Reduce backdrop-filter intensity on mobile */
+  .menu-overlay {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
 
+  /* Smaller menu links on mobile */
+  .menu-overlay-link {
+    font-size: 1.75rem;
+    margin: 0.75rem 0;
+  }
+
+  /* Hardware accelerate sections for smoother scroll */
+  section {
+    will-change: auto;
+    transform: translateZ(0);
+  }
+}
