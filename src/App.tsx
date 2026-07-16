@@ -94,21 +94,25 @@ const services = [
     icon: <ChipIcon />,
     title: 'Optimize for Manufacturing (DFM)',
     desc: 'Build it right the first time. We review PCB layouts early to eliminate design flaws, reduce copper waste, and prevent assembly line stoppages.',
+    image: '/images/service-dfm.png',
   },
   {
     icon: <CogIcon />,
     title: 'Hardware Engineering',
     desc: 'From concept validation to high-fidelity prototype, our engineers manage testing, thermal analysis, and compliance checks.',
+    image: '/images/service-hardware.png',
   },
   {
     icon: <CircuitIcon />,
     title: 'Custom Electronics Design',
     desc: 'Need a specialized board or multi-layered PCB? We design, lay out, and prototype custom circuitry with absolute precision.',
+    image: '/images/service-design.png',
   },
   {
     icon: <CodeIcon />,
     title: 'Embedded Software & Firmware',
     desc: 'We program the brain of your hardware, developing secure, low-latency firmware and drivers for IoT microcontrollers.',
+    image: '/images/service-embedded.png',
   },
 ];
 
@@ -384,31 +388,18 @@ export default function App() {
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-12 lg:px-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left - Image placeholder with gradient border */}
+            {/* Left - Beautiful Stock SMT Factory Image */}
             <div className="relative">
-              <div className="rounded-2xl overflow-hidden border border-gray-900">
-                <div className="aspect-[4/3] bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 flex items-center justify-center relative">
-                  {/* Abstract circuit pattern as visual */}
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-[20%] left-[10%] w-32 h-px bg-[#FFEA00]" />
-                    <div className="absolute top-[20%] left-[10%] w-px h-24 bg-[#FFEA00]" />
-                    <div className="absolute top-[45%] right-[15%] w-40 h-px bg-white" />
-                    <div className="absolute top-[45%] right-[15%] w-px h-32 bg-white" />
-                    <div className="absolute bottom-[25%] left-[30%] w-28 h-px bg-[#FFEA00]" />
-                    <div className="absolute top-[60%] left-[50%] w-px h-20 bg-white" />
-                  </div>
-                  <div className="text-center space-y-4">
-                    <div className="w-20 h-20 mx-auto rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FFEA00" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>
-                      </svg>
-                    </div>
-                    <p className="text-gray-500 text-sm font-medium">Electronics & Innovation</p>
-                  </div>
-                </div>
+              <div className="rounded-2xl overflow-hidden border border-gray-900 aspect-[4/3] relative group">
+                <img
+                  src="/images/about-factory.png"
+                  alt="Serente Electronics SMT Assembly Line"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               </div>
               {/* Floating stat */}
-              <div className="absolute -bottom-4 right-2 sm:-bottom-6 sm:-right-6 bg-[#FFEA00] rounded-xl px-4 py-3 sm:px-5 sm:py-4 shadow-lg">
+              <div className="absolute -bottom-4 right-2 sm:-bottom-6 sm:-right-6 bg-[#FFEA00] rounded-xl px-4 py-3 sm:px-5 sm:py-4 shadow-lg z-10">
                 <p className="text-2xl font-extrabold text-black">2017</p>
                 <p className="text-[11px] text-black/75 font-semibold uppercase tracking-wider">Founded</p>
               </div>
@@ -467,16 +458,35 @@ export default function App() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
             {services.map((svc, i) => (
-              <div key={i} className="card-glow group rounded-2xl p-7 sm:p-8 border border-gray-900 bg-gradient-to-br from-gray-950 to-gray-900">
-                <div className="service-icon w-14 h-14 rounded-xl bg-white/5 border border-white/10 text-[#FFEA00] flex items-center justify-center mb-5">
-                  {svc.icon}
+              <div key={i} className="card-glow group rounded-2xl overflow-hidden border border-gray-900 bg-gradient-to-br from-gray-950 to-gray-900 flex flex-col">
+                <div className="aspect-[16/10] w-full overflow-hidden relative bg-gray-950">
+                  <img
+                    src={svc.image}
+                    alt={svc.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent pointer-events-none" />
+                  
+                  {/* Floating Icon */}
+                  <div className="absolute bottom-4 left-6 service-icon w-12 h-12 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 text-[#FFEA00] flex items-center justify-center">
+                    {svc.icon}
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-3">{svc.title}</h3>
-                <p className="text-[14px] leading-relaxed text-gray-400">{svc.desc}</p>
-                <a href="#contact" className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#FFEA00] mt-5 hover:text-white transition-colors group/link">
-                  Talk to our team
-                  <span className="transition-transform duration-200 group-hover/link:translate-x-0.5"><ArrowRightIcon /></span>
-                </a>
+                
+                <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-base sm:text-lg font-semibold text-white mb-2.5 group-hover:text-[#FFEA00] transition-colors duration-200">
+                      {svc.title}
+                    </h3>
+                    <p className="text-[13px] sm:text-[14px] leading-relaxed text-gray-400">
+                      {svc.desc}
+                    </p>
+                  </div>
+                  <a href="#contact" className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#FFEA00] mt-5 hover:text-white transition-colors group/link w-fit">
+                    Talk to our team
+                    <span className="transition-transform duration-200 group-hover/link:translate-x-0.5"><ArrowRightIcon /></span>
+                  </a>
+                </div>
               </div>
             ))}
           </div>
