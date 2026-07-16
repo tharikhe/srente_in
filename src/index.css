@@ -1,0 +1,508 @@
+@import "tailwindcss";
+
+
+
+/* Spline loader spinner */
+.loader {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #FFEA00;
+  border-radius: 50%;
+  animation: spin 0.8s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Section fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+/* Card hover glow */
+.card-glow {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-glow:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(255, 234, 0, 0.1);
+}
+
+/* Service card icon container */
+.service-icon {
+  transition: all 0.3s ease;
+}
+
+.card-glow:hover .service-icon {
+  transform: scale(1.1);
+  background: #FFEA00;
+  color: #000000;
+}
+
+/* Testimonial card */
+.testimonial-card {
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 234, 0, 0.3);
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #FFFFFF, #FFEA00, #FFFFFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Section divider gradient line */
+.section-divider {
+  height: 3px;
+  width: 60px;
+  background: #FFEA00;
+  border-radius: 2px;
+}
+
+/* Contact form inputs */
+.form-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: #fff;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+}
+
+.form-input:focus {
+  border-color: rgba(255, 234, 0, 0.5);
+  box-shadow: 0 0 0 3px rgba(255, 234, 0, 0.1);
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Footer link hover */
+.footer-link {
+  transition: all 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #FFEA00;
+  padding-left: 4px;
+}
+
+/* Social icon hover */
+.social-icon {
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  background: #FFEA00;
+  color: #000000;
+}
+
+/* Pulse ring for live indicator */
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 234, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 234, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 234, 0, 0);
+  }
+}
+
+/* Hamburger Button Styles */
+.hamburger-btn {
+  position: relative;
+  width: 145px;
+  height: 48px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  cursor: pointer;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 100;
+}
+
+.hamburger-btn:hover {
+  border-color: #FFEA00;
+  box-shadow: 0 0 20px rgba(255, 234, 0, 0.25);
+  color: #FFEA00;
+}
+
+.hamburger-btn .icon {
+  position: absolute;
+  left: 14px;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger-btn .icon svg {
+  transition: transform 0.4s ease;
+}
+
+.hamburger-btn .text {
+  transform: translateX(54px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.1em;
+}
+
+.hamburger-btn:hover .icon {
+  width: 115px;
+  left: 14px;
+}
+
+.hamburger-btn:hover .icon svg {
+  transform: scale(1.1);
+}
+
+.hamburger-btn:hover .text {
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+.hamburger-btn:focus {
+  outline: none;
+}
+
+.hamburger-btn:active .icon {
+  transform: scale(0.9);
+}
+
+/* Full Screen Menu Overlay */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-overlay-link {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 1.25rem 0;
+  transition: all 0.3s ease;
+  transform: translateY(20px);
+  opacity: 0;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.menu-overlay-link:hover {
+  color: #FFEA00;
+  transform: scale(1.08) !important;
+}
+
+@keyframes slideInLink {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-overlay.open .menu-overlay-link {
+  animation: slideInLink 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Brutalist WhatsApp Floating Button */
+.whatsapp-float-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #000000;
+  border-radius: 16px;
+  background-color: #25D366;
+  color: #000000;
+  font-weight: bold;
+  position: relative;
+  box-shadow: 4px 4px 0px #000000;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  height: 90px;
+  width: 90px;
+  cursor: pointer;
+}
+
+.whatsapp-float-btn::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -150%;
+  width: 300%;
+  height: 300%;
+  border-radius: 50%;
+  transform: translateX(-50%) scale(0);
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 1;
+  background-color: #000000;
+}
+
+.whatsapp-float-btn:hover::before {
+  transform: translateX(-50%) scale(1);
+}
+
+.whatsapp-float-btn:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0px #000000;
+  border-color: #25D366;
+}
+
+.whatsapp-float-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.whatsapp-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #000000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.whatsapp-float-btn:hover .whatsapp-logo-container {
+  animation: spin 5s linear infinite;
+  width: 36px;
+  height: 36px;
+  top: 26%;
+  background-color: #25D366;
+}
+
+.whatsapp-logo-icon {
+  width: 32px;
+  height: 32px;
+  fill: #25D366;
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.whatsapp-float-btn:hover .whatsapp-logo-icon {
+  transform: scale(0.6);
+  fill: #000000;
+}
+
+.whatsapp-button-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  z-index: 2;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  color: #FFFFFF;
+}
+
+.whatsapp-button-text span:first-child {
+  font-size: 8px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.5px;
+}
+
+.whatsapp-button-text span:last-child {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #25D366;
+}
+
+.whatsapp-float-btn:hover .whatsapp-button-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Preloader CSS ─── */
+.loader-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  border-radius: 50%;
+  background-color: transparent;
+  user-select: none;
+}
+
+.loader-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: transparent;
+  animation: loader-rotate 2s linear infinite;
+  z-index: 0;
+}
+
+@keyframes loader-rotate {
+  0% {
+    transform: rotate(90deg);
+    box-shadow:
+      0 10px 20px 0 #ffffff inset,
+      0 20px 30px 0 #FFEA00 inset,
+      0 60px 60px 0 #B3A400 inset;
+  }
+  50% {
+    transform: rotate(270deg);
+    box-shadow:
+      0 10px 20px 0 #ffffff inset,
+      0 20px 10px 0 #E6C300 inset,
+      0 40px 60px 0 #332B00 inset;
+  }
+  100% {
+    transform: rotate(450deg);
+    box-shadow:
+      0 10px 20px 0 #ffffff inset,
+      0 20px 30px 0 #FFEA00 inset,
+      0 60px 60px 0 #B3A400 inset;
+  }
+}
+
+.loader-letter {
+  display: inline-block;
+  opacity: 0.3;
+  transform: translateY(0);
+  animation: loader-letter-anim 2s infinite;
+  z-index: 1;
+  border-radius: 50ch;
+  border: none;
+}
+
+.loader-letter:nth-child(1) { animation-delay: 0s; }
+.loader-letter:nth-child(2) { animation-delay: 0.1s; }
+.loader-letter:nth-child(3) { animation-delay: 0.2s; }
+.loader-letter:nth-child(4) { animation-delay: 0.3s; }
+.loader-letter:nth-child(5) { animation-delay: 0.4s; }
+.loader-letter:nth-child(6) { animation-delay: 0.5s; }
+.loader-letter:nth-child(7) { animation-delay: 0.6s; }
+.loader-letter:nth-child(8) { animation-delay: 0.7s; }
+.loader-letter:nth-child(9) { animation-delay: 0.8s; }
+.loader-letter:nth-child(10) { animation-delay: 0.9s; }
+
+@keyframes loader-letter-anim {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+    color: #FFFFFF;
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.2);
+    color: #FFEA00;
+    text-shadow: 0 0 12px rgba(255, 234, 0, 0.6);
+  }
+  40% {
+    opacity: 0.7;
+    transform: translateY(0);
+    color: #FFFFFF;
+  }
+}
+
+
