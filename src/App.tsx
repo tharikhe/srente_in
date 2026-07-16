@@ -677,18 +677,33 @@ export default function App() {
             </div>
 
             {/* Contact Form */}
-            <div className="rounded-2xl p-7 sm:p-8 border border-gray-900 bg-gray-950">
-              <h3 className="text-lg font-semibold text-white mb-6">Tell us about your project</h3>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input type="text" placeholder="Your name" className="form-input" />
-                  <input type="tel" placeholder="Phone number" className="form-input" />
+            <div className="contact-modal">
+              <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+                <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Tell us about your project</h3>
+                
+                <div className="input_container">
+                  <label htmlFor="name_field" className="input_label">Your Full Name</label>
+                  <input id="name_field" className="input_field" type="text" placeholder="Enter your full name" />
                 </div>
-                <input type="email" placeholder="Work email" className="form-input" />
-                <textarea placeholder="Describe your project or requirement" rows={5} className="form-input resize-none" />
-                <button type="submit" className="w-full inline-flex items-center justify-center gap-2 text-[14px] font-semibold text-black bg-[#FFEA00] rounded-xl px-7 py-3.5 hover:bg-white hover:text-black transition-all duration-200 group cursor-pointer">
-                  Send enquiry
-                  <span className="transition-transform duration-200 group-hover:translate-x-0.5"><ArrowRightIcon /></span>
+
+                <div className="input_container">
+                  <label htmlFor="email_field" className="input_label">Work Email Address</label>
+                  <input id="email_field" className="input_field" type="email" placeholder="name@company.com" />
+                </div>
+
+                <div className="input_container">
+                  <label htmlFor="phone_field" className="input_label">Phone Number</label>
+                  <input id="phone_field" className="input_field" type="tel" placeholder="+91 XXXXX XXXXX" />
+                </div>
+
+                <div className="input_container">
+                  <label htmlFor="project_field" className="input_label">Project Details</label>
+                  <textarea id="project_field" className="textarea_field" rows={4} placeholder="Describe your hardware project, volume, or DFM requirements..." />
+                </div>
+
+                <button type="submit" className="purchase--btn">
+                  Send Enquiry
+                  <ArrowRightIcon />
                 </button>
               </form>
             </div>
