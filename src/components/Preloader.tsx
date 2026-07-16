@@ -39,16 +39,18 @@ export function Preloader() {
       }`}
     >
       <div className="loader-wrapper">
-        <span className="loader-letter">S</span>
-        <span className="loader-letter">e</span>
-        <span className="loader-letter">r</span>
-        <span className="loader-letter">e</span>
-        <span className="loader-letter">n</span>
-        <span className="loader-letter">t</span>
-        <span className="loader-letter">e</span>
-        <span className="loader-letter">.</span>
-        <span className="loader-letter">.</span>
-        <span className="loader-letter">.</span>
+        <div className="relative z-10 flex items-center justify-center tracking-wide">
+          <span className="loader-letter">S</span>
+          <span className="loader-letter">e</span>
+          <span className="loader-letter">r</span>
+          <span className="loader-letter">e</span>
+          <span className="loader-letter">n</span>
+          <span className="loader-letter">t</span>
+          <span className="loader-letter">e</span>
+          <span className="loader-letter">.</span>
+          <span className="loader-letter">.</span>
+          <span className="loader-letter">.</span>
+        </div>
         <div className="loader-ring" />
       </div>
     </div>

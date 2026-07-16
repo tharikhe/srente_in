@@ -449,7 +449,7 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           4. SERVICES SECTION
          ═══════════════════════════════════════════════════ */}
-      <section id="services" className="relative py-16 sm:py-24 md:py-32 bg-black">
+      <section id="services" className="relative py-16 sm:py-24 md:py-32 bg-black overflow-hidden">
         {/* Background accent */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FFEA00]/2 rounded-full blur-3xl" />
 
@@ -496,7 +496,7 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           5. BUSINESS SECTORS SECTION
          ═══════════════════════════════════════════════════ */}
-      <section id="sectors" className="relative py-16 sm:py-24 md:py-32 bg-black">
+      <section id="sectors" className="relative py-16 sm:py-24 md:py-32 bg-black overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-900 to-transparent" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-12 lg:px-20">
@@ -544,7 +544,7 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           7. TESTIMONIALS SECTION
          ═══════════════════════════════════════════════════ */}
-      <section className="relative py-16 sm:py-24 md:py-32 bg-black">
+      <section className="relative py-16 sm:py-24 md:py-32 bg-black overflow-hidden">
         <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-12 lg:px-20">
           <SectionTitle eyebrow="Client reviews" title="What partners say about us" />
 
@@ -575,7 +575,7 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           8. BLOG / INSIGHTS SECTION
          ═══════════════════════════════════════════════════ */}
-      <section id="blog" className="relative py-16 sm:py-24 md:py-32 bg-black">
+      <section id="blog" className="relative py-16 sm:py-24 md:py-32 bg-black overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-900 to-transparent" />
         
         <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-12 lg:px-20">
@@ -627,7 +627,7 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           9. CONTACT SECTION
          ═══════════════════════════════════════════════════ */}
-      <section id="contact" className="relative py-16 sm:py-24 md:py-32 bg-black">
+      <section id="contact" className="relative py-16 sm:py-24 md:py-32 bg-black overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-900 to-transparent" />
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#FFEA00]/3 rounded-full blur-3xl" />
 
@@ -714,7 +714,7 @@ export default function App() {
       {/* ═══════════════════════════════════════════════════
           10. FOOTER
          ═══════════════════════════════════════════════════ */}
-      <footer className="relative pt-16 pb-8 bg-black">
+      <footer className="relative pt-16 pb-8 bg-black overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-900 to-transparent" />
 
         <div className="max-w-6xl mx-auto px-6 sm:px-12 lg:px-20">

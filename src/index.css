@@ -21,6 +21,8 @@
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -29,6 +31,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
+  width: 100%;
 }
 
 /* Section fade-in animation */
@@ -525,7 +528,7 @@ body {
   }
 }
 
-/* ─── Mobile performance optimizations ─── */
+/* ─── Mobile performance optimizations & FAB fixes ─── */
 @media (max-width: 767px) {
   /* Reduce backdrop-filter intensity on mobile */
   .menu-overlay {
@@ -543,6 +546,40 @@ body {
   section {
     will-change: auto;
     transform: translateZ(0);
+  }
+
+  /* Clean green circle WhatsApp button on mobile */
+  .whatsapp-float-btn {
+    height: 54px !important;
+    width: 54px !important;
+    border-radius: 50% !important;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    background-color: #25D366 !important;
+    transform: none !important;
+  }
+  
+  .whatsapp-logo-container {
+    position: static !important;
+    transform: none !important;
+    background-color: transparent !important;
+    width: 100% !important;
+    height: 100% !important;
+    box-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .whatsapp-logo-icon {
+    width: 28px !important;
+    height: 28px !important;
+    fill: #ffffff !important;
+  }
+
+  .whatsapp-button-text,
+  .whatsapp-float-btn::before {
+    display: none !important;
   }
 }
 
