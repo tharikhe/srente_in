@@ -18,35 +18,30 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.serentehk.com'),
-  title: "Serente Electronics | Top Semiconductor Distributors Hong Kong | Electronic Components Supplier",
-  description: "Serente Electronics Hong Kong — leading semiconductor distributors and electronic components supplier. Authorized distributor of integrated circuits, MOSFETs, IGBTs, diodes, transistors, passive components, LCD/OLED displays, connectors and cable harnessing solutions. OEM & ODM semiconductor distribution company in Hong Kong. ISO 9001:2015 Certified.",
+  metadataBase: new URL('https://www.serente.in'),
+  title: "Serente Electronics | Electronics Manufacturing Services & Component Solutions",
+  description: "Serente Electronics Pvt. Ltd. — leading Electronics Manufacturing Services (EMS) and global electronic component solutions company. Authorized distributor of integrated circuits, MOSFETs, IGBTs, diodes, transistors, passive components, LCD/OLED displays, connectors and cable harnessing solutions. ISO 9001:2015 Certified.",
   keywords: [
     // Primary Keywords
-    'semiconductor distributors hong kong', 'top semiconductor distributors hong kong', 'semiconductor distributors hong kong price',
-    'semiconductor distributors hong kong address', 'semiconductor distributors hong kong contact number',
-    'electronic component distributor Hong Kong', 'OEM & ODM', 'Resistor and Condenser',
+    'serente electronics', 'serente electronics pvt ltd', 'electronics manufacturing services', 'EMS provider',
+    'electronic component distributor', 'OEM & ODM', 'Resistor and Condenser',
     'electronic components supplier', 'electronics component supplier', 'electronics parts suppliers',
     // Partner Brands
     'Firstohm', 'Octea', 'GL Fiber', 'VITEK', 'Sonytek', 'Kingtronics', 'Palm Technology', 'Taimates',
     'Isocom', 'Greenconn', 'JB Capacitors', 'Disen', 'Hongda', 'Microtech', 'Romtronic', 'Smico',
     'Wipin', 'Yeebo', 'YM Tech',
     // Long-tail Keywords
-    'semiconductor companies in hong kong', 'hong kong semiconductor distributor', 'semiconductor distributor',
-    'semiconductor distributors', 'semiconductor distribution companies hong kong',
+    'semiconductor distributor', 'semiconductor distributors',
     'OEM semiconductor distributor', 'industrial semiconductor supplier', 'semiconductor components supplier',
     'best semiconductor components suppliers', 'best industrial semiconductor suppliers',
-    'semiconductor distribution company hong kong', 'semiconductor distribution companies in hong kong',
-    'electronic components distributors in hong kong', 'best electronic components distributors',
-    'best electronic components distributors in hong kong', 'semiconductor distributors in hong kong',
+    'best electronic components distributors',
     'electronic components supply company', 'electronics procurement services',
     'BOM sourcing and electronics supply', 'electronics supply chain partner',
     'OEM electronics sourcing solutions', 'electronics parts procurement company',
     'global electronics sourcing services', 'electronics vendor management services',
     'custom electronics solutions provider', 'procurement and supply electronics solutions',
     // Branded Keywords
-    'serente electronics hong kong', 'serente electronics pvt ltd', 'serente electronics hk',
-    'serente electronics private limited', 'serente electronics',
+    'serente electronics pvt ltd', 'serente electronics private limited', 'serente electronics',
     // Product & Distribution Keywords
     'electronic components distribution', 'semiconductor products distribution',
     'authorized semiconductor distributor', 'industrial & electronic systems solutions',
@@ -69,8 +64,7 @@ export const metadata: Metadata = {
     'buy semiconductor components online', 'semiconductor components wholesale',
     'semiconductor components price list', 'semiconductor components manufacturer',
     'bulk semiconductor components', 'semiconductor components suppliers',
-    'semiconductor components distributors in Hong Kong', 'semiconductor components manufacturers',
-    'semiconductor components exporters',
+    'semiconductor components manufacturers', 'semiconductor components exporters',
     // Advanced Technology Keywords
     'SiC MOSFET', 'GaN semiconductor devices', 'wide bandgap semiconductors',
     'automotive grade semiconductor', 'AI chip components', 'power electronics semiconductor',
@@ -88,9 +82,9 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Serente Electronics | Top Semiconductor Distributors Hong Kong',
-    description: 'Leading electronic components distributor and authorized semiconductor supplier in Hong Kong. MOSFETs, IGBTs, ICs, passive components, connectors & more. ISO 9001:2015 Certified.',
-    url: 'https://www.serentehk.com',
+    title: 'Serente Electronics | Electronics Manufacturing Services & Component Solutions',
+    description: 'Leading electronic components distributor and EMS solutions provider. MOSFETs, IGBTs, ICs, passive components, connectors & more. ISO 9001:2015 Certified.',
+    url: 'https://www.serente.in',
     siteName: 'Serente Electronics',
     locale: 'en_US',
     type: 'website',

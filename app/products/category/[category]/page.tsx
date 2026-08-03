@@ -22,9 +22,9 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
     }
 
     return {
-        title: `${category} Components | Electronic Component Distributor Hong Kong - Serente Electronics`,
-        description: `Browse ${category} components from Serente Electronics, top semiconductor distributors in Hong Kong. Wide selection of ${category.toLowerCase()} from authorized electronics parts suppliers. OEM & ODM electronic components supplier with competitive pricing.`,
-        keywords: [category.toLowerCase(), 'electronics parts suppliers', 'electronic components supplier', 'electronic component distributor Hong Kong', 'semiconductor distributors hong kong', 'top semiconductor distributors hong kong', 'OEM & ODM', 'Resistor and Condenser', 'semiconductor distributor', 'semiconductor distributors', 'hong kong semiconductor distributor', 'semiconductor components supplier', 'industrial semiconductor supplier', 'electronic components distributors in hong kong', 'semiconductor distributors in hong kong', 'industrial electronics supplier', 'electronic components distribution', 'semiconductor products distribution', 'semiconductor components', 'semiconductor devices', 'discrete semiconductor components', 'power semiconductor devices', 'buy semiconductor components online', 'semiconductor components wholesale'],
+        title: `${category} Components | Electronic Component Distributor - Serente Electronics`,
+        description: `Browse ${category} components from Serente Electronics, top electronic components distributor. Wide selection of ${category.toLowerCase()} from authorized electronics parts suppliers. OEM & ODM electronic components supplier with competitive pricing.`,
+        keywords: [category.toLowerCase(), 'electronics parts suppliers', 'electronic components supplier', 'electronic component distributor', 'OEM & ODM', 'Resistor and Condenser', 'semiconductor distributor', 'semiconductor distributors', 'semiconductor components supplier', 'industrial semiconductor supplier', 'industrial electronics supplier', 'electronic components distribution', 'semiconductor products distribution', 'semiconductor components', 'semiconductor devices', 'discrete semiconductor components', 'power semiconductor devices', 'buy semiconductor components online', 'semiconductor components wholesale'],
         alternates: {
             canonical: getCategoryPath(category),
         },

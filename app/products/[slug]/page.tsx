@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     return {
         title: `${product.partNumber} | ${product.category} - Serente Electronics`,
-        description: `${product.description}. ${product.manufacturer ? `Manufactured by ${product.manufacturer}.` : ''} Available at Serente Electronics Hong Kong.`,
+        description: `${product.description}. ${product.manufacturer ? `Manufactured by ${product.manufacturer}.` : ''} Available at Serente Electronics.`,
         alternates: {
             canonical: `/products/${slug}`,
         },

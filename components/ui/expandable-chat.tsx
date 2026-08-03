@@ -133,7 +133,7 @@ const AnimatedChatIcon = () => (
         <defs>
             <linearGradient id="chatGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#ffffff" />
-                <stop offset="100%" stopColor="#C4960C" />
+                <stop offset="100%" stopColor="#E3D2C3" />
             </linearGradient>
         </defs>
 
@@ -145,9 +145,9 @@ const AnimatedChatIcon = () => (
         />
 
         {/* Animated dots */}
-        <circle cx="8" cy="10.5" r="1.2" fill="#0D5C5C" className="animate-pulse" style={{ animationDelay: '0ms' }} />
-        <circle cx="12" cy="10.5" r="1.2" fill="#0D5C5C" className="animate-pulse" style={{ animationDelay: '150ms' }} />
-        <circle cx="16" cy="10.5" r="1.2" fill="#0D5C5C" className="animate-pulse" style={{ animationDelay: '300ms' }} />
+        <circle cx="8" cy="10.5" r="1.2" fill="#2DAA9E" className="animate-pulse" style={{ animationDelay: '0ms' }} />
+        <circle cx="12" cy="10.5" r="1.2" fill="#2DAA9E" className="animate-pulse" style={{ animationDelay: '150ms' }} />
+        <circle cx="16" cy="10.5" r="1.2" fill="#2DAA9E" className="animate-pulse" style={{ animationDelay: '300ms' }} />
     </svg>
 );
 

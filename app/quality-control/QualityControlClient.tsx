@@ -12,7 +12,7 @@ export default function QualityControlClient() {
                     Quality Assurance
                 </h1>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto px-4 relative z-10">
-                    At Serente Electronics, quality is not just a promise—it's our core operational principle. As an authorized semiconductor distributor in Hong Kong, we implement rigorous testing and visual inspections to ensure every electronic component meets the highest industry standards for semiconductor devices and discrete parts.
+                    At Serente Electronics, quality is not just a promise—it's our core operational principle. As an authorized electronic component distributor and EMS provider, we implement rigorous testing and visual inspections to ensure every electronic component meets the highest industry standards for semiconductor devices and discrete parts.
                 </p>
             </section>
 
@@ -56,7 +56,7 @@ export default function QualityControlClient() {
                         { step: "04", title: "Solderability Testing", desc: "Ensuring proper lead termination and wetting characteristics for reliable PCB assembly of all electronic components." }
                     ].map((step, i) => (
                         <div key={i} className="flex flex-col md:flex-row gap-6 items-start">
-                            <div className="flex-shrink-0 w-12 h-12 bg-brand-gold text-white font-bold text-lg rounded-xl flex items-center justify-center shadow-lg">
+                            <div className="flex-shrink-0 w-12 h-12 bg-brand-gold text-gray-900 font-bold text-lg rounded-xl flex items-center justify-center shadow-lg">
                                 {step.step}
                             </div>
                             <div>

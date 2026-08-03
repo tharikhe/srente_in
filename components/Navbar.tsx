@@ -6,8 +6,9 @@ import { Search, ShoppingCart, Menu, Phone, Mail, ChevronDown, X, Zap, Clock, Ma
 import { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
 import { categories, searchProducts, Product } from '@/data/products';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { getCategoryPath } from '@/lib/category-url';
+import ProductCatalogMenu from '@/components/ProductCatalogMenu';
 
 
 const getCategoryIcon = (category: string) => {
@@ -39,6 +40,7 @@ const getCategoryIcon = (category: string) => {
 
 export default function Navbar() {
     const router = useRouter();
+    const pathname = usePathname();
     const [searchQuery, setSearchQuery] = useState('');
     const [suggestions, setSuggestions] = useState<Product[]>([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -104,54 +106,56 @@ export default function Navbar() {
 
 
             {/* Enhanced Contact Bar */}
-            <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white text-[11px] py-1 hidden md:block border-b border-gray-700/50">
+            <div className="bg-[#EAEAEA] text-[#1A1A1A] text-[12px] py-1.5 hidden md:block border-b border-gray-200">
                 <div className="container mx-auto px-4 flex justify-between items-center">
-                    <div className="flex items-center divide-x divide-gray-600">
-                        <a href="mailto:sales@serenthk.com" className="flex items-center gap-1.5 hover:text-brand-gold transition-all duration-300 pr-4 group">
-                            <div className="p-1 bg-brand-teal/20 rounded-full group-hover:bg-brand-gold/20 transition-colors">
-                                <Mail className="w-2.5 h-2.5" />
+                    <div className="flex items-center divide-x divide-gray-300">
+                        <a href="mailto:hello@serenteelectronics.com" className="flex items-center gap-1.5 hover:text-[#2DAA9E] transition-all duration-300 pr-4 group">
+                            <div className="p-1 bg-[#2DAA9E]/10 rounded-full text-[#2DAA9E]">
+                                <Mail className="w-3 h-3" />
                             </div>
-                            <span className="font-medium">sales@serenthk.com</span>
+                            <span className="font-medium text-gray-700">hello@serenteelectronics.com</span>
                         </a>
-                        <a href="tel:+918088131316" className="flex items-center gap-1.5 hover:text-brand-gold transition-all duration-300 px-4 group">
-                            <div className="p-1 bg-brand-teal/20 rounded-full group-hover:bg-brand-gold/20 transition-colors">
-                                <Phone className="w-2.5 h-2.5" />
+                        <a href="tel:+918660744258" className="flex items-center gap-1.5 hover:text-[#2DAA9E] transition-all duration-300 px-4 group">
+                            <div className="p-1 bg-[#2DAA9E]/10 rounded-full text-[#2DAA9E]">
+                                <Phone className="w-3 h-3" />
                             </div>
-                            <span className="font-medium">+91 80881 31316</span>
+                            <span className="font-medium text-gray-700">+91 86607 44258</span>
                         </a>
-                        <div className="flex items-center gap-1.5 px-4 text-gray-400">
-                            <div className="p-1 bg-gray-700 rounded-full">
-                                <Clock className="w-2.5 h-2.5" />
+                        <div className="flex items-center gap-1.5 px-4 text-gray-600">
+                            <div className="p-1 bg-[#2DAA9E]/10 rounded-full text-[#2DAA9E]">
+                                <Clock className="w-3 h-3" />
                             </div>
-                            <span>Mon - Sat: 9:00 AM - 6:00 PM</span>
+                            <span className="font-medium">Mon - Sat: 9:00 AM - 6:00 PM</span>
                         </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-1.5 text-gray-400">
-                            <MapPin className="w-3 h-3" />
-                            <span>Hong Kong</span>
-                        </div>
-                        <div className="h-3 w-px bg-gray-600" />
-                        <Link href="/contact" className="flex items-center gap-1 text-brand-gold hover:text-brand-gold-light transition-colors font-medium group">
-                            <span>Get Quote</span>
-                            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                    <div className="flex items-center gap-4 text-xs text-gray-600 font-medium">
+                        <Link href="/contact" className="hover:text-[#2DAA9E] transition-colors">
+                            Help Center
                         </Link>
+                        <span className="text-gray-300">|</span>
+                        <Link href="/contact" className="hover:text-[#2DAA9E] transition-colors">
+                            Track Order
+                        </Link>
+                        <span className="text-gray-300">|</span>
+                        <span className="flex items-center gap-1 cursor-pointer hover:text-[#2DAA9E]">
+                            English <ChevronDown className="w-3 h-3" />
+                        </span>
                     </div>
                 </div>
             </div>
 
             {/* Main Header - Premium Design */}
-            <div className={`relative z-[60] bg-white py-2 sm:py-2.5 transition-all duration-300 ${isScrolled ? 'shadow-lg' : 'shadow-soft'}`}>
+            <div className={`relative z-[60] bg-white py-2.5 transition-all duration-300 ${isScrolled ? 'shadow-md' : 'shadow-sm'}`}>
                 <div className="container mx-auto px-4 flex items-center justify-between gap-2 sm:gap-4 lg:gap-8">
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="lg:hidden p-2.5 hover:bg-brand-teal/10 rounded-xl transition-all duration-300 group"
+                        className="lg:hidden p-2.5 hover:bg-[#2DAA9E]/10 rounded-xl transition-all duration-300 group"
                     >
                         {isMobileMenuOpen ? (
-                            <X className="w-6 h-6 text-brand-teal group-hover:rotate-90 transition-transform duration-300" />
+                            <X className="w-6 h-6 text-[#2DAA9E] group-hover:rotate-90 transition-transform duration-300" />
                         ) : (
-                            <Menu className="w-6 h-6 text-brand-teal group-hover:scale-110 transition-transform" />
+                            <Menu className="w-6 h-6 text-[#2DAA9E] group-hover:scale-110 transition-transform" />
                         )}
                     </button>
 
@@ -162,38 +166,34 @@ export default function Navbar() {
                         className="flex items-center gap-3 sm:gap-4 group flex-shrink-0 relative z-50"
                     >
                         <div className="relative">
-                            <div className="absolute -inset-2 bg-gradient-to-r from-brand-teal/20 to-brand-gold/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             <Image
                                 src="/logo.png"
                                 alt="Serente Electronics"
                                 width={56}
                                 height={56}
                                 priority
-                                className="h-10 sm:h-14 w-auto relative transition-transform duration-300 group-hover:scale-105"
+                                className="h-10 sm:h-12 w-auto relative transition-transform duration-300 group-hover:scale-105"
                             />
                         </div>
-                        <div className="flex flex-row items-baseline gap-1">
-                            <span className="text-base sm:text-xl font-bold text-brand-teal tracking-tight leading-none group-hover:text-brand-teal-dark transition-colors">
-                                Serente Electronics
+                        <div className="flex flex-row items-baseline gap-1.5">
+                            <span className="text-base sm:text-xl font-extrabold text-[#1A1A1A] tracking-tight leading-none">
+                                Serente
                             </span>
-                            <span className="text-base sm:text-lg font-bold text-brand-teal tracking-tight leading-none group-hover:text-brand-teal-dark transition-colors">
-                                HK LTD
+                            <span className="text-base sm:text-xl font-extrabold text-[#2DAA9E] tracking-tight leading-none">
+                                Electronics
                             </span>
                         </div>
                     </Link>
 
                     {/* Premium Search Bar */}
-                    <div className={`hidden lg:block flex-grow max-w-2xl transition-all duration-500 ${isSearchFocused ? 'scale-[1.02]' : ''}`}>
+                    <div className={`hidden lg:block flex-grow max-w-2xl transition-all duration-500 ${isSearchFocused ? 'scale-[1.01]' : ''}`}>
                         <div className="relative z-50">
-                            {/* Glow Effect on Focus */}
-                            <div className={`absolute -inset-1 bg-gradient-to-r from-brand-teal to-brand-gold rounded-2xl blur-md transition-opacity duration-300 ${isSearchFocused ? 'opacity-40' : 'opacity-0'}`} />
-
                             <div className="relative flex">
                                 <div className="relative flex-grow">
-                                    <Search className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-all duration-300 ${isSearchFocused ? 'text-brand-teal scale-110' : 'text-gray-400'}`} />
+                                    <Search className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-all duration-300 ${isSearchFocused ? 'text-[#2DAA9E] scale-110' : 'text-gray-400'}`} />
                                     <input
                                         type="text"
-                                        placeholder="Search by Part Number, Manufacturer, or Description..."
+                                        placeholder="Search by Part Number, Manufacturer or Description..."
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                         onKeyDown={handleKeyDown}
@@ -203,12 +203,11 @@ export default function Navbar() {
                                         }}
                                         onBlur={() => {
                                             setIsSearchFocused(false);
-                                            // Delay hiding to allow click event on suggestion
                                             setTimeout(() => setShowSuggestions(false), 200);
                                         }}
                                         className={`w-full pl-11 pr-4 py-2.5 border-2 rounded-l-xl transition-all duration-300 text-sm placeholder:text-gray-400 ${isSearchFocused
-                                            ? 'border-brand-teal bg-white shadow-lg'
-                                            : 'border-gray-200 bg-gray-50/80 hover:border-gray-300 hover:bg-white'
+                                            ? 'border-[#2DAA9E] bg-white shadow-md'
+                                            : 'border-[#EAEAEA] bg-white hover:border-gray-300'
                                             } focus:outline-none`}
                                     />
 
@@ -227,7 +226,7 @@ export default function Navbar() {
                                                     >
                                                         <div className="flex justify-between items-start">
                                                             <div>
-                                                                <p className="text-sm font-semibold text-gray-900 group-hover/item:text-brand-teal">
+                                                                <p className="text-sm font-semibold text-gray-900 group-hover/item:text-[#2DAA9E]">
                                                                     {product.partNumber}
                                                                 </p>
                                                                 <p className="text-xs text-gray-500 line-clamp-1">{product.description}</p>
@@ -242,10 +241,10 @@ export default function Navbar() {
                                             <div className="p-2 bg-gray-50 border-t border-gray-100 text-center">
                                                 <button
                                                     onMouseDown={(e) => {
-                                                        e.preventDefault(); // Prevent blur
+                                                        e.preventDefault();
                                                         handleSearch();
                                                     }}
-                                                    className="text-xs font-semibold text-brand-teal hover:text-brand-gold transition-colors"
+                                                    className="text-xs font-semibold text-[#2DAA9E] hover:text-[#258B82] transition-colors"
                                                 >
                                                     View all results for "{searchQuery}"
                                                 </button>
@@ -255,7 +254,7 @@ export default function Navbar() {
                                 </div>
                                 <button
                                     onClick={() => handleSearch()}
-                                    className="bg-gradient-to-r from-brand-gold to-brand-gold-dark hover:from-brand-gold-dark hover:to-brand-gold text-white px-6 rounded-r-xl transition-all duration-300 hover:shadow-lg hover:shadow-brand-gold/30 font-semibold flex items-center gap-2 group"
+                                    className="bg-[#2DAA9E] hover:bg-[#258B82] text-white px-6 rounded-r-xl transition-all duration-300 font-bold flex items-center gap-2 group shadow-sm"
                                 >
                                     <Search className="w-4 h-4 group-hover:scale-110 transition-transform" />
                                     <span>Search</span>
@@ -284,7 +283,7 @@ export default function Navbar() {
                                 <span className="hidden sm:inline relative">Cart</span>
                             </div>
                             {cartCount > 0 && (
-                                <span className="absolute -top-1.5 -right-1.5 bg-brand-gold text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-bounce shadow-lg z-10">
+                                <span className="absolute -top-1.5 -right-1.5 bg-brand-gold text-gray-900 text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-bounce shadow-lg z-10">
                                     {cartCount}
                                 </span>
                             )}
@@ -355,80 +354,40 @@ export default function Navbar() {
             </div>
 
             {/* Premium Navigation Bar - Desktop */}
-            <div className="relative hidden lg:block border-t border-gray-100">
-                <div className="container mx-auto px-4 flex items-center relative">
-                    {/* Premium Product Catalog Button */}
-                    <div className="w-56 flex-shrink-0 py-2 px-0 mr-4 group relative z-50">
-                        <button className="w-full bg-brand-teal text-white font-bold py-2 px-4 rounded-lg flex items-center justify-between hover:bg-brand-teal-dark transition-all duration-300 shadow-md hover:shadow-lg relative z-20">
-                            <div className="flex items-center gap-2">
-                                <Menu className="w-4 h-4" />
-                                <span className="tracking-wide text-sm">Product Catalog</span>
-                            </div>
-                            <ChevronDown className="w-3.5 h-3.5 group-hover:rotate-180 transition-transform duration-300" />
-                        </button>
-
-                        {/* Dropdown Menu */}
-                        <div
-                            onWheel={(e) => e.stopPropagation()}
-                            className="absolute top-full left-0 w-[480px] bg-white rounded-lg shadow-2xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 p-3 grid grid-cols-2 gap-1 mt-1 max-h-[70vh] overflow-y-auto overscroll-contain">
-                            {categories.map((category) => {
-                                const Icon = getCategoryIcon(category);
-                                return (
-                                    <Link
-                                        key={category}
-                                        href={getCategoryPath(category)}
-                                        className="flex items-center gap-2 px-2.5 py-2 rounded-md hover:bg-brand-surface transition-colors group/item"
-                                    >
-                                        <div className="w-7 h-7 rounded-md bg-brand-teal/10 flex items-center justify-center text-brand-teal group-hover/item:bg-brand-teal group-hover/item:text-white transition-colors flex-shrink-0">
-                                            <Icon className="w-3.5 h-3.5" />
-                                        </div>
-                                        <span className="text-sm font-medium text-gray-700 group-hover/item:text-brand-teal transition-colors truncate">{category}</span>
-                                        <ArrowRight className="w-3 h-3 text-gray-400 ml-auto opacity-0 group-hover/item:opacity-100 transition-all flex-shrink-0" />
-                                    </Link>
-                                );
-                            })}
-                            <div className="col-span-2 mt-1 pt-2 border-t border-gray-100">
-                                <Link
-                                    href="/products"
-                                    className="flex items-center justify-center gap-1.5 text-brand-gold font-semibold hover:text-brand-gold-dark transition-colors text-sm py-1"
-                                >
-                                    <span>View All Categories</span>
-                                    <ArrowRight className="w-3.5 h-3.5" />
-                                </Link>
-                            </div>
-                        </div>
+            <div className="relative hidden lg:block border-t border-[#EAEAEA]">
+                <div className="container mx-auto px-4 flex items-center justify-between relative">
+                    {/* Motion Product Catalog Menu */}
+                    <div className="flex-shrink-0 py-2 px-0 mr-4 relative z-50">
+                        <ProductCatalogMenu />
                     </div>
 
                     {/* Main Navigation Links */}
-                    <nav className="flex-grow flex items-center justify-center gap-0.5 font-semibold text-sm">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.label}
-                                href={link.href}
-                                className="relative px-3 py-2 text-gray-600 hover:text-brand-teal transition-colors duration-300 tracking-wide group"
-                            >
-                                {/* Link Text */}
-                                <span className="relative z-10 flex items-center gap-1.5">
-                                    {link.label}
-                                    {link.badge && (
-                                        <span className="px-1.5 py-0.5 bg-brand-gold text-white text-[10px] font-bold rounded-full">
-                                            {link.badge}
-                                        </span>
-                                    )}
-                                </span>
+                    <nav className="flex-grow flex items-center justify-center gap-1 font-bold text-sm">
+                        {navLinks.map((link) => {
+                            const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+                            return (
+                                <Link
+                                    key={link.label}
+                                    href={link.href}
+                                    className={`relative px-4 py-2.5 transition-colors duration-300 tracking-wide group ${isActive ? 'text-[#2DAA9E]' : 'text-[#1A1A1A] hover:text-[#2DAA9E]'}`}
+                                >
+                                    <span className="relative z-10 flex items-center gap-1.5 font-bold">
+                                        {link.label}
+                                    </span>
 
-                                {/* Bottom Indicator */}
-                                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-brand-gold group-hover:w-full transition-all duration-300 rounded-full opacity-0 group-hover:opacity-100" />
-                            </Link>
-                        ))}
+                                    {/* Bottom Indicator */}
+                                    <span className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#2DAA9E] transition-all duration-300 rounded-full ${isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-100'}`} />
+                                </Link>
+                            );
+                        })}
                     </nav>
 
                     {/* Quick Contact Button */}
                     <Link
                         href="/contact"
-                        className="flex items-center gap-1.5 px-3.5 py-1.5 ml-4 text-brand-gold hover:text-white border-2 border-brand-gold hover:bg-brand-gold rounded-lg transition-all duration-300 font-bold text-sm group"
+                        className="flex items-center gap-2 px-4 py-2 text-[#2DAA9E] hover:text-white border-2 border-[#2DAA9E] hover:bg-[#2DAA9E] rounded-lg transition-all duration-300 font-bold text-sm group"
                     >
-                        <Phone className="w-3.5 h-3.5 group-hover:animate-bounce" />
+                        <Phone className="w-4 h-4 group-hover:animate-bounce" />
                         <span>Call Now</span>
                     </Link>
                 </div>
@@ -484,22 +443,22 @@ export default function Navbar() {
                         {/* Mobile Contact Info */}
                         <div className="mt-8 pt-8 border-t border-gray-200 space-y-4">
                             <h4 className="text-sm font-bold text-gray-500 uppercase tracking-wider">Contact Info</h4>
-                            <a href="mailto:sales@serenthk.com" className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-soft">
+                            <a href="mailto:hello@serenteelectronics.com" className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-soft">
                                 <div className="p-3 bg-brand-teal/10 rounded-xl">
                                     <Mail className="w-5 h-5 text-brand-teal" />
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500">Email us at</p>
-                                    <p className="font-semibold text-gray-800">sales@serenthk.com</p>
+                                    <p className="font-semibold text-gray-800">hello@serenteelectronics.com</p>
                                 </div>
                             </a>
-                            <a href="tel:+918088131316" className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-soft">
+                            <a href="tel:+918660744258" className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-soft">
                                 <div className="p-3 bg-brand-gold/10 rounded-xl">
                                     <Phone className="w-5 h-5 text-brand-gold" />
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500">Call us at</p>
-                                    <p className="font-semibold text-gray-800">+91 80881 31316</p>
+                                    <p className="font-semibold text-gray-800">+91 86607 44258</p>
                                 </div>
                             </a>
                         </div>

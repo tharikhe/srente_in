@@ -15,7 +15,7 @@ function createSlug(partNumber: string): string {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://www.serentehk.com';
+    const baseUrl = 'https://www.serente.in';
 
     // Static pages
     const staticPages: MetadataRoute.Sitemap = [

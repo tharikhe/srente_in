@@ -4,7 +4,25 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Target, Globe, Award, Zap, Users, ShieldCheck, ArrowRight, LayoutGrid, Cog } from 'lucide-react';
+import {
+    Cpu,
+    Package,
+    Share2,
+    Wrench,
+    Monitor,
+    Zap,
+    Cog,
+    Globe,
+    Clock,
+    ShieldCheck,
+    Truck,
+    ArrowRight,
+    Sparkles,
+    Check,
+    Building2,
+    Factory,
+    Award
+} from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const fadeInUp = {
@@ -16,305 +34,303 @@ const fadeInUp = {
 const staggerContainer = {
     animate: {
         transition: {
-            staggerChildren: 0.1
+            staggerChildren: 0.08
         }
     }
 };
+
+const coreCapabilities = [
+    { title: "Electronics Manufacturing Services (EMS)", icon: Factory, description: "End-to-end manufacturing solutions for low-, medium-, and high-volume production." },
+    { title: "PCB Assembly (SMT & Through-Hole)", icon: Cpu, description: "Advanced SMT & Through-Hole assembly with stringent quality controls." },
+    { title: "Box Build & System Integration", icon: Package, description: "Complete electromechanical box build and full system integration services." },
+    { title: "Electronic Component Distribution", icon: Share2, description: "Global supply network for high-reliability electronic components." },
+    { title: "Product Engineering & Design Support", icon: Wrench, description: "Design support, value engineering, and component selection expertise." },
+    { title: "LCD, TFT & HMI Display Solutions", icon: Monitor, description: "Custom display solutions and HMI integrations for industrial applications." },
+    { title: "Connector & Cable Assembly Solutions", icon: Zap, description: "Custom wiring harnesses and high-durability connector assemblies." },
+    { title: "Custom Electromechanical Solutions", icon: Cog, description: "Tailored mechanical and electronic integration solutions for OEMs." },
+    { title: "Global Strategic Sourcing", icon: Globe, description: "Strategic sourcing network partnering with qualified component manufacturers." },
+    { title: "Component Lifecycle Management", icon: Clock, description: "Obsolescence tracking, alternate sourcing, and lifecycle sustainability." },
+    { title: "Functional Testing & Quality Assurance", icon: ShieldCheck, description: "Globally recognized quality systems and rigorous functional testing." },
+    { title: "Supply Chain & Logistics Management", icon: Truck, description: "Agile supply chain management ensuring shorter lead times and fast response." },
+];
+
+const whySerentePoints = [
+    "Complete EMS partner from concept to production",
+    "Global network of qualified manufacturing partners",
+    "Strong technical engineering and sourcing expertise",
+    "High-quality, cost-effective manufacturing solutions",
+    "Long-term product lifecycle and obsolescence management",
+    "Flexible production for prototype to mass manufacturing",
+    "Customer-centric approach with fast engineering response",
+    "Commitment to quality, innovation, and continuous improvement"
+];
 
 export default function AboutClient() {
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900 overflow-hidden">
             {/* Hero Section */}
-            <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-teal-900 to-gray-900">
-                    <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20"></div>
-                    {/* Abstract Shapes */}
-                    <div className="absolute top-0 right-0 p-12 opacity-30">
-                        <div className="w-64 h-64 border-2 border-brand-gold rounded-full blur-3xl"></div>
-                    </div>
-                    <div className="absolute bottom-0 left-0 p-12 opacity-30">
-                        <div className="w-64 h-64 border-2 border-brand-teal rounded-full blur-3xl"></div>
-                    </div>
-                </div>
-
-                <div className="relative container mx-auto px-4 text-center z-10">
+            <section className="relative py-20 md:py-28 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 border-b border-gray-100 dark:border-gray-800">
+                <div className="absolute inset-0 bg-[#2DAA9E]/5 pointer-events-none" />
+                <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="space-y-6"
                     >
-                        <span className="inline-block py-1 px-3 rounded-full bg-brand-gold/10 text-brand-gold border border-brand-gold/20 text-sm font-medium tracking-wide">
-                            ESTABLISHED 2023
+                        <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-[#2DAA9E]/10 text-[#2DAA9E] border border-[#2DAA9E]/20 text-xs md:text-sm font-semibold tracking-wider uppercase">
+                            <Sparkles className="w-4 h-4" /> Electronics Manufacturing Services & Component Solutions
                         </span>
-                        <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-tight">
-                            Powering <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-200">Innovation</span><br />
-                            Connecting the World
+                        <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-[#1A1A1A] dark:text-white tracking-tight leading-tight">
+                            About <span className="text-[#2DAA9E]">Serente Electronics</span> Pvt. Ltd.
                         </h1>
-                        <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                            Your trusted global partner for electronic component distribution, bridging the gap between cutting-edge manufacturing and reliable supply chains.
+                        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
+                            A technology-driven Electronics Manufacturing Services (EMS) and global electronic component solutions company, committed to delivering end-to-end manufacturing, engineering, and supply chain solutions to OEMs across diverse industries.
                         </p>
                     </motion.div>
                 </div>
             </section>
 
-            {/* Stats Section */}
-            <section className="relative -mt-20 z-20 container mx-auto px-4">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white dark:bg-gray-800 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700 p-8"
-                >
-                    {[
-                        { label: 'Global Customers', value: '500+', icon: Globe },
-                        { label: 'Components Shipped', value: '1M+', icon: Zap },
-                        { label: 'Manufacturers', value: '50+', icon: LayoutGrid },
-                        { label: 'Quality Guarantee', value: '100%', icon: ShieldCheck },
-                    ].map((stat, index) => (
-                        <div key={index} className="text-center space-y-2 p-4 group hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-2xl transition-colors">
-                            <div className="w-12 h-12 mx-auto bg-brand-teal/10 dark:bg-brand-teal/20 rounded-full flex items-center justify-center text-brand-teal group-hover:scale-110 transition-transform">
-                                <stat.icon className="w-6 h-6" />
+            {/* Team Photo Banner */}
+            <section className="relative">
+                <div className="container mx-auto px-4 -mt-10 relative z-20">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                        className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800"
+                    >
+                        <div className="relative h-64 sm:h-80 md:h-[420px]">
+                            <Image
+                                src="/about-team.jpg"
+                                alt="Serente Electronics Team — Design, Manufacture, Deliver"
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+                            {/* Gradient overlay at bottom */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                                <div className="flex flex-wrap items-center gap-3">
+                                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#2DAA9E] text-white text-xs font-bold rounded-full shadow-lg">
+                                        <Sparkles className="w-3.5 h-3.5" />
+                                        Our Team
+                                    </span>
+                                    <span className="text-white/90 text-sm sm:text-base font-semibold">
+                                        Design · Manufacture · Deliver
+                                    </span>
+                                </div>
                             </div>
-                            <div className="text-3xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
-                            <div className="text-sm text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">{stat.label}</div>
                         </div>
-                    ))}
-                </motion.div>
+                    </motion.div>
+                </div>
             </section>
 
-            {/* Who We Are Section */}
-            <section className="py-24 container mx-auto px-4">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Detailed Company Overview Section */}
+            <section className="py-16 md:py-24 container mx-auto px-4">
+                <div className="max-w-5xl mx-auto">
                     <motion.div
                         initial="initial"
                         whileInView="animate"
                         viewport={{ once: true }}
                         variants={staggerContainer}
-                        className="space-y-8"
+                        className="space-y-12"
                     >
-                        <motion.div variants={fadeInUp}>
-                            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                                Bridging the Gap in <span className="text-brand-teal">Global Electronics</span>
+                        <motion.div variants={fadeInUp} className="text-center space-y-4">
+                            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white">
+                                Delivering End-to-End <span className="text-[#2DAA9E]">Manufacturing & Sourcing Excellence</span>
                             </h2>
-                            <div className="w-20 h-1.5 bg-gradient-to-r from-brand-teal to-brand-gold rounded-full"></div>
+                            <div className="w-24 h-1.5 bg-gradient-to-r from-[#2DAA9E] to-brand-gold rounded-full mx-auto" />
                         </motion.div>
 
-                        <motion.div variants={fadeInUp} className="prose prose-lg dark:prose-invert text-gray-600 dark:text-gray-300">
-                            <p>
-                                Serente Electronics HK Ltd is a premier Hong Kong-based distributor established in 2023. We specialize in the global supply of electronic components, catering to OEM and ODM projects with precision and speed.
-                            </p>
-                            <p>
-                                With active operations in markets ranging from India to key international regions, we don't just supply parts; we provide comprehensive supply chain solutions. Our expertise extends to reverse engineering, legacy system support, and customized sourcing, making us the partner of choice for manufacturers seeking reliability in a volatile market.
-                            </p>
-                        </motion.div>
-
-                        <motion.div variants={fadeInUp} className="flex gap-4">
-                            <Button className="bg-brand-gold hover:bg-brand-gold-dark text-white px-8 py-6 rounded-xl text-lg group">
-                                Contact Us <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </Button>
-                        </motion.div>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="relative"
-                    >
-                        <div className="absolute inset-0 bg-brand-teal rounded-3xl rotate-3 opacity-10"></div>
-                        <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-700 aspect-[4/3] group">
-                            <Image
-                                src="/about2.jpeg"
-                                alt="Serente Global Hub"
-                                fill
-                                className="object-cover group-hover:scale-105 transition-transform duration-700"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
-                                <div className="text-white">
-                                    <p className="font-bold text-lg">Global Distribution Hub</p>
-                                    <p className="text-sm text-white/80">Hong Kong</p>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Mission & Vision */}
-            <section className="py-24 bg-gray-50 dark:bg-gray-800/50">
-                <div className="container mx-auto px-4">
-                    <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Driven by Purpose</h2>
-                        <p className="text-gray-600 dark:text-gray-300 text-lg">
-                            Our roadmap for the future is built on a foundation of excellence and global accessibility.
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <motion.div
-                            whileHover={{ y: -5 }}
-                            className="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 relative overflow-hidden group"
-                        >
-                            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-                                <Target className="w-32 h-32 text-brand-teal" />
-                            </div>
-                            <div className="w-14 h-14 bg-brand-teal/10 rounded-2xl flex items-center justify-center text-brand-teal mb-6">
-                                <Target className="w-8 h-8" />
-                            </div>
-                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Mission</h3>
-                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
-                                To deliver reliable, innovative, and cost-effective electronic components to OEM and ODM customers worldwide. we focus on pin-to-pin replacements and project-based support to ensure your production lines never stop.
-                            </p>
-                        </motion.div>
-
-                        <motion.div
-                            whileHover={{ y: -5 }}
-                            className="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 relative overflow-hidden group"
-                        >
-                            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-                                <Globe className="w-32 h-32 text-brand-gold" />
-                            </div>
-                            <div className="w-14 h-14 bg-brand-gold/10 rounded-2xl flex items-center justify-center text-brand-gold mb-6">
-                                <Globe className="w-8 h-8" />
-                            </div>
-                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Vision</h3>
-                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
-                                To dominate the APAC and European markets within the next five years. We are expanding our footprint to India, China, Japan, Germany, and beyond, becoming the go-to partner for global electronics manufacturing.
-                            </p>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Why Choose Us */}
-            <section className="py-24 container mx-auto px-4">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
-                    <div className="order-2 lg:order-1 relative">
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid md:grid-cols-2 gap-8">
                             <motion.div
-                                whileHover={{ scale: 1.02 }}
-                                className="space-y-4"
+                                variants={fadeInUp}
+                                className="bg-gray-50 dark:bg-gray-800/60 p-8 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm space-y-4 hover:shadow-md transition-shadow"
                             >
-                                <div className="h-64 relative rounded-2xl overflow-hidden shadow-lg">
-                                    <Image src="/about3.jpeg" alt="Partnership with Tech Company" fill className="object-cover" />
+                                <div className="w-12 h-12 rounded-xl bg-[#2DAA9E]/10 flex items-center justify-center text-[#2DAA9E]">
+                                    <Building2 className="w-6 h-6" />
                                 </div>
-                                <div className="h-48 relative rounded-2xl overflow-hidden shadow-lg bg-gray-900 flex items-center justify-center p-6 text-center">
-                                    <div>
-                                        <h4 className="text-white font-bold text-xl mb-2">100% Genuine</h4>
-                                        <p className="text-gray-400 text-sm">Valid Manufacturer Warranties</p>
-                                    </div>
-                                </div>
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Global Sourcing & Comprehensive Support</h3>
+                                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                    With a strong global sourcing network and strategic partnerships with leading component manufacturers, Serente provides comprehensive support from product concept, component engineering, sourcing, PCB assembly, box-build integration, testing, and final product delivery. Our expertise enables customers to accelerate product development while optimizing cost, quality, and supply chain reliability.
+                                </p>
                             </motion.div>
+
                             <motion.div
-                                whileHover={{ scale: 1.02 }}
-                                className="space-y-4 pt-12"
+                                variants={fadeInUp}
+                                className="bg-gray-50 dark:bg-gray-800/60 p-8 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm space-y-4 hover:shadow-md transition-shadow"
                             >
-                                <div className="h-48 relative rounded-2xl overflow-hidden shadow-lg bg-brand-teal flex items-center justify-center p-6 text-center">
-                                    <div>
-                                        <h4 className="text-white font-bold text-xl mb-2">Fast Logistics</h4>
-                                        <p className="text-teal-100 text-sm">Global Shipping Network</p>
-                                    </div>
+                                <div className="w-12 h-12 rounded-xl bg-brand-gold/10 flex items-center justify-center text-brand-gold">
+                                    <Cpu className="w-6 h-6" />
                                 </div>
-                                <div className="h-64 relative rounded-2xl overflow-hidden shadow-lg">
-                                    <Image src="/about7.jpeg" alt="Partnership with Greenconn" fill className="object-cover" />
-                                </div>
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white">High-Reliability Specialization</h3>
+                                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                    We specialize in high-reliability electronic products for Industrial Automation, Medical Electronics, Automotive, Railway, Energy, EV Infrastructure, Consumer Electronics, IoT, Telecommunications, and Smart Devices. Our engineering team works closely with customers to provide design support, component selection, lifecycle management, value engineering, and alternate sourcing solutions that ensure long-term product sustainability.
+                                </p>
                             </motion.div>
                         </div>
-                    </div>
 
-                    <div className="order-1 lg:order-2 space-y-8">
-                        <div>
-                            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                                The Serente Difference
-                            </h2>
-                            <p className="text-xl text-gray-500 dark:text-gray-400">
-                                Why leading manufacturers trust us with their supply chain.
-                            </p>
-                        </div>
-
-                        <div className="space-y-6">
-                            {[
-                                {
-                                    title: "Pin-to-Pin Compatibility",
-                                    desc: "Drop-in replacements for major brands without redesigning your PCB.",
-                                    icon: Cog
-                                },
-                                {
-                                    title: "Reverse Engineering",
-                                    desc: "Expert technical team capable of finding alternatives for obsolete parts.",
-                                    icon: Zap
-                                },
-                                {
-                                    title: "Legacy System Support",
-                                    desc: "We ensure longevity for your established product lines.",
-                                    icon: Award
-                                }
-                            ].map((feature, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.2 }}
-                                    className="flex gap-4 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
-                                >
-                                    <div className="w-12 h-12 bg-white dark:bg-gray-800 shadow-md rounded-xl flex items-center justify-center text-brand-gold flex-shrink-0">
-                                        <feature.icon className="w-6 h-6" />
+                        <motion.div
+                            variants={fadeInUp}
+                            className="relative rounded-3xl overflow-hidden shadow-xl"
+                        >
+                            <div className="relative h-72 sm:h-80 md:h-96">
+                                <Image
+                                    src="/about-factory.jpg"
+                                    alt="Serente Electronics PCB Assembly and Manufacturing Facility"
+                                    fill
+                                    className="object-cover"
+                                    loading="lazy"
+                                />
+                                {/* Gradient overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/30 to-transparent" />
+                                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 space-y-3">
+                                    <h3 className="text-xl sm:text-2xl font-bold text-white">Quality Systems & Advanced Production</h3>
+                                    <p className="text-gray-200 leading-relaxed text-sm sm:text-base max-w-2xl">
+                                        Our manufacturing ecosystem is backed by globally recognized quality systems, advanced production capabilities, and stringent quality assurance processes. Serente delivers consistent quality, shorter lead times, and dependable manufacturing services.
+                                    </p>
+                                    <div className="flex flex-wrap gap-2 pt-1">
+                                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#2DAA9E]/20 text-[#2DAA9E] border border-[#2DAA9E]/30">
+                                            <ShieldCheck className="w-3 h-3" /> ISO 9001:2015
+                                        </span>
+                                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#F39800]/20 text-[#F39800] border border-[#F39800]/30">
+                                            <Factory className="w-3 h-3" /> SMT & Through-Hole
+                                        </span>
+                                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#448ACA]/20 text-[#448ACA] border border-[#448ACA]/30">
+                                            <Cpu className="w-3 h-3" /> PCB Assembly
+                                        </span>
                                     </div>
-                                    <div>
-                                        <h4 className="text-lg font-bold text-gray-900 dark:text-white">{feature.title}</h4>
-                                        <p className="text-gray-500 dark:text-gray-400 leading-relaxed">{feature.desc}</p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
                 </div>
             </section>
 
-            {/* Partnership Gallery Section */}
-            <section className="py-24 bg-gray-50 dark:bg-gray-800/50">
+            {/* State-of-the-art Facilities Gallery */}
+            <section className="py-16 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
                 <div className="container mx-auto px-4">
-                    <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                        <span className="inline-block py-1 px-3 rounded-full bg-brand-teal/10 text-brand-teal border border-brand-teal/20 text-sm font-medium tracking-wide">
-                            GLOBAL NETWORK
+                    <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                        <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-blue-500/10 text-blue-600 border border-blue-500/20 text-xs font-semibold tracking-wider uppercase">
+                            <Zap className="w-3.5 h-3.5" /> Our Facilities
                         </span>
-                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Our Manufacturing Partners</h2>
-                        <p className="text-gray-600 dark:text-gray-300 text-lg">
-                            Building strong relationships with leading manufacturers across Asia to ensure quality and reliability.
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">State-of-the-Art <span className="text-blue-600">Infrastructure</span></h2>
+                        <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg">
+                            Equipped with world-class cleanrooms, advanced robotic assembly lines, and rigorous quality inspection labs to ensure uncompromised precision.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        {[
-                            { src: '/about1.jpeg', alt: 'Partnership at Mega Source', label: 'Mega Source' },
-                            { src: '/about2.jpeg', alt: 'Partnership at YB Corporation', label: 'YB Corporation' },
-                            { src: '/about3.jpeg', alt: 'Partnership with Tech Company', label: 'Tech Partner' },
-                            { src: '/about4.jpeg', alt: 'Partnership at Antenk Electronics', label: 'Antenk Electronics' },
-                            { src: '/about5.jpeg', alt: 'Partnership at Technology Co., Ltd', label: 'Technology Co.' },
-                            { src: '/about6.jpeg', alt: 'Business Meeting with Partners', label: 'Strategic Partners' },
-                            { src: '/about7.jpeg', alt: 'Partnership at Greenconn Shenzhen', label: 'Greenconn' },
-                            { src: '/about8.jpeg', alt: 'Team Building Event', label: 'Team Building' },
-                        ].map((partner, index) => (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 }}
+                            className="group relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] bg-gray-100"
+                        >
+                            <Image
+                                src="/about-cleanroom.png"
+                                alt="High-tech PCB manufacturing cleanroom"
+                                fill
+                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 transition-transform">
+                                <h4 className="text-white font-bold text-lg mb-1 flex items-center gap-2">
+                                    <Factory className="w-4 h-4 text-[#2DAA9E]" /> Precision Assembly
+                                </h4>
+                                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+                                    Automated pick-and-place cleanroom environments.
+                                </p>
+                            </div>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="group relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] bg-gray-100 md:-translate-y-6"
+                        >
+                            <Image
+                                src="/about-testing.jpg"
+                                alt="PCB Assembly Line Workers"
+                                fill
+                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 transition-transform">
+                                <h4 className="text-white font-bold text-lg mb-1 flex items-center gap-2">
+                                    <ShieldCheck className="w-4 h-4 text-[#F39800]" /> 100% Validation
+                                </h4>
+                                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+                                    Rigorous functional testing at every stage.
+                                </p>
+                            </div>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                            className="group relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] bg-gray-100"
+                        >
+                            <Image
+                                src="/about-inspection.png"
+                                alt="Quality Assurance and Inspection Lab"
+                                fill
+                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 transition-transform">
+                                <h4 className="text-white font-bold text-lg mb-1 flex items-center gap-2">
+                                    <Monitor className="w-4 h-4 text-[#448ACA]" /> Quality Labs
+                                </h4>
+                                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+                                    Advanced microscopic inspection & QA.
+                                </p>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Our Core Capabilities */}
+            <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-800/40 border-y border-gray-100 dark:border-gray-800">
+                <div className="container mx-auto px-4">
+                    <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                        <span className="inline-block py-1 px-3 rounded-full bg-[#2DAA9E]/10 text-[#2DAA9E] border border-[#2DAA9E]/20 text-xs font-semibold tracking-wider uppercase">
+                            What We Offer
+                        </span>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Our Core Capabilities</h2>
+                        <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg">
+                            Comprehensive EMS, engineering, display, and supply chain solutions tailored for modern OEMs.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {coreCapabilities.map((item, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                whileHover={{ scale: 1.03 }}
-                                className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg group cursor-pointer"
+                                transition={{ delay: index * 0.05 }}
+                                whileHover={{ y: -4 }}
+                                className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm hover:shadow-lg border border-gray-100 dark:border-gray-700 transition-all flex flex-col justify-between group"
                             >
-                                <Image
-                                    src={partner.src}
-                                    alt={partner.alt}
-                                    fill
-                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                                    <p className="text-white font-semibold text-sm">{partner.label}</p>
+                                <div className="space-y-4">
+                                    <div className="w-12 h-12 bg-[#2DAA9E]/10 dark:bg-[#2DAA9E]/20 rounded-xl flex items-center justify-center text-[#2DAA9E] group-hover:bg-[#2DAA9E] group-hover:text-white transition-colors duration-300">
+                                        <item.icon className="w-6 h-6" />
+                                    </div>
+                                    <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-[#2DAA9E] transition-colors">
+                                        {item.title}
+                                    </h3>
+                                    <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                                        {item.description}
+                                    </p>
                                 </div>
                             </motion.div>
                         ))}
@@ -322,90 +338,77 @@ export default function AboutClient() {
                 </div>
             </section>
 
-            {/* Map Section */}
-            <section className="py-24 bg-gray-50 dark:bg-gray-800/50">
-                <div className="container mx-auto px-4">
+            {/* Why Serente? */}
+            <section className="py-16 md:py-24 container mx-auto px-4">
+                <div className="max-w-5xl mx-auto">
                     <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Our Location / 我們的地址</h2>
-                        <div className="text-gray-600 dark:text-gray-300 text-lg space-y-2">
-                            <p>2/F, Tern Centre Tower 1, 237 Queen's Road Central, Hong Kong</p>
-                            <p className="font-medium">香港皇后大道中237號太興中心第一座2樓</p>
-                        </div>
+                        <span className="inline-block py-1 px-3 rounded-full bg-brand-gold/10 text-brand-gold border border-brand-gold/20 text-xs font-semibold tracking-wider uppercase">
+                            Why Choose Us
+                        </span>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Why Serente?</h2>
+                        <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg">
+                            Strategic advantages that empower our global OEM partners.
+                        </p>
                     </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        {/* Google Maps */}
-                        <div className="space-y-4">
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-                                Google Maps (Global)
-                            </h3>
-                            <div className="rounded-3xl overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700 h-[400px] relative group">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.688657697472!2d114.1517865759521!3d22.28983634237146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34040063260cbed9%3A0x6fda752f9c340d21!2sTern%20Centre%20Tower%201!5e0!3m2!1sen!2shk!4v1703640000000!5m2!1sen!2shk"
-                                    width="100%"
-                                    height="100%"
-                                    style={{ border: 0 }}
-                                    allowFullScreen
-                                    loading="lazy"
-                                    referrerPolicy="no-referrer-when-downgrade"
-                                    title="Serente Electronics Location - Google Maps"
-                                    className="grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
-                                ></iframe>
-                            </div>
-                        </div>
 
-                        {/* Baidu Maps - Link Card */}
-                        <div className="space-y-4">
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-red-500"></span>
-                                Baidu Maps (China)
-                            </h3>
-                            <a
-                                href="https://map.baidu.com/search/香港皇后大道中237號/@12706890.545,2569660.355,17z?querytype=s&wd=香港皇后大道中237號"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block rounded-3xl overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700 h-[400px] relative group bg-gradient-to-br from-red-50 via-white to-red-50 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 hover:shadow-2xl transition-all duration-500"
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {whySerentePoints.map((point, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.08 }}
+                                className="flex items-start gap-4 p-5 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm hover:border-[#2DAA9E]/40 transition-colors"
                             >
-                                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                                    <div className="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                        <svg className="w-10 h-10 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5-2.5 2.5z" />
-                                        </svg>
-                                    </div>
-                                    <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">View on Baidu Maps</h4>
-                                    <p className="text-gray-600 dark:text-gray-300 mb-4">香港皇后大道中237號太興中心第一座2樓</p>
-                                    <span className="inline-flex items-center gap-2 px-6 py-3 bg-red-500 text-white rounded-full font-semibold group-hover:bg-red-600 transition-colors">
-                                        Open in Baidu Maps
-                                        <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                        </svg>
-                                    </span>
+                                <div className="w-8 h-8 rounded-full bg-[#2DAA9E]/10 text-[#2DAA9E] flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <Check className="w-5 h-5 stroke-[3]" />
                                 </div>
-                            </a>
-                        </div>
+                                <p className="text-gray-800 dark:text-gray-200 font-semibold text-base md:text-lg leading-snug">
+                                    {point}
+                                </p>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="py-24 bg-brand-teal-dark relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-teal/30 rounded-full blur-[100px]"></div>
+            {/* Closing Statement Highlight Banner */}
+            <section className="py-16 bg-gradient-to-br from-[#2DAA9E]/10 via-white to-brand-gold/10 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-y border-gray-200/60 dark:border-gray-700">
+                <div className="container mx-auto px-4 max-w-4xl text-center">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.96 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="space-y-6"
+                    >
+                        <div className="w-14 h-14 mx-auto bg-[#2DAA9E] text-white rounded-2xl flex items-center justify-center shadow-lg">
+                            <Award className="w-8 h-8" />
+                        </div>
+                        <p className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white leading-relaxed italic">
+                            &ldquo;At Serente Electronics Pvt. Ltd., we strive to be more than a manufacturing partner—we aim to become a trusted technology and supply chain partner, enabling customers worldwide to transform innovative ideas into reliable, high-quality electronic products.&rdquo;
+                        </p>
+                    </motion.div>
+                </div>
+            </section>
 
-                <div className="container mx-auto px-4 relative z-10 text-center space-y-8">
-                    <h2 className="text-4xl md:text-5xl font-bold text-white">Ready to Secure Your Supply Chain?</h2>
-                    <p className="text-xl text-teal-100 max-w-2xl mx-auto">
-                        Partner with Serente Electronics today and experience the difference of a truly global distributor.
+            {/* Call To Action */}
+            <section className="py-20 bg-[#2DAA9E] text-white relative overflow-hidden">
+                <div className="container mx-auto px-4 relative z-10 text-center space-y-8 max-w-3xl">
+                    <h2 className="text-3xl md:text-5xl font-bold text-white">Partner with Serente Electronics</h2>
+                    <p className="text-lg md:text-xl text-teal-100 max-w-2xl mx-auto leading-relaxed">
+                        Ready to accelerate your product development and optimize your supply chain? Contact our engineering team today.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link href="/contact">
-                            <Button className="bg-brand-gold hover:bg-brand-gold-dark text-white text-lg px-8 py-6 rounded-xl w-full sm:w-auto">
-                                Request a Quote
+                            <Button className="bg-brand-gold hover:bg-brand-gold-dark text-gray-900 text-lg px-8 py-6 rounded-xl w-full sm:w-auto shadow-lg hover:scale-105 transition-transform">
+                                Request a Quote <ArrowRight className="ml-2 w-5 h-5" />
                             </Button>
                         </Link>
-                        <Link href="/manufacturers">
-                            <Button className="bg-white text-brand-teal hover:bg-gray-100 text-lg px-8 py-6 rounded-xl w-full sm:w-auto">
-                                View Line Card
+                        <Link href="/products">
+                            <Button className="bg-white text-brand-teal hover:bg-gray-100 text-lg px-8 py-6 rounded-xl w-full sm:w-auto hover:scale-105 transition-transform">
+                                Explore Products
                             </Button>
                         </Link>
                     </div>

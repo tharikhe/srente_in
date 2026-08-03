@@ -96,7 +96,7 @@ export default function ProductDetailPopup({ product, isOpen, onClose, onAddToIn
                         Copy Part #
                     </Button>
                     <Button
-                        className="w-full gap-2 bg-brand-gold hover:bg-brand-gold-dark text-white shadow-md shadow-brand-gold/20"
+                        className="w-full gap-2 bg-brand-gold hover:bg-brand-gold-dark text-gray-900 shadow-md shadow-brand-gold/20"
                         onClick={() => {
                             onAddToInquiry(product);
                             onClose();

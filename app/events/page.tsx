@@ -2,9 +2,9 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Serente Electronics HK - Semiconductor Companies in Hong Kong",
+    title: "Serente Electronics - Industry Events & Conferences",
     description: "Trusted distributor partners Such as Firstohm, Isocom and many more for BOM sourcing and electronics supply. Shop our extensive inventory here.",
-    keywords: ['semiconductor companies in hong kong', 'electronics supply chain partner', 'semiconductor distribution companies in hong kong', 'BOM sourcing and electronics supply', 'semiconductor distributors hong kong', 'top semiconductor distributors hong kong', 'electronic components supplier', 'electronics parts suppliers', 'OEM & ODM', 'Firstohm', 'Isocom', 'semiconductor for EV', 'automotive semiconductor components', 'hong kong semiconductor distributor', 'semiconductor distributor', 'semiconductor distributors', 'semiconductor distribution companies hong kong', 'industrial semiconductor supplier', 'electronics procurement services', 'global electronics sourcing services', 'industrial electronics supplier', 'semiconductor devices', 'industrial semiconductor devices', 'semiconductor for solar inverter', 'semiconductor for telecom equipment', 'semiconductor for consumer electronics', 'semiconductor for IoT devices', 'SiC MOSFET', 'GaN semiconductor devices', 'wide bandgap semiconductors', 'automotive grade semiconductor', 'AI chip components', 'power electronics semiconductor'],
+    keywords: ['electronics supply chain partner', 'BOM sourcing and electronics supply', 'electronic components supplier', 'electronics parts suppliers', 'OEM & ODM', 'Firstohm', 'Isocom', 'semiconductor for EV', 'automotive semiconductor components', 'semiconductor distributor', 'semiconductor distributors', 'industrial semiconductor supplier', 'electronics procurement services', 'global electronics sourcing services', 'industrial electronics supplier', 'semiconductor devices', 'industrial semiconductor devices', 'semiconductor for solar inverter', 'semiconductor for telecom equipment', 'semiconductor for consumer electronics', 'semiconductor for IoT devices', 'SiC MOSFET', 'GaN semiconductor devices', 'wide bandgap semiconductors', 'automotive grade semiconductor', 'AI chip components', 'power electronics semiconductor'],
     alternates: {
         canonical: '/events',
     },
@@ -66,22 +66,18 @@ export default function EventsPage() {
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
             {/* Hero Section */}
-            <div className="relative bg-[#0F172A] py-24 sm:py-32 overflow-hidden">
-                {/* Abstract Background Shapes */}
-                <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 w-96 h-96 bg-brand-teal/20 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 left-0 translate-y-12 -translate-x-12 w-96 h-96 bg-brand-gold/20 rounded-full blur-3xl" />
-
+            <div className="relative bg-[#EAEAEA] border-b border-gray-200 py-20 sm:py-28 overflow-hidden">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-3xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-teal/10 border border-brand-teal/20 text-brand-teal text-sm font-semibold mb-6">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2DAA9E]/10 border border-[#2DAA9E]/20 text-[#2DAA9E] text-xs font-bold uppercase tracking-wider mb-6">
                             <Calendar className="w-4 h-4" />
                             <span>Upcoming Industry Events</span>
                         </div>
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-6 leading-tight">
-                            Connect with <span className="text-brand-teal">Serente</span> <br className="hidden sm:block" />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-200">Around the World</span>
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#1A1A1A] tracking-tight mb-6 leading-tight">
+                            Connect with <span className="text-[#2DAA9E]">Serente</span> <br className="hidden sm:block" />
+                            <span className="text-[#2DAA9E]">Around the World</span>
                         </h1>
-                        <p className="text-lg text-gray-400 mb-8 max-w-2xl leading-relaxed">
+                        <p className="text-base sm:text-lg text-gray-700 mb-8 max-w-2xl leading-relaxed font-medium">
                             Stay updated with the latest expos, summits, and workshops. Join us to explore new technologies, discuss supply chain strategies, and build lasting partnerships.
                         </p>
                     </div>
@@ -176,7 +172,7 @@ export default function EventsPage() {
                         <p className="text-brand-surface/90 text-lg">
                             Looking for a sponsor or a keynote speaker for your next electronics conference? we'd love to collaborate.
                         </p>
-                        <Link href="/contact" className="inline-block bg-white text-brand-teal font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl hover:bg-brand-gold hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                        <Link href="/contact" className="inline-block bg-white text-brand-teal font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl hover:bg-brand-gold hover:text-gray-900 transition-all duration-300 transform hover:-translate-y-1">
                             Get in Touch
                         </Link>
                     </div>

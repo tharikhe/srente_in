@@ -61,7 +61,7 @@ export default function Footer() {
                                     required
                                     className="flex-grow md:w-80 px-5 py-3.5 rounded-l-xl bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:bg-white/20 transition-colors"
                                 />
-                                <button type="submit" className="px-6 py-3.5 bg-brand-gold hover:bg-brand-gold-dark text-white font-semibold rounded-r-xl transition-all duration-200 flex items-center gap-2 hover:shadow-glow-gold disabled:opacity-50 disabled:cursor-not-allowed">
+                                <button type="submit" className="px-6 py-3.5 bg-brand-gold hover:bg-brand-gold-dark text-gray-900 font-semibold rounded-r-xl transition-all duration-200 flex items-center gap-2 hover:shadow-glow-gold disabled:opacity-50 disabled:cursor-not-allowed">
                                     <Send className="w-5 h-5" />
                                     <span className="hidden sm:inline">Subscribe</span>
                                 </button>
@@ -78,7 +78,7 @@ export default function Footer() {
                     <div>
                         <h3 className="text-xl font-bold text-brand-gold mb-6">Serente Electronics</h3>
                         <p className="text-white/70 text-sm mb-6 leading-relaxed">
-                            Your trusted semiconductor distributors in Hong Kong. Authorized electronic components distributor specializing in integrated circuits, MOSFETs, IGBTs, diodes, passive components, LCD/OLED displays, and connector & cable harnessing solutions. OEM & ODM semiconductor distribution with full traceability.
+                            Your trusted semiconductor distributors and EMS solutions provider. Authorized electronic components distributor specializing in integrated circuits, MOSFETs, IGBTs, diodes, passive components, LCD/OLED displays, and connector & cable harnessing solutions. OEM & ODM electronic solutions with full traceability.
                         </p>
                         <div className="flex space-x-3">
                             {[
@@ -155,7 +155,7 @@ export default function Footer() {
                                 </div>
                                 <div>
                                     <p className="text-white/50 text-xs mb-1">Contact</p>
-                                    <p className="text-white font-medium text-sm">Phone: +91 80881 31316</p>
+                                    <p className="text-white font-medium text-sm">Phone: +91 86607 44258</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-4">
@@ -164,7 +164,7 @@ export default function Footer() {
                                 </div>
                                 <div>
                                     <p className="text-white/50 text-xs mb-1">Email</p>
-                                    <p className="text-white font-medium">sales@serentehk.com</p>
+                                    <p className="text-white font-medium">hello@serenteelectronics.com</p>
                                 </div>
                             </li>
                             <li className="flex items-start gap-4">
@@ -173,7 +173,7 @@ export default function Footer() {
                                 </div>
                                 <div>
                                     <p className="text-white/50 text-xs mb-1">Address</p>
-                                    <p className="text-white font-medium text-sm">2/F Tern Ctr Tower 1, 237 Queen's Rd Central, Hong Kong</p>
+                                    <p className="text-white font-medium text-sm">Serente Electronics Pvt. Ltd.</p>
                                 </div>
                             </li>
                         </ul>
@@ -188,7 +188,7 @@ export default function Footer() {
 
                         {/* Copyright */}
                         <p className="text-white/50 text-sm text-center">
-                            © {currentYear} Serente Electronics HK Limited. All Rights Reserved. | Top Semiconductor Distributors & Electronic Components Supplier in Hong Kong
+                            © {currentYear} Serente Electronics. All Rights Reserved. | Electronics Manufacturing Services & Electronic Components Supplier
                         </p>
 
                         {/* Legal Links */}

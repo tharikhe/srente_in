@@ -32,7 +32,7 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
                         </Link>
 
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="bg-brand-gold text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            <span className="bg-brand-gold text-gray-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                                 {post.category}
                             </span>
                         </div>
@@ -71,7 +71,7 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
                     <div className="mt-12 bg-gradient-to-br from-brand-teal/5 to-brand-gold/5 rounded-2xl p-8 border border-brand-teal/10">
                         <h3 className="text-xl font-bold text-brand-teal mb-3">Looking for Quality Components?</h3>
                         <p className="text-gray-600 mb-5 leading-relaxed">
-                            Serente Electronics HK LTD is your trusted partner for semiconductor components, connectors, resistors, displays, and more. Get in touch with us for competitive pricing and fast delivery.
+                            Serente Electronics Pvt. Ltd. is your trusted partner for semiconductor components, connectors, resistors, displays, and more. Get in touch with us for competitive pricing and fast delivery.
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <Link

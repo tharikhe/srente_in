@@ -20,9 +20,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
 
     return {
-        title: `${manufacturer.name} | Authorized Distributor - Serente Electronics HK | Semiconductor Distributors Hong Kong`,
-        description: `${manufacturer.name} authorized distributor — Serente Electronics HK. Buy ${manufacturer.name} electronic components from top semiconductor distributors in Hong Kong. OEM & ODM electronic component distributor with competitive pricing and full traceability.`,
-        keywords: [manufacturer.name, 'authorized semiconductor distributor', 'semiconductor distributors hong kong', 'top semiconductor distributors hong kong', 'electronic component distributor Hong Kong', 'electronic components supplier', 'electronics parts suppliers', 'OEM & ODM', 'Resistor and Condenser', 'semiconductor distributor', 'semiconductor distributors', 'hong kong semiconductor distributor', 'semiconductor companies in hong kong', 'OEM semiconductor distributor', 'industrial semiconductor supplier', 'semiconductor distribution company hong kong', 'semiconductor distributors in hong kong', 'best electronic components distributors in hong kong', 'electronic components distribution', 'semiconductor products distribution', 'semiconductor components', 'semiconductor devices', 'integrated circuits', 'semiconductor components supplier', 'semiconductor components manufacturers', 'semiconductor components exporters'],
+        title: `${manufacturer.name} | Authorized Distributor - Serente Electronics`,
+        description: `${manufacturer.name} authorized distributor — Serente Electronics. Buy ${manufacturer.name} electronic components from top semiconductor & electronic components distributor. OEM & ODM electronic component distributor with competitive pricing and full traceability.`,
+        keywords: [manufacturer.name, 'authorized semiconductor distributor', 'electronic component distributor', 'electronic components supplier', 'electronics parts suppliers', 'OEM & ODM', 'Resistor and Condenser', 'semiconductor distributor', 'semiconductor distributors', 'OEM semiconductor distributor', 'industrial semiconductor supplier', 'electronic components distribution', 'semiconductor products distribution', 'semiconductor components', 'semiconductor devices', 'integrated circuits', 'semiconductor components supplier', 'semiconductor components manufacturers', 'semiconductor components exporters'],
         alternates: {
             canonical: `/manufacturers/${manufacturer.slug}`,
         },

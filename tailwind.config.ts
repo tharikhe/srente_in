@@ -11,18 +11,18 @@ const config: Config = {
             colors: {
                 brand: {
                     // Primary Colors
-                    teal: '#0D5C5C',
-                    'teal-light': '#0E6B6B',
-                    'teal-dark': '#084545',
+                    teal: '#2DAA9E',
+                    'teal-light': '#66D2CE',
+                    'teal-dark': '#258B82',
 
-                    // Accent Gold/Mustard  
-                    gold: '#C4960C',
-                    'gold-light': '#D4A631',
-                    'gold-dark': '#A67C00',
+                    // Accent Warm Beige/Sand
+                    gold: '#E3D2C3',
+                    'gold-light': '#E9E1D9',
+                    'gold-dark': '#CDBAA9',
 
                     // Neutrals
                     white: '#FFFFFF',
-                    surface: '#FAFAFA',
+                    surface: '#EAEAEA',
                     'surface-alt': '#F5F5F5',
 
                     // Text colors
@@ -31,12 +31,14 @@ const config: Config = {
                     'text-light': '#9CA3AF',
 
                     // Borders
-                    border: '#E5E7EB',
-                    'border-dark': '#D1D5DB',
+                    border: '#EAEAEA',
+                    'border-dark': '#E3D2C3',
 
-                    // Legacy support
-                    yellow: '#C4960C',
-                    orange: '#C4960C',
+                    // Theme aliases
+                    yellow: '#E3D2C3',
+                    orange: '#E3D2C3',
+                    blue: '#2DAA9E',
+                    emerald: '#2DAA9E',
                 },
             },
             fontFamily: {
@@ -48,8 +50,8 @@ const config: Config = {
                 'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
                 'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 30px -5px rgba(0, 0, 0, 0.04)',
                 'strong': '0 10px 40px -10px rgba(0, 0, 0, 0.15)',
-                'glow-gold': '0 0 20px rgba(196, 150, 12, 0.3)',
-                'glow-teal': '0 0 20px rgba(13, 92, 92, 0.3)',
+                'glow-gold': '0 0 20px rgba(227, 210, 195, 0.5)',
+                'glow-teal': '0 0 20px rgba(45, 170, 158, 0.35)',
             },
             animation: {
                 'fade-in': 'fadeIn 0.5s ease-out',

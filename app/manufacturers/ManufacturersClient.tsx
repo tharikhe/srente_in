@@ -8,6 +8,47 @@ import { motion } from 'framer-motion';
 
 import { manufacturers as authorisedLines } from '@/data/manufacturers';
 
+const Pin = ({ className }: { className?: string }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className={className}
+    >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M16 3a1 1 0 0 1 .117 1.993l-.117 .007v4.764l1.894 3.789a1 1 0 0 1 .1 .331l.006 .116v2a1 1 0 0 1 -.883 .993l-.117 .007h-4v4a1 1 0 0 1 -1.993 .117l-.007 -.117v-4h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-2a1 1 0 0 1 .06 -.34l.046 -.107l1.894 -3.791v-4.762a1 1 0 0 1 -.117 -1.993l.117 -.007h8z" />
+    </svg>
+);
+
+const themeStyles = [
+    {
+        bg: "bg-[#2DAA9E]/10",
+        text: "text-[#2DAA9E]",
+        border: "border-[#2DAA9E]/25",
+        rotate: "hover:rotate-2",
+    },
+    {
+        bg: "bg-[#F39800]/10",
+        text: "text-[#F39800]",
+        border: "border-[#F39800]/25",
+        rotate: "hover:-rotate-2",
+    },
+    {
+        bg: "bg-[#1A1A1A]/5",
+        text: "text-[#1A1A1A]",
+        border: "border-[#1A1A1A]/15",
+        rotate: "hover:rotate-1",
+    },
+    {
+        bg: "bg-[#2DAA9E]/10",
+        text: "text-[#2DAA9E]",
+        border: "border-[#2DAA9E]/25",
+        rotate: "hover:-rotate-1",
+    },
+];
+
 export default function ManufacturersClient() {
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -20,7 +61,7 @@ export default function ManufacturersClient() {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1
+                staggerChildren: 0.08
             }
         }
     };
@@ -38,28 +79,22 @@ export default function ManufacturersClient() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50/50 pb-24">
+        <div className="min-h-screen bg-[#F8FAFC] pb-24">
             {/* Premium Hero Section */}
-            <section className="relative py-24 md:py-32 bg-[#0F172A] overflow-hidden">
-                {/* Abstract Background Elements */}
-                <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-                    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-teal/20 rounded-full blur-[100px] opacity-40 animate-pulse" />
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-gold/20 rounded-full blur-[100px] opacity-40 animate-pulse" style={{ animationDelay: '2s' }} />
-                </div>
-
+            <section className="relative py-20 md:py-28 bg-[#EAEAEA] border-b border-gray-200 overflow-hidden">
                 <div className="container mx-auto px-4 relative z-10 text-center">
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <span className="inline-block py-1 px-3 rounded-full bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-sm font-medium mb-6">
+                        <span className="inline-block py-1 px-3.5 rounded-full bg-[#2DAA9E]/10 border border-[#2DAA9E]/20 text-[#2DAA9E] text-xs font-bold uppercase tracking-wider mb-4">
                             Global Supply Chain Partners
                         </span>
-                        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                            Authorised <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-200">Distributors</span>
+                        <h1 className="text-4xl md:text-6xl font-extrabold text-[#1A1A1A] mb-6 leading-tight">
+                            Authorised <span className="text-[#2DAA9E]">Line Card</span>
                         </h1>
-                        <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                        <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
                             We partner directly with world-class manufacturers to ensure 100% authenticity, full traceability, and reliable supply for your production needs.
                         </p>
                     </motion.div>
@@ -72,14 +107,14 @@ export default function ManufacturersClient() {
                         className="max-w-xl mx-auto relative group"
                     >
                         <div className="absolute inset-0 bg-gradient-to-r from-brand-teal to-brand-gold rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300" />
-                        <div className="relative bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-2 flex items-center shadow-2xl">
+                        <div className="relative bg-white/90 backdrop-blur-xl border border-gray-200 rounded-2xl p-2 flex items-center shadow-xl">
                             <Search className="text-gray-400 w-6 h-6 ml-4" />
                             <input
                                 type="text"
-                                placeholder="Search our manufacturers..."
+                                placeholder="Search line card manufacturers..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full bg-transparent border-none text-white placeholder-gray-400 px-4 py-3 focus:ring-0 focus:outline-none text-lg"
+                                className="w-full bg-transparent border-none text-[#1A1A1A] placeholder-gray-400 px-4 py-3 focus:ring-0 focus:outline-none text-base sm:text-lg font-medium"
                             />
                         </div>
                     </motion.div>
@@ -92,7 +127,7 @@ export default function ManufacturersClient() {
                     <div className="p-2 bg-brand-gold/10 rounded-lg">
                         <ShieldCheck className="w-6 h-6 text-brand-gold" />
                     </div>
-                    <h2 className="text-2xl font-bold text-gray-900">Verified Partners</h2>
+                    <h2 className="text-2xl font-bold text-gray-900">Verified Line Card Partners</h2>
                     <span className="bg-brand-teal/10 text-brand-teal text-xs font-bold px-2.5 py-1 rounded-full border border-brand-teal/20">
                         {filteredAuthorised.length} Brands
                     </span>
@@ -103,50 +138,68 @@ export default function ManufacturersClient() {
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                     >
-                        {filteredAuthorised.map((brand) => (
-                            <motion.div key={brand.name} variants={itemVariants}>
-                                <Link
-                                    href={`/manufacturers/${brand.slug}`}
-                                    className="group block h-full bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-gold/30 transition-all duration-300 relative"
-                                >
-                                    <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <ArrowRight className="w-5 h-5 text-brand-gold -translate-x-4 group-hover:translate-x-0 transition-transform duration-300" />
-                                    </div>
+                        {filteredAuthorised.map((brand, index) => {
+                            const theme = themeStyles[index % themeStyles.length];
+                            const cardNumber = index + 1 < 10 ? `0${index + 1}` : `${index + 1}`;
 
-                                    <div className="p-8">
-                                        <div className="h-24 w-full relative mb-6 transition-all duration-300">
-                                            <Image
-                                                src={brand.logo}
-                                                alt={brand.name}
-                                                fill
-                                                className="object-contain object-left md:object-center"
-                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                            />
-                                        </div>
+                            return (
+                                <motion.div key={brand.name} variants={itemVariants}>
+                                    <Link
+                                        href={`/manufacturers/${brand.slug}`}
+                                        className={`block h-full relative group transition-all duration-300 hover:z-30 hover:scale-105 ${theme.rotate}`}
+                                    >
+                                        <div className="bg-white p-3 rounded-[25px] shadow-[0px_10px_20px_0px_#D3D3D3] border border-gray-100 h-full flex flex-col">
+                                            <Pin className={`w-8 h-8 ${theme.text} z-20 mb-3 mx-auto transition-transform duration-300 group-hover:scale-110`} />
+                                            <div
+                                                className={`${theme.bg} border ${theme.border} rounded-[18px] p-5 h-full flex flex-col justify-between relative overflow-hidden`}
+                                            >
+                                                <div>
+                                                    <div className="flex items-center justify-between mb-4">
+                                                        <span
+                                                            className={`${theme.text} text-3xl font-extrabold font-mono tracking-wider`}
+                                                        >
+                                                            {cardNumber}
+                                                        </span>
+                                                        <span className="text-[11px] font-bold uppercase px-2.5 py-1 bg-white/80 backdrop-blur-sm rounded-full text-gray-700 border border-gray-200/60 shadow-xs">
+                                                            {brand.country}
+                                                        </span>
+                                                    </div>
 
-                                        <div className="space-y-3">
-                                            <h3 className="text-xl font-bold text-gray-900 group-hover:text-brand-teal transition-colors">
-                                                {brand.name}
-                                            </h3>
-                                            <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
-                                                {brand.description}
-                                            </p>
+                                                    {/* Logo */}
+                                                    <div className="w-full h-16 relative bg-white/90 rounded-xl p-2 mb-4 shadow-sm border border-gray-100 flex items-center justify-center">
+                                                        <Image
+                                                            src={brand.logo}
+                                                            alt={brand.name}
+                                                            fill
+                                                            className="object-contain p-1"
+                                                            sizes="200px"
+                                                        />
+                                                    </div>
 
-                                            <div className="pt-4 flex items-center gap-2">
-                                                <div className="h-px flex-1 bg-gray-100 group-hover:bg-brand-gold/20 transition-colors" />
-                                                <span className="text-xs font-semibold text-brand-teal bg-brand-teal/5 px-2 py-1 rounded border border-brand-teal/10 group-hover:bg-brand-gold/10 group-hover:text-brand-gold group-hover:border-brand-gold/20 transition-all">
-                                                    {brand.country}
-                                                </span>
+                                                    <h3 className="text-xl font-bold text-[#1A1A1A] mb-2 group-hover:text-[#2DAA9E] transition-colors">
+                                                        {brand.name}
+                                                    </h3>
+                                                    <p className="text-gray-600 text-xs leading-relaxed line-clamp-2">
+                                                        {brand.description}
+                                                    </p>
+                                                </div>
+
+                                                <div className="mt-5 pt-3 border-t border-black/5 flex items-center justify-between">
+                                                    <span className={`text-xs font-bold ${theme.text} group-hover:underline`}>
+                                                        View Line Card
+                                                    </span>
+                                                    <div className={`p-1.5 rounded-full ${theme.bg} ${theme.text}`}>
+                                                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div className="h-1 w-0 bg-brand-gold group-hover:w-full transition-all duration-500" />
-                                </Link>
-                            </motion.div>
-                        ))}
+                                    </Link>
+                                </motion.div>
+                            );
+                        })}
                     </motion.div>
                 ) : (
                     <motion.div

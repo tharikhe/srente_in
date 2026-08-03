@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { Star, Award, ChevronRight, Zap, Globe, CheckCircle2, ArrowRight, BarChart3 } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Award, Zap, Globe, CheckCircle2, ArrowRight, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import { ContainerScroll } from './ui/container-scroll-animation';
+import { motion } from 'framer-motion';
+import { SplineScene } from './ui/SplineScene';
 
 // Types for component props
 interface HeroProps {
@@ -16,390 +17,349 @@ interface HeroProps {
         line2: string;
     };
     subtitle: string;
-    buttons?: {
-        primary?: {
-            text: string;
-            onClick?: () => void;
-        };
-        secondary?: {
-            text: string;
-            onClick?: () => void;
-        };
-    };
     className?: string;
 }
 
-// Video sources for the hero section
-const heroVideos = [
-    '/hero-sec/A_professional_woman_202512091328.webm',
-    '/hero-sec/Female_engineer_in_202512091328.webm',
+// Stats Data with brand palette
+const stats = [
+    {
+        value: '15+',
+        label: 'Years Experience',
+        icon: Award,
+        badge: 'Est. 2011',
+        color: '#2DAA9E',
+    },
+    {
+        value: '50K+',
+        label: 'Products Sourced',
+        icon: Zap,
+        badge: 'Ready Stock',
+        color: '#E3D2C3',
+    },
+    {
+        value: '100+',
+        label: 'Countries Served',
+        icon: Globe,
+        badge: 'Global',
+        color: '#66D2CE',
+    },
+    {
+        value: '99.9%',
+        label: 'Client Satisfaction',
+        icon: CheckCircle2,
+        badge: 'ISO 9001',
+        color: '#2DAA9E',
+    },
 ];
 
-// Video Background Hook with smooth crossfade transitions
-const useVideoBackground = () => {
-    const video1Ref = useRef<HTMLVideoElement>(null);
-    const video2Ref = useRef<HTMLVideoElement>(null);
-    const [activeVideo, setActiveVideo] = useState<1 | 2>(1);
-    const [isTransitioning, setIsTransitioning] = useState(false);
-    const [videosLoaded, setVideosLoaded] = useState({ video1: false, video2: false });
-
-    const handleVideoEnd = useCallback(() => {
-        setIsTransitioning(true);
-
-        // Start playing the next video slightly before the transition
-        const nextVideo = activeVideo === 1 ? video2Ref.current : video1Ref.current;
-        if (nextVideo) {
-            nextVideo.currentTime = 0;
-            nextVideo.play().catch(console.error);
-        }
-
-        // Smooth crossfade transition
-        setTimeout(() => {
-            setActiveVideo(prev => prev === 1 ? 2 : 1);
-            setIsTransitioning(false);
-        }, 800); // Match with CSS transition duration
-    }, [activeVideo]);
-
-    useEffect(() => {
-        const video1 = video1Ref.current;
-        const video2 = video2Ref.current;
-
-        if (!video1 || !video2) return;
-
-        // Set up video 1 immediately
-        video1.src = heroVideos[0];
-
-        // Lazy load video 2
-        const loadVideo2 = () => {
-            if (!video2.src) {
-                video2.src = heroVideos[1];
-                video2.load(); // Explicitly load
-            }
-        };
-
-        // Handle video loaded events
-        const handleVideo1Loaded = () => {
-            setVideosLoaded(prev => ({ ...prev, video1: true }));
-            // Start loading video 2 shortly after video 1 is ready
-            setTimeout(loadVideo2, 3000);
-        };
-        const handleVideo2Loaded = () => setVideosLoaded(prev => ({ ...prev, video2: true }));
-
-        video1.addEventListener('loadeddata', handleVideo1Loaded);
-        video2.addEventListener('loadeddata', handleVideo2Loaded);
-
-        // Start playing the first video when it's loaded
-        video1.addEventListener('canplay', () => {
-            video1.play().catch(console.error);
-        });
-
-        // Handle video end for transitions
-        video1.addEventListener('ended', handleVideoEnd);
-        video2.addEventListener('ended', handleVideoEnd);
-
-        return () => {
-            video1.removeEventListener('loadeddata', handleVideo1Loaded);
-            video2.removeEventListener('loadeddata', handleVideo2Loaded);
-            video1.removeEventListener('ended', handleVideoEnd);
-            video2.removeEventListener('ended', handleVideoEnd);
-        };
-    }, [handleVideoEnd]);
-
-    return { video1Ref, video2Ref, activeVideo, isTransitioning, videosLoaded };
+// Stagger animation variants
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.12,
+            delayChildren: 0.1,
+        },
+    },
 };
 
-// Stats Data
-const stats = [
-    { value: '15+', label: 'Years Experience', icon: Award },
-    { value: '50K+', label: 'Products', icon: Zap },
-    { value: '100+', label: 'Countries', icon: Globe },
-    { value: '99.9%', label: 'Client Satisfaction', icon: CheckCircle2 },
-];
+const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.6,
+            ease: [0.22, 1, 0.36, 1] as const,
+        },
+    },
+};
+
+const scaleVariants = {
+    hidden: { opacity: 0, scale: 0.85 },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+            duration: 0.8,
+            ease: [0.22, 1, 0.36, 1] as const,
+            delay: 0.3,
+        },
+    },
+};
+
+const statsVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.5,
+            ease: [0.22, 1, 0.36, 1] as const,
+            delay: 0.6 + i * 0.1,
+        },
+    }),
+};
+
+// Floating orb component for ambient background
+const FloatingOrb = ({ className, delay = 0 }: { className: string; delay?: number }) => (
+    <motion.div
+        className={`absolute rounded-full blur-3xl pointer-events-none ${className}`}
+        animate={{
+            y: [0, -20, 0],
+            x: [0, 10, 0],
+            scale: [1, 1.05, 1],
+        }}
+        transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay,
+        }}
+    />
+);
 
 // Premium Hero Component
 const HeroSection: React.FC<HeroProps> = ({
     trustBadge,
     headline,
     subtitle,
-    buttons,
     className = ""
 }) => {
-    const { video1Ref, video2Ref, activeVideo, isTransitioning, videosLoaded } = useVideoBackground();
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
+        // eslint-disable-next-line
         setIsLoaded(true);
     }, []);
 
     return (
-        <div className={`relative w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-black mb-6 sm:mb-10 ${className}`}>
-            {/* Custom Animations */}
+        <div className={`relative w-full overflow-hidden bg-[#1A1A1A] rounded-2xl sm:rounded-3xl mb-6 sm:mb-10 ${className}`}>
+            {/* Custom Styles */}
             <style jsx>{`
-                /* Video Transition Styles */
-                .video-layer {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+                /* Spline loader animation */
+                .loader {
+                    width: 40px;
+                    height: 40px;
+                    border: 3px solid rgba(45, 170, 158, 0.2);
+                    border-top-color: #2DAA9E;
+                    border-radius: 50%;
+                    animation: spin 0.8s linear infinite;
+                }
+                @keyframes spin {
+                    to { transform: rotate(360deg); }
                 }
 
-                .video-active {
-                    opacity: 1;
-                    z-index: 2;
+                /* Subtle grain texture */
+                .grain-overlay {
+                    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+                    background-repeat: repeat;
                 }
 
-                .video-inactive {
-                    opacity: 0;
-                    z-index: 1;
+                /* Grid pattern */
+                .grid-pattern {
+                    background-image: 
+                        linear-gradient(rgba(45, 170, 158, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(45, 170, 158, 0.03) 1px, transparent 1px);
+                    background-size: 60px 60px;
                 }
 
-                /* Cinematic overlay for video enhancement */
-                .cinematic-overlay {
-                    background: 
-                        linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0.5) 100%),
-                        radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.2) 100%);
-                }
-
-                /* Subtle vignette effect */
-                .vignette {
-                    box-shadow: inset 0 0 150px rgba(0,0,0,0.5);
-                }
-
-                /* Custom Skew Button Styles */
-                .btn-skew {
-                    --color: #C4960C;
-                    --color-hover: #1a1a1a;
-                    padding: 1em 2.5em;
-                    background-color: transparent;
-                    border-radius: 8px;
-                    border: 2px solid var(--color);
-                    transition: .5s;
+                /* Glowing border on stat cards */
+                .stat-card {
                     position: relative;
                     overflow: hidden;
-                    cursor: pointer;
-                    z-index: 1;
-                    font-weight: 600;
-                    font-size: 16px;
-                    font-family: inherit;
-                    text-transform: uppercase;
-                    color: var(--color);
-                    letter-spacing: 0.05em;
                 }
-                .btn-skew::after, .btn-skew::before {
+                .stat-card::before {
                     content: '';
-                    display: block;
-                    height: 100%;
-                    width: 100%;
-                    transform: skew(90deg) translate(-50%, -50%);
                     position: absolute;
-                    inset: 50%;
-                    left: 25%;
-                    z-index: -1;
-                    transition: .5s ease-out;
-                    background-color: var(--color);
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 1px;
+                    background: linear-gradient(90deg, transparent, rgba(45, 170, 158, 0.5), transparent);
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
                 }
-                .btn-skew::before {
-                    top: -50%;
-                    left: -25%;
-                    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
-                }
-                .btn-skew:hover::before {
-                    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
-                }
-                .btn-skew:hover::after {
-                    transform: skew(45deg) translate(-50%, -50%);
-                }
-                .btn-skew:hover {
-                    color: var(--color-hover);
-                }
-                .btn-skew:active {
-                    filter: brightness(.9);
-                    transform: scale(.98);
-                }
-
-                /* Secondary Button - Teal variant */
-                .btn-skew-secondary {
-                    --color: #0D9488;
-                    --color-hover: #ffffff;
-                }
-
-                /* Video loading pulse animation */
-                @keyframes subtle-pulse {
-                    0%, 100% { opacity: 0.3; }
-                    50% { opacity: 0.5; }
-                }
-
-                .loading-bg {
-                    animation: subtle-pulse 2s ease-in-out infinite;
+                .stat-card:hover::before {
+                    opacity: 1;
                 }
             `}</style>
 
-            {/* Video Background Container */}
-            <div className="absolute inset-0 overflow-hidden">
-                {/* Loading background */}
-                {(!videosLoaded.video1 || !videosLoaded.video2) && (
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900 loading-bg z-0" />
-                )}
+            {/* ====== Background Layers ====== */}
 
-                {/* Video 1 */}
-                <video
-                    ref={video1Ref}
-                    className={`video-layer ${activeVideo === 1 ? 'video-active' : 'video-inactive'}`}
-                    muted
-                    playsInline
-                    preload="metadata"
-                    title="Professional woman working"
-                    aria-label="A professional woman working in a business environment"
-                />
+            {/* Base gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0D0D0D] via-[#1A1A1A] to-[#111111]" />
 
-                {/* Video 2 */}
-                <video
-                    ref={video2Ref}
-                    className={`video-layer ${activeVideo === 2 ? 'video-active' : 'video-inactive'}`}
-                    muted
-                    playsInline
-                    preload="metadata"
-                    title="Female engineer working"
-                    aria-label="A female engineer working in an industrial setting"
-                />
+            {/* Animated floating orbs */}
+            <FloatingOrb
+                className="w-[500px] h-[500px] bg-[#2DAA9E]/8 top-[-10%] left-[-5%]"
+                delay={0}
+            />
+            <FloatingOrb
+                className="w-[400px] h-[400px] bg-[#E3D2C3]/6 bottom-[-10%] right-[10%]"
+                delay={2}
+            />
+            <FloatingOrb
+                className="w-[300px] h-[300px] bg-[#66D2CE]/5 top-[40%] right-[-5%]"
+                delay={4}
+            />
 
-                {/* Cinematic overlay */}
-                <div className="absolute inset-0 cinematic-overlay z-10" />
+            {/* Grid pattern overlay */}
+            <div className="absolute inset-0 grid-pattern" />
 
-                {/* Vignette effect */}
-                <div className="absolute inset-0 vignette z-10 pointer-events-none" />
-            </div>
+            {/* Grain texture */}
+            <div className="absolute inset-0 grain-overlay" />
 
-            {/* Gradient Overlays */}
-            <div className="absolute inset-0 bg-black/50 z-10" /> {/* Added darkness */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 z-10" />
+            {/* ====== Main Content ====== */}
+            <div className="relative z-10 flex flex-col lg:flex-row items-center min-h-[600px] lg:min-h-[700px]">
 
-            {/* Video Progress Indicators */}
-            <div className="absolute bottom-32 sm:bottom-40 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-                <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activeVideo === 1 ? 'bg-white scale-125' : 'bg-white/40'}`} />
-                <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activeVideo === 2 ? 'bg-white scale-125' : 'bg-white/40'}`} />
-            </div>
-
-            {/* Main Content with Container Scroll Animation */}
-            <div className="relative z-20">
-                <ContainerScroll
-                    titleComponent={
-                        <div className="flex flex-col items-center justify-center">
-                            {/* Trust Badge */}
-                            {trustBadge && (
-                                <div className="inline-flex mb-6 sm:mb-8 animate-fade-in-up">
-                                    <div className="relative group cursor-pointer">
-                                        <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold via-amber-400 to-brand-gold rounded-full blur-md opacity-40 group-hover:opacity-60 transition-opacity" />
-                                        <div className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full">
-                                            <div className="flex gap-0.5">
-                                                {[1, 2, 3].map((i) => (
-                                                    <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 text-brand-gold fill-brand-gold" />
-                                                ))}
-                                            </div>
-                                            <span className="text-white font-semibold tracking-wide text-xs sm:text-sm">
-                                                {trustBadge.text}
-                                            </span>
-                                            <ChevronRight className="w-4 h-4 text-brand-gold group-hover:translate-x-1 transition-transform" />
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-
-                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight drop-shadow-2xl">
-                                <span className="text-yellow-400 italic font-serif block mb-2">
-                                    {headline.line1}
-                                </span>
-                                <span className="text-teal-400">
-                                    {headline.line2}
-                                </span>
-                            </h1>
-
-                            <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow-lg">
-                                {subtitle}
-                            </p>
-
-                            {/* Buttons */}
-                            {buttons && (
-                                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-12">
-                                    {buttons.primary && (
-                                        <Link href="/products">
-                                            <button
-                                                onClick={buttons.primary.onClick}
-                                                className="btn-skew flex items-center justify-center gap-3"
-                                            >
-                                                <span>{buttons.primary.text}</span>
-                                                <ArrowRight className="w-5 h-5" />
-                                            </button>
-                                        </Link>
-                                    )}
-
-                                    {buttons.secondary && (
-                                        <Link href="/bom">
-                                            <button
-                                                onClick={buttons.secondary.onClick}
-                                                className="btn-skew btn-skew-secondary flex items-center justify-center gap-3"
-                                            >
-                                                <Zap className="w-5 h-5" />
-                                                <span>{buttons.secondary.text}</span>
-                                            </button>
-                                        </Link>
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    }
+                {/* ====== Left Side: Text Content ====== */}
+                <motion.div
+                    className="flex-1 flex flex-col justify-center px-6 sm:px-10 lg:px-14 xl:px-20 py-12 lg:py-16 z-20"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate={isLoaded ? "visible" : "hidden"}
                 >
-                    {/* Dashboard Mockup Card */}
-                    <div className="w-full h-full bg-gradient-to-br from-gray-900 to-black p-6 flex flex-col gap-6">
-                        {/* Header Bar */}
-                        <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-3 h-3 rounded-full bg-red-500" />
-                                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                                <div className="w-3 h-3 rounded-full bg-green-500" />
+                    {/* Trust Badge */}
+                    {trustBadge && (
+                        <motion.div variants={itemVariants} className="mb-6">
+                            <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full group cursor-default hover:bg-white/8 transition-colors duration-300">
+                                <div className="relative flex items-center justify-center">
+                                    <div className="w-2 h-2 bg-[#2DAA9E] rounded-full" />
+                                    <div className="absolute w-2 h-2 bg-[#2DAA9E] rounded-full animate-ping opacity-75" />
+                                </div>
+                                <span className="text-xs sm:text-sm font-semibold text-[#E3D2C3] tracking-wide">
+                                    {trustBadge.text}
+                                </span>
+                                <ChevronRight className="w-3.5 h-3.5 text-[#6B7280] group-hover:text-[#2DAA9E] transition-colors" />
                             </div>
-                            <div className="text-gray-400 text-sm font-mono">serente-dashboard.exe</div>
-                        </div>
+                        </motion.div>
+                    )}
 
-                        {/* Dashboard Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-full">
-                            {stats.map((stat, index) => (
-                                <div key={index} className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-brand-gold/50 transition-colors group flex flex-col items-center justify-center text-center">
-                                    <div className="p-3 bg-brand-gold/10 rounded-full mb-4 group-hover:scale-110 transition-transform">
-                                        <stat.icon className="w-8 h-8 text-brand-gold" />
+                    {/* Headline */}
+                    <motion.h1
+                        variants={itemVariants}
+                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6"
+                    >
+                        <span className="text-white block">
+                            {headline.line1}
+                        </span>
+                        <span className="bg-gradient-to-r from-[#2DAA9E] via-[#66D2CE] to-[#2DAA9E] bg-clip-text text-transparent block mt-1">
+                            {headline.line2 || "Serente Electronics"}
+                        </span>
+                    </motion.h1>
+
+                    {/* Subtitle */}
+                    <motion.p
+                        variants={itemVariants}
+                        className="text-base sm:text-lg text-[#9CA3AF] max-w-xl leading-relaxed mb-8 font-medium"
+                    >
+                        {subtitle}
+                    </motion.p>
+
+                    {/* CTA Buttons */}
+                    <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10">
+                        <Link href="/products">
+                            <button className="group relative px-7 py-3.5 bg-gradient-to-r from-[#2DAA9E] to-[#258B82] text-white font-bold rounded-xl shadow-lg hover:shadow-[0_0_30px_rgba(45,170,158,0.3)] transition-all duration-300 flex items-center justify-center gap-2.5 overflow-hidden">
+                                {/* Shimmer effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                                <span className="relative">Browse Catalog</span>
+                                <ArrowRight className="w-5 h-5 relative group-hover:translate-x-1 transition-transform" />
+                            </button>
+                        </Link>
+
+                        <Link href="/contact">
+                            <button className="group px-7 py-3.5 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white font-bold rounded-xl border border-white/10 hover:border-[#2DAA9E]/50 transition-all duration-300 flex items-center justify-center gap-2.5">
+                                <span>Request a Quote</span>
+                                <ArrowRight className="w-4 h-4 text-[#2DAA9E] group-hover:translate-x-1 transition-transform" />
+                            </button>
+                        </Link>
+                    </motion.div>
+
+                    {/* Stats Row */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        {stats.map((stat, index) => (
+                            <motion.div
+                                key={index}
+                                custom={index}
+                                variants={statsVariants}
+                                initial="hidden"
+                                animate={isLoaded ? "visible" : "hidden"}
+                                className="stat-card bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl p-3.5 hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300 group cursor-default"
+                            >
+                                <div className="flex items-center gap-2 mb-2">
+                                    <div
+                                        className="w-7 h-7 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform"
+                                        style={{ backgroundColor: `${stat.color}15` }}
+                                    >
+                                        <stat.icon className="w-3.5 h-3.5" style={{ color: stat.color }} />
                                     </div>
-                                    <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                                    <div className="text-sm text-gray-400">{stat.label}</div>
+                                    <span
+                                        className="text-[10px] font-bold px-2 py-0.5 rounded-full border"
+                                        style={{
+                                            backgroundColor: `${stat.color}10`,
+                                            color: stat.color,
+                                            borderColor: `${stat.color}20`,
+                                        }}
+                                    >
+                                        {stat.badge}
+                                    </span>
                                 </div>
-                            ))}
+                                <div className="text-xl sm:text-2xl font-black tracking-tight" style={{ color: stat.color }}>
+                                    {stat.value}
+                                </div>
+                                <div className="text-[11px] font-medium text-[#6B7280] mt-0.5">
+                                    {stat.label}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
 
-                            {/* Chart Placeholder */}
-                            <div className="col-span-1 md:col-span-2 lg:col-span-4 bg-white/5 rounded-xl p-6 border border-white/10 flex items-center justify-center relative overflow-hidden group">
-                                <div className="absolute inset-0 bg-gradient-to-r from-brand-teal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                                <div className="flex items-end gap-2 h-32 w-full px-8 pb-4">
-                                    {[40, 70, 45, 90, 65, 85, 50, 75, 60, 95, 80, 55].map((h, i) => (
-                                        <div
-                                            key={i}
-                                            className="flex-1 bg-brand-gold/30 hover:bg-brand-gold transition-colors rounded-t-sm"
-                                            style={{ height: `${h}%` }}
-                                        />
-                                    ))}
-                                </div>
-                                <div className="absolute top-4 left-6 text-white font-medium flex items-center gap-2">
-                                    <BarChart3 className="w-4 h-4 text-brand-gold" />
-                                    Monthly Growth
-                                </div>
+                {/* ====== Right Side: Spline 3D Robot ====== */}
+                <motion.div
+                    className="flex-1 relative w-full lg:w-auto min-h-[400px] sm:min-h-[450px] lg:min-h-[700px]"
+                    variants={scaleVariants}
+                    initial="hidden"
+                    animate={isLoaded ? "visible" : "hidden"}
+                >
+                    {/* Glow behind the robot */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="w-[80%] h-[60%] bg-[#2DAA9E]/10 rounded-full blur-[100px]" />
+                    </div>
+
+                    {/* Spline 3D Scene */}
+                    <div 
+                        className="absolute inset-x-0 bottom-0 top-[-10%] sm:top-[-20%] pointer-events-auto flex items-end justify-center"
+                        style={{ 
+                            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)', 
+                            maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 100%)' 
+                        }}
+                    >
+                        <div 
+                            className="w-full h-full"
+                            style={{ 
+                                WebkitMaskImage: 'linear-gradient(to top, transparent 0%, black 15%, black 100%)', 
+                                maskImage: 'linear-gradient(to top, transparent 0%, black 15%, black 100%)' 
+                            }}
+                        >
+                            <div className="w-full h-full transform scale-75 sm:scale-90 lg:scale-95 origin-bottom translate-y-[2%]">
+                                <SplineScene
+                                    scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                                    className="w-full h-full"
+                                />
                             </div>
                         </div>
                     </div>
-                </ContainerScroll>
+
+                    {/* Bottom gradient fade on the spline side */}
+                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#111111] to-transparent pointer-events-none" />
+                </motion.div>
             </div>
 
-            {/* Bottom Gradient Fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-[#FAFAFA] via-[#FAFAFA]/80 to-transparent z-20" />
+            {/* ====== Bottom Edge Gradient ====== */}
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2DAA9E]/30 to-transparent" />
         </div>
     );
 };

@@ -7,15 +7,15 @@ export default function Schema() {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Serente Electronics",
-        "alternateName": ["Serente Electronics HK", "Serente Electronics Pvt Ltd", "Serente Electronics Private Limited"],
-        "url": "https://www.serentehk.com/",
-        "logo": "https://www.serentehk.com/icon.png",
-        "description": "Serente Electronics is a top semiconductor distributor in Hong Kong, specializing in electronic components distribution, integrated circuits (ICs), MOSFETs, IGBTs, diodes, transistors, passive components, LCD/OLED displays, and connector & cable harnessing solutions. Authorized semiconductor distributor offering OEM & ODM solutions, BOM sourcing, and global electronics supply chain services.",
+        "alternateName": ["Serente Electronics Pvt Ltd", "Serente Electronics Private Limited"],
+        "url": "https://www.serente.in/",
+        "logo": "https://www.serente.in/icon.png",
+        "description": "Serente Electronics Pvt. Ltd. is a technology-driven Electronics Manufacturing Services (EMS) and global electronic component solutions company, specializing in electronic components distribution, integrated circuits (ICs), MOSFETs, IGBTs, diodes, transistors, passive components, LCD/OLED displays, and connector & cable harnessing solutions.",
         "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+91 80881 31316",
+            "telephone": "+91 86607 44258",
             "contactType": "technical support",
-            "areaServed": ["HK", "IN", "CN", "US", "GB"],
+            "areaServed": ["IN", "US", "EU", "GB", "CN"],
             "availableLanguage": "en"
         },
         "sameAs": [
@@ -27,22 +27,16 @@ export default function Schema() {
         "@context": "https://schema.org",
         "@type": "ElectronicsStore",
         "name": "Serente Electronics",
-        "image": "https://www.serentehk.com/icon.png",
-        "@id": "https://www.serentehk.com/",
-        "url": "https://www.serentehk.com/",
-        "telephone": "+91 80881 31316",
-        "email": "sales@serentehk.com",
-        "description": "Leading semiconductor distributors in Hong Kong. Authorized distributor of electronic components including integrated circuits, power semiconductor devices, MOSFETs, IGBTs, diodes, transistors, passive components (capacitors, resistors, inductors), LCD/OLED displays and touch panels. Industrial & electronic systems solutions provider with connector & cable harnessing expertise.",
+        "image": "https://www.serente.in/icon.png",
+        "@id": "https://www.serente.in/",
+        "url": "https://www.serente.in/",
+        "telephone": "+91 86607 44258",
+        "email": "hello@serenteelectronics.com",
+        "description": "Leading Electronics Manufacturing Services (EMS) & electronic components distributor. Authorized distributor of electronic components including integrated circuits, power semiconductor devices, MOSFETs, IGBTs, diodes, transistors, passive components (capacitors, resistors, inductors), LCD/OLED displays and touch panels.",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "2/F Tern Ctr Tower 1, 237 Queen's Rd Central",
-            "addressLocality": "Hong Kong",
-            "addressCountry": "HK"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 22.28983,
-            "longitude": 114.15175
+            "streetAddress": "Serente Electronics Pvt. Ltd.",
+            "addressCountry": "IN"
         },
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
@@ -51,7 +45,8 @@ export default function Schema() {
                 "Tuesday",
                 "Wednesday",
                 "Thursday",
-                "Friday"
+                "Friday",
+                "Saturday"
             ],
             "opens": "09:00",
             "closes": "18:00"
@@ -68,7 +63,7 @@ export default function Schema() {
                 "name": "What Shipping Options do you Offer?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "We offer worldwide shipping with multiple options including express delivery (1-3 days), standard shipping (5-7 days), and economy shipping (10-15 days). We ship from our warehouses in India and Hong Kong for faster regional delivery. As a top semiconductor distributor and electronics supply chain partner in Hong Kong, we ensure reliable global logistics."
+                    "text": "We offer worldwide shipping with multiple options including express delivery (1-3 days), standard shipping (5-7 days), and economy shipping (10-15 days). As a top electronic components distributor and EMS partner, we ensure reliable global logistics."
                 }
             },
             {
@@ -76,7 +71,7 @@ export default function Schema() {
                 "name": "Can you Source Obsolete or Hard-to-Find Components?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes! We specialize in sourcing obsolete, end-of-life, and hard-to-find electronic components including integrated circuits, MOSFETs, IGBTs, and discrete semiconductor parts. Our global network of suppliers allows us to locate rare parts. We are authorized distributor partners with Firstohm, Octea, GL Fiber, VITEK, Sonytek, Kingtronics, Palm Technology, Taimates, Isocom, Greenconn, JB Capacitors, Disen, Hongda, Microtech, Romtronic, Smico, Wipin, Yeebo, and YM Tech."
+                    "text": "Yes! We specialize in sourcing obsolete, end-of-life, and hard-to-find electronic components including integrated circuits, MOSFETs, IGBTs, and discrete semiconductor parts. Our global network of suppliers allows us to locate rare parts."
                 }
             },
             {
@@ -84,7 +79,7 @@ export default function Schema() {
                 "name": "Do you Provide Technical Datasheets?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Absolutely. We provide complete technical documentation including datasheets, application notes, and compliance certificates for all semiconductor components and electronic parts. These can be downloaded directly from product pages or requested from our support team. As one of the best semiconductor components suppliers in Hong Kong, we ensure full traceability."
+                    "text": "Absolutely. We provide complete technical documentation including datasheets, application notes, and compliance certificates for all semiconductor components and electronic parts. These can be downloaded directly from product pages or requested from our support team."
                 }
             },
             {
@@ -92,7 +87,7 @@ export default function Schema() {
                 "name": "What Payment Methods do you accept?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "We accept various payment methods including bank transfers, credit/debit cards, PayPal, and letters of credit for large orders. For established customers, we also offer flexible payment terms. Contact our semiconductor distribution company in Hong Kong for more details."
+                    "text": "We accept various payment methods including bank transfers, credit/debit cards, PayPal, and letters of credit for large orders. For established customers, we also offer flexible payment terms."
                 }
             },
             {
@@ -100,7 +95,7 @@ export default function Schema() {
                 "name": "What types of semiconductor components do you distribute?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "As an authorized semiconductor distributor in Hong Kong, we supply a comprehensive range including: MOSFET transistors, IGBT modules, power MOSFETs, NPN/PNP transistors, Schottky diodes, Zener diodes, rectifier diodes, microcontroller ICs, analog/digital ICs, power management ICs (PMIC), RF ICs, SiC MOSFETs, GaN semiconductor devices, wide bandgap semiconductors, automotive grade semiconductors, AI chip components, and power electronics semiconductors."
+                    "text": "As an authorized electronic component distributor, we supply a comprehensive range including: MOSFET transistors, IGBT modules, power MOSFETs, NPN/PNP transistors, Schottky diodes, Zener diodes, rectifier diodes, microcontroller ICs, analog/digital ICs, power management ICs (PMIC), RF ICs, SiC MOSFETs, GaN semiconductor devices, wide bandgap semiconductors, automotive grade semiconductors, AI chip components, and power electronics semiconductors."
                 }
             },
             {
@@ -108,7 +103,7 @@ export default function Schema() {
                 "name": "Which industries do you serve with semiconductor components?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "We serve automotive semiconductor components for EV and traditional vehicles, industrial semiconductor devices, semiconductors for solar inverters, telecom equipment components, consumer electronics semiconductors, and IoT device components. Our industrial & electronic systems solutions cover railways, medical industry, lighting, and network infrastructure."
+                    "text": "We supply high-reliability electronic components across key industries including Industrial Automation, Automotive, EV Sector, Medical Devices, Telecom, Railways, Energy & Solar Inverters, Consumer Electronics, and Smart IoT Devices."
                 }
             }
         ]
@@ -116,15 +111,21 @@ export default function Schema() {
 
     return (
         <>
-            <Script id="organization-schema" type="application/ld+json" strategy="afterInteractive">
-                {JSON.stringify(organizationSchema)}
-            </Script>
-            <Script id="local-business-schema" type="application/ld+json" strategy="afterInteractive">
-                {JSON.stringify(localBusinessSchema)}
-            </Script>
-            <Script id="faq-schema" type="application/ld+json" strategy="afterInteractive">
-                {JSON.stringify(faqSchema)}
-            </Script>
+            <Script
+                id="organization-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+            />
+            <Script
+                id="local-business-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+            />
+            <Script
+                id="faq-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
         </>
     );
 }

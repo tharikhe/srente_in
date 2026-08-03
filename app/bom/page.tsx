@@ -2,8 +2,8 @@ import BomUploader from '@/components/BomUploader';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "BOM Upload Tool | Electronics Parts Procurement - Serente Electronics HK",
-    description: "Upload your Bill of Materials (BOM) for instant quotes on electronic components. BOM sourcing and electronics supply, electronics parts procurement company, OEM electronics sourcing solutions. Electronics vendor management services from top semiconductor distributors in Hong Kong.",
+    title: "BOM Upload Tool | Electronics Parts Procurement - Serente Electronics",
+    description: "Upload your Bill of Materials (BOM) for instant quotes on electronic components. BOM sourcing and electronics supply, electronics parts procurement, OEM electronics sourcing solutions.",
     keywords: ['BOM sourcing and electronics supply', 'electronics parts procurement company', 'OEM electronics sourcing solutions', 'electronics vendor management services', 'procurement and supply electronics solutions', 'electronic components supply company', 'semiconductor components price list', 'semiconductor distributors hong kong', 'electronic component distributor Hong Kong', 'electronics parts suppliers', 'OEM & ODM', 'electronic components supplier', 'electronics supply chain partner', 'global electronics sourcing services', 'custom electronics solutions provider', 'electronics procurement services', 'OEM semiconductor distributor', 'industrial electronics supplier', 'electronic components distribution', 'semiconductor products distribution', 'semiconductor components', 'semiconductor components supplier', 'semiconductor components wholesale', 'bulk semiconductor components', 'semiconductor components suppliers'],
     alternates: {
         canonical: '/bom',

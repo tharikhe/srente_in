@@ -220,7 +220,7 @@ export default function ProductTable() {
                         </div>
                         <button
                             type="submit"
-                            className="px-4 sm:px-8 py-2.5 sm:py-3.5 bg-brand-gold text-white font-semibold rounded-r-lg sm:rounded-r-xl hover:bg-brand-gold-dark transition-colors flex items-center gap-2"
+                            className="px-4 sm:px-8 py-2.5 sm:py-3.5 bg-brand-gold text-gray-900 font-semibold rounded-r-lg sm:rounded-r-xl hover:bg-brand-gold-dark transition-colors flex items-center gap-2"
                         >
                             <Search className="w-4 h-4 sm:w-5 sm:h-5" />
                             <span className="hidden sm:inline">Search</span>
@@ -321,7 +321,7 @@ export default function ProductTable() {
                                             onClick={() => handleAddToCart(product)}
                                             className={`p-2 rounded-lg transition-all duration-200 ${addedItems.includes(product.partNumber)
                                                 ? 'bg-emerald-500 text-white shadow-md scale-105'
-                                                : 'bg-brand-gold text-white hover:bg-brand-gold-dark hover:shadow-glow-gold'
+                                                : 'bg-[#2DAA9E] text-white hover:bg-[#258B82] hover:shadow-lg hover:scale-105'
                                                 }`}
                                             title="Add to Quote"
                                         >
@@ -415,7 +415,7 @@ export default function ProductTable() {
                                         onClick={() => handleAddToCart(product)}
                                         className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-medium transition-all duration-200 ${addedItems.includes(product.partNumber)
                                             ? 'bg-emerald-500 text-white'
-                                            : 'bg-brand-gold text-white hover:bg-brand-gold-dark'
+                                            : 'bg-brand-gold text-gray-900 hover:bg-brand-gold-dark'
                                             }`}
                                     >
                                         {addedItems.includes(product.partNumber) ? (

@@ -88,7 +88,7 @@ export default function CartClient() {
                 </p>
                 <Link
                     href="/products"
-                    className="px-8 py-3.5 bg-brand-gold hover:bg-brand-gold-dark text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-glow-gold flex items-center gap-2"
+                    className="px-8 py-3.5 bg-brand-gold hover:bg-brand-gold-dark text-gray-900 font-semibold rounded-xl transition-all duration-200 hover:shadow-glow-gold flex items-center gap-2"
                 >
                     Browse Catalog
                     <ArrowRight className="w-5 h-5" />
@@ -110,7 +110,7 @@ export default function CartClient() {
                 </p>
                 <Link
                     href="/products"
-                    className="px-8 py-3.5 bg-brand-gold hover:bg-brand-gold-dark text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-glow-gold flex items-center gap-2"
+                    className="px-8 py-3.5 bg-brand-gold hover:bg-brand-gold-dark text-gray-900 font-semibold rounded-xl transition-all duration-200 hover:shadow-glow-gold flex items-center gap-2"
                 >
                     Continue Shopping
                     <ArrowRight className="w-5 h-5" />
@@ -234,7 +234,7 @@ export default function CartClient() {
 
                         <button
                             onClick={() => setShowForm(true)}
-                            className="w-full py-4 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold rounded-xl transition-all duration-200 shadow-glow-gold hover:shadow-lg hover:scale-[1.02] mb-4 flex items-center justify-center gap-2"
+                            className="w-full py-4 bg-brand-gold hover:bg-brand-gold-dark text-gray-900 font-bold rounded-xl transition-all duration-200 shadow-glow-gold hover:shadow-lg hover:scale-[1.02] mb-4 flex items-center justify-center gap-2"
                         >
                             <Send className="w-5 h-5" />
                             Submit Quote Request
@@ -344,7 +344,7 @@ export default function CartClient() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full py-4 bg-brand-gold hover:bg-brand-gold-dark disabled:bg-brand-gold/50 text-white font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-2"
+                                    className="w-full py-4 bg-brand-gold hover:bg-brand-gold-dark disabled:bg-brand-gold/50 text-gray-900 font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-2"
                                 >
                                     {isSubmitting ? (
                                         <>

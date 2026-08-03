@@ -33,19 +33,19 @@ export default function FloatingMenu() {
             {
                 icon: Phone,
                 label: 'Call Us',
-                href: 'tel:+918088131316',
+                href: 'tel:+918660744258',
                 color: 'text-[#F39800]', // Orange
             },
             {
                 icon: Mail,
                 label: 'Email Us',
-                href: 'mailto:sales@serenthk.com',
+                href: 'mailto:hello@serenteelectronics.com',
                 color: 'text-[#448ACA]', // Blue
             },
             {
                 icon: WhatsAppIcon,
                 label: 'WhatsApp',
-                href: 'https://wa.me/+918088131316',
+                href: 'https://wa.me/918660744258',
                 color: '', // Image has its own color
             },
         ];
@@ -81,7 +81,7 @@ export default function FloatingMenu() {
                 className={`w-12 h-12 flex items-center justify-center hover:bg-gray-50 transition-colors border-t-2 border-gray-100 group ${isVisible ? 'block' : 'hidden'}`}
                 title="Back to Top"
             >
-                <ArrowUp className="w-6 h-6 text-[#333333]" />
+                <ArrowUp className="w-6 h-6 text-brand-text" />
             </button>
         </div>
     );

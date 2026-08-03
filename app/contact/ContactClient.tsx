@@ -47,13 +47,12 @@ export default function ContactClient() {
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-teal-900 via-teal-800 to-teal-900 py-20">
-                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+            <section className="relative bg-[#EAEAEA] border-b border-gray-200 py-16">
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                        Get In Touch
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-[#1A1A1A] mb-4">
+                        Get In <span className="text-[#2DAA9E]">Touch</span>
                     </h1>
-                    <p className="text-xl text-teal-100 max-w-2xl mx-auto">
+                    <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto font-medium">
                         Have questions about our products? Need a quote? Our team is ready to help you find the right components for your project.
                     </p>
                 </div>
@@ -82,7 +81,7 @@ export default function ContactClient() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-gray-900 dark:text-white">Phone</h3>
-                                        <p className="text-gray-600 dark:text-gray-300">+91 80881 31316</p>
+                                        <p className="text-gray-600 dark:text-gray-300">+91 86607 44258</p>
                                     </div>
                                 </div>
 
@@ -92,7 +91,7 @@ export default function ContactClient() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-gray-900 dark:text-white">Email</h3>
-                                        <p className="text-gray-600 dark:text-gray-300">sales@serentehk.com</p>
+                                        <p className="text-gray-600 dark:text-gray-300">hello@serenteelectronics.com</p>
                                     </div>
                                 </div>
 
@@ -103,9 +102,7 @@ export default function ContactClient() {
                                     <div>
                                         <h3 className="font-semibold text-gray-900 dark:text-white">Address</h3>
                                         <p className="text-gray-600 dark:text-gray-300">
-                                            2/F Tern Ctr Tower 1<br />
-                                            237 Queen&apos;s Rd Central<br />
-                                            Hong Kong
+                                            Serente Electronics Pvt. Ltd.
                                         </p>
                                     </div>
                                 </div>
@@ -116,9 +113,9 @@ export default function ContactClient() {
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-gray-900 dark:text-white">Business Hours</h3>
-                                        <p className="text-gray-600 dark:text-gray-300">Monday - Saturday: 9:00 AM - 5:30 PM</p>
+                                        <p className="text-gray-600 dark:text-gray-300">Monday - Saturday: 9:00 AM - 6:00 PM</p>
                                         <p className="text-gray-600 dark:text-gray-300">Sunday: Closed</p>
-                                        <p className="text-gray-500 dark:text-gray-400 text-sm">Hong Kong Time (GMT+8)</p>
+                                        <p className="text-gray-500 dark:text-gray-400 text-sm">Indian Standard Time (IST)</p>
                                     </div>
                                 </div>
                             </div>

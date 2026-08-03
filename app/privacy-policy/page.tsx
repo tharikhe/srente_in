@@ -3,9 +3,9 @@ import { ArrowLeft, Shield, Lock, Eye, FileText, Database } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Privacy Policy | Serente Electronics HK - Electronic Component Distributor Hong Kong",
-    description: "Privacy policy for Serente Electronics HK Ltd., leading semiconductor distributors and electronic components supplier in Hong Kong. Learn how we protect your data as a trusted electronic component distributor.",
-    keywords: ['semiconductor distributors hong kong', 'electronic component distributor Hong Kong', 'electronic components supplier', 'top semiconductor distributors hong kong', 'Serente Electronics', 'semiconductor distributor', 'semiconductor distributors', 'hong kong semiconductor distributor', 'semiconductor distribution company hong kong', 'semiconductor distributors in hong kong', 'electronic components distribution', 'semiconductor products distribution', 'authorized semiconductor distributor', 'semiconductor components'],
+    title: "Privacy Policy | Serente Electronics",
+    description: "Privacy policy for Serente Electronics Pvt. Ltd., leading electronics manufacturing services (EMS) and electronic components supplier. Learn how we protect your data.",
+    keywords: ['electronic component distributor', 'electronic components supplier', 'Serente Electronics', 'semiconductor distributor', 'semiconductor distributors', 'electronic components distribution', 'authorized semiconductor distributor', 'semiconductor components'],
     alternates: {
         canonical: '/privacy-policy',
     },
@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
                     <p className="text-brand-teal-light text-lg max-w-2xl mx-auto">
-                        Your privacy is important to us. This policy outlines how Serente Electronics HK Ltd. collects, uses, and protects your information.
+                        Your privacy is important to us. This policy outlines how Serente Electronics Pvt. Ltd. collects, uses, and protects your information.
                     </p>
                 </div>
             </div>
@@ -103,9 +103,9 @@ export default function PrivacyPolicy() {
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Contact Us</h3>
                             <p className="mb-4">If there are any questions regarding this privacy policy, you may contact us using the information below:</p>
                             <address className="not-italic bg-gray-50 p-6 rounded-xl border border-gray-100">
-                                <strong>Serente Electronics HK Ltd.</strong><br />
-                                Email: <a href="mailto:sales@serenthk.com" className="text-brand-teal hover:underline">sales@serenthk.com</a><br />
-                                Phone: +91 80881 31316
+                                <strong>Serente Electronics Pvt. Ltd.</strong><br />
+                                Email: <a href="mailto:hello@serenteelectronics.com" className="text-brand-teal hover:underline">hello@serenteelectronics.com</a><br />
+                                Phone: +91 86607 44258
                             </address>
                         </div>
                     </div>

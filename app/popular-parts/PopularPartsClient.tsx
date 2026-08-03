@@ -12,23 +12,21 @@ export default function PopularPartsClient() {
         .slice(0, 24); // Show first 24 items as "Popular"
 
     return (
-        <div className="space-y-12 pb-16">
-            {/* Header */}
-            <section className="py-12 bg-gradient-to-r from-brand-teal to-brand-teal-dark rounded-3xl relative overflow-hidden text-white px-8 md:px-16 flex flex-col md:flex-row items-center justify-between gap-8">
-                <div className="relative z-10 z-max-w-2xl">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/20 rounded-full mb-4 backdrop-blur-sm border border-white/10">
-                        <TrendingUp className="w-4 h-4 text-brand-gold" />
+        <div className="container mx-auto px-4 py-8">
+            {/* Header Banner */}
+            <section className="bg-[#EAEAEA] border border-gray-200 text-[#1A1A1A] rounded-2xl p-8 md:p-12 mb-10 relative overflow-hidden shadow-sm">
+                <div className="max-w-3xl relative z-10">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#2DAA9E]/10 rounded-full text-[#2DAA9E] mb-4">
+                        <TrendingUp className="w-4 h-4 text-[#2DAA9E]" />
                         <span className="text-xs font-bold uppercase tracking-wider">High Demand</span>
                     </div>
-                    <h1 className="text-3xl md:text-5xl font-bold mb-4">
-                        Popular Semiconductor Components
+                    <h1 className="text-3xl md:text-5xl font-extrabold mb-4 text-[#1A1A1A]">
+                        Popular <span className="text-[#2DAA9E]">Semiconductor Components</span>
                     </h1>
-                    <p className="text-white/80 text-lg">
-                        Our most requested electronic parts and semiconductor components, ready to ship today. Browse MOSFETs, ICs, diodes, capacitors, and more from top semiconductor distributors in Hong Kong.
+                    <p className="text-gray-700 text-base md:text-lg font-medium">
+                        Our most requested electronic parts and semiconductor components, ready to ship today. Browse MOSFETs, ICs, diodes, capacitors, and more from Serente Electronics.
                     </p>
                 </div>
-                {/* Decorative Pattern */}
-                <div className="absolute right-0 top-0 bottom-0 w-1/3 opacity-10 bg-[url('/grid-pattern.svg')]"></div>
             </section>
 
             {/* Product Grid */}
@@ -73,7 +71,7 @@ export default function PopularPartsClient() {
                             <Link href={`/products?search=${product.partNumber}`} className="text-sm font-bold text-brand-teal flex items-center gap-1 hover:gap-2 transition-all">
                                 View Details <ArrowRight className="w-3 h-3" />
                             </Link>
-                            <button className="w-8 h-8 rounded-full bg-gray-50 text-gray-600 flex items-center justify-center hover:bg-brand-gold hover:text-white transition-colors">
+                            <button className="w-8 h-8 rounded-full bg-gray-50 text-gray-600 flex items-center justify-center hover:bg-brand-gold hover:text-gray-900 transition-colors">
                                 <ShoppingCart className="w-4 h-4" />
                             </button>
                         </div>

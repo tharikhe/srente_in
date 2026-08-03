@@ -3,9 +3,9 @@ import { ArrowLeft, FileCheck, AlertCircle, Scale, DollarSign, HelpCircle } from
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Terms & Conditions | Serente Electronics HK - Semiconductor Distributors Hong Kong",
-    description: "Terms and conditions for Serente Electronics HK Ltd., top semiconductor distributors and electronic component distributor in Hong Kong. OEM & ODM semiconductor distribution company policies.",
-    keywords: ['semiconductor distributors hong kong', 'electronic component distributor Hong Kong', 'top semiconductor distributors hong kong', 'electronic components supplier', 'OEM & ODM', 'Serente Electronics', 'semiconductor distributor', 'semiconductor distributors', 'hong kong semiconductor distributor', 'semiconductor distribution company hong kong', 'semiconductor distributors in hong kong', 'electronic components distributors in hong kong', 'electronic components distribution', 'semiconductor products distribution', 'authorized semiconductor distributor', 'semiconductor components', 'semiconductor devices'],
+    title: "Terms & Conditions | Serente Electronics",
+    description: "Terms and conditions for Serente Electronics Pvt. Ltd., top semiconductor distributors and electronic component distributor.",
+    keywords: ['electronic component distributor', 'electronic components supplier', 'OEM & ODM', 'Serente Electronics', 'semiconductor distributor', 'semiconductor distributors', 'electronic components distribution', 'authorized semiconductor distributor', 'semiconductor components'],
     alternates: {
         canonical: '/terms',
     },
@@ -41,7 +41,7 @@ export default function TermsAndConditions() {
                                 <h2 className="text-2xl font-bold m-0">1. Acceptance of Terms</h2>
                             </div>
                             <p>
-                                By accessing this website (Serente Electronics HK Ltd.) and placing an order, you agree to be bound by these standard Terms and Conditions. If you do not agree with any part of these terms, please do not use our website or services.
+                                By accessing this website (Serente Electronics Pvt. Ltd.) and placing an order, you agree to be bound by these standard Terms and Conditions. If you do not agree with any part of these terms, please do not use our website or services.
                             </p>
                         </section>
 
@@ -79,7 +79,7 @@ export default function TermsAndConditions() {
                                 <h2 className="text-2xl font-bold m-0">4. Warranty and Liability</h2>
                             </div>
                             <p>
-                                We warrant that our products will be free from defects in material and workmanship for a period of [Insert Warranty Period, e.g., 30 days] from the date of shipment.
+                                We warrant that our products will be free from defects in material and workmanship for a period of 30 days from the date of shipment.
                             </p>
                             <p className="mt-4">
                                 Our liability is limited to the repair, replacement, or refund of the defected product. We shall not be liable for any indirect, incidental, or consequential damages arising from the use or inability to use our products.
@@ -92,7 +92,7 @@ export default function TermsAndConditions() {
                                 <h2 className="text-2xl font-bold m-0">5. Governing Law</h2>
                             </div>
                             <p>
-                                These Terms and Conditions shall be governed by and construed in accordance with the laws of Hong Kong.
+                                These Terms and Conditions shall be governed by and construed in accordance with applicable laws.
                             </p>
                         </section>
 
@@ -100,9 +100,9 @@ export default function TermsAndConditions() {
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Questions?</h3>
                             <p className="mb-4">If you have any questions about these Terms & Conditions, please contact us:</p>
                             <address className="not-italic bg-gray-50 p-6 rounded-xl border border-gray-100">
-                                <strong>Serente Electronics HK Ltd.</strong><br />
-                                Email: <a href="mailto:sales@serenthk.com" className="text-brand-teal hover:underline">sales@serenthk.com</a><br />
-                                Phone: +91 80881 31316
+                                <strong>Serente Electronics Pvt. Ltd.</strong><br />
+                                Email: <a href="mailto:hello@serenteelectronics.com" className="text-brand-teal hover:underline">hello@serenteelectronics.com</a><br />
+                                Phone: +91 86607 44258
                             </address>
                         </div>
                     </div>

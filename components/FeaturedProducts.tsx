@@ -105,7 +105,7 @@ export default function FeaturedProducts() {
                                     onClick={() => handleAddToCart(product)}
                                     className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl transition-all duration-200 text-xs sm:text-sm font-semibold group/btn ${addedItems.includes(product.partNumber)
                                         ? 'bg-emerald-500 text-white shadow-md'
-                                        : 'bg-brand-gold text-white hover:bg-brand-gold-dark hover:shadow-glow-gold'
+                                        : 'bg-[#2DAA9E] text-white hover:bg-[#258B82] hover:shadow-lg'
                                         }`}
                                 >
                                     {addedItems.includes(product.partNumber) ? (
