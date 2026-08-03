@@ -61,10 +61,6 @@ export default function Home() {
           line2: "Serente Electronics"
         }}
         subtitle="We source top industrial electronic components globally, ensuring reliability and performance."
-        buttons={{
-          primary: { text: "Browse Catalog" },
-          secondary: { text: "Upload BOM" }
-        }}
       />
 
       {/* Product Banner Slider */}
