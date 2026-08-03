@@ -70,3 +70,11 @@ export const blogPosts: BlogPost[] = [
         category: 'Product Spotlight'
     }
 ];
+
+export const getAllPosts = (): BlogPost[] => {
+    return blogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+};
+
+export const getPostBySlug = (slug: string): BlogPost | undefined => {
+    return blogPosts.find(post => post.slug === slug);
+};
