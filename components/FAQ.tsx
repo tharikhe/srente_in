@@ -53,7 +53,7 @@ const faqs = [
  */
 export const FaqCard = ({ question, answer }: { question: string; answer: string }) => {
     return (
-        <div className="flex flex-col items-start gap-4 p-8 bg-[#141414]/80 backdrop-blur-xl border border-white/10 rounded-3xl shadow-xl w-[450px] flex-shrink-0 group hover:border-[#2DAA9E]/50 hover:shadow-[0_0_30px_rgba(45,170,158,0.15)] hover:-translate-y-1 transition-all duration-300">
+        <div className="flex flex-col items-start gap-4 p-8 bg-[#141414] border border-white/10 rounded-3xl shadow-xl w-[450px] flex-shrink-0 group hover:border-[#2DAA9E]/50 hover:shadow-[0_0_30px_rgba(45,170,158,0.15)] hover:-translate-y-1 transition-all duration-300">
             <h3 className="text-xl font-bold text-white group-hover:text-[#2DAA9E] transition-colors">{question}</h3>
             <p className="text-base text-gray-400 leading-relaxed">{answer}</p>
         </div>

@@ -49,8 +49,8 @@ export default function ProductShowcase() {
         <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
             {/* Background Decorations */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-teal/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl" />
+                <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-teal/5 rounded-full opacity-60" />
+                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-gold/5 rounded-full opacity-60" />
             </div>
 
             <div className="container mx-auto px-4 relative z-10">

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Award, Zap, Globe, CheckCircle2, ArrowRight, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -102,22 +102,9 @@ const statsVariants = {
     }),
 };
 
-// Floating orb component for ambient background
-const FloatingOrb = ({ className, delay = 0 }: { className: string; delay?: number }) => (
-    <motion.div
-        className={`absolute rounded-full blur-3xl pointer-events-none ${className}`}
-        animate={{
-            y: [0, -20, 0],
-            x: [0, 10, 0],
-            scale: [1, 1.05, 1],
-        }}
-        transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay,
-        }}
-    />
+// Static ambient background orb (no animation, no blur filter for performance)
+const StaticOrb = ({ className }: { className: string }) => (
+    <div className={`absolute rounded-full pointer-events-none ${className}`} />
 );
 
 // Premium Hero Component
@@ -127,12 +114,7 @@ const HeroSection: React.FC<HeroProps> = ({
     subtitle,
     className = ""
 }) => {
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        // eslint-disable-next-line
-        setIsLoaded(true);
-    }, []);
+    const isLoaded = true;
 
     return (
         <div className={`relative w-full overflow-hidden bg-[#1A1A1A] rounded-2xl sm:rounded-3xl mb-6 sm:mb-10 ${className}`}>
@@ -191,19 +173,10 @@ const HeroSection: React.FC<HeroProps> = ({
             {/* Base gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#0D0D0D] via-[#1A1A1A] to-[#111111]" />
 
-            {/* Animated floating orbs */}
-            <FloatingOrb
-                className="w-[500px] h-[500px] bg-[#2DAA9E]/8 top-[-10%] left-[-5%]"
-                delay={0}
-            />
-            <FloatingOrb
-                className="w-[400px] h-[400px] bg-[#E3D2C3]/6 bottom-[-10%] right-[10%]"
-                delay={2}
-            />
-            <FloatingOrb
-                className="w-[300px] h-[300px] bg-[#66D2CE]/5 top-[40%] right-[-5%]"
-                delay={4}
-            />
+            {/* Static ambient orbs (no blur filter, no animation for performance) */}
+            <StaticOrb className="w-[500px] h-[500px] bg-[#2DAA9E]/5 top-[-10%] left-[-5%] opacity-60" />
+            <StaticOrb className="w-[400px] h-[400px] bg-[#E3D2C3]/5 bottom-[-10%] right-[10%] opacity-40" />
+            <StaticOrb className="w-[300px] h-[300px] bg-[#66D2CE]/5 top-[40%] right-[-5%] opacity-30" />
 
             {/* Grid pattern overlay */}
             <div className="absolute inset-0 grid-pattern" />
@@ -224,10 +197,9 @@ const HeroSection: React.FC<HeroProps> = ({
                     {/* Trust Badge */}
                     {trustBadge && (
                         <motion.div variants={itemVariants} className="mb-6">
-                            <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full group cursor-default hover:bg-white/8 transition-colors duration-300">
+                            <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/5 border border-white/10 rounded-full group cursor-default hover:bg-white/8 transition-colors duration-300">
                                 <div className="relative flex items-center justify-center">
                                     <div className="w-2 h-2 bg-[#2DAA9E] rounded-full" />
-                                    <div className="absolute w-2 h-2 bg-[#2DAA9E] rounded-full animate-ping opacity-75" />
                                 </div>
                                 <span className="text-xs sm:text-sm font-semibold text-[#E3D2C3] tracking-wide">
                                     {trustBadge.text}
@@ -270,7 +242,7 @@ const HeroSection: React.FC<HeroProps> = ({
                         </Link>
 
                         <Link href="/contact">
-                            <button className="group px-7 py-3.5 bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white font-bold rounded-xl border border-white/10 hover:border-[#2DAA9E]/50 transition-all duration-300 flex items-center justify-center gap-2.5">
+                            <button className="group px-7 py-3.5 bg-white/5 hover:bg-white/10 text-white font-bold rounded-xl border border-white/10 hover:border-[#2DAA9E]/50 transition-all duration-300 flex items-center justify-center gap-2.5">
                                 <span>Request a Quote</span>
                                 <ArrowRight className="w-4 h-4 text-[#2DAA9E] group-hover:translate-x-1 transition-transform" />
                             </button>
@@ -286,7 +258,7 @@ const HeroSection: React.FC<HeroProps> = ({
                                 variants={statsVariants}
                                 initial="hidden"
                                 animate={isLoaded ? "visible" : "hidden"}
-                                className="stat-card bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl p-3.5 hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300 group cursor-default"
+                                className="stat-card bg-white/[0.03] border border-white/[0.06] rounded-xl p-3.5 hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300 group cursor-default"
                             >
                                 <div className="flex items-center gap-2 mb-2">
                                     <div

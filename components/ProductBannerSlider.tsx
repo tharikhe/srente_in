@@ -90,8 +90,8 @@ export default function ProductBannerSlider() {
                         <div className="w-full h-full flex flex-col md:flex-row items-center justify-between p-6 sm:p-12 md:p-16 relative overflow-hidden">
 
                             {/* Decorative Background Patterns */}
-                            <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/4" />
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/5 rounded-full translate-y-1/2 -translate-x-1/4" />
 
                             {/* Text Content */}
                             <div className="relative z-10 w-full md:w-1/2 text-white flex flex-col items-start text-left mb-6 md:mb-0">
@@ -132,7 +132,7 @@ export default function ProductBannerSlider() {
                                     </motion.div>
 
                                     {/* Floating Sparkle/Glow effect behind image */}
-                                    <div className="absolute inset-0 bg-white/20 blur-3xl rounded-full -z-10 scale-75 animate-pulse" />
+
                                 </div>
                             </div>
                         </div>
