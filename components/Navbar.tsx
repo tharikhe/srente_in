@@ -93,7 +93,6 @@ export default function Navbar() {
     const navLinks: { href: string; label: string; badge?: string }[] = [
         { href: '/', label: 'HOME' },
         { href: '/products', label: 'PRODUCTS' },
-        { href: '/manufacturers', label: 'LINE CARD' },
         { href: '/blog', label: 'BLOG' },
         { href: '/events', label: 'EVENTS' },
         { href: '/about', label: 'ABOUT US' },

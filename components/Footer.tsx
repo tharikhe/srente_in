@@ -105,7 +105,6 @@ export default function Footer() {
                         <ul className="space-y-3">
                             {[
                                 { label: 'Product Catalog', href: '/products' },
-                                { label: 'Manufacturers', href: '/manufacturers' },
                                 { label: 'Popular Parts', href: '/popular-parts' },
                                 { label: 'Blog', href: '/blog' },
                                 { label: 'About Us', href: '/about' },
