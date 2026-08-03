@@ -59,6 +59,8 @@ const config: Config = {
                 'slide-down': 'slideDown 0.3s ease-out',
                 'scale-in': 'scaleIn 0.3s ease-out',
                 'shimmer': 'shimmer 2s infinite',
+                'scroll-horizontal': 'scrollHorizontal var(--scroll-duration, 40s) linear infinite',
+                'scroll-horizontal-reverse': 'scrollHorizontalReverse var(--scroll-duration, 40s) linear infinite',
             },
             keyframes: {
                 fadeIn: {
@@ -80,6 +82,14 @@ const config: Config = {
                 shimmer: {
                     '0%': { backgroundPosition: '-200% 0' },
                     '100%': { backgroundPosition: '200% 0' },
+                },
+                scrollHorizontal: {
+                    '0%': { transform: 'translateX(0)' },
+                    '100%': { transform: 'translateX(-50%)' },
+                },
+                scrollHorizontalReverse: {
+                    '0%': { transform: 'translateX(-50%)' },
+                    '100%': { transform: 'translateX(0)' },
                 },
             },
         },

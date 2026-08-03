@@ -1,149 +1,167 @@
 'use client';
 
-import { useState } from 'react';
-import { ChevronDown, HelpCircle, MessageCircle } from 'lucide-react';
-import Link from 'next/link';
+import React from 'react';
+import { HelpCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const faqs = [
     {
         question: 'What type of electronic components do you supply?',
-        answer: 'As top semiconductor distributors in Hong Kong, we supply a comprehensive range of electronic components including integrated circuits (ICs), MOSFET transistors, IGBT modules, Schottky diodes, Zener diodes, rectifier diodes, NPN/PNP transistors, capacitors, resistors, inductors, connectors, and optocoupler transistors. Our inventory covers semiconductor discrete parts, passive components, power semiconductor modules, LCD/OLED displays, touch panels, and connector & cable harnessing solutions from leading manufacturers worldwide.',
+        answer: 'We supply a comprehensive range of electronic components including integrated circuits (ICs), MOSFET transistors, IGBT modules, Schottky diodes, Zener diodes, rectifier diodes, NPN/PNP transistors, capacitors, resistors, inductors, connectors, and optocoupler transistors from leading manufacturers worldwide.',
     },
     {
         question: 'Do you offer warranty on your products?',
-        answer: 'Yes, all our semiconductor components and electronic parts come with a manufacturer warranty. We are ISO 9001:2015 certified and provide full traceability documentation. If you receive any defective components, we offer hassle-free returns and replacements. As authorized semiconductor distributor and electronics parts suppliers in Hong Kong, quality assurance is our top priority.',
+        answer: 'Yes, all our semiconductor components and electronic parts come with a manufacturer warranty. We are ISO 9001:2015 certified and provide full traceability documentation. If you receive any defective components, we offer hassle-free returns and replacements.',
     },
     {
         question: 'What is the minimum order quantity (MOQ)?',
-        answer: 'Our MOQ varies by product. For most standard semiconductor components, we offer flexible quantities starting from 1 piece. For bulk semiconductor components and wholesale orders, we provide significant volume discounts. Contact our sales team for specific MOQ details and semiconductor components price list.',
+        answer: 'Our MOQ varies by product. For most standard semiconductor components, we offer flexible quantities starting from 1 piece. For bulk semiconductor components and wholesale orders, we provide significant volume discounts.',
     },
     {
         question: 'How do I use the BOM Upload Tool?',
-        answer: 'Our BOM (Bill of Materials) sourcing tool allows you to upload your component list in Excel or CSV format. Simply navigate to the BOM Tool page, upload your file, and receive instant quotes for all semiconductor and electronic components. Our electronics procurement team will review and respond within 24 hours with pricing and availability.',
+        answer: 'Our BOM sourcing tool allows you to upload your component list in Excel or CSV format. Simply navigate to the BOM Tool page, upload your file, and receive instant quotes for all semiconductor and electronic components.',
     },
     {
         question: 'What are your Shipping Options and Delivery Time?',
-        answer: 'We offer worldwide shipping with multiple options including express delivery (1-3 days), standard shipping (5-7 days), and economy shipping (10-15 days). We ship from our warehouses in India and Hong Kong for faster regional delivery. As your electronics supply chain partner, we ensure reliable global logistics for all semiconductor components.',
+        answer: 'We offer worldwide shipping with multiple options including express delivery (1-3 days), standard shipping (5-7 days), and economy shipping (10-15 days). We ship from our warehouses in India and Hong Kong for faster regional delivery.',
     },
     {
         question: 'Can you Source Obsolete or Hard-to-Find Components?',
-        answer: 'Yes! We specialize in sourcing obsolete, end-of-life, and hard-to-find electronic components including integrated circuits, MOSFETs, IGBTs, and discrete semiconductor parts. Our global network ensures we locate rare parts. We are authorized distributor partners with Firstohm, Octea, GL Fiber, VITEK, Sonytek, Kingtronics, Palm Technology, Taimates, Isocom, Greenconn, JB Capacitors, Disen, Hongda, Microtech, Romtronic, Smico, Wipin, Yeebo, and YM Tech.',
+        answer: 'Yes! We specialize in sourcing obsolete, end-of-life, and hard-to-find electronic components including integrated circuits, MOSFETs, IGBTs, and discrete semiconductor parts. Our global network ensures we locate rare parts.',
     },
     {
         question: 'Do you Provide Technical Datasheets?',
-        answer: 'Absolutely. We provide complete technical documentation including datasheets, application notes, and compliance certificates for all semiconductor devices and electronic components. These can be downloaded directly from product pages or requested from our support team.',
+        answer: 'Absolutely. We provide complete technical documentation including datasheets, application notes, and compliance certificates for all semiconductor devices and electronic components. These can be downloaded directly or requested from our support team.',
     },
     {
         question: 'What Payment Methods do you accept?',
-        answer: 'We accept various payment methods including bank transfers, credit/debit cards, PayPal, and letters of credit for large orders. For established customers, we also offer flexible payment terms. Contact our semiconductor distribution company for more details.',
+        answer: 'We accept various payment methods including bank transfers, credit/debit cards, PayPal, and letters of credit for large orders. For established customers, we also offer flexible payment terms.',
     },
     {
         question: 'What types of semiconductor devices do you distribute?',
-        answer: 'We distribute a wide range of semiconductor devices: power MOSFETs, NPN and PNP transistors, SiC MOSFETs, GaN semiconductor devices, IGBT modules, power rectifier modules, thyristor modules, silicon controlled rectifiers (SCR), triacs, microcontroller ICs, microprocessor chips, analog and digital ICs, power management ICs (PMIC), RF ICs, logic ICs, memory ICs, and wide bandgap semiconductors. We also supply automotive grade semiconductors and AI chip components.',
+        answer: 'We distribute power MOSFETs, NPN and PNP transistors, SiC MOSFETs, GaN semiconductor devices, IGBT modules, power rectifier modules, thyristor modules, silicon controlled rectifiers (SCR), triacs, microcontroller ICs, memory ICs, and wide bandgap semiconductors.',
     },
     {
         question: 'Which industries do you serve?',
-        answer: 'We provide semiconductor components for automotive and EV applications, solar inverters, telecom equipment, consumer electronics, IoT devices, industrial automation, railways, medical devices, and lighting industries. Our industrial & electronic systems solutions and custom electronics solutions serve OEM & ODM manufacturers globally.',
+        answer: 'We provide semiconductor components for automotive and EV applications, solar inverters, telecom equipment, consumer electronics, IoT devices, industrial automation, railways, medical devices, and lighting industries.',
     },
 ];
 
-export default function FAQ() {
-    const [openIndex, setOpenIndex] = useState<number | null>(0);
+/**
+ * FaqCard
+ * Reusable card for a single FAQ item.
+ */
+export const FaqCard = ({ question, answer }: { question: string; answer: string }) => {
+    return (
+        <div className="flex flex-col items-start gap-4 p-8 bg-[#141414]/80 backdrop-blur-xl border border-white/10 rounded-3xl shadow-xl w-[450px] flex-shrink-0 group hover:border-[#2DAA9E]/50 hover:shadow-[0_0_30px_rgba(45,170,158,0.15)] hover:-translate-y-1 transition-all duration-300">
+            <h3 className="text-xl font-bold text-white group-hover:text-[#2DAA9E] transition-colors">{question}</h3>
+            <p className="text-base text-gray-400 leading-relaxed">{answer}</p>
+        </div>
+    );
+};
 
-    const toggleFAQ = (index: number) => {
-        setOpenIndex(openIndex === index ? null : index);
-    };
+/**
+ * HorizontalScroller
+ * Wraps children and creates a seamless horizontal looping animation.
+ */
+export const HorizontalScroller = ({ 
+    children, 
+    speed = '40s', 
+    direction = 'left' 
+}: { 
+    children: React.ReactNode; 
+    speed?: string; 
+    direction?: 'left' | 'right'; 
+}) => {
+    const animationClass = direction === 'right' ? 'animate-scroll-horizontal-reverse' : 'animate-scroll-horizontal';
+
+    const style = { '--scroll-duration': speed } as React.CSSProperties;
 
     return (
-        <section className="py-16 sm:py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
-            {/* Background Decorations */}
+        <div className="w-full overflow-hidden group relative">
+            {/* Fade masks for smooth edges */}
+            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none"></div>
+            
+            {/* Scrolling track */}
+            <div className={`flex w-max ${animationClass} hover:[animation-play-state:paused]`} style={style}>
+                <div className="flex items-stretch justify-center flex-shrink-0 gap-6 px-3">
+                    {children}
+                </div>
+                {/* Duplicate for seamless loop */}
+                <div className="flex items-stretch justify-center flex-shrink-0 gap-6 px-3" aria-hidden="true">
+                    {children}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default function FAQ() {
+    // Split FAQs into two rows for the double marquee effect
+    const row1 = faqs.slice(0, 5);
+    const row2 = faqs.slice(5, 10);
+
+    return (
+        <section className="py-24 bg-[#0a0a0a] relative overflow-hidden font-sans">
+            {/* Background Ambient Orbs */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-20 right-10 w-72 h-72 bg-brand-teal/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-20 left-10 w-72 h-72 bg-brand-gold/5 rounded-full blur-3xl" />
+                <div className="absolute top-[20%] right-[-5%] w-[400px] h-[400px] bg-[#2DAA9E]/10 rounded-full blur-[120px] mix-blend-screen" />
+                <div className="absolute bottom-[10%] left-[-10%] w-[500px] h-[500px] bg-[#E3D2C3]/5 rounded-full blur-[150px] mix-blend-screen" />
             </div>
 
-            <div className="container mx-auto px-4 relative z-10">
+            <div className="relative z-10 w-full flex flex-col items-center gap-16">
+                
                 {/* Section Header */}
-                <div className="text-center mb-12 sm:mb-16">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-gold/10 rounded-full mb-4">
-                        <HelpCircle className="w-4 h-4 text-brand-gold" />
-                        <span className="text-sm font-semibold text-brand-gold uppercase tracking-wider">FAQ</span>
-                    </div>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                        Frequently Asked
-                        <span className="bg-gradient-to-r from-brand-teal to-brand-gold bg-clip-text text-transparent"> Questions</span>
-                    </h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-                        Find answers to common questions about our products, services, and ordering process
-                    </p>
+                <div className="flex flex-col items-center gap-6 text-center max-w-3xl px-4 mx-auto">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2DAA9E]/10 border border-[#2DAA9E]/30 text-[#2DAA9E] text-sm font-semibold"
+                    >
+                        <HelpCircle className="w-4 h-4" />
+                        <span className="uppercase tracking-wider">FAQ</span>
+                    </motion.div>
+                    
+                    <motion.h2 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight tracking-tight"
+                    >
+                        Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2DAA9E] to-emerald-400">Questions</span>
+                    </motion.h2>
+                    
+                    <motion.p 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                        className="text-lg text-gray-400 font-medium"
+                    >
+                        Find answers to common questions about our electronic components, services, and the global ordering process.
+                    </motion.p>
                 </div>
 
-                {/* FAQ Grid */}
-                <div className="max-w-4xl mx-auto">
-                    <div className="space-y-4">
-                        {faqs.map((faq, index) => (
-                            <div
-                                key={index}
-                                className={`bg-white rounded-2xl border-2 transition-all duration-300 overflow-hidden ${openIndex === index
-                                    ? 'border-brand-teal shadow-lg shadow-brand-teal/10'
-                                    : 'border-gray-100 hover:border-gray-200 shadow-sm hover:shadow-md'
-                                    }`}
-                            >
-                                <button
-                                    onClick={() => toggleFAQ(index)}
-                                    className="w-full flex items-center justify-between p-5 sm:p-6 text-left"
-                                >
-                                    <div className="flex items-start gap-4">
-                                        <div className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold transition-colors ${openIndex === index
-                                            ? 'bg-brand-teal text-white'
-                                            : 'bg-gray-100 text-gray-500'
-                                            }`}>
-                                            {String(index + 1).padStart(2, '0')}
-                                        </div>
-                                        <h3 className={`font-semibold text-base sm:text-lg transition-colors ${openIndex === index ? 'text-brand-teal' : 'text-gray-900'
-                                            }`}>
-                                            {faq.question}
-                                        </h3>
-                                    </div>
-                                    <ChevronDown
-                                        className={`w-5 h-5 flex-shrink-0 ml-4 transition-transform duration-300 ${openIndex === index
-                                            ? 'transform rotate-180 text-brand-teal'
-                                            : 'text-gray-400'
-                                            }`}
-                                    />
-                                </button>
-
-                                <div className={`overflow-hidden transition-all duration-300 ${openIndex === index ? 'max-h-96' : 'max-h-0'
-                                    }`}>
-                                    <div className="px-5 sm:px-6 pb-5 sm:pb-6 pl-16 sm:pl-[72px]">
-                                        <p className="text-gray-600 leading-relaxed">
-                                            {faq.answer}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                {/* Infinite Scrolling Rows */}
+                <div className="flex flex-col gap-6 w-full">
+                    {/* Top Row - Scrolls Left */}
+                    <HorizontalScroller speed="45s" direction="left">
+                        {row1.map((item, index) => (
+                            <FaqCard key={index} question={item.question} answer={item.answer} />
                         ))}
-                    </div>
-                </div>
+                    </HorizontalScroller>
 
-                {/* Still Have Questions CTA */}
-                <div className="mt-12 sm:mt-16 text-center">
-                    <div className="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-6 sm:p-8 bg-gradient-to-r from-brand-teal/5 via-white to-brand-gold/5 rounded-2xl border border-gray-100">
-                        <div className="p-4 bg-brand-teal/10 rounded-2xl">
-                            <MessageCircle className="w-8 h-8 text-brand-teal" />
-                        </div>
-                        <div className="text-center sm:text-left">
-                            <h3 className="text-xl font-bold text-gray-900 mb-1">Still have questions?</h3>
-                            <p className="text-gray-600">Our support team is here to help you</p>
-                        </div>
-                        <Link
-                            href="/contact"
-                            className="px-6 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-brand-teal/30"
-                        >
-                            Contact Support
-                        </Link>
-                    </div>
+                    {/* Bottom Row - Scrolls Right */}
+                    <HorizontalScroller speed="55s" direction="right">
+                        {row2.map((item, index) => (
+                            <FaqCard key={index} question={item.question} answer={item.answer} />
+                        ))}
+                    </HorizontalScroller>
                 </div>
+                
             </div>
         </section>
     );
