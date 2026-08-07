@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter } from "next/font/google";
+import { Inter, Syne, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,6 +14,18 @@ import SmoothScroll from "@/components/SmoothScroll";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: 'swap',
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-syne",
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: 'swap',
 });
 
@@ -101,7 +113,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans bg-brand-surface text-brand-text min-h-screen flex flex-col antialiased`}>
+      <body className={`${inter.variable} ${syne.variable} ${jetbrainsMono.variable} font-sans bg-brand-surface text-brand-text min-h-screen flex flex-col antialiased`}>
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe

@@ -13,7 +13,7 @@ export default function Schema() {
         "description": "Serente Electronics Pvt. Ltd. is a technology-driven Electronics Manufacturing Services (EMS) and global electronic component solutions company, specializing in electronic components distribution, integrated circuits (ICs), MOSFETs, IGBTs, diodes, transistors, passive components, LCD/OLED displays, and connector & cable harnessing solutions.",
         "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+91 86607 44258",
+            "telephone": "+91 80881 31316",
             "contactType": "technical support",
             "areaServed": ["IN", "US", "EU", "GB", "CN"],
             "availableLanguage": "en"
@@ -30,7 +30,7 @@ export default function Schema() {
         "image": "https://www.serente.in/icon.png",
         "@id": "https://www.serente.in/",
         "url": "https://www.serente.in/",
-        "telephone": "+91 86607 44258",
+        "telephone": "+91 80881 31316",
         "email": "hello@serenteelectronics.com",
         "description": "Leading Electronics Manufacturing Services (EMS) & electronic components distributor. Authorized distributor of electronic components including integrated circuits, power semiconductor devices, MOSFETs, IGBTs, diodes, transistors, passive components (capacitors, resistors, inductors), LCD/OLED displays and touch panels.",
         "address": {

@@ -102,7 +102,7 @@ export default function TermsAndConditions() {
                             <address className="not-italic bg-gray-50 p-6 rounded-xl border border-gray-100">
                                 <strong>Serente Electronics Pvt. Ltd.</strong><br />
                                 Email: <a href="mailto:hello@serenteelectronics.com" className="text-brand-teal hover:underline">hello@serenteelectronics.com</a><br />
-                                Phone: +91 86607 44258
+                                Phone: +91 80881 31316
                             </address>
                         </div>
                     </div>

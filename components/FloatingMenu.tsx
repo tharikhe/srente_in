@@ -1,18 +1,15 @@
 'use client';
 
-import { ShoppingCart, Phone, Mail, MessageCircle, ArrowUp, MessageSquare } from 'lucide-react';
-import Link from 'next/link';
+import { Phone, Mail, ArrowUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
     <img src="/whatsapp-logo.png" alt="WhatsApp" className={className} />
 );
 
-import { useCart } from '@/context/CartContext';
-
 export default function FloatingMenu() {
     const [isVisible, setIsVisible] = useState(false);
-    const { cartCount } = useCart();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,67 +19,77 @@ export default function FloatingMenu() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const menuItems: {
-        icon: any;
-        label: string;
-        href: string;
-        color: string;
-        badge?: string;
-        badgeColor?: string;
-    }[] = [
-            {
-                icon: Phone,
-                label: 'Call Us',
-                href: 'tel:+918660744258',
-                color: 'text-[#F39800]', // Orange
-            },
-            {
-                icon: Mail,
-                label: 'Email Us',
-                href: 'mailto:hello@serenteelectronics.com',
-                color: 'text-[#448ACA]', // Blue
-            },
-            {
-                icon: WhatsAppIcon,
-                label: 'WhatsApp',
-                href: 'https://wa.me/918660744258',
-                color: '', // Image has its own color
-            },
-        ];
+    const menuItems = [
+        {
+            icon: Phone,
+            label: 'Call Us',
+            href: 'tel:+918088131316',
+            hoverColor: 'group-hover:text-[#E3D2C3]', // Brand Gold
+            bgHover: 'hover:bg-[#1A1A1A]',
+        },
+        {
+            icon: Mail,
+            label: 'Email Us',
+            href: 'mailto:hello@serenteelectronics.com',
+            hoverColor: 'group-hover:text-[#2DAA9E]', // Brand Teal
+            bgHover: 'hover:bg-[#1A1A1A]',
+        },
+        {
+            icon: WhatsAppIcon,
+            label: 'WhatsApp',
+            href: 'https://wa.me/918088131316',
+            hoverColor: '', 
+            bgHover: 'hover:bg-[#1A1A1A]',
+            isImage: true
+        },
+    ];
 
     return (
-        <div className="fixed right-0 top-1/2 -translate-y-1/2 z-50 flex flex-col shadow-lg bg-white rounded-l-lg overflow-hidden border border-gray-100">
-            {menuItems.map((item, index) => (
-                <a
-                    key={index}
-                    href={item.href}
-                    className="relative w-12 h-12 flex items-center justify-center hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0 group"
-                    title={item.label}
-                >
-                    <item.icon className={`w-6 h-6 ${item.color}`} />
+        <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+            className="fixed right-5 bottom-24 z-50 flex flex-col gap-4 items-center"
+        >
+            {/* Main Interaction Pill */}
+            <div className="flex flex-col gap-2 p-2 bg-white/70 dark:bg-black/40 backdrop-blur-xl rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-white/50 dark:border-white/10">
+                {menuItems.map((item, index) => (
+                    <a
+                        key={index}
+                        href={item.href}
+                        className={`relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-400 ${item.bgHover} group`}
+                        title={item.label}
+                    >
+                        {item.isImage ? (
+                            <item.icon className="w-5 h-5 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-400" />
+                        ) : (
+                            <item.icon className={`w-5 h-5 text-gray-600 dark:text-gray-400 ${item.hoverColor} group-hover:scale-110 transition-all duration-400`} />
+                        )}
 
-                    {/* Badge for Cart */}
-                    {item.badge && (
-                        <span className={`absolute top-1 right-1 w-4 h-4 ${item.badgeColor} text-white text-[10px] font-bold rounded-full flex items-center justify-center`}>
-                            {item.badge}
+                        {/* Tooltip */}
+                        <span className="absolute right-full mr-4 bg-[#1A1A1A] text-white font-mono text-[10px] uppercase tracking-widest px-3 py-1.5 rounded-sm opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0 pointer-events-none whitespace-nowrap shadow-lg border border-white/10">
+                            {item.label}
                         </span>
-                    )}
+                    </a>
+                ))}
+            </div>
 
-                    {/* Tooltip */}
-                    <span className="absolute right-full mr-2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                        {item.label}
-                    </span>
-                </a>
-            ))}
-
-            {/* Back to Top */}
-            <button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className={`w-12 h-12 flex items-center justify-center hover:bg-gray-50 transition-colors border-t-2 border-gray-100 group ${isVisible ? 'block' : 'hidden'}`}
-                title="Back to Top"
-            >
-                <ArrowUp className="w-6 h-6 text-brand-text" />
-            </button>
-        </div>
+            {/* Back to Top Button */}
+            <AnimatePresence>
+                {isVisible && (
+                    <motion.button
+                        initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.5, y: 20 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        className="w-16 h-16 bg-white/70 dark:bg-black/40 hover:bg-[#2DAA9E] backdrop-blur-xl border border-white/50 dark:border-white/10 text-gray-600 hover:text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-400 group"
+                        title="Back to Top"
+                    >
+                        <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
+                    </motion.button>
+                )}
+            </AnimatePresence>
+        </motion.div>
     );
 }

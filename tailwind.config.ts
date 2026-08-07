@@ -43,8 +43,9 @@ const config: Config = {
             },
             fontFamily: {
                 sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+                display: ['var(--font-syne)', 'system-ui', 'sans-serif'],
                 serif: ['Georgia', 'Cambria', 'serif'],
-                mono: ['JetBrains Mono', 'Consolas', 'monospace'],
+                mono: ['var(--font-mono)', 'Consolas', 'monospace'],
             },
             boxShadow: {
                 'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',

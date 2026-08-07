@@ -114,40 +114,18 @@ const ExpandableChatFooter: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
 
 ExpandableChatFooter.displayName = "ExpandableChatFooter";
 
-interface ExpandableChatToggleProps
-    extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    icon?: React.ReactNode;
-    isOpen: boolean;
-    toggleChat: () => void;
-}
-
-// Premium Animated Chat Icon
+// Premium Minimalist Chat Icon
 const AnimatedChatIcon = () => (
     <svg
         viewBox="0 0 24 24"
-        className="w-7 h-7"
+        className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-[#2DAA9E] transition-colors duration-300"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
     >
-        {/* Chat bubble with gradient */}
-        <defs>
-            <linearGradient id="chatGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#ffffff" />
-                <stop offset="100%" stopColor="#E3D2C3" />
-            </linearGradient>
-        </defs>
-
-        {/* Main chat bubble */}
-        <path
-            d="M12 2C6.48 2 2 5.92 2 10.7c0 2.53 1.24 4.81 3.2 6.35V21l3.8-2.13c.95.26 1.96.4 3 .4 5.52 0 10-3.92 10-8.27S17.52 2 12 2z"
-            fill="url(#chatGradient)"
-            className="drop-shadow-sm"
-        />
-
-        {/* Animated dots */}
-        <circle cx="8" cy="10.5" r="1.2" fill="#2DAA9E" className="animate-pulse" style={{ animationDelay: '0ms' }} />
-        <circle cx="12" cy="10.5" r="1.2" fill="#2DAA9E" className="animate-pulse" style={{ animationDelay: '150ms' }} />
-        <circle cx="16" cy="10.5" r="1.2" fill="#2DAA9E" className="animate-pulse" style={{ animationDelay: '300ms' }} />
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
     </svg>
 );
 
@@ -159,97 +137,43 @@ const ExpandableChatToggle: React.FC<ExpandableChatToggleProps> = ({
     ...props
 }) => (
     <div className="relative">
-        {/* Animated pulse ring - only when closed */}
-        {!isOpen && (
-            <>
-                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-brand-teal to-brand-gold opacity-40 animate-ping" />
-                <span className="absolute -inset-1 rounded-full bg-gradient-to-r from-brand-teal via-brand-gold to-brand-teal opacity-20 blur-md animate-pulse" />
-            </>
-        )}
-
-        {/* Main button with squeeze animation */}
+        {/* Main glassmorphic button */}
         <button
             onClick={toggleChat}
             className={cn(
-                "chat-toggle-btn relative w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300",
-                "bg-gradient-to-br from-brand-teal via-brand-teal-light to-brand-teal",
-                "border-2 border-brand-gold/50",
-                "shadow-lg shadow-brand-teal/30",
-                "hover:shadow-xl hover:shadow-brand-gold/40",
-                "hover:border-brand-gold",
-                "active:scale-95",
+                "relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-400",
+                "bg-white/80 dark:bg-black/60 backdrop-blur-xl border border-white/50 dark:border-white/10",
+                "shadow-[0_8px_32px_rgba(0,0,0,0.1)]",
+                "hover:shadow-[0_8px_32px_rgba(45,170,158,0.2)] hover:scale-105 active:scale-95",
                 "group",
                 isOpen ? "hidden sm:flex" : "",
                 className,
             )}
             {...props}
         >
-            {/* Glow effect on hover */}
-            <span className="absolute inset-0 rounded-full bg-gradient-to-tr from-brand-gold/0 via-brand-gold/20 to-brand-gold/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-            {/* Icon container with animation */}
+            {/* Icon container */}
             <span className={cn(
-                "relative z-10 text-white transition-transform duration-300",
-                isOpen ? "rotate-0" : ""
+                "relative z-10 transition-transform duration-300",
+                isOpen ? "rotate-90 scale-0 opacity-0 absolute" : "rotate-0 scale-100 opacity-100"
             )}>
-                {isOpen ? (
-                    <X className="h-7 w-7 drop-shadow-md" />
-                ) : (
-                    icon || <AnimatedChatIcon />
-                )}
+                {icon || <AnimatedChatIcon />}
+            </span>
+
+            {/* Close Icon */}
+            <span className={cn(
+                "absolute inset-0 flex items-center justify-center transition-transform duration-300",
+                isOpen ? "rotate-0 scale-100 opacity-100 text-gray-700 dark:text-gray-300" : "-rotate-90 scale-0 opacity-0"
+            )}>
+                <X className="h-6 w-6" />
             </span>
 
             {/* Online indicator dot */}
             {!isOpen && (
-                <span className="absolute top-0.5 right-0.5 w-4 h-4 bg-green-400 rounded-full border-2 border-white shadow-sm">
-                    <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
+                <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white dark:border-black shadow-sm">
+                    <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75" />
                 </span>
             )}
         </button>
-
-        {/* Squeeze animation styles */}
-        <style jsx>{`
-            .chat-toggle-btn {
-                animation: float 3s ease-in-out infinite;
-            }
-
-            .chat-toggle-btn:hover {
-                animation: squeeze 0.9s ease-out;
-            }
-
-            @keyframes float {
-                0%, 100% {
-                    transform: translateY(0px);
-                }
-                50% {
-                    transform: translateY(-6px);
-                }
-            }
-
-            @keyframes squeeze {
-                0% {
-                    transform: scale3d(1, 1, 1);
-                }
-                30% {
-                    transform: scale3d(1.2, 0.8, 1);
-                }
-                40% {
-                    transform: scale3d(0.8, 1.2, 1);
-                }
-                50% {
-                    transform: scale3d(1.1, 0.9, 1);
-                }
-                65% {
-                    transform: scale3d(0.95, 1.05, 1);
-                }
-                75% {
-                    transform: scale3d(1.03, 0.97, 1);
-                }
-                100% {
-                    transform: scale3d(1, 1, 1);
-                }
-            }
-        `}</style>
     </div>
 );
 

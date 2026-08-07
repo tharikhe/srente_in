@@ -120,8 +120,8 @@ export default function ContactClient() {
                                     </div>
                                     <div>
                                         <p className="text-sm font-medium text-gray-400 mb-1">Call Us</p>
-                                        <a href="tel:+918660744258" className="text-lg font-semibold text-white hover:text-[#E3D2C3] transition-colors">
-                                            +91 86607 44258
+                                        <a href="tel:+918088131316" className="text-lg font-semibold text-white hover:text-[#E3D2C3] transition-colors">
+                                            +91 80881 31316
                                         </a>
                                     </div>
                                 </div>

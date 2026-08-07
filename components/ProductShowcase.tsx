@@ -46,12 +46,9 @@ const productShowcase = [
 
 export default function ProductShowcase() {
     return (
-        <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        <section className="py-16 sm:py-24 bg-white relative overflow-hidden">
             {/* Background Decorations */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-teal/5 rounded-full opacity-60" />
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-gold/5 rounded-full opacity-60" />
-            </div>
+            <div className="absolute inset-0 bg-dot-matrix" />
 
             <div className="container mx-auto px-4 relative z-10">
                 {/* Section Header */}
@@ -60,9 +57,9 @@ export default function ProductShowcase() {
                         <Package className="w-4 h-4 text-brand-teal" />
                         <span className="text-sm font-semibold text-brand-teal uppercase tracking-wider">Our Products</span>
                     </div>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
                         Premium Electronic
-                        <span className="bg-gradient-to-r from-brand-teal to-brand-gold bg-clip-text text-transparent"> Components</span>
+                        <span className="text-[#2DAA9E]"> Components</span>
                     </h2>
                     <p className="text-gray-600 max-w-2xl mx-auto text-lg">
                         Explore our extensive range of high-quality electronic components from trusted manufacturers worldwide
@@ -78,7 +75,7 @@ export default function ProductShowcase() {
                             className="group relative block"
                         >
                             {/* Card Shell */}
-                            <div className="relative bg-white rounded-sm overflow-hidden shadow-[0_1px_13px_rgba(0,0,0,0.1)] transition-all duration-200 active:scale-[0.98] h-[330px] sm:h-[370px] flex flex-col">
+                            <div className="bento-box tech-border relative overflow-hidden h-[330px] sm:h-[370px] flex flex-col">
                                 {/* Image Area */}
                                 <div className="relative flex-grow bg-[#f1f1f1] flex items-center justify-center overflow-hidden">
                                     <Image
@@ -100,14 +97,14 @@ export default function ProductShowcase() {
 
                                 {/* Bottom Info */}
                                 <div className="px-4 py-3 pb-5 relative z-10 bg-white">
-                                    <h3 className="text-sm font-semibold text-[#1A1A1A] leading-snug group-hover:text-[#2DAA9E] transition-colors">
+                                    <h3 className="font-display text-sm font-semibold text-[#1A1A1A] leading-snug group-hover:text-[#2DAA9E] transition-colors">
                                         {product.title}
                                     </h3>
                                     <p className="text-xs text-gray-500 mt-1 line-clamp-1">
                                         {product.description}
                                     </p>
                                     <span
-                                        className="inline-block mt-1.5 text-xs font-extrabold tracking-wide"
+                                        className="inline-block mt-1.5 text-xs font-mono font-bold tracking-wide"
                                         style={{ color: product.accent }}
                                     >
                                         {product.stats}
@@ -137,7 +134,7 @@ export default function ProductShowcase() {
                                     <span className="text-xs font-bold text-[#2DAA9E] uppercase tracking-wider">Ready to Ship Globally</span>
                                 </div>
 
-                                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1A1A1A] mb-4">
+                                <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1A1A1A] mb-4 tracking-tight">
                                     Massive <span className="text-[#2DAA9E]">Inventory</span>
                                 </h3>
 

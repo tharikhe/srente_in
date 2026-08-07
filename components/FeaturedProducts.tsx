@@ -31,8 +31,8 @@ export default function FeaturedProducts() {
             {/* Section Header */}
             <div className="flex items-center justify-between mb-6 sm:mb-8">
                 <div>
-                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-text">Featured Products</h2>
-                    <p className="text-brand-text-muted mt-1 text-sm sm:text-base">Hand-picked components for your next project</p>
+                    <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-brand-text tracking-tight">Featured Products</h2>
+                    <p className="text-brand-text-muted mt-2 text-sm sm:text-base font-mono">Hand-picked components for your next project</p>
                 </div>
                 <Link
                     href="/products"
@@ -48,7 +48,7 @@ export default function FeaturedProducts() {
                 {featured.map((product, index) => (
                     <div
                         key={`${product.partNumber}-${index}`}
-                        className="group bg-white rounded-xl sm:rounded-2xl shadow-soft hover:shadow-strong transition-all duration-300 overflow-hidden border border-brand-border hover:border-brand-gold"
+                        className="bento-box tech-border group relative overflow-hidden flex flex-col"
                     >
                         {/* Category Badge */}
                         <div className="relative h-28 sm:h-48 bg-brand-surface border-b border-brand-border flex items-center justify-center p-2 sm:p-4 group-hover:bg-white transition-colors">

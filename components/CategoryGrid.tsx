@@ -39,8 +39,8 @@ export default function CategoryGrid() {
             {/* Section Header */}
             <div className="flex items-center justify-between mb-6 sm:mb-8">
                 <div>
-                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-text">Browse Electronic Components by Category</h2>
-                    <p className="text-brand-text-muted mt-1 text-sm sm:text-base">Find semiconductor components, ICs, MOSFETs, diodes, passive components and more across all major categories</p>
+                    <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-brand-text tracking-tight">Browse Electronic Components by Category</h2>
+                    <p className="text-brand-text-muted mt-2 text-sm sm:text-base font-mono">Find semiconductor components, ICs, MOSFETs, diodes, passive components and more across all major categories</p>
                 </div>
                 <Link
                     href="/products"
@@ -63,7 +63,7 @@ export default function CategoryGrid() {
                         <Link
                             key={category}
                             href={getCategoryPath(category)}
-                            className="group relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-soft hover:shadow-strong transition-all duration-300 border border-brand-border hover:border-brand-gold overflow-hidden"
+                            className="bento-box tech-border group relative p-4 sm:p-6 overflow-hidden"
                             style={{ animationDelay: `${index * 50}ms` }}
                         >
                             {/* Background Accent */}
@@ -76,7 +76,7 @@ export default function CategoryGrid() {
                                 </div>
 
                                 {/* Title */}
-                                <h3 className="font-semibold text-brand-text mb-0.5 sm:mb-1 group-hover:text-brand-teal transition-colors duration-200 text-sm sm:text-base">
+                                <h3 className="font-display font-semibold text-brand-text mb-0.5 sm:mb-1 group-hover:text-brand-teal transition-colors duration-200 text-sm sm:text-base">
                                     {category}
                                 </h3>
 
