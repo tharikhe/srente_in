@@ -1,79 +1,446 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useMemo, useState } from 'react';
+
+const INTRO_STYLE_ID = 'faq-serente-animations';
 
 const faqs = [
-    {
-        question: 'What type of electronic components do you supply?',
-        answer: 'We supply a comprehensive range of electronic components including integrated circuits (ICs), MOSFET transistors, IGBT modules, Schottky diodes, Zener diodes, rectifier diodes, NPN/PNP transistors, capacitors, resistors, inductors, connectors, and optocoupler transistors from leading manufacturers worldwide.',
-    },
-    {
-        question: 'Do you offer warranty on your products?',
-        answer: 'Yes, all our semiconductor components and electronic parts come with a manufacturer warranty. We are ISO 9001:2015 certified and provide full traceability documentation. If you receive any defective components, we offer hassle-free returns and replacements.',
-    },
-    {
-        question: 'How do I use the BOM Upload Tool?',
-        answer: 'Our BOM sourcing tool allows you to upload your component list in Excel or CSV format. Simply navigate to the BOM Tool page, upload your file, and receive instant quotes for all semiconductor and electronic components.',
-    },
-    {
-        question: 'Can you Source Obsolete or Hard-to-Find Components?',
-        answer: 'Yes! We specialize in sourcing obsolete, end-of-life, and hard-to-find electronic components including integrated circuits, MOSFETs, IGBTs, and discrete semiconductor parts. Our global network ensures we locate rare parts.',
-    }
+  {
+    question: 'What types of semiconductor and passive components do you supply?',
+    answer:
+      'We supply a comprehensive range of components including ICs, MOSFETs, IGBTs, Schottky diodes, capacitors, resistors, LCD/OLED displays, and connector & cable harnessing solutions from authorized global manufacturers.',
+    meta: 'Sourcing',
+  },
+  {
+    question: 'How do you validate component quality and authenticity before shipping?',
+    answer:
+      'All components undergo strict inspection in ISO 9001:2015 certified facilities. We perform visual verification, pin-out testing, X-ray analysis, and supply full Certificate of Conformance (CoC) documentation with complete batch traceability.',
+    meta: 'Quality',
+  },
+  {
+    question: 'Can you source obsolete or hard-to-find semiconductor components?',
+    answer:
+      'Yes. We specialize in locating obsolete, allocated, and end-of-life (EOL) electronic parts through our global verified distributor network, minimizing supply chain disruptions for critical OEM builds.',
+    meta: 'Supply Chain',
+  },
+  {
+    question: 'How does the automated BOM Sourcing Tool operate?',
+    answer:
+      'Upload your Bill of Materials (BOM) in Excel or CSV format. Our automated system cross-references part numbers, analyzes lifecycle availability, and generates competitive volume quotes within minutes.',
+    meta: 'BOM Tool',
+  },
 ];
 
+const palettes = {
+  dark: {
+    surface: 'bg-[#0D0D0D] text-white',
+    panel: 'bg-[#141414]/80 backdrop-blur-xl',
+    border: 'border-white/10 hover:border-[#FFFF00]/40',
+    heading: 'text-white',
+    muted: 'text-gray-400',
+    iconRing: 'border-[#FFFF00]/40',
+    iconSurface: 'bg-[#FFFF00]/10',
+    icon: 'text-[#FFFF00]',
+    toggle: 'border-[#FFFF00]/40 text-[#FFFF00]',
+    toggleSurface: 'bg-black/50',
+    glow: 'rgba(255, 255, 0, 0.12)',
+    aurora: 'radial-gradient(ellipse 50% 100% at 10% 0%, rgba(255, 255, 0, 0.08), transparent 65%), #0A0A0A',
+    shadow: 'shadow-[0_20px_80px_-40px_rgba(255,255,0,0.15)]',
+    overlay: 'linear-gradient(130deg, rgba(255,255,0,0.03) 0%, transparent 65%)',
+  },
+  light: {
+    surface: 'bg-slate-100 text-neutral-900',
+    panel: 'bg-white/80 backdrop-blur-xl',
+    border: 'border-neutral-200 hover:border-[#FFFF00]',
+    heading: 'text-neutral-900',
+    muted: 'text-neutral-600',
+    iconRing: 'border-neutral-400',
+    iconSurface: 'bg-neutral-900/5',
+    icon: 'text-neutral-900',
+    toggle: 'border-neutral-300 text-neutral-900',
+    toggleSurface: 'bg-white',
+    glow: 'rgba(15, 15, 15, 0.08)',
+    aurora: 'radial-gradient(ellipse 50% 100% at 10% 0%, rgba(255, 255, 0, 0.15), rgba(255, 255, 255, 0.95) 70%)',
+    shadow: 'shadow-[0_36px_120px_-70px_rgba(15,15,15,0.18)]',
+    overlay: 'linear-gradient(130deg, rgba(15,23,42,0.08) 0%, transparent 70%)',
+  },
+};
+
 export default function FAQ() {
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const getRootTheme = () => {
+    if (typeof document === 'undefined') return 'dark';
+    if (document.documentElement.classList.contains('light')) return 'light';
+    return 'dark';
+  };
 
-    return (
-        <section className="bg-[#1A1A1A] py-32 relative overflow-hidden min-h-screen flex flex-col justify-center">
-            
-            <div className="container-fluid mx-auto max-w-7xl relative z-20">
-                <div className="mb-24 flex items-baseline gap-4">
-                    <span className="font-mono text-[#E3D2C3] text-sm font-bold">[ FAQ ]</span>
-                    <h2 className="font-display text-4xl md:text-6xl text-white font-bold tracking-tighter">INQUIRIES</h2>
-                </div>
+  const [theme, setTheme] = useState(getRootTheme);
+  const [introReady, setIntroReady] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [hasEntered, setHasEntered] = useState(false);
 
-                <div className="flex flex-col border-t border-white/10">
-                    {faqs.map((faq, idx) => (
-                        <div 
-                            key={idx}
-                            className="group relative border-b border-white/10 py-12 md:py-16 transition-colors duration-500 hover:border-white/40 cursor-pointer"
-                            onMouseEnter={() => setHoveredIndex(idx)}
-                            onMouseLeave={() => setHoveredIndex(null)}
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    if (document.getElementById(INTRO_STYLE_ID)) return;
+    const style = document.createElement('style');
+    style.id = INTRO_STYLE_ID;
+    style.innerHTML = `
+      @keyframes faq1-fade-up {
+        0% { transform: translate3d(0, 20px, 0); opacity: 0; filter: blur(6px); }
+        60% { filter: blur(0); }
+        100% { transform: translate3d(0, 0, 0); opacity: 1; filter: blur(0); }
+      }
+      @keyframes faq1-beam-spin {
+        0% { transform: rotate(0deg) scale(1); }
+        100% { transform: rotate(360deg) scale(1); }
+      }
+      @keyframes faq1-pulse {
+        0% { transform: scale(0.7); opacity: 0.55; }
+        60% { opacity: 0.1; }
+        100% { transform: scale(1.25); opacity: 0; }
+      }
+      @keyframes faq1-meter {
+        0%, 20% { transform: scaleX(0); transform-origin: left; }
+        45%, 60% { transform: scaleX(1); transform-origin: left; }
+        80%, 100% { transform: scaleX(0); transform-origin: right; }
+      }
+      @keyframes faq1-tick {
+        0%, 30% { transform: translateX(-6px); opacity: 0.4; }
+        50% { transform: translateX(2px); opacity: 1; }
+        100% { transform: translateX(20px); opacity: 0; }
+      }
+      .faq1-intro {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        padding: 0.85rem 1.4rem;
+        border-radius: 9999px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 0, 0.3);
+        background: rgba(12, 12, 12, 0.6);
+        color: #FFFF00;
+        text-transform: uppercase;
+        letter-spacing: 0.35em;
+        font-size: 0.65rem;
+        width: 100%;
+        max-width: 24rem;
+        margin: 0 auto;
+        opacity: 0;
+        transform: translate3d(0, 12px, 0);
+        filter: blur(8px);
+        transition: opacity 720ms ease, transform 720ms ease, filter 720ms ease;
+        isolation: isolate;
+      }
+      .faq1-intro--light {
+        border-color: rgba(17, 17, 17, 0.12);
+        background: rgba(248, 250, 252, 0.88);
+        color: rgba(15, 23, 42, 0.78);
+      }
+      .faq1-intro--active {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        filter: blur(0);
+      }
+      .faq1-intro__beam,
+      .faq1-intro__pulse {
+        position: absolute;
+        inset: -110%;
+        pointer-events: none;
+        border-radius: 50%;
+      }
+      .faq1-intro__beam {
+        background: conic-gradient(from 160deg, rgba(255, 255, 0, 0.3), transparent 32%, rgba(255, 255, 0, 0.2) 58%, transparent 78%, rgba(255, 255, 0, 0.2));
+        animation: faq1-beam-spin 18s linear infinite;
+        opacity: 0.65;
+      }
+      .faq1-intro--light .faq1-intro__beam {
+        background: conic-gradient(from 180deg, rgba(15, 23, 42, 0.18), transparent 30%, rgba(71, 85, 105, 0.18) 58%, transparent 80%, rgba(15, 23, 42, 0.14));
+      }
+      .faq1-intro__pulse {
+        border: 1px solid #FFFF00;
+        opacity: 0.35;
+        animation: faq1-pulse 3.4s ease-out infinite;
+      }
+      .faq1-intro__label {
+        position: relative;
+        z-index: 1;
+        font-weight: 700;
+        letter-spacing: 0.4em;
+      }
+      .faq1-intro__meter {
+        position: relative;
+        z-index: 1;
+        flex: 1 1 auto;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #FFFF00 35%, transparent 85%);
+        transform: scaleX(0);
+        transform-origin: left;
+        animation: faq1-meter 5.8s ease-in-out infinite;
+        opacity: 0.8;
+      }
+      .faq1-intro__tick {
+        position: relative;
+        z-index: 1;
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 9999px;
+        background: #FFFF00;
+        box-shadow: 0 0 0 4px rgba(255, 255, 0, 0.2);
+        animation: faq1-tick 3.2s ease-in-out infinite;
+      }
+      .faq1-intro--light .faq1-intro__tick {
+        box-shadow: 0 0 0 4px rgba(15, 15, 15, 0.08);
+      }
+      .faq1-fade {
+        opacity: 0;
+        transform: translate3d(0, 24px, 0);
+        filter: blur(12px);
+        transition: opacity 700ms ease, transform 700ms ease, filter 700ms ease;
+      }
+      .faq1-fade--ready {
+        animation: faq1-fade-up 860ms cubic-bezier(0.22, 0.68, 0, 1) forwards;
+      }
+    `;
+
+    document.head.appendChild(style);
+
+    return () => {
+      if (style.parentNode) style.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      setIntroReady(true);
+      return;
+    }
+    const frame = window.requestAnimationFrame(() => setIntroReady(true));
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    const applyThemeFromRoot = () => setTheme(getRootTheme());
+
+    applyThemeFromRoot();
+
+    const observer = new MutationObserver(applyThemeFromRoot);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class', 'data-theme'],
+    });
+
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === 'bento-theme') applyThemeFromRoot();
+    };
+
+    window.addEventListener('storage', handleStorage);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('storage', handleStorage);
+    };
+  }, []);
+
+  const palette = useMemo(() => palettes[theme as 'dark' | 'light'] || palettes.dark, [theme]);
+
+  const toggleTheme = () => {
+    if (typeof document === 'undefined') return;
+    const root = document.documentElement;
+    const next = root.classList.contains('light') ? 'dark' : 'light';
+    root.classList.toggle('dark', next === 'dark');
+    root.classList.toggle('light', next === 'light');
+    setTheme(next);
+    try {
+      window.localStorage?.setItem('bento-theme', next);
+    } catch (_err) {
+      /* ignore */
+    }
+  };
+
+  const toggleQuestion = (index: number) => setActiveIndex((prev) => (prev === index ? -1 : index));
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      setHasEntered(true);
+      return;
+    }
+
+    let timeout: number;
+    const onLoad = () => {
+      timeout = window.setTimeout(() => setHasEntered(true), 120);
+    };
+
+    if (document.readyState === 'complete') {
+      onLoad();
+    } else {
+      window.addEventListener('load', onLoad, { once: true });
+    }
+
+    return () => {
+      window.removeEventListener('load', onLoad);
+      window.clearTimeout(timeout);
+    };
+  }, []);
+
+  const setCardGlow = (event: React.MouseEvent<HTMLLIElement>) => {
+    const target = event.currentTarget;
+    const rect = target.getBoundingClientRect();
+    target.style.setProperty('--faq-x', `${event.clientX - rect.left}px`);
+    target.style.setProperty('--faq-y', `${event.clientY - rect.top}px`);
+  };
+
+  const clearCardGlow = (event: React.MouseEvent<HTMLLIElement>) => {
+    const target = event.currentTarget;
+    target.style.removeProperty('--faq-x');
+    target.style.removeProperty('--faq-y');
+  };
+
+  return (
+    <div className={`relative min-h-screen w-full overflow-hidden transition-colors duration-700 ${palette.surface}`}>
+      <div className="absolute inset-0 z-0" style={{ background: palette.aurora }} />
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-80"
+        style={{ background: palette.overlay, mixBlendMode: theme === 'dark' ? 'screen' : 'multiply' }}
+      />
+
+      <section
+        className={`relative z-10 mx-auto flex max-w-4xl flex-col gap-12 px-6 py-24 lg:max-w-5xl lg:px-12 ${
+          hasEntered ? 'faq1-fade--ready' : 'faq1-fade'
+        }`}
+      >
+        {/* Animated Signal Pill Badge */}
+        <div
+          className={`faq1-intro ${introReady ? 'faq1-intro--active' : ''} ${
+            theme === 'light' ? 'faq1-intro--light' : 'faq1-intro--dark'
+          }`}
+        >
+          <span className="faq1-intro__beam" aria-hidden="true" />
+          <span className="faq1-intro__pulse" aria-hidden="true" />
+          <span className="faq1-intro__label">SERENTE INQUIRIES</span>
+          <span className="faq1-intro__meter" aria-hidden="true" />
+          <span className="faq1-intro__tick" aria-hidden="true" />
+        </div>
+
+        <header className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-4">
+            <p className="text-xs uppercase tracking-[0.35em] text-[#FFFF00] font-mono font-bold">Frequently Asked Questions</p>
+            <h2 className={`text-4xl font-bold leading-tight md:text-5xl ${palette.heading}`}>
+              Clear answers for <span className="text-[#FFFF00]">engineering &amp; sourcing</span> teams.
+            </h2>
+            <p className={`max-w-xl text-base ${palette.muted}`}>
+              Everything you need to know about component availability, ISO 9001:2015 quality control, and our BOM sourcing platform.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className={`relative inline-flex h-11 items-center gap-3 rounded-full border px-5 text-sm font-bold transition-colors duration-500 ${palette.toggleSurface} ${palette.toggle}`}
+            aria-pressed={theme === 'dark' ? 'true' : 'false'}
+          >
+            <span className="relative flex h-6 w-6 items-center justify-center">
+              <span
+                className={`pointer-events-none absolute inset-0 rounded-full border opacity-40 ${
+                  theme === 'dark' ? 'border-[#FFFF00] animate-pulse' : 'border-neutral-400/50'
+                }`}
+              />
+              <span
+                className={`h-3 w-3 rounded-full transition-all duration-500 ${
+                  theme === 'dark' ? 'bg-[#FFFF00]' : 'bg-neutral-900'
+                }`}
+              />
+            </span>
+            {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+          </button>
+        </header>
+
+        <ul className="space-y-5">
+          {faqs.map((item, index) => {
+            const open = activeIndex === index;
+            const panelId = `faq-panel-${index}`;
+            const buttonId = `faq-trigger-${index}`;
+
+            return (
+              <li
+                key={item.question}
+                className={`group relative overflow-hidden rounded-3xl border backdrop-blur-xl transition-all duration-500 hover:-translate-y-0.5 focus-within:-translate-y-0.5 ${palette.border} ${palette.panel} ${palette.shadow}`}
+                onMouseMove={setCardGlow}
+                onMouseLeave={clearCardGlow}
+              >
+                <div
+                  className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${
+                    open ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                  }`}
+                  style={{
+                    background: `radial-gradient(240px circle at var(--faq-x, 50%) var(--faq-y, 50%), ${palette.glow}, transparent 70%)`,
+                  }}
+                />
+
+                <button
+                  type="button"
+                  id={buttonId}
+                  aria-controls={panelId}
+                  aria-expanded={open}
+                  onClick={() => toggleQuestion(index)}
+                  style={{ '--faq-outline': theme === 'dark' ? 'rgba(255,255,0,0.4)' : 'rgba(17,17,17,0.25)' } as React.CSSProperties}
+                  className="relative flex w-full items-start gap-6 px-8 py-7 text-left transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--faq-outline)]"
+                >
+                  <span
+                    className={`relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border transition-all duration-500 group-hover:scale-105 ${palette.iconRing} ${palette.iconSurface}`}
+                  >
+                    <span
+                      className={`pointer-events-none absolute inset-0 rounded-full border opacity-30 ${
+                        palette.iconRing
+                      } ${open ? 'animate-ping' : ''}`}
+                    />
+                    <svg
+                      className={`relative h-5 w-5 transition-transform duration-500 ${palette.icon} ${open ? 'rotate-45' : ''}`}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M12 5v14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      <path d="M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                  </span>
+
+                  <div className="flex flex-1 flex-col gap-4">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+                      <h3 className={`text-lg font-bold leading-tight sm:text-xl ${palette.heading}`}>
+                        {item.question}
+                      </h3>
+                      {item.meta && (
+                        <span
+                          className={`inline-flex w-fit items-center rounded-full border border-[#FFFF00]/30 bg-[#FFFF00]/10 text-[#FFFF00] px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-[0.25em] transition-opacity duration-300 sm:ml-auto`}
                         >
-                            <div className="flex flex-col md:flex-row gap-8 md:items-center">
-                                <span className="font-mono text-[#2DAA9E] text-2xl font-bold">0{idx + 1}</span>
-                                <h3 className={`font-display text-3xl md:text-5xl font-bold transition-colors duration-500 ${hoveredIndex === idx ? 'text-white' : 'text-white/40'}`}>
-                                    {faq.question}
-                                </h3>
-                            </div>
+                          {item.meta}
+                        </span>
+                      )}
+                    </div>
 
-                            <AnimatePresence>
-                                {hoveredIndex === idx && (
-                                    <motion.div
-                                        initial={{ opacity: 0, height: 0, y: 10 }}
-                                        animate={{ opacity: 1, height: 'auto', y: 0 }}
-                                        exit={{ opacity: 0, height: 0, y: 10 }}
-                                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                                        className="overflow-hidden"
-                                    >
-                                        <p className="font-mono text-sm md:text-base text-[#E3D2C3] mt-8 max-w-2xl leading-relaxed uppercase tracking-wide">
-                                            {faq.answer}
-                                        </p>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Liquid Glass Overlay Effect on Hover */}
-            <div 
-                className={`absolute inset-0 bg-black transition-opacity duration-700 pointer-events-none z-10 ${hoveredIndex !== null ? 'opacity-40' : 'opacity-0'}`} 
-            />
-
-        </section>
-    );
+                    <div
+                      id={panelId}
+                      role="region"
+                      aria-labelledby={buttonId}
+                      className={`overflow-hidden text-sm leading-relaxed transition-[max-height] duration-500 ease-out ${
+                        open ? 'max-h-64' : 'max-h-0'
+                      } ${palette.muted}`}
+                    >
+                      <p className="pr-2 pt-1 font-mono text-sm leading-relaxed text-gray-300">
+                        {item.answer}
+                      </p>
+                    </div>
+                  </div>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    </div>
+  );
 }
+
+export { FAQ };

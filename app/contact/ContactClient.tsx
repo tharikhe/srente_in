@@ -63,7 +63,7 @@ export default function ContactClient() {
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white relative overflow-hidden font-sans">
             {/* Background Ambient Orbs */}
-            <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-[#2DAA9E]/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
+            <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-[#FFFF00]/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
             <div className="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-[#E3D2C3]/10 rounded-full blur-[150px] pointer-events-none mix-blend-screen" />
             
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
@@ -75,12 +75,12 @@ export default function ContactClient() {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="text-center mb-20"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2DAA9E]/10 border border-[#2DAA9E]/30 text-[#2DAA9E] text-sm font-semibold mb-6">
-                        <span className="w-2 h-2 rounded-full bg-[#2DAA9E] animate-pulse"></span>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FFFF00]/10 border border-[#FFFF00]/30 text-[#FFFF00] text-sm font-semibold mb-6">
+                        <span className="w-2 h-2 rounded-full bg-[#FFFF00] animate-pulse"></span>
                         We're Here to Help
                     </div>
                     <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-                        Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2DAA9E] to-emerald-400">Touch</span>
+                        Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFFF00] to-emerald-400">Touch</span>
                     </h1>
                     <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-medium">
                         Have questions about our components? Need a custom quote? Reach out to our engineering and sales experts today.
@@ -97,18 +97,18 @@ export default function ContactClient() {
                     <div className="lg:col-span-5 space-y-6">
                         <motion.div variants={itemVariants} className="bg-[#141414]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all duration-300">
                             <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-                                <Building2 className="w-6 h-6 text-[#2DAA9E]" />
+                                <Building2 className="w-6 h-6 text-[#FFFF00]" />
                                 Contact Details
                             </h3>
                             
                             <div className="space-y-8">
                                 <div className="flex gap-5 group">
-                                    <div className="w-12 h-12 rounded-2xl bg-[#2DAA9E]/10 flex items-center justify-center shrink-0 group-hover:bg-[#2DAA9E] transition-colors duration-300">
-                                        <Mail className="w-5 h-5 text-[#2DAA9E] group-hover:text-white transition-colors" />
+                                    <div className="w-12 h-12 rounded-2xl bg-[#FFFF00]/10 flex items-center justify-center shrink-0 group-hover:bg-[#FFFF00] transition-colors duration-300">
+                                        <Mail className="w-5 h-5 text-[#FFFF00] group-hover:text-white transition-colors" />
                                     </div>
                                     <div>
                                         <p className="text-sm font-medium text-gray-400 mb-1">Email Us</p>
-                                        <a href="mailto:hello@serenteelectronics.com" className="text-lg font-semibold text-white hover:text-[#2DAA9E] transition-colors break-all">
+                                        <a href="mailto:hello@serenteelectronics.com" className="text-lg font-semibold text-white hover:text-[#FFFF00] transition-colors break-all">
                                             hello@serenteelectronics.com
                                         </a>
                                     </div>
@@ -144,7 +144,7 @@ export default function ContactClient() {
                     <motion.div variants={itemVariants} className="lg:col-span-7">
                         <div className="bg-[#141414]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden h-full">
                             {/* Form Glowing Accents */}
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-[#2DAA9E]/10 rounded-full blur-[100px] pointer-events-none" />
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-[#FFFF00]/10 rounded-full blur-[100px] pointer-events-none" />
                             
                             <AnimatePresence mode="wait">
                                 {submitted ? (
@@ -155,7 +155,7 @@ export default function ContactClient() {
                                         exit={{ opacity: 0, scale: 0.95 }}
                                         className="h-full flex flex-col items-center justify-center text-center py-20"
                                     >
-                                        <div className="w-24 h-24 bg-gradient-to-br from-[#2DAA9E] to-emerald-500 rounded-full flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(45,170,158,0.4)]">
+                                        <div className="w-24 h-24 bg-gradient-to-br from-[#FFFF00] to-emerald-500 rounded-full flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(45,170,158,0.4)]">
                                             <Send className="w-10 h-10 text-white" />
                                         </div>
                                         <h3 className="text-3xl font-bold mb-4">Message Sent!</h3>
@@ -194,7 +194,7 @@ export default function ContactClient() {
                                                     onChange={handleChange}
                                                     onFocus={() => setFocusedInput('name')}
                                                     onBlur={() => setFocusedInput(null)}
-                                                    className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#2DAA9E]/50 focus:border-[#2DAA9E] transition-all"
+                                                    className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFFF00]/50 focus:border-[#FFFF00] transition-all"
                                                     placeholder="John Doe"
                                                 />
                                             </div>
@@ -208,7 +208,7 @@ export default function ContactClient() {
                                                     onChange={handleChange}
                                                     onFocus={() => setFocusedInput('email')}
                                                     onBlur={() => setFocusedInput(null)}
-                                                    className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#2DAA9E]/50 focus:border-[#2DAA9E] transition-all"
+                                                    className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFFF00]/50 focus:border-[#FFFF00] transition-all"
                                                     placeholder="john@example.com"
                                                 />
                                             </div>
@@ -224,7 +224,7 @@ export default function ContactClient() {
                                                     onChange={handleChange}
                                                     onFocus={() => setFocusedInput('phone')}
                                                     onBlur={() => setFocusedInput(null)}
-                                                    className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#2DAA9E]/50 focus:border-[#2DAA9E] transition-all"
+                                                    className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFFF00]/50 focus:border-[#FFFF00] transition-all"
                                                     placeholder="+1 234 567 890"
                                                 />
                                             </div>
@@ -237,7 +237,7 @@ export default function ContactClient() {
                                                     onChange={handleChange}
                                                     onFocus={() => setFocusedInput('company')}
                                                     onBlur={() => setFocusedInput(null)}
-                                                    className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#2DAA9E]/50 focus:border-[#2DAA9E] transition-all"
+                                                    className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFFF00]/50 focus:border-[#FFFF00] transition-all"
                                                     placeholder="Your Company Ltd."
                                                 />
                                             </div>
@@ -252,7 +252,7 @@ export default function ContactClient() {
                                                 onChange={handleChange}
                                                 onFocus={() => setFocusedInput('subject')}
                                                 onBlur={() => setFocusedInput(null)}
-                                                className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:ring-2 focus:ring-[#2DAA9E]/50 focus:border-[#2DAA9E] transition-all appearance-none"
+                                                className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:ring-2 focus:ring-[#FFFF00]/50 focus:border-[#FFFF00] transition-all appearance-none"
                                             >
                                                 <option value="" disabled className="bg-[#1A1A1A]">Select a subject</option>
                                                 <option value="quote" className="bg-[#1A1A1A]">Request a Quote</option>
@@ -272,7 +272,7 @@ export default function ContactClient() {
                                                 onChange={handleChange}
                                                 onFocus={() => setFocusedInput('message')}
                                                 onBlur={() => setFocusedInput(null)}
-                                                className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#2DAA9E]/50 focus:border-[#2DAA9E] transition-all resize-none"
+                                                className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFFF00]/50 focus:border-[#FFFF00] transition-all resize-none"
                                                 placeholder="Please describe your requirements in detail..."
                                             />
                                         </div>
@@ -280,7 +280,7 @@ export default function ContactClient() {
                                         <button
                                             type="submit"
                                             disabled={isSubmitting}
-                                            className="w-full py-5 bg-gradient-to-r from-[#2DAA9E] to-emerald-500 hover:from-emerald-400 hover:to-emerald-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(45,170,158,0.3)] hover:shadow-[0_0_30px_rgba(45,170,158,0.5)] transition-all duration-300 flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed"
+                                            className="w-full py-5 bg-gradient-to-r from-[#FFFF00] to-yellow-400 text-[#1A1A1A] font-bold rounded-xl shadow-[0_0_20px_rgba(255,255,0,0.3)] hover:shadow-[0_0_30px_rgba(255,255,0,0.5)] transition-all duration-300 flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed"
                                         >
                                             {isSubmitting ? (
                                                 <>

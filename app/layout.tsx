@@ -5,7 +5,6 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingMenu from "@/components/FloatingMenu";
-import Chatbot from "@/components/Chatbot";
 import Schema from "@/components/Schema";
 import { CartProvider } from "@/context/CartContext";
 
@@ -157,7 +156,6 @@ export default function RootLayout({
           <main className="flex-grow container mx-auto px-4 py-8">
             {children}
           </main>
-          <Chatbot />
           <FloatingMenu />
           <Footer />
         </CartProvider>

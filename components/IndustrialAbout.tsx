@@ -50,7 +50,7 @@ export default function IndustrialAbout() {
                                 <button 
                                     key={idx}
                                     onClick={() => setCurrentImage(idx)}
-                                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${currentImage === idx ? 'bg-[#2DAA9E] w-6' : 'bg-white/50 hover:bg-white'}`}
+                                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${currentImage === idx ? 'bg-[#FFFF00] w-6' : 'bg-white/50 hover:bg-white'}`}
                                     aria-label={`Go to slide ${idx + 1}`}
                                 />
                             ))}
@@ -62,7 +62,7 @@ export default function IndustrialAbout() {
                         <h2 className="font-display font-bold text-3xl md:text-5xl text-[#1A1A1A] mb-2">
                             About Us
                         </h2>
-                        <h3 className="font-mono text-sm md:text-base font-bold text-[#2DAA9E] mb-8 uppercase tracking-wide">
+                        <h3 className="font-mono text-sm md:text-base font-bold text-[#FFFF00] mb-8 uppercase tracking-wide">
                             Serente Electronics India Limited
                         </h3>
                         
@@ -79,7 +79,7 @@ export default function IndustrialAbout() {
                         </div>
                         
                         <div className="mt-10">
-                            <Link href="/about" className="inline-flex items-center gap-3 bg-[#1A1A1A] hover:bg-[#2DAA9E] text-white px-8 py-3.5 font-display font-bold uppercase tracking-wider transition-colors duration-300">
+                            <Link href="/about" className="inline-flex items-center gap-3 bg-[#1A1A1A] hover:bg-[#FFFF00] text-white px-8 py-3.5 font-display font-bold uppercase tracking-wider transition-colors duration-300">
                                 Know More <ArrowRight className="w-5 h-5" />
                             </Link>
                         </div>

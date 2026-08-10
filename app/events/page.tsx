@@ -69,13 +69,13 @@ export default function EventsPage() {
             <div className="relative bg-[#EAEAEA] border-b border-gray-200 py-20 sm:py-28 overflow-hidden">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-3xl">
-                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2DAA9E]/10 border border-[#2DAA9E]/20 text-[#2DAA9E] text-xs font-bold uppercase tracking-wider mb-6">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFFF00]/10 border border-[#FFFF00]/20 text-[#FFFF00] text-xs font-bold uppercase tracking-wider mb-6">
                             <Calendar className="w-4 h-4" />
                             <span>Upcoming Industry Events</span>
                         </div>
                         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#1A1A1A] tracking-tight mb-6 leading-tight">
-                            Connect with <span className="text-[#2DAA9E]">Serente</span> <br className="hidden sm:block" />
-                            <span className="text-[#2DAA9E]">Around the World</span>
+                            Connect with <span className="text-[#FFFF00]">Serente</span> <br className="hidden sm:block" />
+                            <span className="text-[#FFFF00]">Around the World</span>
                         </h1>
                         <p className="text-base sm:text-lg text-gray-700 mb-8 max-w-2xl leading-relaxed font-medium">
                             Stay updated with the latest expos, summits, and workshops. Join us to explore new technologies, discuss supply chain strategies, and build lasting partnerships.

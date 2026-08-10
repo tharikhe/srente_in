@@ -15,10 +15,10 @@ export default function PrivacyPolicy() {
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
             {/* Header */}
-            <div className="bg-brand-teal text-white py-16">
+            <div className="bg-[#1A1A1A] text-white py-16">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
-                    <p className="text-brand-teal-light text-lg max-w-2xl mx-auto">
+                    <p className="text-gray-300 text-lg max-w-2xl mx-auto">
                         Your privacy is important to us. This policy outlines how Serente Electronics Pvt. Ltd. collects, uses, and protects your information.
                     </p>
                 </div>
@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
             <div className="container mx-auto px-4 -mt-8">
                 <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 max-w-4xl mx-auto">
 
-                    <Link href="/" className="inline-flex items-center text-brand-teal hover:text-brand-gold transition-colors mb-8 font-medium">
+                    <Link href="/" className="inline-flex items-center text-[#1A1A1A] hover:text-brand-gold transition-colors mb-8 font-medium">
                         <ArrowLeft className="w-4 h-4 mr-2" />
                         Back to Home
                     </Link>
@@ -36,7 +36,7 @@ export default function PrivacyPolicy() {
                         <p className="text-sm text-gray-400 mb-8">Last Updated: December 11, 2025</p>
 
                         <section className="mb-10">
-                            <div className="flex items-center gap-3 mb-4 text-brand-teal">
+                            <div className="flex items-center gap-3 mb-4 text-[#1A1A1A]">
                                 <Database className="w-6 h-6" />
                                 <h2 className="text-2xl font-bold m-0">1. Information We Collect</h2>
                             </div>
@@ -51,7 +51,7 @@ export default function PrivacyPolicy() {
                         </section>
 
                         <section className="mb-10">
-                            <div className="flex items-center gap-3 mb-4 text-brand-teal">
+                            <div className="flex items-center gap-3 mb-4 text-[#1A1A1A]">
                                 <Eye className="w-6 h-6" />
                                 <h2 className="text-2xl font-bold m-0">2. How We Use Your Information</h2>
                             </div>
@@ -67,7 +67,7 @@ export default function PrivacyPolicy() {
                         </section>
 
                         <section className="mb-10">
-                            <div className="flex items-center gap-3 mb-4 text-brand-teal">
+                            <div className="flex items-center gap-3 mb-4 text-[#1A1A1A]">
                                 <Lock className="w-6 h-6" />
                                 <h2 className="text-2xl font-bold m-0">3. Data Security</h2>
                             </div>
@@ -77,7 +77,7 @@ export default function PrivacyPolicy() {
                         </section>
 
                         <section className="mb-10">
-                            <div className="flex items-center gap-3 mb-4 text-brand-teal">
+                            <div className="flex items-center gap-3 mb-4 text-[#1A1A1A]">
                                 <Shield className="w-6 h-6" />
                                 <h2 className="text-2xl font-bold m-0">4. Third-Party Disclosure</h2>
                             </div>
@@ -87,7 +87,7 @@ export default function PrivacyPolicy() {
                         </section>
 
                         <section className="mb-10">
-                            <div className="flex items-center gap-3 mb-4 text-brand-teal">
+                            <div className="flex items-center gap-3 mb-4 text-[#1A1A1A]">
                                 <FileText className="w-6 h-6" />
                                 <h2 className="text-2xl font-bold m-0">5. Cookies</h2>
                             </div>
@@ -104,7 +104,7 @@ export default function PrivacyPolicy() {
                             <p className="mb-4">If there are any questions regarding this privacy policy, you may contact us using the information below:</p>
                             <address className="not-italic bg-gray-50 p-6 rounded-xl border border-gray-100">
                                 <strong>Serente Electronics Pvt. Ltd.</strong><br />
-                                Email: <a href="mailto:hello@serenteelectronics.com" className="text-brand-teal hover:underline">hello@serenteelectronics.com</a><br />
+                                Email: <a href="mailto:hello@serenteelectronics.com" className="text-[#1A1A1A] hover:underline">hello@serenteelectronics.com</a><br />
                                 Phone: +91 80881 31316
                             </address>
                         </div>

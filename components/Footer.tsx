@@ -1,207 +1,198 @@
 'use client';
 
+import React from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import Link from 'next/link';
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin, ArrowRight, Send } from 'lucide-react';
+import Image from 'next/image';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Instagram, Linkedin, Twitter, Send, ArrowRight } from 'lucide-react';
 import { submitToGoogleSheets } from '@/lib/google-sheets';
 
+interface FooterLink {
+    title: string;
+    href: string;
+    icon?: React.ComponentType<{ className?: string }>;
+}
+
+interface FooterSection {
+    label: string;
+    links: FooterLink[];
+}
+
+const footerLinks: FooterSection[] = [
+    {
+        label: 'Company',
+        links: [
+            { title: 'About Us', href: '/about' },
+            { title: 'Services', href: '/services' },
+            { title: 'Events', href: '/events' },
+            { title: 'Blog', href: '/blog' },
+            { title: 'Contact Us', href: '/contact' },
+        ],
+    },
+    {
+        label: 'Legal',
+        links: [
+            { title: 'Privacy Policy', href: '/privacy-policy' },
+            { title: 'Terms & Conditions', href: '/terms' },
+        ],
+    },
+    {
+        label: 'Social Links',
+        links: [
+            { title: 'LinkedIn', href: '#', icon: Linkedin },
+            { title: 'Instagram', href: 'https://www.instagram.com/serenteelectronics_2020?igsh=MTQ0MndjbHpudmM2OA==', icon: Instagram },
+            { title: 'Twitter', href: '#', icon: Twitter },
+        ],
+    },
+];
+
 export default function Footer() {
-    const currentYear = new Date().getFullYear();
-
     return (
-        <footer className="bg-brand-teal-dark text-white">
-            {/* Newsletter Section */}
-            <div className="bg-brand-teal py-10">
-                <div className="container mx-auto px-4">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div>
-                            <h3 className="text-2xl font-bold mb-2">Stay Updated</h3>
-                            <p className="text-white/80">Subscribe to our newsletter for the latest products and offers</p>
+        <footer className="relative w-full max-w-7xl mx-auto flex flex-col items-center justify-center rounded-t-4xl md:rounded-t-6xl border-t border-white/10 bg-[#0D0D0D] bg-[radial-gradient(35%_128px_at_50%_0%,rgba(255,255,0,0.12),transparent)] px-6 py-12 lg:py-16 text-white overflow-hidden">
+            {/* Top Glowing Blur Line */}
+            <div className="bg-[#FFFF00] absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur shadow-[0_0_15px_#FFFF00]" />
+
+            <div className="grid w-full gap-10 xl:grid-cols-3 xl:gap-8">
+                {/* Brand & Newsletter Column */}
+                <AnimatedContainer className="space-y-6">
+                    <Link href="/" className="inline-flex items-center gap-3 group">
+                        <Image
+                            src="/logo.png"
+                            alt="Serente Logo"
+                            width={44}
+                            height={44}
+                            className="h-10 w-auto group-hover:scale-105 transition-transform"
+                        />
+                        <div className="flex flex-col">
+                            <span className="font-display font-black text-xl tracking-tighter leading-none text-white">
+                                SERENTE
+                            </span>
+                            <span className="font-mono text-[10px] tracking-widest text-[#FFFF00] leading-none mt-1 uppercase font-bold">
+                                Electronics
+                            </span>
                         </div>
-                        <div className="flex w-full md:w-auto flex-col gap-2">
-                            <form
-                                onSubmit={async (e) => {
-                                    e.preventDefault();
-                                    const form = e.target as HTMLFormElement;
-                                    const emailInput = form.elements.namedItem('email') as HTMLInputElement;
-                                    const email = emailInput.value;
+                    </Link>
 
-                                    if (!email) return;
+                    <p className="text-white/70 text-sm leading-relaxed max-w-sm font-medium">
+                        Your trusted semiconductor distributor & EMS solutions provider. Delivering end-to-end component sourcing and manufacturing excellence.
+                    </p>
 
-                                    const btn = form.querySelector('button');
+                    {/* Newsletter Subscription Form */}
+                    <div className="pt-2">
+                        <h4 className="text-xs uppercase tracking-wider font-bold text-[#FFFF00] mb-3">
+                            Subscribe to Newsletter
+                        </h4>
+                        <form
+                            onSubmit={async (e) => {
+                                e.preventDefault();
+                                const form = e.target as HTMLFormElement;
+                                const emailInput = form.elements.namedItem('email') as HTMLInputElement;
+                                const email = emailInput.value;
+
+                                if (!email) return;
+
+                                const btn = form.querySelector('button');
+                                if (btn) {
+                                    btn.disabled = true;
+                                    btn.textContent = 'Subscribing...';
+                                }
+
+                                try {
+                                    await submitToGoogleSheets({
+                                        type: 'contact',
+                                        name: 'Newsletter Subscriber',
+                                        email: email,
+                                        subject: 'Newsletter Subscription',
+                                        message: 'User requested to subscribe to the newsletter via website footer.'
+                                    });
+                                    alert('Thank you for subscribing!');
+                                    emailInput.value = '';
+                                } catch (error) {
+                                    alert('Something went wrong. Please try again.');
+                                } finally {
                                     if (btn) {
-                                        btn.disabled = true;
-                                        btn.textContent = 'Subscribing...';
+                                        btn.disabled = false;
+                                        btn.innerHTML = '<span class="hidden sm:inline">Subscribe</span>';
                                     }
-
-                                    try {
-                                        await submitToGoogleSheets({
-                                            type: 'contact',
-                                            name: 'Newsletter Subscriber',
-                                            email: email,
-                                            subject: 'Newsletter Subscription',
-                                            message: 'User requested to subscribe to the newsletter via website footer.'
-                                        });
-                                        alert('Thank you for subscribing!');
-                                        emailInput.value = '';
-                                    } catch (error) {
-                                        alert('Something went wrong. Please try again.');
-                                    } finally {
-                                        if (btn) {
-                                            btn.disabled = false;
-                                            btn.innerHTML = '<span class="hidden sm:inline">Subscribe</span>';
-                                        }
-                                    }
-                                }}
-                                className="flex w-full md:w-auto"
+                                }
+                            }}
+                            className="flex w-full max-w-sm"
+                        >
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                required
+                                className="flex-grow px-4 py-2.5 rounded-l-xl bg-white/10 border border-white/15 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#FFFF00] transition-colors"
+                            />
+                            <button
+                                type="submit"
+                                className="px-5 py-2.5 bg-[#FFFF00] hover:bg-[#FFF566] text-[#1A1A1A] font-bold text-sm rounded-r-xl transition-all duration-200 flex items-center gap-2 shadow-md disabled:opacity-50"
                             >
-                                <input
-                                    type="email"
-                                    name="email"
-                                    placeholder="Enter your email"
-                                    required
-                                    className="flex-grow md:w-80 px-5 py-3.5 rounded-l-xl bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:bg-white/20 transition-colors"
-                                />
-                                <button type="submit" className="px-6 py-3.5 bg-brand-gold hover:bg-brand-gold-dark text-gray-900 font-semibold rounded-r-xl transition-all duration-200 flex items-center gap-2 hover:shadow-glow-gold disabled:opacity-50 disabled:cursor-not-allowed">
-                                    <Send className="w-5 h-5" />
-                                    <span className="hidden sm:inline">Subscribe</span>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Main Footer Content */}
-            <div className="container mx-auto px-4 py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                    {/* Company Info */}
-                    <div>
-                        <h3 className="text-xl font-bold text-brand-gold mb-6">Serente Electronics</h3>
-                        <p className="text-white/70 text-sm mb-6 leading-relaxed">
-                            Your trusted semiconductor distributors and EMS solutions provider. Authorized electronic components distributor specializing in integrated circuits, MOSFETs, IGBTs, diodes, passive components, LCD/OLED displays, and connector & cable harnessing solutions. OEM & ODM electronic solutions with full traceability.
-                        </p>
-                        <div className="flex space-x-3">
-                            {[
-                                { icon: Twitter, href: '#', label: 'Twitter' },
-                                { icon: Facebook, href: '#', label: 'Facebook' },
-                                { icon: Linkedin, href: '#', label: 'LinkedIn' },
-                                { icon: Instagram, href: 'https://www.instagram.com/serenteelectronics_2020?igsh=MTQ0MndjbHpudmM2OA==', label: 'Instagram' },
-                            ].map((social) => (
-                                <a
-                                    key={social.label}
-                                    href={social.href}
-                                    aria-label={social.label}
-                                    className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-gold transition-all duration-200 group"
-                                >
-                                    <social.icon className="w-5 h-5 text-white/70 group-hover:text-white transition-colors" />
-                                </a>
-                            ))}
-                        </div>
+                                <Send className="w-4 h-4 text-[#1A1A1A]" />
+                                <span className="hidden sm:inline">Subscribe</span>
+                            </button>
+                        </form>
                     </div>
 
-                    {/* Quick Links */}
-                    <div>
-                        <h3 className="text-lg font-bold text-white mb-6">Quick Links</h3>
-                        <ul className="space-y-3">
-                            {[
-                                { label: 'Product Catalog', href: '/products' },
-                                { label: 'Popular Parts', href: '/popular-parts' },
-                                { label: 'Blog', href: '/blog' },
-                                { label: 'About Us', href: '/about' },
-                                { label: 'Quality Control', href: '/quality-control' },
-                            ].map((link) => (
-                                <li key={link.label}>
-                                    <Link
-                                        href={link.href}
-                                        className="text-white/70 hover:text-brand-gold transition-colors flex items-center gap-2 group text-sm"
-                                    >
-                                        <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                                        <span>{link.label}</span>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    <p className="text-white/40 text-xs pt-4">
+                        © {new Date().getFullYear()} Serente Electronics Pvt. Ltd. All rights reserved.
+                    </p>
+                </AnimatedContainer>
 
-                    {/* Support */}
-                    <div>
-                        <h3 className="text-lg font-bold text-white mb-6">Support</h3>
-                        <ul className="space-y-3">
-                            {[
-                                { label: 'Request for Quotation', href: '/contact' },
-                                { label: 'Upload BOM', href: '/bom' },
-                            ].map((link) => (
-                                <li key={link.label}>
-                                    <Link
-                                        href={link.href}
-                                        className="text-white/70 hover:text-brand-gold transition-colors flex items-center gap-2 group text-sm"
-                                    >
-                                        <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                                        <span>{link.label}</span>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Contact Us */}
-                    <div>
-                        <h3 className="text-lg font-bold text-white mb-6">Contact Us</h3>
-                        <ul className="space-y-4">
-                            <li className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-lg bg-brand-gold/20 flex items-center justify-center flex-shrink-0">
-                                    <Phone className="w-5 h-5 text-brand-gold" />
-                                </div>
-                                <div>
-                                    <p className="text-white/50 text-xs mb-1">Contact</p>
-                                    <p className="text-white font-medium text-sm">Phone: +91 80881 31316</p>
-                                </div>
-                            </li>
-                            <li className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-lg bg-brand-gold/20 flex items-center justify-center flex-shrink-0">
-                                    <Mail className="w-5 h-5 text-brand-gold" />
-                                </div>
-                                <div>
-                                    <p className="text-white/50 text-xs mb-1">Email</p>
-                                    <p className="text-white font-medium">hello@serenteelectronics.com</p>
-                                </div>
-                            </li>
-                            <li className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-lg bg-brand-gold/20 flex items-center justify-center flex-shrink-0">
-                                    <MapPin className="w-5 h-5 text-brand-gold" />
-                                </div>
-                                <div>
-                                    <p className="text-white/50 text-xs mb-1">Address</p>
-                                    <p className="text-white font-medium text-sm">Serente Electronics Pvt. Ltd.</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            {/* Bottom Bar */}
-            <div className="border-t border-white/10">
-                <div className="container mx-auto px-4 py-6">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-
-                        {/* Copyright */}
-                        <p className="text-white/50 text-sm text-center">
-                            © {currentYear} Serente Electronics. All Rights Reserved. | Electronics Manufacturing Services & Electronic Components Supplier
-                        </p>
-
-                        {/* Legal Links */}
-                        <div className="flex items-center gap-6 text-sm">
-                            <Link href="/terms" className="text-white/50 hover:text-brand-gold transition-colors">
-                                Terms & Conditions
-                            </Link>
-                            <Link href="/privacy-policy" className="text-white/50 hover:text-brand-gold transition-colors">
-                                Privacy Policy
-                            </Link>
-                        </div>
-                    </div>
+                {/* Footer Nav Sections */}
+                <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 md:grid-cols-3 xl:col-span-2 xl:mt-0">
+                    {footerLinks.map((section, index) => (
+                        <AnimatedContainer key={section.label} delay={0.1 + index * 0.1}>
+                            <div className="mb-10 md:mb-0">
+                                <h3 className="text-xs uppercase tracking-widest font-bold text-[#FFFF00] mb-4">
+                                    {section.label}
+                                </h3>
+                                <ul className="text-white/70 space-y-2.5 text-sm font-medium">
+                                    {section.links.map((link) => (
+                                        <li key={link.title}>
+                                            <a
+                                                href={link.href}
+                                                className="hover:text-[#FFFF00] inline-flex items-center transition-all duration-300 gap-2 group"
+                                            >
+                                                {link.icon && <link.icon className="size-4 text-[#FFFF00] group-hover:scale-110 transition-transform" />}
+                                                <span>{link.title}</span>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </AnimatedContainer>
+                    ))}
                 </div>
             </div>
         </footer>
+    );
+}
+
+type ViewAnimationProps = {
+    delay?: number;
+    className?: ComponentProps<typeof motion.div>['className'];
+    children: ReactNode;
+};
+
+function AnimatedContainer({ className, delay = 0.1, children }: ViewAnimationProps) {
+    const shouldReduceMotion = useReducedMotion();
+
+    if (shouldReduceMotion) {
+        return <div className={className}>{children}</div>;
+    }
+
+    return (
+        <motion.div
+            initial={{ filter: 'blur(4px)', translateY: -8, opacity: 0 }}
+            whileInView={{ filter: 'blur(0px)', translateY: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay, duration: 0.8 }}
+            className={className}
+        >
+            {children}
+        </motion.div>
     );
 }

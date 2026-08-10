@@ -1,144 +1,212 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Car, Plane, Activity, Factory, Wifi, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import {
+    Car,
+    Plane,
+    Activity,
+    Factory,
+    Wifi,
+    TrainFront,
+    ShoppingBag,
+} from 'lucide-react';
 
 const industries = [
     {
         id: 'automotive',
         title: 'Automotive',
         icon: Car,
-        image: '/images/industry_automotive.png',
-        description: 'Advanced electronics manufacturing for modern EV systems, autonomous driving arrays, and ruggedized in-cabin controls.'
-    },
-    {
-        id: 'aerospace',
-        title: 'Aerospace & Defence',
-        icon: Plane,
-        image: '/images/industry_aerospace.png',
-        description: 'High-reliability circuit boards and mission-critical assemblies strictly adhering to AS9100 quality standards.'
-    },
-    {
-        id: 'medical',
-        title: 'Medical Devices',
-        icon: Activity,
-        image: '/images/industry_medical.png',
-        description: 'ISO 13485 compliant manufacturing for life-saving diagnostic equipment and wearable health monitors.'
     },
     {
         id: 'industrial',
         title: 'Industrial',
         icon: Factory,
-        image: '/images/industry_industrial.png',
-        description: 'Heavy-duty automation controllers, robust power supplies, and smart factory sensory nodes.'
+    },
+    {
+        id: 'railways',
+        title: 'Railways',
+        icon: TrainFront,
+    },
+    {
+        id: 'medical',
+        title: 'Medical',
+        icon: Activity,
+    },
+    {
+        id: 'aerospace',
+        title: 'Aerospace, Defence & Outerspace',
+        icon: Plane,
     },
     {
         id: 'iot',
-        title: 'IoT & Smart Tech',
+        title: 'IoT/IT',
         icon: Wifi,
-        image: '/images/industry_iot.png',
-        description: 'High-volume production for connected home devices, mesh networks, and environmental sensors.'
-    }
+    },
+    {
+        id: 'consumer',
+        title: 'Consumer',
+        icon: ShoppingBag,
+    },
 ];
 
 export default function HomeIndustries() {
-    const [hoveredIdx, setHoveredIdx] = useState<number>(0);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ['start end', 'end start'],
+    });
+
+    // Parallax: background moves slower than scroll
+    const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+    // Slight scale for depth feel
+    const bgScale = useTransform(scrollYProgress, [0, 1], [1.1, 1.25]);
+
+    const cardVariants = {
+        hidden: { opacity: 0, y: 60, scale: 0.9 },
+        visible: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: {
+                delay: i * 0.1,
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1] as const,
+            },
+        }),
+    };
 
     return (
-        <section className="bg-white py-20 md:py-32">
-            <div className="container mx-auto px-4 max-w-7xl">
-                
-                <div className="text-center mb-16 md:mb-24">
-                    <motion.h2 
-                        initial={{ opacity: 0, y: 20 }}
+        <section
+            ref={sectionRef}
+            className="relative overflow-hidden"
+            style={{ minHeight: '70vh' }}
+        >
+            {/* ── Parallax Background ── */}
+            <motion.div
+                className="absolute inset-0 will-change-transform"
+                style={{ y: bgY, scale: bgScale }}
+            >
+                <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
+                        backgroundImage: `url('/images/industry_industrial.png')`,
+                        /* extend the image beyond section bounds so parallax doesn't reveal gaps */
+                        top: '-15%',
+                        bottom: '-15%',
+                        height: '130%',
+                    }}
+                />
+            </motion.div>
+
+            {/* ── Dark overlay for contrast + depth ── */}
+            <div className="absolute inset-0 bg-[#1A1A1A]/70" />
+
+            {/* ── Subtle grid pattern overlay for 3D texture ── */}
+            <div
+                className="absolute inset-0 opacity-[0.04] pointer-events-none"
+                style={{
+                    backgroundImage: `
+                        linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+                    `,
+                    backgroundSize: '60px 60px',
+                }}
+            />
+
+            {/* ── Content ── */}
+            <div className="relative z-10 py-20 md:py-32">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    {/* Heading */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="font-display font-bold text-4xl md:text-5xl text-[#1A1A1A] mb-6 uppercase tracking-wider"
+                        transition={{ duration: 0.7 }}
+                        className="text-center mb-16 md:mb-24"
                     >
-                        Industries We <span className="text-[#2DAA9E]">Serve</span>
-                    </motion.h2>
-                    <motion.div 
-                        initial={{ opacity: 0, scaleX: 0 }}
-                        whileInView={{ opacity: 1, scaleX: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="w-24 h-2 bg-[#2DAA9E] mx-auto"
-                    />
-                </div>
+                        <h2 className="font-display font-bold text-4xl md:text-5xl text-white mb-6 uppercase tracking-wider">
+                            Industries
+                        </h2>
+                        <motion.div
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            className="w-24 h-1.5 bg-[#FFFF00] mx-auto origin-center"
+                        />
+                    </motion.div>
 
-                <div className="flex flex-col lg:flex-row h-auto lg:h-[600px] border border-gray-200 shadow-xl overflow-hidden">
-                    
-                    {/* Navigation Sidebar */}
-                    <div className="w-full lg:w-1/3 bg-[#F8F9FA] flex flex-col justify-center">
-                        {industries.map((ind, idx) => (
-                            <button
+                    {/* Industry Cards — Row 1: 4 cards */}
+                    <div className="flex flex-wrap justify-center gap-5 lg:gap-6 mb-5 lg:mb-6">
+                        {industries.slice(0, 4).map((ind, idx) => (
+                            <motion.div
                                 key={ind.id}
-                                onMouseEnter={() => setHoveredIdx(idx)}
-                                onClick={() => setHoveredIdx(idx)}
-                                className={`group flex items-center justify-between p-6 md:p-8 text-left transition-all duration-300 border-b border-gray-200 last:border-b-0 ${
-                                    hoveredIdx === idx ? 'bg-[#1A1A1A] text-white' : 'hover:bg-white text-gray-500'
-                                }`}
+                                custom={idx}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: '-50px' }}
+                                variants={cardVariants}
+                                whileHover={{
+                                    y: -8,
+                                    scale: 1.04,
+                                    transition: { duration: 0.3, ease: 'easeOut' },
+                                }}
+                                className="group relative cursor-pointer"
                             >
-                                <div className="flex items-center gap-4">
-                                    <ind.icon className={`w-6 h-6 transition-colors duration-300 ${
-                                        hoveredIdx === idx ? 'text-[#2DAA9E]' : 'group-hover:text-[#1A1A1A]'
-                                    }`} />
-                                    <span className={`font-display font-bold text-xl tracking-wide transition-colors duration-300 ${
-                                        hoveredIdx === idx ? 'text-white' : 'group-hover:text-[#1A1A1A]'
-                                    }`}>
+                                <div className="relative w-[140px] sm:w-[150px] md:w-[160px] lg:w-[170px] aspect-[3/4] border-2 border-[#FFFF00] bg-[#FFFF00] flex flex-col items-center justify-center gap-5 p-5 transition-all duration-500 group-hover:bg-[#FFFF00] group-hover:shadow-[0_0_40px_rgba(255,255,0,0.4)]">
+                                    <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#1A1A1A]/30" />
+                                    <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#1A1A1A]/30" />
+                                    <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#1A1A1A]/30" />
+                                    <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#1A1A1A]/30" />
+
+                                    <ind.icon
+                                        className="w-10 h-10 md:w-12 md:h-12 text-[#1A1A1A] transition-transform duration-500 group-hover:scale-110"
+                                        strokeWidth={1.8}
+                                    />
+                                    <span className="font-display font-extrabold text-[11px] sm:text-xs md:text-sm text-[#1A1A1A] text-center uppercase tracking-widest leading-tight">
                                         {ind.title}
                                     </span>
                                 </div>
-                                <ArrowRight className={`w-5 h-5 transition-transform duration-300 ${
-                                    hoveredIdx === idx ? 'opacity-100 translate-x-0 text-[#E3D2C3]' : 'opacity-0 -translate-x-4'
-                                }`} />
-                            </button>
+                            </motion.div>
                         ))}
                     </div>
 
-                    {/* Image & Content Display */}
-                    <div className="w-full lg:w-2/3 relative h-[400px] lg:h-full bg-[#1A1A1A] overflow-hidden">
-                        <AnimatePresence mode="wait">
+                    {/* Industry Cards — Row 2: 3 cards centered */}
+                    <div className="flex flex-wrap justify-center gap-5 lg:gap-6">
+                        {industries.slice(4).map((ind, idx) => (
                             <motion.div
-                                key={hoveredIdx}
-                                initial={{ opacity: 0, scale: 1.05 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.5 }}
-                                className="absolute inset-0"
+                                key={ind.id}
+                                custom={idx + 4}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: '-50px' }}
+                                variants={cardVariants}
+                                whileHover={{
+                                    y: -8,
+                                    scale: 1.04,
+                                    transition: { duration: 0.3, ease: 'easeOut' },
+                                }}
+                                className="group relative cursor-pointer"
                             >
-                                {/* Background Image */}
-                                <div 
-                                    className="absolute inset-0 bg-cover bg-center"
-                                    style={{ backgroundImage: `url(${industries[hoveredIdx].image})` }}
-                                />
-                                {/* Dark Gradient Overlay for Text Legibility */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/60 to-[#1A1A1A]/10" />
-                                
-                                {/* Content */}
-                                <div className="absolute inset-x-0 bottom-0 p-8 md:p-16 flex flex-col justify-end h-full">
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.5, delay: 0.2 }}
-                                    >
-                                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#2DAA9E]/20 text-[#2DAA9E] border border-[#2DAA9E]/30 rounded-full font-mono text-xs font-bold uppercase tracking-widest mb-6">
-                                            {industries[hoveredIdx].title} Sector
-                                        </div>
-                                        <p className="font-mono text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl border-l-4 border-[#E3D2C3] pl-6">
-                                            {industries[hoveredIdx].description}
-                                        </p>
-                                    </motion.div>
+                                <div className="relative w-[140px] sm:w-[150px] md:w-[160px] lg:w-[170px] aspect-[3/4] border-2 border-[#FFFF00] bg-[#FFFF00] flex flex-col items-center justify-center gap-5 p-5 transition-all duration-500 group-hover:bg-[#FFFF00] group-hover:shadow-[0_0_40px_rgba(255,255,0,0.4)]">
+                                    <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#1A1A1A]/30" />
+                                    <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#1A1A1A]/30" />
+                                    <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#1A1A1A]/30" />
+                                    <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#1A1A1A]/30" />
+
+                                    <ind.icon
+                                        className="w-10 h-10 md:w-12 md:h-12 text-[#1A1A1A] transition-transform duration-500 group-hover:scale-110"
+                                        strokeWidth={1.8}
+                                    />
+                                    <span className="font-display font-extrabold text-[11px] sm:text-xs md:text-sm text-[#1A1A1A] text-center uppercase tracking-widest leading-tight">
+                                        {ind.title}
+                                    </span>
                                 </div>
                             </motion.div>
-                        </AnimatePresence>
+                        ))}
                     </div>
-
                 </div>
-
             </div>
         </section>
     );

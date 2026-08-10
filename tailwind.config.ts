@@ -10,15 +10,15 @@ const config: Config = {
         extend: {
             colors: {
                 brand: {
-                    // Primary Colors
-                    teal: '#2DAA9E',
-                    'teal-light': '#66D2CE',
-                    'teal-dark': '#258B82',
+                    // Primary Colors (Yellow Palette)
+                    teal: '#FFFF00',
+                    'teal-light': '#FFF566',
+                    'teal-dark': '#CCCC00',
 
-                    // Accent Warm Beige/Sand
-                    gold: '#E3D2C3',
-                    'gold-light': '#E9E1D9',
-                    'gold-dark': '#CDBAA9',
+                    // Accent Warm Gold / Yellow
+                    gold: '#FFFF00',
+                    'gold-light': '#FFF566',
+                    'gold-dark': '#E6E600',
 
                     // Neutrals
                     white: '#FFFFFF',
@@ -32,13 +32,13 @@ const config: Config = {
 
                     // Borders
                     border: '#EAEAEA',
-                    'border-dark': '#E3D2C3',
+                    'border-dark': '#FFFF00',
 
                     // Theme aliases
-                    yellow: '#E3D2C3',
-                    orange: '#E3D2C3',
-                    blue: '#2DAA9E',
-                    emerald: '#2DAA9E',
+                    yellow: '#FFFF00',
+                    orange: '#E6E600',
+                    blue: '#FFFF00',
+                    emerald: '#FFFF00',
                 },
             },
             fontFamily: {
@@ -51,8 +51,8 @@ const config: Config = {
                 'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
                 'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 30px -5px rgba(0, 0, 0, 0.04)',
                 'strong': '0 10px 40px -10px rgba(0, 0, 0, 0.15)',
-                'glow-gold': '0 0 20px rgba(227, 210, 195, 0.5)',
-                'glow-teal': '0 0 20px rgba(45, 170, 158, 0.35)',
+                'glow-gold': '0 0 20px rgba(255, 255, 0, 0.5)',
+                'glow-teal': '0 0 20px rgba(255, 255, 0, 0.35)',
             },
             animation: {
                 'fade-in': 'fadeIn 0.5s ease-out',

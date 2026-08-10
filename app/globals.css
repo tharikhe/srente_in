@@ -4,13 +4,13 @@
   --color-background: #EAEAEA;
   --color-foreground: #1A1A1A;
 
-  /* Brand Colors - Explicitly defined for v4 compatibility if config fails */
-  --color-brand-teal: #2DAA9E;
-  --color-brand-teal-light: #66D2CE;
-  --color-brand-teal-dark: #258B82;
-  --color-brand-gold: #E3D2C3;
-  --color-brand-gold-light: #E9E1D9;
-  --color-brand-gold-dark: #BFB0A4;
+  /* Brand Colors - Yellow Palette */
+  --color-brand-teal: #FFFF00;
+  --color-brand-teal-light: #FFF566;
+  --color-brand-teal-dark: #CCCC00;
+  --color-brand-gold: #FFFF00;
+  --color-brand-gold-light: #FFF566;
+  --color-brand-gold-dark: #E6E600;
   --color-brand-surface: #EAEAEA;
   --color-brand-border: #EAEAEA;
   --color-brand-text: #1A1A1A;
@@ -45,23 +45,23 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-brand-teal);
+  background: #FFFF00;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #66D2CE;
+  background: #FFF566;
 }
 
 /* Selection */
 ::selection {
-  background: var(--color-brand-gold);
+  background: #FFFF00;
   color: #1A1A1A;
 }
 
 /* Focus States */
 *:focus-visible {
-  outline: 2px solid var(--color-brand-teal);
+  outline: 2px solid #FFFF00;
   outline-offset: 2px;
 }
 
@@ -77,7 +77,7 @@ body {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--color-brand-gold);
+  background: #FFFF00;
   transition: width 0.3s ease;
 }
 
@@ -113,21 +113,21 @@ body {
 }
 
 .glass-dark {
-  background: rgba(45, 170, 158, 0.9);
+  background: rgba(255, 255, 0, 0.9);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
 /* Gradient Text */
 .gradient-text-gold {
-  background: linear-gradient(135deg, #E3D2C3 0%, #EAEAEA 50%, #E3D2C3 100%);
+  background: linear-gradient(135deg, #FFFF00 0%, #FFF566 50%, #FFFF00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-teal {
-  background: linear-gradient(135deg, #2DAA9E 0%, #66D2CE 50%, #2DAA9E 100%);
+  background: linear-gradient(135deg, #FFFF00 0%, #FFF566 50%, #FFFF00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

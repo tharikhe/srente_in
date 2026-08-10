@@ -115,9 +115,9 @@ export default function ServicesClient() {
                         className="max-w-4xl"
                     >
                         <h1 className="font-display font-bold text-4xl md:text-6xl lg:text-7xl mb-6 uppercase tracking-tight">
-                            End-to-End <br/><span className="text-[#2DAA9E]">Capabilities</span>
+                            End-to-End <br/><span className="text-[#FFFF00]">Capabilities</span>
                         </h1>
-                        <p className="font-mono text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl border-l-4 border-[#2DAA9E] pl-6">
+                        <p className="font-mono text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl border-l-4 border-[#FFFF00] pl-6">
                             From concept to mass production, we deliver manufacturable products, not just paper proposals. Experience true 360° integrated manufacturing.
                         </p>
                     </motion.div>
@@ -135,9 +135,9 @@ export default function ServicesClient() {
                         className="mb-16 md:mb-24"
                     >
                         <h2 className="font-display font-bold text-4xl md:text-5xl text-[#1A1A1A] mb-4 uppercase tracking-wider">
-                            Our <span className="text-[#2DAA9E]">Services</span>
+                            Our <span className="text-[#FFFF00]">Services</span>
                         </h2>
-                        <div className="w-24 h-2 bg-[#2DAA9E]"></div>
+                        <div className="w-24 h-2 bg-[#FFFF00]"></div>
                     </motion.div>
 
                     <motion.div 
@@ -153,7 +153,7 @@ export default function ServicesClient() {
                                 variants={fadeInUp}
                                 className="group bg-gray-50 p-8 md:p-10 hover:bg-[#1A1A1A] transition-colors duration-500 border border-gray-100 shadow-sm hover:shadow-xl"
                             >
-                                <div className="mb-6 inline-flex p-4 rounded-full bg-[#EAEAEA] group-hover:bg-[#2DAA9E]/20 text-[#1A1A1A] group-hover:text-[#2DAA9E] transition-colors duration-500">
+                                <div className="mb-6 inline-flex p-4 rounded-full bg-[#EAEAEA] group-hover:bg-[#FFFF00]/20 text-[#1A1A1A] group-hover:text-[#FFFF00] transition-colors duration-500">
                                     <service.icon className="w-8 h-8" />
                                 </div>
                                 <h3 className="font-display font-bold text-2xl md:text-3xl text-[#1A1A1A] group-hover:text-white mb-4 transition-colors duration-500">
