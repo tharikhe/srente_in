@@ -85,111 +85,112 @@ const MOBILE_PATH = `
 // Scroll thresholds for each of the 6 nodes
 const NODE_THRESHOLDS = [0.10, 0.24, 0.38, 0.52, 0.66, 0.82];
 
-/* ─── Glowing Node Component ─── */
-function JourneyNode({
-    scrollProgress,
-    threshold,
-    number,
-    cx,
-    cy,
-}: {
-    scrollProgress: MotionValue<number>;
-    threshold: number;
-    number: string;
-    cx: number;
-    cy: number;
-}) {
-    const opacity = useTransform(
-        scrollProgress,
-        [Math.max(0, threshold - 0.06), threshold],
-        [0.2, 1]
-    );
-    const scale = useTransform(
-        scrollProgress,
-        [Math.max(0, threshold - 0.06), threshold],
-        [0.6, 1]
-    );
-    const glowRadius = useTransform(
-        scrollProgress,
-        [Math.max(0, threshold - 0.06), threshold, Math.min(1, threshold + 0.06)],
-        [0, 16, 10]
-    );
+const CategoryCard = ({ cat, idx, isLeft }: { cat: any, idx: number, isLeft: boolean }) => {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: cardRef,
+        offset: ['start 85%', 'center 50%'],
+    });
+
+    const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+    const opacity = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
+    const glowOpacity = useTransform(scrollYProgress, [0.5, 1], [0, 0.25]);
 
     return (
-        <motion.g style={{ opacity }}>
-            <motion.circle
-                cx={cx}
-                cy={cy}
-                r={24}
-                fill="none"
-                stroke="#FFB800"
-                strokeWidth="1.5"
-                style={{ opacity: useTransform(scrollProgress, [Math.max(0, threshold - 0.04), threshold], [0, 0.4]) }}
-            />
-            <motion.circle
-                cx={cx}
-                cy={cy}
-                style={{ r: glowRadius }}
-                fill="#FFB800"
-                opacity={0.25}
-                filter="url(#catNodeGlow)"
-            />
-            <motion.circle
-                cx={cx}
-                cy={cy}
-                r={18}
-                fill="#FAFAFA"
-                stroke="#FFB800"
-                strokeWidth="2"
-                style={{ scale }}
-            />
-            <text
-                x={cx}
-                y={cy + 1}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fill="#FFB800"
-                fontSize="10"
-                fontFamily="monospace"
-                fontWeight="bold"
-            >
-                {number}
-            </text>
-        </motion.g>
+        <div 
+            ref={cardRef} 
+            className={`relative flex flex-col lg:flex-row items-center gap-8 mb-16 lg:mb-24 last:mb-0 ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
+        >
+            {/* ─── Timeline Node (Center on Desktop, Left on Mobile) ─── */}
+            <div className="absolute left-6 lg:left-1/2 -translate-x-1/2 flex items-center justify-center z-20 w-12 h-12">
+                {/* Outer Ring */}
+                <motion.div 
+                    className="absolute inset-0 rounded-full border-2 border-[#FFB800]"
+                    style={{ scale, opacity }}
+                />
+                {/* Glow */}
+                <motion.div 
+                    className="absolute inset-[-10px] rounded-full bg-[#FFB800] blur-md"
+                    style={{ opacity: glowOpacity }}
+                />
+                {/* Inner Circle */}
+                <div className="w-8 h-8 rounded-full bg-[#FAFAFA] border-2 border-[#FFB800] flex items-center justify-center relative z-10 shadow-sm">
+                    <span className="text-[#FFB800] text-[10px] font-mono font-bold leading-none">{cat.number}</span>
+                </div>
+            </div>
+
+            {/* ─── Card Content ─── */}
+            <div className={`w-full lg:w-1/2 pl-20 lg:pl-0 ${isLeft ? 'lg:pr-16 lg:text-right' : 'lg:pl-16 text-left'}`}>
+                <motion.div
+                    initial={{ opacity: 0, y: 30, x: isLeft ? -20 : 20 }}
+                    whileInView={{ opacity: 1, y: 0, x: 0 }}
+                    viewport={{ once: true, margin: '-10%' }}
+                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                    className="group relative bg-white border border-gray-200 hover:border-[#FFB800] rounded-2xl p-6 md:p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(255,184,0,0.12)] text-left"
+                >
+                    {/* Accent border */}
+                    <div
+                        className={`absolute top-0 ${isLeft ? 'right-0 lg:left-0' : 'left-0'} w-1 h-full rounded-full bg-gradient-to-b from-[#FFB800] via-[#FFB800]/50 to-transparent hidden lg:block`}
+                    />
+                    <div
+                        className="absolute top-0 left-0 w-1 h-full rounded-full bg-gradient-to-b from-[#FFB800] via-[#FFB800]/50 to-transparent lg:hidden"
+                    />
+
+                    {/* Corner accent */}
+                    <div className="absolute top-0 right-0 w-12 h-12 overflow-hidden rounded-tr-2xl">
+                        <div className="absolute top-0 right-0 w-0 h-0 border-t-[30px] border-t-gray-100 border-l-[30px] border-l-transparent group-hover:border-t-[#FFB800]/20 transition-colors duration-500" />
+                    </div>
+
+                    {/* Header */}
+                    <div className={`flex items-center gap-4 mb-5 ${isLeft ? 'lg:flex-row-reverse' : ''}`}>
+                        <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex items-center justify-center text-[#FFB800] group-hover:scale-105 transition-transform duration-300 shadow-md shrink-0">
+                            <cat.icon className="w-6 h-6" strokeWidth={1.8} />
+                        </div>
+                        <span className="font-mono text-2xl font-black text-gray-200 group-hover:text-[#FFB800]/30 transition-colors duration-300 select-none">
+                            {cat.number}
+                        </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="font-display font-bold text-lg md:text-xl text-[#1A1A1A] mb-4 uppercase tracking-wider">
+                        {cat.title}
+                    </h3>
+
+                    {/* Items */}
+                    <ul className={`space-y-2 border-t border-gray-100 pt-4 ${isLeft ? 'lg:items-end flex flex-col' : ''}`}>
+                        {cat.items.map((item: string, iIdx: number) => (
+                            <li key={iIdx} className={`flex items-center gap-2.5 text-sm font-mono text-gray-600 ${isLeft ? 'lg:flex-row-reverse' : ''}`}>
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#FFB800] shrink-0" />
+                                <span>{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </motion.div>
+            </div>
+            
+            {/* Empty space for alternating layout */}
+            <div className="hidden lg:block lg:w-1/2" />
+        </div>
     );
-}
+};
 
 /* ─── Main Component ─── */
 export default function ProductCategories() {
-    const journeyRef = useRef<HTMLDivElement>(null);
+    const sectionRef = useRef<HTMLDivElement>(null);
 
     const { scrollYProgress } = useScroll({
-        target: journeyRef,
-        offset: ['start end', 'end start'],
+        target: sectionRef,
+        offset: ['start center', 'end center'],
     });
 
-    const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 60,
+    const scaleY = useSpring(scrollYProgress, {
+        stiffness: 80,
         damping: 20,
         restDelta: 0.001,
     });
 
-    const pathLength = useTransform(smoothProgress, [0.08, 0.88], [0, 1]);
-
-    const orbY = useTransform(smoothProgress, [0.08, 0.88], [0, 1500]);
-    const orbOpacity = useTransform(smoothProgress, [0.06, 0.12, 0.84, 0.90], [0, 1, 1, 0]);
-
-    const desktopNodes = [
-        { cx: 200, cy: 230 },
-        { cx: 1000, cy: 420 },
-        { cx: 200, cy: 630 },
-        { cx: 1000, cy: 840 },
-        { cx: 200, cy: 1050 },
-        { cx: 1000, cy: 1260 },
-    ];
-
     return (
-        <section className="py-24 md:py-36 bg-[#FAFAFA] text-[#1A1A1A] relative overflow-hidden" ref={journeyRef}>
+        <section className="py-24 md:py-36 bg-[#FAFAFA] text-[#1A1A1A] relative overflow-hidden" ref={sectionRef}>
             {/* Subtle Grid Background */}
             <div
                 className="absolute inset-0 pointer-events-none opacity-[0.4]"
@@ -209,7 +210,7 @@ export default function ProductCategories() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center max-w-3xl mx-auto mb-16 md:mb-20 space-y-4"
+                    className="text-center max-w-3xl mx-auto mb-20 md:mb-32 space-y-4"
                 >
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1A1A] text-[#FFB800] text-xs font-mono font-bold uppercase tracking-wider">
                         <span>Component Portfolio</span>
@@ -222,204 +223,28 @@ export default function ProductCategories() {
                     </p>
                 </motion.div>
 
-                {/* ─── Journey Container ─── */}
-                <div className="relative">
+                {/* ─── Timeline Container ─── */}
+                <div className="relative max-w-5xl mx-auto">
+                    
+                    {/* Background Line (Inactive) */}
+                    <div className="absolute top-0 bottom-0 left-6 lg:left-1/2 w-0.5 -translate-x-1/2 bg-gray-200 rounded-full" />
+                    
+                    {/* Foreground Line (Active, drawn on scroll) */}
+                    <motion.div 
+                        className="absolute top-0 bottom-0 left-6 lg:left-1/2 w-0.5 -translate-x-1/2 bg-[#FFB800] rounded-full origin-top drop-shadow-[0_0_8px_rgba(255,184,0,0.6)]"
+                        style={{ scaleY }}
+                    />
 
-                    {/* ─── Desktop SVG Journey Line ─── */}
-                    <svg
-                        className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block"
-                        viewBox="0 0 1200 1500"
-                        preserveAspectRatio="none"
-                        fill="none"
-                        style={{ zIndex: 1 }}
-                    >
-                        <defs>
-                            <filter id="catNodeGlow" x="-50%" y="-50%" width="200%" height="200%">
-                                <feGaussianBlur stdDeviation="5" result="blur" />
-                                <feMerge>
-                                    <feMergeNode in="blur" />
-                                    <feMergeNode in="SourceGraphic" />
-                                </feMerge>
-                            </filter>
-                            <filter id="catPathGlow" x="-10%" y="-10%" width="120%" height="120%">
-                                <feGaussianBlur stdDeviation="2.5" result="blur" />
-                                <feMerge>
-                                    <feMergeNode in="blur" />
-                                    <feMergeNode in="SourceGraphic" />
-                                </feMerge>
-                            </filter>
-                            <radialGradient id="catOrbGradient" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stopColor="#FFB800" stopOpacity="1" />
-                                <stop offset="40%" stopColor="#FFB800" stopOpacity="0.6" />
-                                <stop offset="100%" stopColor="#FFB800" stopOpacity="0" />
-                            </radialGradient>
-                        </defs>
-
-                        {/* Ghost track */}
-                        <path
-                            d={DESKTOP_PATH}
-                            stroke="#E0E0E0"
-                            strokeWidth="2"
-                            strokeDasharray="6 8"
-                            fill="none"
-                        />
-
-                        {/* Drawn path */}
-                        <motion.path
-                            d={DESKTOP_PATH}
-                            stroke="#FFB800"
-                            strokeWidth="2.5"
-                            fill="none"
-                            strokeLinecap="round"
-                            filter="url(#catPathGlow)"
-                            style={{ pathLength }}
-                            strokeDashoffset={0}
-                            strokeDasharray="1"
-                        />
-
-                        {/* Nodes */}
+                    {/* Category Cards */}
+                    <div className="relative z-10 pt-8 pb-8">
                         {categories.map((cat, idx) => (
-                            <JourneyNode
-                                key={idx}
-                                scrollProgress={smoothProgress}
-                                threshold={NODE_THRESHOLDS[idx]}
-                                number={cat.number}
-                                cx={desktopNodes[idx].cx}
-                                cy={desktopNodes[idx].cy}
+                            <CategoryCard 
+                                key={idx} 
+                                cat={cat} 
+                                idx={idx} 
+                                isLeft={idx % 2 === 0} 
                             />
                         ))}
-
-                        {/* Leading orb */}
-                        <motion.circle
-                            cx={600}
-                            style={{
-                                cy: orbY,
-                                opacity: orbOpacity,
-                            }}
-                            r={7}
-                            fill="url(#catOrbGradient)"
-                            filter="url(#catNodeGlow)"
-                        />
-                    </svg>
-
-                    {/* ─── Mobile SVG Journey Line ─── */}
-                    <svg
-                        className="absolute left-6 top-0 h-full pointer-events-none lg:hidden"
-                        width="48"
-                        viewBox="0 0 48 1600"
-                        preserveAspectRatio="none"
-                        fill="none"
-                        style={{ zIndex: 1 }}
-                    >
-                        <defs>
-                            <filter id="catMobileGlow" x="-50%" y="-50%" width="200%" height="200%">
-                                <feGaussianBlur stdDeviation="4" result="blur" />
-                                <feMerge>
-                                    <feMergeNode in="blur" />
-                                    <feMergeNode in="SourceGraphic" />
-                                </feMerge>
-                            </filter>
-                        </defs>
-
-                        <path
-                            d={MOBILE_PATH}
-                            stroke="#E0E0E0"
-                            strokeWidth="2"
-                            strokeDasharray="6 8"
-                            fill="none"
-                        />
-
-                        <motion.path
-                            d={MOBILE_PATH}
-                            stroke="#FFB800"
-                            strokeWidth="2.5"
-                            fill="none"
-                            strokeLinecap="round"
-                            style={{ pathLength }}
-                            strokeDashoffset={0}
-                            strokeDasharray="1"
-                        />
-
-                        {categories.map((cat, idx) => {
-                            const mobileY = 134 + idx * 267;
-                            return (
-                                <JourneyNode
-                                    key={idx}
-                                    scrollProgress={smoothProgress}
-                                    threshold={NODE_THRESHOLDS[idx]}
-                                    number={cat.number}
-                                    cx={24}
-                                    cy={mobileY}
-                                />
-                            );
-                        })}
-                    </svg>
-
-                    {/* ─── Category Cards: Serpentine Zigzag ─── */}
-                    <div className="relative" style={{ zIndex: 2 }}>
-                        {categories.map((cat, idx) => {
-                            const isLeft = idx % 2 === 0;
-
-                            return (
-                                <motion.div
-                                    key={idx}
-                                    initial={{ opacity: 0, y: 35, x: isLeft ? -25 : 25 }}
-                                    whileInView={{ opacity: 1, y: 0, x: 0 }}
-                                    viewport={{ once: true, margin: '-60px' }}
-                                    transition={{ duration: 0.6, ease: 'easeOut', delay: 0.08 }}
-                                    className={`
-                                        flex flex-col lg:flex-row items-start gap-6 lg:gap-10
-                                        mb-12 md:mb-20 last:mb-0
-                                        pl-16 lg:pl-0
-                                        ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'}
-                                    `}
-                                >
-                                    <div
-                                        className={`
-                                            w-full lg:w-[45%]
-                                            ${isLeft ? 'lg:ml-0 lg:mr-auto' : 'lg:mr-0 lg:ml-auto'}
-                                        `}
-                                    >
-                                        <div className="group relative bg-white border border-gray-200 hover:border-[#FFB800] rounded-2xl p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(255,184,0,0.12)]">
-                                            {/* Accent border */}
-                                            <div
-                                                className={`absolute top-0 ${isLeft ? 'left-0' : 'right-0'} w-1 h-full rounded-full bg-gradient-to-b from-[#FFB800] via-[#FFB800]/50 to-transparent`}
-                                            />
-
-                                            {/* Corner accent */}
-                                            <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden rounded-tr-2xl">
-                                                <div className="absolute top-0 right-0 w-0 h-0 border-t-[40px] border-t-gray-100 border-l-[40px] border-l-transparent group-hover:border-t-[#FFB800]/20 transition-colors duration-500" />
-                                            </div>
-
-                                            {/* Header */}
-                                            <div className="flex items-center gap-4 mb-6">
-                                                <div className="w-14 h-14 rounded-xl bg-[#1A1A1A] flex items-center justify-center text-[#FFB800] group-hover:scale-105 transition-transform duration-300 shadow-md">
-                                                    <cat.icon className="w-7 h-7" strokeWidth={1.8} />
-                                                </div>
-                                                <span className="font-mono text-3xl font-black text-gray-200 group-hover:text-[#FFB800]/30 transition-colors duration-300 select-none">
-                                                    {cat.number}
-                                                </span>
-                                            </div>
-
-                                            {/* Title */}
-                                            <h3 className="font-display font-bold text-xl text-[#1A1A1A] mb-5 uppercase tracking-wider">
-                                                {cat.title}
-                                            </h3>
-
-                                            {/* Items */}
-                                            <ul className="space-y-2.5 border-t border-gray-100 pt-5">
-                                                {cat.items.map((item, iIdx) => (
-                                                    <li key={iIdx} className="flex items-center gap-2.5 text-sm font-mono text-gray-600">
-                                                        <span className="w-1.5 h-1.5 rounded-full bg-[#FFB800] shrink-0" />
-                                                        <span>{item}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
                     </div>
                 </div>
             </div>

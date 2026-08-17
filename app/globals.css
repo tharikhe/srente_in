@@ -17,8 +17,8 @@
   --color-brand-text-muted: #6B7280;
   --color-brand-text-light: #9CA3AF;
 
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 /* Base Styles */

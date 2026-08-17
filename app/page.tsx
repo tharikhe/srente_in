@@ -1,3 +1,4 @@
+import PortalHero from '@/components/PortalHero';
 import IndustrialAbout from '@/components/IndustrialAbout';
 import HomeStats from '@/components/HomeStats';
 import HomeCapabilities from '@/components/HomeCapabilities';
@@ -16,6 +17,9 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="w-screen bg-[#EAEAEA] relative" style={{ marginLeft: 'calc(-50vw + 50%)', marginTop: '-2rem' }}>
+      {/* 0. Portal Hero — Scroll-Driven Opening */}
+      <PortalHero />
+
       {/* 1. Industrial About Section */}
       <IndustrialAbout />
 
@@ -42,3 +46,4 @@ export default function Home() {
     </div>
   );
 }
+

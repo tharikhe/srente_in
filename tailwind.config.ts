@@ -42,10 +42,10 @@ const config: Config = {
                 },
             },
             fontFamily: {
-                sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-                display: ['var(--font-syne)', 'system-ui', 'sans-serif'],
+                sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+                display: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
                 serif: ['Georgia', 'Cambria', 'serif'],
-                mono: ['var(--font-mono)', 'Consolas', 'monospace'],
+                mono: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
             },
             boxShadow: {
                 'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
