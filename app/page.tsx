@@ -1,4 +1,3 @@
-import HeroSection from '@/components/HeroSection';
 import IndustrialAbout from '@/components/IndustrialAbout';
 import HomeStats from '@/components/HomeStats';
 import HomeCapabilities from '@/components/HomeCapabilities';
@@ -17,10 +16,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="w-screen bg-[#EAEAEA] relative" style={{ marginLeft: 'calc(-50vw + 50%)', marginTop: '-2rem' }}>
-      {/* 1. Cinematic Scroll-Driven Hero */}
-      <HeroSection />
-
-      {/* 2. Industrial About Section */}
+      {/* 1. Industrial About Section */}
       <IndustrialAbout />
 
       {/* 3. Global Stats & ISO Metrics Banner */}

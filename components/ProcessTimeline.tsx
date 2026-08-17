@@ -54,16 +54,16 @@ export default function ProcessTimeline() {
     return (
         <section className="py-24 md:py-36 bg-[#111111] text-white relative overflow-hidden">
             {/* Ambient Halos */}
-            <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#FFFF00]/5 rounded-full blur-[140px] pointer-events-none -translate-y-1/2" />
+            <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#FFB800]/5 rounded-full blur-[140px] pointer-events-none -translate-y-1/2" />
 
             <div className="container mx-auto px-4 max-w-7xl relative z-10">
                 {/* Header */}
                 <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20 space-y-4">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFFF00]/10 border border-[#FFFF00]/30 text-[#FFFF00] text-xs font-mono font-bold uppercase tracking-wider">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFB800]/10 border border-[#FFB800]/30 text-[#FFB800] text-xs font-mono font-bold uppercase tracking-wider">
                         <span>Turnkey ESDM Lifecycle</span>
                     </div>
                     <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight uppercase">
-                        Our 5-Step <span className="text-[#FFFF00]">Production Workflow</span>
+                        Our 5-Step <span className="text-[#FFB800]">Production Workflow</span>
                     </h2>
                     <p className="font-mono text-gray-300 text-sm md:text-base leading-relaxed">
                         A systematic, quality-first manufacturing methodology designed to eliminate risk and accelerate your electronics product launch.
@@ -80,11 +80,11 @@ export default function ProcessTimeline() {
                                 onClick={() => setActiveStep(idx)}
                                 className={`flex flex-col items-start p-4 rounded-xl border text-left transition-all duration-300 cursor-pointer ${
                                     isActive
-                                        ? 'bg-[#FFFF00] text-[#1A1A1A] border-[#FFFF00] shadow-[0_0_25px_rgba(255,255,0,0.3)]'
+                                        ? 'bg-[#FFB800] text-[#1A1A1A] border-[#FFB800] shadow-[0_0_25px_rgba(255,184,0,0.3)]'
                                         : 'bg-white/5 text-white border-white/10 hover:border-white/30 hover:bg-white/10'
                                 }`}
                             >
-                                <span className={`font-mono text-xs font-bold mb-2 ${isActive ? 'text-[#1A1A1A]' : 'text-[#FFFF00]'}`}>
+                                <span className={`font-mono text-xs font-bold mb-2 ${isActive ? 'text-[#1A1A1A]' : 'text-[#FFB800]'}`}>
                                     STEP {step.number}
                                 </span>
                                 <span className="font-display font-bold text-xs sm:text-sm uppercase tracking-wide line-clamp-1">
@@ -101,19 +101,19 @@ export default function ProcessTimeline() {
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="bg-[#181818] border border-[#FFFF00]/30 rounded-2xl p-8 md:p-12 relative overflow-hidden shadow-2xl"
+                    className="bg-[#181818] border border-[#FFB800]/30 rounded-2xl p-8 md:p-12 relative overflow-hidden shadow-2xl"
                 >
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFFF00]/10 rounded-bl-full pointer-events-none" />
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFB800]/10 rounded-bl-full pointer-events-none" />
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                         {/* Left Info Column */}
                         <div className="lg:col-span-8 space-y-6">
                             <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 rounded-2xl bg-[#FFFF00] text-[#1A1A1A] flex items-center justify-center font-bold shadow-lg shrink-0">
+                                <div className="w-14 h-14 rounded-2xl bg-[#FFB800] text-[#1A1A1A] flex items-center justify-center font-bold shadow-lg shrink-0">
                                     {React.createElement(steps[activeStep].icon, { className: 'w-7 h-7', strokeWidth: 2 })}
                                 </div>
                                 <div>
-                                    <span className="font-mono text-xs text-[#FFFF00] font-bold uppercase tracking-widest">
+                                    <span className="font-mono text-xs text-[#FFB800] font-bold uppercase tracking-widest">
                                         STEP {steps[activeStep].number} — {steps[activeStep].subtitle}
                                     </span>
                                     <h3 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-white uppercase tracking-tight">
@@ -133,7 +133,7 @@ export default function ProcessTimeline() {
                                         key={tIdx}
                                         className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-black/50 border border-white/15 text-gray-300 text-xs font-mono"
                                     >
-                                        <Check className="w-3.5 h-3.5 text-[#FFFF00]" />
+                                        <Check className="w-3.5 h-3.5 text-[#FFB800]" />
                                         <span>{tag}</span>
                                     </span>
                                 ))}
@@ -147,7 +147,7 @@ export default function ProcessTimeline() {
                             </p>
                             <Link
                                 href="/contact"
-                                className="inline-flex items-center gap-2.5 bg-[#FFFF00] text-[#1A1A1A] hover:bg-white px-6 py-3.5 rounded-xl font-display font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg"
+                                className="inline-flex items-center gap-2.5 bg-[#FFB800] text-[#1A1A1A] hover:bg-white px-6 py-3.5 rounded-xl font-display font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg"
                             >
                                 Contact Our Team
                                 <ArrowRight className="w-4 h-4" />

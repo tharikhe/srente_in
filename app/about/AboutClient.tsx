@@ -70,7 +70,7 @@ export default function AboutClient() {
         <div className="min-h-screen bg-white dark:bg-gray-900 overflow-hidden">
             {/* Hero Section */}
             <section className="relative py-20 md:py-28 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 border-b border-gray-100 dark:border-gray-800">
-                <div className="absolute inset-0 bg-[#FFFF00]/5 pointer-events-none" />
+                <div className="absolute inset-0 bg-[#FFB800]/5 pointer-events-none" />
                 <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -78,11 +78,11 @@ export default function AboutClient() {
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="space-y-6"
                     >
-                        <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-[#FFFF00]/10 text-[#FFFF00] border border-[#FFFF00]/20 text-xs md:text-sm font-semibold tracking-wider uppercase">
+                        <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-[#FFB800]/10 text-[#FFB800] border border-[#FFB800]/20 text-xs md:text-sm font-semibold tracking-wider uppercase">
                             <Sparkles className="w-4 h-4" /> Electronics Manufacturing Services & Component Solutions
                         </span>
                         <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-[#1A1A1A] dark:text-white tracking-tight leading-tight">
-                            About <span className="text-[#FFFF00]">Serente Electronics</span> Pvt. Ltd.
+                            About <span className="text-[#FFB800]">Serente Electronics</span> Pvt. Ltd.
                         </h1>
                         <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
                             A technology-driven Electronics Manufacturing Services (EMS) and global electronic component solutions company, committed to delivering end-to-end manufacturing, engineering, and supply chain solutions to OEMs across diverse industries.
@@ -112,7 +112,7 @@ export default function AboutClient() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
                                 <div className="flex flex-wrap items-center gap-3">
-                                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FFFF00] text-white text-xs font-bold rounded-full shadow-lg">
+                                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FFB800] text-white text-xs font-bold rounded-full shadow-lg">
                                         <Sparkles className="w-3.5 h-3.5" />
                                         Our Team
                                     </span>
@@ -138,9 +138,9 @@ export default function AboutClient() {
                     >
                         <motion.div variants={fadeInUp} className="text-center space-y-4">
                             <h2 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white">
-                                Delivering End-to-End <span className="text-[#FFFF00]">Manufacturing & Sourcing Excellence</span>
+                                Delivering End-to-End <span className="text-[#FFB800]">Manufacturing & Sourcing Excellence</span>
                             </h2>
-                            <div className="w-24 h-1.5 bg-gradient-to-r from-[#FFFF00] to-brand-gold rounded-full mx-auto" />
+                            <div className="w-24 h-1.5 bg-gradient-to-r from-[#FFB800] to-brand-gold rounded-full mx-auto" />
                         </motion.div>
 
                         <div className="grid md:grid-cols-2 gap-8">
@@ -148,7 +148,7 @@ export default function AboutClient() {
                                 variants={fadeInUp}
                                 className="bg-gray-50 dark:bg-gray-800/60 p-8 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm space-y-4 hover:shadow-md transition-shadow"
                             >
-                                <div className="w-12 h-12 rounded-xl bg-[#FFFF00]/10 flex items-center justify-center text-[#FFFF00]">
+                                <div className="w-12 h-12 rounded-xl bg-[#FFB800]/10 flex items-center justify-center text-[#FFB800]">
                                     <Building2 className="w-6 h-6" />
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">Global Sourcing & Comprehensive Support</h3>
@@ -191,7 +191,7 @@ export default function AboutClient() {
                                         Our manufacturing ecosystem is backed by globally recognized quality systems, advanced production capabilities, and stringent quality assurance processes. Serente delivers consistent quality, shorter lead times, and dependable manufacturing services.
                                     </p>
                                     <div className="flex flex-wrap gap-2 pt-1">
-                                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#FFFF00]/20 text-[#FFFF00] border border-[#FFFF00]/30">
+                                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#FFB800]/20 text-[#FFB800] border border-[#FFB800]/30">
                                             <ShieldCheck className="w-3 h-3" /> ISO 9001:2015
                                         </span>
                                         <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#F39800]/20 text-[#F39800] border border-[#F39800]/30">
@@ -238,7 +238,7 @@ export default function AboutClient() {
                             <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
                             <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 transition-transform">
                                 <h4 className="text-white font-bold text-lg mb-1 flex items-center gap-2">
-                                    <Factory className="w-4 h-4 text-[#FFFF00]" /> Precision Assembly
+                                    <Factory className="w-4 h-4 text-[#FFB800]" /> Precision Assembly
                                 </h4>
                                 <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity delay-100">
                                     Automated pick-and-place cleanroom environments.
@@ -301,7 +301,7 @@ export default function AboutClient() {
             <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-800/40 border-y border-gray-100 dark:border-gray-800">
                 <div className="container mx-auto px-4">
                     <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                        <span className="inline-block py-1 px-3 rounded-full bg-[#FFFF00]/10 text-[#FFFF00] border border-[#FFFF00]/20 text-xs font-semibold tracking-wider uppercase">
+                        <span className="inline-block py-1 px-3 rounded-full bg-[#FFB800]/10 text-[#FFB800] border border-[#FFB800]/20 text-xs font-semibold tracking-wider uppercase">
                             What We Offer
                         </span>
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Our Core Capabilities</h2>
@@ -322,10 +322,10 @@ export default function AboutClient() {
                                 className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm hover:shadow-lg border border-gray-100 dark:border-gray-700 transition-all flex flex-col justify-between group"
                             >
                                 <div className="space-y-4">
-                                    <div className="w-12 h-12 bg-[#FFFF00]/10 dark:bg-[#FFFF00]/20 rounded-xl flex items-center justify-center text-[#FFFF00] group-hover:bg-[#FFFF00] group-hover:text-white transition-colors duration-300">
+                                    <div className="w-12 h-12 bg-[#FFB800]/10 dark:bg-[#FFB800]/20 rounded-xl flex items-center justify-center text-[#FFB800] group-hover:bg-[#FFB800] group-hover:text-white transition-colors duration-300">
                                         <item.icon className="w-6 h-6" />
                                     </div>
-                                    <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-[#FFFF00] transition-colors">
+                                    <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-[#FFB800] transition-colors">
                                         {item.title}
                                     </h3>
                                     <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
@@ -359,9 +359,9 @@ export default function AboutClient() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.08 }}
-                                className="flex items-start gap-4 p-5 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm hover:border-[#FFFF00]/40 transition-colors"
+                                className="flex items-start gap-4 p-5 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm hover:border-[#FFB800]/40 transition-colors"
                             >
-                                <div className="w-8 h-8 rounded-full bg-[#FFFF00]/10 text-[#FFFF00] flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <div className="w-8 h-8 rounded-full bg-[#FFB800]/10 text-[#FFB800] flex items-center justify-center flex-shrink-0 mt-0.5">
                                     <Check className="w-5 h-5 stroke-[3]" />
                                 </div>
                                 <p className="text-gray-800 dark:text-gray-200 font-semibold text-base md:text-lg leading-snug">
@@ -374,7 +374,7 @@ export default function AboutClient() {
             </section>
 
             {/* Closing Statement Highlight Banner */}
-            <section className="py-16 bg-gradient-to-br from-[#FFFF00]/10 via-white to-brand-gold/10 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-y border-gray-200/60 dark:border-gray-700">
+            <section className="py-16 bg-gradient-to-br from-[#FFB800]/10 via-white to-brand-gold/10 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-y border-gray-200/60 dark:border-gray-700">
                 <div className="container mx-auto px-4 max-w-4xl text-center">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.96 }}
@@ -383,7 +383,7 @@ export default function AboutClient() {
                         transition={{ duration: 0.6 }}
                         className="space-y-6"
                     >
-                        <div className="w-14 h-14 mx-auto bg-[#FFFF00] text-[#1A1A1A] rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-14 h-14 mx-auto bg-[#FFB800] text-[#1A1A1A] rounded-2xl flex items-center justify-center shadow-lg">
                             <Award className="w-8 h-8" />
                         </div>
                         <p className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white leading-relaxed italic">
@@ -394,7 +394,7 @@ export default function AboutClient() {
             </section>
 
             {/* Call To Action */}
-            <section className="py-20 bg-[#FFFF00] text-[#1A1A1A] relative overflow-hidden">
+            <section className="py-20 bg-[#FFB800] text-[#1A1A1A] relative overflow-hidden">
                 <div className="container mx-auto px-4 relative z-10 text-center space-y-8 max-w-3xl">
                     <h2 className="text-3xl md:text-5xl font-bold text-[#1A1A1A]">Partner with Serente Electronics</h2>
                     <p className="text-lg md:text-xl text-[#1A1A1A]/80 max-w-2xl mx-auto leading-relaxed">

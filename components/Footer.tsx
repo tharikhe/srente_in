@@ -49,9 +49,9 @@ const footerLinks: FooterSection[] = [
 
 export default function Footer() {
     return (
-        <footer className="relative w-full max-w-7xl mx-auto flex flex-col items-center justify-center rounded-t-4xl md:rounded-t-6xl border-t border-white/10 bg-[#0D0D0D] bg-[radial-gradient(35%_128px_at_50%_0%,rgba(255,255,0,0.12),transparent)] px-6 py-12 lg:py-16 text-white overflow-hidden">
+        <footer className="relative w-full max-w-7xl mx-auto flex flex-col items-center justify-center rounded-t-4xl md:rounded-t-6xl border-t border-white/10 bg-[#0D0D0D] bg-[radial-gradient(35%_128px_at_50%_0%,rgba(255,184,0,0.12),transparent)] px-6 py-12 lg:py-16 text-white overflow-hidden">
             {/* Top Glowing Blur Line */}
-            <div className="bg-[#FFFF00] absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur shadow-[0_0_15px_#FFFF00]" />
+            <div className="bg-[#FFB800] absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur shadow-[0_0_15px_#FFB800]" />
 
             <div className="grid w-full gap-10 xl:grid-cols-3 xl:gap-8">
                 {/* Brand & Newsletter Column */}
@@ -68,7 +68,7 @@ export default function Footer() {
                             <span className="font-display font-black text-xl tracking-tighter leading-none text-white">
                                 SERENTE
                             </span>
-                            <span className="font-mono text-[10px] tracking-widest text-[#FFFF00] leading-none mt-1 uppercase font-bold">
+                            <span className="font-mono text-[10px] tracking-widest text-[#FFB800] leading-none mt-1 uppercase font-bold">
                                 Electronics
                             </span>
                         </div>
@@ -80,7 +80,7 @@ export default function Footer() {
 
                     {/* Newsletter Subscription Form */}
                     <div className="pt-2">
-                        <h4 className="text-xs uppercase tracking-wider font-bold text-[#FFFF00] mb-3">
+                        <h4 className="text-xs uppercase tracking-wider font-bold text-[#FFB800] mb-3">
                             Subscribe to Newsletter
                         </h4>
                         <form
@@ -124,11 +124,11 @@ export default function Footer() {
                                 name="email"
                                 placeholder="Enter your email"
                                 required
-                                className="flex-grow px-4 py-2.5 rounded-l-xl bg-white/10 border border-white/15 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#FFFF00] transition-colors"
+                                className="flex-grow px-4 py-2.5 rounded-l-xl bg-white/10 border border-white/15 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#FFB800] transition-colors"
                             />
                             <button
                                 type="submit"
-                                className="px-5 py-2.5 bg-[#FFFF00] hover:bg-[#FFF566] text-[#1A1A1A] font-bold text-sm rounded-r-xl transition-all duration-200 flex items-center gap-2 shadow-md disabled:opacity-50"
+                                className="px-5 py-2.5 bg-[#FFB800] hover:bg-[#E5A500] text-[#1A1A1A] font-bold text-sm rounded-r-xl transition-all duration-200 flex items-center gap-2 shadow-md disabled:opacity-50"
                             >
                                 <Send className="w-4 h-4 text-[#1A1A1A]" />
                                 <span className="hidden sm:inline">Subscribe</span>
@@ -146,7 +146,7 @@ export default function Footer() {
                     {footerLinks.map((section, index) => (
                         <AnimatedContainer key={section.label} delay={0.1 + index * 0.1}>
                             <div className="mb-10 md:mb-0">
-                                <h3 className="text-xs uppercase tracking-widest font-bold text-[#FFFF00] mb-4">
+                                <h3 className="text-xs uppercase tracking-widest font-bold text-[#FFB800] mb-4">
                                     {section.label}
                                 </h3>
                                 <ul className="text-white/70 space-y-2.5 text-sm font-medium">
@@ -154,9 +154,9 @@ export default function Footer() {
                                         <li key={link.title}>
                                             <a
                                                 href={link.href}
-                                                className="hover:text-[#FFFF00] inline-flex items-center transition-all duration-300 gap-2 group"
+                                                className="hover:text-[#FFB800] inline-flex items-center transition-all duration-300 gap-2 group"
                                             >
-                                                {link.icon && <link.icon className="size-4 text-[#FFFF00] group-hover:scale-110 transition-transform" />}
+                                                {link.icon && <link.icon className="size-4 text-[#FFB800] group-hover:scale-110 transition-transform" />}
                                                 <span>{link.title}</span>
                                             </a>
                                         </li>

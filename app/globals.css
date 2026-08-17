@@ -5,12 +5,12 @@
   --color-foreground: #1A1A1A;
 
   /* Brand Colors - Yellow Palette */
-  --color-brand-teal: #FFFF00;
-  --color-brand-teal-light: #FFF566;
-  --color-brand-teal-dark: #CCCC00;
-  --color-brand-gold: #FFFF00;
-  --color-brand-gold-light: #FFF566;
-  --color-brand-gold-dark: #E6E600;
+  --color-brand-teal: #FFB800;
+  --color-brand-teal-light: #FFC72C;
+  --color-brand-teal-dark: #D97706;
+  --color-brand-gold: #FFB800;
+  --color-brand-gold-light: #FFC72C;
+  --color-brand-gold-dark: #D97706;
   --color-brand-surface: #EAEAEA;
   --color-brand-border: #EAEAEA;
   --color-brand-text: #1A1A1A;
@@ -45,23 +45,23 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FFFF00;
+  background: #FFB800;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FFF566;
+  background: #E5A500;
 }
 
 /* Selection */
 ::selection {
-  background: #FFFF00;
+  background: #FFB800;
   color: #1A1A1A;
 }
 
 /* Focus States */
 *:focus-visible {
-  outline: 2px solid #FFFF00;
+  outline: 2px solid #FFB800;
   outline-offset: 2px;
 }
 
@@ -77,7 +77,7 @@ body {
   left: 0;
   width: 0;
   height: 2px;
-  background: #FFFF00;
+  background: #FFB800;
   transition: width 0.3s ease;
 }
 
@@ -113,21 +113,21 @@ body {
 }
 
 .glass-dark {
-  background: rgba(255, 255, 0, 0.9);
+  background: rgba(255, 184, 0, 0.9);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
 /* Gradient Text */
 .gradient-text-gold {
-  background: linear-gradient(135deg, #FFFF00 0%, #FFF566 50%, #FFFF00 100%);
+  background: linear-gradient(135deg, #FFB800 0%, #FFC72C 50%, #FFB800 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-teal {
-  background: linear-gradient(135deg, #FFFF00 0%, #FFF566 50%, #FFFF00 100%);
+  background: linear-gradient(135deg, #FFB800 0%, #FFC72C 50%, #FFB800 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

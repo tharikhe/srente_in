@@ -133,7 +133,7 @@ export default function HomeIndustries() {
                             whileInView={{ scaleX: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: 0.3 }}
-                            className="w-24 h-1.5 bg-[#FFFF00] mx-auto origin-center"
+                            className="w-24 h-1.5 bg-[#FFB800] mx-auto origin-center"
                         />
                     </motion.div>
 
@@ -154,7 +154,7 @@ export default function HomeIndustries() {
                                 }}
                                 className="group relative cursor-pointer"
                             >
-                                <div className="relative w-[140px] sm:w-[150px] md:w-[160px] lg:w-[170px] aspect-[3/4] border-2 border-[#FFFF00] bg-[#FFFF00] flex flex-col items-center justify-center gap-5 p-5 transition-all duration-500 group-hover:bg-[#FFFF00] group-hover:shadow-[0_0_40px_rgba(255,255,0,0.4)]">
+                                <div className="relative w-[140px] sm:w-[150px] md:w-[160px] lg:w-[170px] aspect-[3/4] border-2 border-[#FFB800] bg-[#FFB800] flex flex-col items-center justify-center gap-5 p-5 transition-all duration-500 group-hover:bg-[#FFB800] group-hover:shadow-[0_0_40px_rgba(255,184,0,0.4)]">
                                     <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#1A1A1A]/30" />
                                     <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#1A1A1A]/30" />
                                     <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#1A1A1A]/30" />
@@ -189,7 +189,7 @@ export default function HomeIndustries() {
                                 }}
                                 className="group relative cursor-pointer"
                             >
-                                <div className="relative w-[140px] sm:w-[150px] md:w-[160px] lg:w-[170px] aspect-[3/4] border-2 border-[#FFFF00] bg-[#FFFF00] flex flex-col items-center justify-center gap-5 p-5 transition-all duration-500 group-hover:bg-[#FFFF00] group-hover:shadow-[0_0_40px_rgba(255,255,0,0.4)]">
+                                <div className="relative w-[140px] sm:w-[150px] md:w-[160px] lg:w-[170px] aspect-[3/4] border-2 border-[#FFB800] bg-[#FFB800] flex flex-col items-center justify-center gap-5 p-5 transition-all duration-500 group-hover:bg-[#FFB800] group-hover:shadow-[0_0_40px_rgba(255,184,0,0.4)]">
                                     <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#1A1A1A]/30" />
                                     <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#1A1A1A]/30" />
                                     <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#1A1A1A]/30" />

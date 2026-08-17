@@ -27,12 +27,12 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
                             href="/blog"
                             className="inline-flex items-center text-white/80 hover:text-white mb-6 transition-colors text-sm font-medium"
                         >
-                            <ArrowLeft className="w-4 h-4 mr-2 text-[#FFFF00]" />
+                            <ArrowLeft className="w-4 h-4 mr-2 text-[#FFB800]" />
                             Back to Blog
                         </Link>
 
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="bg-[#FFFF00] text-[#1A1A1A] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            <span className="bg-[#FFB800] text-[#1A1A1A] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                                 {post.category}
                             </span>
                         </div>
@@ -43,15 +43,15 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
 
                         <div className="flex flex-wrap items-center gap-6 text-white/90 text-sm font-medium">
                             <div className="flex items-center gap-2">
-                                <User className="w-4 h-4 text-[#FFFF00]" />
+                                <User className="w-4 h-4 text-[#FFB800]" />
                                 <span>{post.author}</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <Calendar className="w-4 h-4 text-[#FFFF00]" />
+                                <Calendar className="w-4 h-4 text-[#FFB800]" />
                                 <span>{post.date}</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <Clock className="w-4 h-4 text-[#FFFF00]" />
+                                <Clock className="w-4 h-4 text-[#FFB800]" />
                                 <span>5 min read</span>
                             </div>
                         </div>
@@ -63,12 +63,12 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
             <div className="container mx-auto px-4 mt-12">
                 <div className="max-w-3xl mx-auto">
                     <div
-                        className="prose prose-lg prose-headings:text-[#1A1A1A] prose-img:rounded-xl prose-img:shadow-lg prose-img:mx-auto prose-img:my-8 prose-li:marker:text-[#FFFF00] prose-strong:text-gray-800 prose-p:text-gray-700 prose-p:leading-relaxed max-w-none [&_.blog-banner-image]:w-full [&_.blog-banner-image]:max-w-2xl [&_.blog-banner-image]:mx-auto [&_.blog-banner-image]:rounded-xl [&_.blog-banner-image]:shadow-md [&_.blog-banner-image]:mb-8 [&_.blog-banner-image]:border [&_.blog-banner-image]:border-gray-100 [&_a]:text-yellow-600 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-yellow-400 [&_a:hover]:text-yellow-800 [&_a:hover]:decoration-yellow-600 [&_a]:transition-colors [&_a]:duration-200 [&_ul]:space-y-2 [&_h3]:mt-8 [&_h3]:mb-4 [&_h3]:text-xl [&_h3]:font-bold"
+                        className="prose prose-lg prose-headings:text-[#1A1A1A] prose-img:rounded-xl prose-img:shadow-lg prose-img:mx-auto prose-img:my-8 prose-li:marker:text-[#FFB800] prose-strong:text-gray-800 prose-p:text-gray-700 prose-p:leading-relaxed max-w-none [&_.blog-banner-image]:w-full [&_.blog-banner-image]:max-w-2xl [&_.blog-banner-image]:mx-auto [&_.blog-banner-image]:rounded-xl [&_.blog-banner-image]:shadow-md [&_.blog-banner-image]:mb-8 [&_.blog-banner-image]:border [&_.blog-banner-image]:border-gray-100 [&_a]:text-yellow-600 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-yellow-400 [&_a:hover]:text-yellow-800 [&_a:hover]:decoration-yellow-600 [&_a]:transition-colors [&_a]:duration-200 [&_ul]:space-y-2 [&_h3]:mt-8 [&_h3]:mb-4 [&_h3]:text-xl [&_h3]:font-bold"
                         dangerouslySetInnerHTML={{ __html: post.content }}
                     />
 
                     {/* CTA Section */}
-                    <div className="mt-12 bg-gradient-to-br from-[#FFFF00]/10 to-gray-50 rounded-2xl p-8 border border-[#FFFF00]/30">
+                    <div className="mt-12 bg-gradient-to-br from-[#FFB800]/10 to-gray-50 rounded-2xl p-8 border border-[#FFB800]/30">
                         <h3 className="text-xl font-bold text-[#1A1A1A] mb-3">Looking for Quality Components?</h3>
                         <p className="text-gray-600 mb-5 leading-relaxed">
                             Serente Electronics Pvt. Ltd. is your trusted partner for semiconductor components, connectors, resistors, displays, and more. Get in touch with us for competitive pricing and fast delivery.
@@ -76,13 +76,13 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
                         <div className="flex flex-wrap gap-4">
                             <Link
                                 href="/products"
-                                className="inline-flex items-center px-6 py-3 bg-[#FFFF00] text-[#1A1A1A] font-bold rounded-lg hover:bg-[#FFF566] transition-colors shadow-md hover:shadow-lg"
+                                className="inline-flex items-center px-6 py-3 bg-[#FFB800] text-[#1A1A1A] font-bold rounded-lg hover:bg-[#E5A500] transition-colors shadow-md hover:shadow-lg"
                             >
                                 Browse Products
                             </Link>
                             <Link
                                 href="/contact"
-                                className="inline-flex items-center px-6 py-3 bg-[#1A1A1A] text-[#FFFF00] rounded-lg font-bold border-2 border-[#1A1A1A] hover:bg-black transition-colors"
+                                className="inline-flex items-center px-6 py-3 bg-[#1A1A1A] text-[#FFB800] rounded-lg font-bold border-2 border-[#1A1A1A] hover:bg-black transition-colors"
                             >
                                 Contact Us
                             </Link>
@@ -94,7 +94,7 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
                             Share this article:
                         </div>
                         <div className="flex gap-4">
-                            <button className="p-2 rounded-full bg-gray-100 hover:bg-[#FFFF00] hover:text-[#1A1A1A] transition-colors">
+                            <button className="p-2 rounded-full bg-gray-100 hover:bg-[#FFB800] hover:text-[#1A1A1A] transition-colors">
                                 <Share2 className="w-5 h-5" />
                             </button>
                         </div>

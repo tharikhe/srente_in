@@ -35,23 +35,23 @@ const palettes = {
   dark: {
     surface: 'bg-[#0D0D0D] text-white',
     panel: 'bg-[#141414]/80 backdrop-blur-xl',
-    border: 'border-white/10 hover:border-[#FFFF00]/40',
+    border: 'border-white/10 hover:border-[#FFB800]/40',
     heading: 'text-white',
     muted: 'text-gray-400',
-    iconRing: 'border-[#FFFF00]/40',
-    iconSurface: 'bg-[#FFFF00]/10',
-    icon: 'text-[#FFFF00]',
-    toggle: 'border-[#FFFF00]/40 text-[#FFFF00]',
+    iconRing: 'border-[#FFB800]/40',
+    iconSurface: 'bg-[#FFB800]/10',
+    icon: 'text-[#FFB800]',
+    toggle: 'border-[#FFB800]/40 text-[#FFB800]',
     toggleSurface: 'bg-black/50',
-    glow: 'rgba(255, 255, 0, 0.12)',
-    aurora: 'radial-gradient(ellipse 50% 100% at 10% 0%, rgba(255, 255, 0, 0.08), transparent 65%), #0A0A0A',
-    shadow: 'shadow-[0_20px_80px_-40px_rgba(255,255,0,0.15)]',
-    overlay: 'linear-gradient(130deg, rgba(255,255,0,0.03) 0%, transparent 65%)',
+    glow: 'rgba(255, 184, 0, 0.12)',
+    aurora: 'radial-gradient(ellipse 50% 100% at 10% 0%, rgba(255, 184, 0, 0.08), transparent 65%), #0A0A0A',
+    shadow: 'shadow-[0_20px_80px_-40px_rgba(255,184,0,0.15)]',
+    overlay: 'linear-gradient(130deg, rgba(255,184,0,0.03) 0%, transparent 65%)',
   },
   light: {
     surface: 'bg-slate-100 text-neutral-900',
     panel: 'bg-white/80 backdrop-blur-xl',
-    border: 'border-neutral-200 hover:border-[#FFFF00]',
+    border: 'border-neutral-200 hover:border-[#FFB800]',
     heading: 'text-neutral-900',
     muted: 'text-neutral-600',
     iconRing: 'border-neutral-400',
@@ -60,7 +60,7 @@ const palettes = {
     toggle: 'border-neutral-300 text-neutral-900',
     toggleSurface: 'bg-white',
     glow: 'rgba(15, 15, 15, 0.08)',
-    aurora: 'radial-gradient(ellipse 50% 100% at 10% 0%, rgba(255, 255, 0, 0.15), rgba(255, 255, 255, 0.95) 70%)',
+    aurora: 'radial-gradient(ellipse 50% 100% at 10% 0%, rgba(255, 184, 0, 0.15), rgba(255, 255, 255, 0.95) 70%)',
     shadow: 'shadow-[0_36px_120px_-70px_rgba(15,15,15,0.18)]',
     overlay: 'linear-gradient(130deg, rgba(15,23,42,0.08) 0%, transparent 70%)',
   },
@@ -116,9 +116,9 @@ export default function FAQ() {
         padding: 0.85rem 1.4rem;
         border-radius: 9999px;
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 0, 0.3);
+        border: 1px solid rgba(255, 184, 0, 0.3);
         background: rgba(12, 12, 12, 0.6);
-        color: #FFFF00;
+        color: #FFB800;
         text-transform: uppercase;
         letter-spacing: 0.35em;
         font-size: 0.65rem;
@@ -149,7 +149,7 @@ export default function FAQ() {
         border-radius: 50%;
       }
       .faq1-intro__beam {
-        background: conic-gradient(from 160deg, rgba(255, 255, 0, 0.3), transparent 32%, rgba(255, 255, 0, 0.2) 58%, transparent 78%, rgba(255, 255, 0, 0.2));
+        background: conic-gradient(from 160deg, rgba(255, 184, 0, 0.3), transparent 32%, rgba(255, 184, 0, 0.2) 58%, transparent 78%, rgba(255, 184, 0, 0.2));
         animation: faq1-beam-spin 18s linear infinite;
         opacity: 0.65;
       }
@@ -157,7 +157,7 @@ export default function FAQ() {
         background: conic-gradient(from 180deg, rgba(15, 23, 42, 0.18), transparent 30%, rgba(71, 85, 105, 0.18) 58%, transparent 80%, rgba(15, 23, 42, 0.14));
       }
       .faq1-intro__pulse {
-        border: 1px solid #FFFF00;
+        border: 1px solid #FFB800;
         opacity: 0.35;
         animation: faq1-pulse 3.4s ease-out infinite;
       }
@@ -172,7 +172,7 @@ export default function FAQ() {
         z-index: 1;
         flex: 1 1 auto;
         height: 1px;
-        background: linear-gradient(90deg, transparent, #FFFF00 35%, transparent 85%);
+        background: linear-gradient(90deg, transparent, #FFB800 35%, transparent 85%);
         transform: scaleX(0);
         transform-origin: left;
         animation: faq1-meter 5.8s ease-in-out infinite;
@@ -184,8 +184,8 @@ export default function FAQ() {
         width: 0.55rem;
         height: 0.55rem;
         border-radius: 9999px;
-        background: #FFFF00;
-        box-shadow: 0 0 0 4px rgba(255, 255, 0, 0.2);
+        background: #FFB800;
+        box-shadow: 0 0 0 4px rgba(255, 184, 0, 0.2);
         animation: faq1-tick 3.2s ease-in-out infinite;
       }
       .faq1-intro--light .faq1-intro__tick {
@@ -325,9 +325,9 @@ export default function FAQ() {
 
         <header className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div className="space-y-4">
-            <p className="text-xs uppercase tracking-[0.35em] text-[#FFFF00] font-mono font-bold">Frequently Asked Questions</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-[#FFB800] font-mono font-bold">Frequently Asked Questions</p>
             <h2 className={`text-4xl font-bold leading-tight md:text-5xl ${palette.heading}`}>
-              Clear answers for <span className="text-[#FFFF00]">engineering &amp; sourcing</span> teams.
+              Clear answers for <span className="text-[#FFB800]">engineering &amp; sourcing</span> teams.
             </h2>
             <p className={`max-w-xl text-base ${palette.muted}`}>
               Everything you need to know about component availability, ISO 9001:2015 quality control, and our BOM sourcing platform.
@@ -343,12 +343,12 @@ export default function FAQ() {
             <span className="relative flex h-6 w-6 items-center justify-center">
               <span
                 className={`pointer-events-none absolute inset-0 rounded-full border opacity-40 ${
-                  theme === 'dark' ? 'border-[#FFFF00] animate-pulse' : 'border-neutral-400/50'
+                  theme === 'dark' ? 'border-[#FFB800] animate-pulse' : 'border-neutral-400/50'
                 }`}
               />
               <span
                 className={`h-3 w-3 rounded-full transition-all duration-500 ${
-                  theme === 'dark' ? 'bg-[#FFFF00]' : 'bg-neutral-900'
+                  theme === 'dark' ? 'bg-[#FFB800]' : 'bg-neutral-900'
                 }`}
               />
             </span>
@@ -384,7 +384,7 @@ export default function FAQ() {
                   aria-controls={panelId}
                   aria-expanded={open}
                   onClick={() => toggleQuestion(index)}
-                  style={{ '--faq-outline': theme === 'dark' ? 'rgba(255,255,0,0.4)' : 'rgba(17,17,17,0.25)' } as React.CSSProperties}
+                  style={{ '--faq-outline': theme === 'dark' ? 'rgba(255,184,0,0.4)' : 'rgba(17,17,17,0.25)' } as React.CSSProperties}
                   className="relative flex w-full items-start gap-6 px-8 py-7 text-left transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--faq-outline)]"
                 >
                   <span
@@ -413,7 +413,7 @@ export default function FAQ() {
                       </h3>
                       {item.meta && (
                         <span
-                          className={`inline-flex w-fit items-center rounded-full border border-[#FFFF00]/30 bg-[#FFFF00]/10 text-[#FFFF00] px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-[0.25em] transition-opacity duration-300 sm:ml-auto`}
+                          className={`inline-flex w-fit items-center rounded-full border border-[#FFB800]/30 bg-[#FFB800]/10 text-[#FFB800] px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-[0.25em] transition-opacity duration-300 sm:ml-auto`}
                         >
                           {item.meta}
                         </span>

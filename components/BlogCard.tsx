@@ -11,7 +11,7 @@ interface BlogCardProps {
 export default function BlogCard({ post }: BlogCardProps) {
     return (
         <Link href={`/blog/${post.slug}`} className="group block h-full">
-            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl hover:border-[#FFFF00] transition-all duration-300 h-full flex flex-col">
+            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl hover:border-[#FFB800] transition-all duration-300 h-full flex flex-col">
                 {/* Image Container */}
                 <div className="relative h-48 overflow-hidden">
                     <img
@@ -19,7 +19,7 @@ export default function BlogCard({ post }: BlogCardProps) {
                         alt={post.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute top-4 left-4 bg-[#FFFF00] text-[#1A1A1A] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                    <div className="absolute top-4 left-4 bg-[#FFB800] text-[#1A1A1A] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                         {post.category}
                     </div>
                 </div>

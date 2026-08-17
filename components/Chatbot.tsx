@@ -298,17 +298,17 @@ export default function Chatbot() {
     return (
         <>
             <ExpandableChat size="md" position="bottom-right" icon={<MessageCircle className="w-6 h-6" />}>
-                <ExpandableChatHeader className="bg-[#1A1A1A] text-white border-b border-[#FFFF00]/30 flex justify-between items-center p-4">
+                <ExpandableChatHeader className="bg-[#1A1A1A] text-white border-b border-[#FFB800]/30 flex justify-between items-center p-4">
                     <div className="flex items-center gap-3">
                         <div className="relative">
                             <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
-                                <Bot className="w-6 h-6 text-[#FFFF00]" />
+                                <Bot className="w-6 h-6 text-[#FFB800]" />
                             </div>
-                            <span className="absolute bottom-0 right-0 w-3 h-3 bg-[#FFFF00] border-2 border-[#1A1A1A] rounded-full"></span>
+                            <span className="absolute bottom-0 right-0 w-3 h-3 bg-[#FFB800] border-2 border-[#1A1A1A] rounded-full"></span>
                         </div>
                         <div>
                             <h3 className="font-bold text-base text-white">Serente AI</h3>
-                            <p className="text-xs text-[#FFFF00] font-medium">Always Online</p>
+                            <p className="text-xs text-[#FFB800] font-medium">Always Online</p>
                         </div>
                     </div>
 
@@ -320,15 +320,15 @@ export default function Chatbot() {
 
                             <div className={`flex gap-3 max-w-[90%] ${message.type === 'user' ? 'flex-row-reverse' : ''}`}>
                                 {/* Avatar */}
-                                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center mt-1 shadow-sm ${message.type === 'user' ? 'bg-[#FFFF00]' : 'bg-[#1A1A1A]'
+                                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center mt-1 shadow-sm ${message.type === 'user' ? 'bg-[#FFB800]' : 'bg-[#1A1A1A]'
                                     }`}>
-                                    {message.type === 'user' ? <User className="w-4 h-4 text-[#1A1A1A]" /> : <Sparkles className="w-4 h-4 text-[#FFFF00]" />}
+                                    {message.type === 'user' ? <User className="w-4 h-4 text-[#1A1A1A]" /> : <Sparkles className="w-4 h-4 text-[#FFB800]" />}
                                 </div>
 
                                 {/* Bubble */}
                                 <div className={`flex flex-col gap-1 ${message.type === 'user' ? 'items-end' : 'items-start'}`}>
                                     <div className={`rounded-2xl px-4 py-3 shadow-sm text-sm leading-relaxed ${message.type === 'user'
-                                        ? 'bg-[#FFFF00] text-[#1A1A1A] font-medium rounded-tr-sm'
+                                        ? 'bg-[#FFB800] text-[#1A1A1A] font-medium rounded-tr-sm'
                                         : 'bg-white border border-slate-200 text-slate-800 rounded-tl-sm'
                                         }`}>
                                         {message.content.split('\n').map((line, i) => (
@@ -349,11 +349,11 @@ export default function Chatbot() {
                                                 <div
                                                     key={pIdx}
 
-                                                    className="bg-white p-3 rounded-xl border border-slate-200 hover:border-[#FFFF00] hover:shadow-md hover:scale-[1.02] transition-all cursor-pointer group"
+                                                    className="bg-white p-3 rounded-xl border border-slate-200 hover:border-[#FFB800] hover:shadow-md hover:scale-[1.02] transition-all cursor-pointer group"
                                                 >
                                                     <div className="flex justify-between items-start">
                                                         <div>
-                                                            <div className="text-xs font-bold text-[#1A1A1A] bg-[#FFFF00] px-2 py-0.5 rounded-full inline-block mb-1">
+                                                            <div className="text-xs font-bold text-[#1A1A1A] bg-[#FFB800] px-2 py-0.5 rounded-full inline-block mb-1">
                                                                 {product.category}
                                                             </div>
                                                             <div className="font-bold text-slate-800 text-sm group-hover:text-[#1A1A1A] transition-colors">
@@ -407,7 +407,7 @@ export default function Chatbot() {
                                         <button
                                             key={qIdx}
                                             onClick={() => handleSend(q)}
-                                            className="text-xs bg-white border border-[#FFFF00] text-[#1A1A1A] px-3 py-1.5 rounded-full hover:bg-[#FFFF00] hover:text-[#1A1A1A] font-medium transition-all shadow-sm"
+                                            className="text-xs bg-white border border-[#FFB800] text-[#1A1A1A] px-3 py-1.5 rounded-full hover:bg-[#FFB800] hover:text-[#1A1A1A] font-medium transition-all shadow-sm"
                                         >
                                             {q}
                                         </button>
@@ -421,7 +421,7 @@ export default function Chatbot() {
                     {isTyping && (
                         <div className="flex items-end gap-3 animate-fade-in">
                             <div className="w-8 h-8 rounded-full bg-[#1A1A1A] flex items-center justify-center flex-shrink-0">
-                                <Bot className="w-4 h-4 text-[#FFFF00]" />
+                                <Bot className="w-4 h-4 text-[#FFB800]" />
                             </div>
                             <div className="bg-white border border-slate-200 rounded-2xl rounded-bl-none px-4 py-3 shadow-sm">
                                 <div className="flex gap-1">
@@ -443,7 +443,7 @@ export default function Chatbot() {
                                 <button
                                     key={i}
                                     onClick={() => handleQuickAction(action.action)}
-                                    className="flex items-center gap-1.5 px-3 py-2 bg-slate-50 hover:bg-[#FFFF00]/20 hover:text-[#1A1A1A] hover:border-[#FFFF00] border border-slate-200 rounded-lg text-xs font-medium text-slate-600 transition-all whitespace-nowrap"
+                                    className="flex items-center gap-1.5 px-3 py-2 bg-slate-50 hover:bg-[#FFB800]/20 hover:text-[#1A1A1A] hover:border-[#FFB800] border border-slate-200 rounded-lg text-xs font-medium text-slate-600 transition-all whitespace-nowrap"
                                 >
                                     {action.icon}
                                     {action.label}
@@ -452,7 +452,7 @@ export default function Chatbot() {
                         </div>
                     )}
 
-                    <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-full border border-slate-200 focus-within:border-[#FFFF00] focus-within:ring-2 focus-within:ring-[#FFFF00]/20 transition-all">
+                    <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-full border border-slate-200 focus-within:border-[#FFB800] focus-within:ring-2 focus-within:ring-[#FFB800]/20 transition-all">
                         <input
                             type="text"
                             value={input}
@@ -464,7 +464,7 @@ export default function Chatbot() {
                         <button
                             onClick={() => handleSend()}
                             disabled={!input.trim()}
-                            className="w-9 h-9 bg-[#FFFF00] text-[#1A1A1A] rounded-full flex items-center justify-center hover:bg-[#FFF566] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow active:scale-95"
+                            className="w-9 h-9 bg-[#FFB800] text-[#1A1A1A] rounded-full flex items-center justify-center hover:bg-[#E5A500] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow active:scale-95"
                         >
                             <Send className="w-4 h-4 ml-0.5 text-[#1A1A1A]" />
                         </button>

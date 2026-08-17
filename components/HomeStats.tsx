@@ -38,8 +38,8 @@ export default function HomeStats() {
                 className="absolute inset-0 opacity-[0.03] pointer-events-none"
                 style={{
                     backgroundImage: `
-                        linear-gradient(rgba(255, 255, 0, 0.2) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255, 255, 0, 0.2) 1px, transparent 1px)
+                        linear-gradient(rgba(255, 184, 0, 0.2) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 184, 0, 0.2) 1px, transparent 1px)
                     `,
                     backgroundSize: '60px 60px',
                 }}
@@ -49,17 +49,17 @@ export default function HomeStats() {
                 {/* Header Badge */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-14">
                     <div>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFF00]/10 border border-[#FFFF00]/30 text-[#FFFF00] text-xs font-mono font-bold uppercase tracking-wider mb-3">
-                            <span className="w-2 h-2 rounded-full bg-[#FFFF00] animate-pulse"></span>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFB800]/10 border border-[#FFB800]/30 text-[#FFB800] text-xs font-mono font-bold uppercase tracking-wider mb-3">
+                            <span className="w-2 h-2 rounded-full bg-[#FFB800] animate-pulse"></span>
                             <span>Proven Performance Track Record</span>
                         </div>
                         <h2 className="font-display font-extrabold text-3xl md:text-5xl text-white tracking-tight uppercase">
-                            Global Scale. <span className="text-[#FFFF00]">Uncompromising Quality.</span>
+                            Global Scale. <span className="text-[#FFB800]">Uncompromising Quality.</span>
                         </h2>
                     </div>
 
                     <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-5 py-3 rounded-xl backdrop-blur-md">
-                        <Award className="w-6 h-6 text-[#FFFF00] shrink-0" />
+                        <Award className="w-6 h-6 text-[#FFB800] shrink-0" />
                         <div>
                             <p className="font-display font-bold text-xs text-white uppercase tracking-wider">ISO 9001:2015 Certified</p>
                             <p className="font-mono text-[11px] text-gray-400">Quality Management System</p>
@@ -76,13 +76,13 @@ export default function HomeStats() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            className="group relative bg-[#141414] border border-white/10 hover:border-[#FFFF00]/50 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 shadow-xl"
+                            className="group relative bg-[#141414] border border-white/10 hover:border-[#FFB800]/50 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 shadow-xl"
                         >
-                            <div className="w-12 h-12 rounded-xl bg-[#FFFF00]/10 border border-[#FFFF00]/30 flex items-center justify-center text-[#FFFF00] mb-6 group-hover:scale-110 group-hover:bg-[#FFFF00] group-hover:text-[#1A1A1A] transition-all duration-300">
+                            <div className="w-12 h-12 rounded-xl bg-[#FFB800]/10 border border-[#FFB800]/30 flex items-center justify-center text-[#FFB800] mb-6 group-hover:scale-110 group-hover:bg-[#FFB800] group-hover:text-[#1A1A1A] transition-all duration-300">
                                 <stat.icon className="w-6 h-6" strokeWidth={1.8} />
                             </div>
 
-                            <p className="font-display font-black text-4xl lg:text-5xl text-[#FFFF00] mb-2 tracking-tight">
+                            <p className="font-display font-black text-4xl lg:text-5xl text-[#FFB800] mb-2 tracking-tight">
                                 {stat.value}
                             </p>
 
