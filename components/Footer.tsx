@@ -5,7 +5,7 @@ import type { ComponentProps, ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Instagram, Linkedin, Twitter, Send, ArrowRight } from 'lucide-react';
+import { Instagram, Linkedin, Send, ArrowRight } from 'lucide-react';
 import { submitToGoogleSheets } from '@/lib/google-sheets';
 
 interface FooterLink {
@@ -42,7 +42,6 @@ const footerLinks: FooterSection[] = [
         links: [
             { title: 'LinkedIn', href: '#', icon: Linkedin },
             { title: 'Instagram', href: 'https://www.instagram.com/serenteelectronics_2020?igsh=MTQ0MndjbHpudmM2OA==', icon: Instagram },
-            { title: 'Twitter', href: '#', icon: Twitter },
         ],
     },
 ];
