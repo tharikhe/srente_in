@@ -170,21 +170,15 @@ export default function AboutClient() {
 
                         <motion.div
                             variants={fadeInUp}
-                            className="relative rounded-3xl overflow-hidden shadow-xl"
+                            className="relative rounded-3xl overflow-hidden shadow-xl bg-gray-900"
                         >
-                            <div className="relative h-72 sm:h-80 md:h-96">
-                                <Image
-                                    src="/about-factory.jpg"
-                                    alt="Serente Electronics PCB Assembly and Manufacturing Facility"
-                                    fill
-                                    className="object-cover"
-                                    loading="lazy"
-                                />
-                                {/* Gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/30 to-transparent" />
-                                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 space-y-3">
-                                    <h3 className="text-xl sm:text-2xl font-bold text-white">Quality Systems & Advanced Production</h3>
-                                    <p className="text-gray-200 leading-relaxed text-sm sm:text-base max-w-2xl">
+                            <div className="relative p-6 sm:p-8 md:p-12 flex flex-col justify-center min-h-[300px]">
+                                {/* Decorative subtle gradient */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-[#FFB800]/5 via-transparent to-transparent pointer-events-none" />
+                                
+                                <div className="relative z-10 space-y-4">
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">Quality Systems & Advanced Production</h3>
+                                    <p className="text-gray-200 leading-relaxed text-sm sm:text-base md:text-lg max-w-3xl">
                                         Our manufacturing ecosystem is backed by globally recognized quality systems, advanced production capabilities, and stringent quality assurance processes. Serente delivers consistent quality, shorter lead times, and dependable manufacturing services.
                                     </p>
                                     <div className="flex flex-wrap gap-2 pt-1">

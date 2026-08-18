@@ -4,7 +4,6 @@ import HomeStats from '@/components/HomeStats';
 import HomeCapabilities from '@/components/HomeCapabilities';
 import ProductCategories from '@/components/ProductCategories';
 import ProcessTimeline from '@/components/ProcessTimeline';
-import WhyChooseUs from '@/components/WhyChooseUs';
 import HomeIndustries from '@/components/HomeIndustries';
 import FAQ from '@/components/FAQ';
 import { Metadata } from 'next';
@@ -34,9 +33,6 @@ export default function Home() {
 
       {/* 6. 5-Step ESDM Manufacturing Workflow */}
       <ProcessTimeline />
-
-      {/* 7. Why Partner With Serente Advantage */}
-      <WhyChooseUs />
 
       {/* 8. Industries Served */}
       <HomeIndustries />
