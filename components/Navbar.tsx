@@ -188,14 +188,6 @@ export default function Navbar() {
                             transition={{ duration: 0.4, delay: 0.35 }}
                             className="relative z-10 pt-6 border-t border-white/10 flex flex-col gap-4 mt-6"
                         >
-                            <Link
-                                href="/contact"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="w-full py-4 rounded-xl bg-[#FFB800] text-[#1A1A1A] font-display font-extrabold uppercase text-center tracking-wider text-sm shadow-[0_4px_20px_rgba(255,184,0,0.3)] active:scale-[0.98] transition-transform"
-                            >
-                                Request a Quote
-                            </Link>
-
                             <div className="grid grid-cols-2 gap-3 text-xs text-gray-400 font-mono">
                                 <a
                                     href="tel:+918088131316"
