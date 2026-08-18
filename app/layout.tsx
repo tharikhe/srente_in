@@ -8,6 +8,7 @@ import Schema from "@/components/Schema";
 import { CartProvider } from "@/context/CartContext";
 
 import SmoothScroll from "@/components/SmoothScroll";
+import CookieConsent from "@/components/CookieConsent";
 
 
 
@@ -140,6 +141,7 @@ export default function RootLayout({
             {children}
           </main>
           <FloatingMenu />
+          <CookieConsent />
           <Footer />
         </CartProvider>
       </body>
