@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
@@ -16,14 +15,12 @@ import {
     Clock,
     ShieldCheck,
     Truck,
-    ArrowRight,
     Sparkles,
     Check,
     Building2,
     Factory,
     Award
 } from 'lucide-react';
-import { Button } from "@/components/ui/button";
 
 const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -93,7 +90,7 @@ export default function AboutClient() {
 
             {/* Team Photo Banner */}
             <section className="relative">
-                <div className="container mx-auto px-4 -mt-10 relative z-20">
+                <div className="container mx-auto px-4 mt-6 relative z-20">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -251,7 +248,7 @@ export default function AboutClient() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.2 }}
-                            className="group relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] bg-gray-100 md:-translate-y-6"
+                            className="group relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] bg-gray-100"
                         >
                             <Image
                                 src="/about-testing.jpg"
@@ -393,27 +390,7 @@ export default function AboutClient() {
                 </div>
             </section>
 
-            {/* Call To Action */}
-            <section className="py-20 bg-[#FFB800] text-[#1A1A1A] relative overflow-hidden">
-                <div className="container mx-auto px-4 relative z-10 text-center space-y-8 max-w-3xl">
-                    <h2 className="text-3xl md:text-5xl font-bold text-[#1A1A1A]">Partner with Serente Electronics</h2>
-                    <p className="text-lg md:text-xl text-[#1A1A1A]/80 max-w-2xl mx-auto leading-relaxed">
-                        Ready to accelerate your product development and optimize your supply chain? Contact our engineering team today.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link href="/contact">
-                            <Button className="bg-brand-gold hover:bg-brand-gold-dark text-gray-900 text-lg px-8 py-6 rounded-xl w-full sm:w-auto shadow-lg hover:scale-105 transition-transform">
-                                Request a Quote <ArrowRight className="ml-2 w-5 h-5" />
-                            </Button>
-                        </Link>
-                        <Link href="/products">
-                            <Button className="bg-white text-brand-teal hover:bg-gray-100 text-lg px-8 py-6 rounded-xl w-full sm:w-auto hover:scale-105 transition-transform">
-                                Explore Products
-                            </Button>
-                        </Link>
-                    </div>
-                </div>
-            </section>
+
         </div>
     );
 }

@@ -14,8 +14,8 @@ const pillars = [
     {
         icon: Zap,
         badge: 'Speed & Scale',
-        title: 'Instant BOM & Cross-Reference Engine',
-        description: 'Overcome component shortages and 40+ week lead times. Our automated BOM engine identifies pin-compatible drop-in replacements within minutes.',
+        title: 'Rapid Lead-Time Reduction',
+        description: 'Strategic inventory buffers and direct factory relationships shorten standard 40+ week lead times to days, keeping your production lines running without interruption.',
     },
     {
         icon: Award,

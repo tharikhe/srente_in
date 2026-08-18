@@ -75,12 +75,6 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <Link
-                                href="/products"
-                                className="inline-flex items-center px-6 py-3 bg-[#FFB800] text-[#1A1A1A] font-bold rounded-lg hover:bg-[#E5A500] transition-colors shadow-md hover:shadow-lg"
-                            >
-                                Browse Products
-                            </Link>
-                            <Link
                                 href="/contact"
                                 className="inline-flex items-center px-6 py-3 bg-[#1A1A1A] text-[#FFB800] rounded-lg font-bold border-2 border-[#1A1A1A] hover:bg-black transition-colors"
                             >
@@ -94,7 +88,30 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
                             Share this article:
                         </div>
                         <div className="flex gap-4">
-                            <button className="p-2 rounded-full bg-gray-100 hover:bg-[#FFB800] hover:text-[#1A1A1A] transition-colors">
+                            <button
+                                onClick={async () => {
+                                    const shareData = {
+                                        title: post.title,
+                                        text: post.excerpt,
+                                        url: window.location.href,
+                                    };
+                                    try {
+                                        if (navigator.share) {
+                                            await navigator.share(shareData);
+                                        } else {
+                                            await navigator.clipboard.writeText(window.location.href);
+                                            alert('Link copied to clipboard!');
+                                        }
+                                    } catch (err) {
+                                        // User cancelled share or clipboard failed
+                                        if ((err as Error).name !== 'AbortError') {
+                                            await navigator.clipboard.writeText(window.location.href);
+                                            alert('Link copied to clipboard!');
+                                        }
+                                    }
+                                }}
+                                className="p-2 rounded-full bg-gray-100 hover:bg-[#FFB800] hover:text-[#1A1A1A] transition-colors"
+                            >
                                 <Share2 className="w-5 h-5" />
                             </button>
                         </div>

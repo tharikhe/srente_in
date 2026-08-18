@@ -106,11 +106,11 @@ export default function PortalHero() {
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                         <h1
-                            className="font-display font-extrabold text-[#EDE7DC] uppercase select-none"
-                            style={{ fontSize: 'clamp(3rem, 12vw, 10rem)', letterSpacing: '-0.04em', lineHeight: 0.85 }}
+                            className="font-display font-extrabold text-[#EDE7DC] uppercase select-none flex items-baseline gap-[0.3em]"
+                            style={{ fontSize: 'clamp(2rem, 8vw, 7rem)', letterSpacing: '-0.04em', lineHeight: 0.85 }}
                         >
-                            <span>SEREN</span>
-                            <span className="text-[#FFB800]">TE</span>
+                            <span>SERENTE</span>
+                            <span className="text-[#FFB800]" style={{ fontSize: '0.45em', letterSpacing: '0.12em' }}>ELECTRONICS</span>
                         </h1>
                     </div>
                 </div>
@@ -231,9 +231,9 @@ export default function PortalHero() {
                 {/* Layer 7: WORDMARK */}
                 <div className="absolute inset-0 flex items-center justify-center" style={{ zIndex: 15 }}>
                     <motion.h1
-                        className="font-display font-extrabold text-[#EDE7DC] uppercase select-none flex items-baseline will-change-transform"
+                        className="font-display font-extrabold text-[#EDE7DC] uppercase select-none flex items-baseline gap-[0.3em] will-change-transform"
                         style={{
-                            fontSize: 'clamp(3rem, 12vw, 10rem)',
+                            fontSize: 'clamp(2rem, 8vw, 7rem)',
                             lineHeight: 0.85,
                             scale: titleScale,
                             letterSpacing: titleLetterSpacing,
@@ -241,13 +241,13 @@ export default function PortalHero() {
                         }}
                     >
                         <motion.span style={{ x: leftHalfX }} className="inline-block will-change-transform">
-                            SEREN
+                            SERENTE
                         </motion.span>
                         <motion.span
-                            style={{ x: rightHalfX }}
+                            style={{ x: rightHalfX, fontSize: '0.45em', letterSpacing: '0.12em' }}
                             className="inline-block text-[#FFB800] will-change-transform"
                         >
-                            TE
+                            ELECTRONICS
                         </motion.span>
                     </motion.h1>
                 </div>

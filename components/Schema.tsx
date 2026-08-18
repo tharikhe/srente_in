@@ -19,6 +19,7 @@ export default function Schema() {
             "availableLanguage": "en"
         },
         "sameAs": [
+            "https://www.linkedin.com/company/serente-electronics-hk-ltd/",
             "https://www.instagram.com/serenteelectronics_2020?igsh=MTQ0MndjbHpudmM2OA%3D%3D"
         ]
     };
@@ -35,7 +36,10 @@ export default function Schema() {
         "description": "Leading Electronics Manufacturing Services (EMS) & electronic components distributor. Authorized distributor of electronic components including integrated circuits, power semiconductor devices, MOSFETs, IGBTs, diodes, transistors, passive components (capacitors, resistors, inductors), LCD/OLED displays and touch panels.",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Serente Electronics Pvt. Ltd.",
+            "streetAddress": "1787, 15th Main Rd, HBR Layout 5th Block, 1st Stage, HBR Layout",
+            "addressLocality": "Bengaluru",
+            "addressRegion": "Karnataka",
+            "postalCode": "560043",
             "addressCountry": "IN"
         },
         "openingHoursSpecification": {

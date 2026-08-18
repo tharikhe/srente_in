@@ -25,8 +25,8 @@ const stats = [
     {
         icon: Clock,
         value: '< 24h',
-        label: 'BOM Quote Turnaround',
-        description: 'Automated part cross-referencing and instant global pricing.'
+        label: 'Engineering Response Time',
+        description: 'Rapid technical support and quote turnaround from dedicated FAEs.'
     }
 ];
 

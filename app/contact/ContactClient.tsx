@@ -127,6 +127,26 @@ export default function ContactClient() {
                                 </div>
 
                                 <div className="flex gap-5 group">
+                                    <div className="w-12 h-12 rounded-2xl bg-[#FFB800]/10 flex items-center justify-center shrink-0 group-hover:bg-[#FFB800] transition-colors duration-300">
+                                        <MapPin className="w-5 h-5 text-[#FFB800] group-hover:text-[#1A1A1A] transition-colors" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-medium text-gray-400 mb-1">Our Office</p>
+                                        <p className="text-base font-semibold text-white leading-relaxed">
+                                            1787, 15th Main Rd, HBR Layout 5th Block, 1st Stage, HBR Layout, Bengaluru, Karnataka 560043
+                                        </p>
+                                        <a 
+                                            href="https://maps.google.com/?q=1787,+15th+Main+Rd,+HBR+Layout+5th+Block,+1st+Stage,+HBR+Layout,+Bengaluru,+Karnataka+560043" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="inline-flex items-center gap-1.5 text-xs text-[#FFB800] hover:underline mt-2 font-mono font-bold"
+                                        >
+                                            Get Directions <ExternalLink className="w-3.5 h-3.5" />
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-5 group">
                                     <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/10 transition-colors duration-300">
                                         <Clock className="w-5 h-5 text-gray-300" />
                                     </div>

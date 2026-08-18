@@ -218,7 +218,7 @@ export default function Navbar() {
                                     <ShieldCheck className="w-3.5 h-3.5 text-[#FFB800]" />
                                     ISO 9001:2015 Certified
                                 </span>
-                                <span>Bangalore, India</span>
+                                <span>Bengaluru, India</span>
                             </div>
                         </motion.div>
                     </motion.div>

@@ -14,10 +14,10 @@ import {
     Eye,
     Calendar,
     RefreshCw,
-    Shield
+    Shield,
+    ArrowRight
 } from 'lucide-react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 
 /* ─── Animation Variants ─── */
 const fadeInUp = {
