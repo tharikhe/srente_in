@@ -2,23 +2,81 @@
 
 import Link from 'next/link';
 import { ArrowLeft, Calendar, User, Share2, Clock } from 'lucide-react';
-import { BlogPost } from '@/data/blog';
+import { PortableText } from '@portabletext/react';
+import { urlFor } from '@/sanity/lib/image';
 
-interface BlogPostContentProps {
-    post: BlogPost;
+interface SanityBlogPost {
+    _id: string;
+    title: string;
+    slug: { current: string };
+    excerpt: string;
+    content: any[];
+    date: string;
+    author: string;
+    image: any;
+    category: string;
 }
 
+interface BlogPostContentProps {
+    post: SanityBlogPost;
+}
+
+// Custom components for Portable Text rendering
+const portableTextComponents = {
+    types: {
+        image: ({ value }: any) => {
+            if (!value?.asset?._ref) return null;
+            return (
+                <img
+                    src={urlFor(value).width(800).url()}
+                    alt={value.alt || 'Blog image'}
+                    className="blog-banner-image w-full max-w-2xl mx-auto rounded-xl shadow-md mb-8 border border-gray-100"
+                />
+            );
+        },
+    },
+    marks: {
+        link: ({ children, value }: any) => {
+            const href = value?.href || '';
+            return (
+                <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-yellow-600 underline underline-offset-2 decoration-yellow-400 hover:text-yellow-800 hover:decoration-yellow-600 transition-colors duration-200"
+                >
+                    {children}
+                </a>
+            );
+        },
+    },
+};
+
 export default function BlogPostContent({ post }: BlogPostContentProps) {
+    const imageUrl = post.image
+        ? urlFor(post.image).width(1200).height(600).url()
+        : '';
+
+    const formattedDate = post.date
+        ? new Date(post.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+          })
+        : '';
+
     return (
         <article className="min-h-screen bg-white pb-20">
             {/* Hero Header */}
             <div className="relative h-[60vh] min-h-[400px] w-full overflow-hidden">
                 <div className="absolute inset-0 bg-black/60 z-10"></div>
-                <img
-                    src={post.image}
-                    alt={post.title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                />
+                {imageUrl && (
+                    <img
+                        src={imageUrl}
+                        alt={post.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                    />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-20"></div>
 
                 <div className="absolute bottom-0 left-0 w-full z-30 pb-12 pt-20">
@@ -48,7 +106,7 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
                             </div>
                             <div className="flex items-center gap-2">
                                 <Calendar className="w-4 h-4 text-[#FFB800]" />
-                                <span>{post.date}</span>
+                                <span>{formattedDate}</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Clock className="w-4 h-4 text-[#FFB800]" />
@@ -62,10 +120,12 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
             {/* Content */}
             <div className="container mx-auto px-4 mt-12">
                 <div className="max-w-3xl mx-auto">
-                    <div
-                        className="prose prose-lg prose-headings:text-[#1A1A1A] prose-img:rounded-xl prose-img:shadow-lg prose-img:mx-auto prose-img:my-8 prose-li:marker:text-[#FFB800] prose-strong:text-gray-800 prose-p:text-gray-700 prose-p:leading-relaxed max-w-none [&_.blog-banner-image]:w-full [&_.blog-banner-image]:max-w-2xl [&_.blog-banner-image]:mx-auto [&_.blog-banner-image]:rounded-xl [&_.blog-banner-image]:shadow-md [&_.blog-banner-image]:mb-8 [&_.blog-banner-image]:border [&_.blog-banner-image]:border-gray-100 [&_a]:text-yellow-600 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-yellow-400 [&_a:hover]:text-yellow-800 [&_a:hover]:decoration-yellow-600 [&_a]:transition-colors [&_a]:duration-200 [&_ul]:space-y-2 [&_h3]:mt-8 [&_h3]:mb-4 [&_h3]:text-xl [&_h3]:font-bold"
-                        dangerouslySetInnerHTML={{ __html: post.content }}
-                    />
+                    <div className="prose prose-lg prose-headings:text-[#1A1A1A] prose-img:rounded-xl prose-img:shadow-lg prose-img:mx-auto prose-img:my-8 prose-li:marker:text-[#FFB800] prose-strong:text-gray-800 prose-p:text-gray-700 prose-p:leading-relaxed max-w-none [&_ul]:space-y-2 [&_h3]:mt-8 [&_h3]:mb-4 [&_h3]:text-xl [&_h3]:font-bold">
+                        <PortableText
+                            value={post.content}
+                            components={portableTextComponents}
+                        />
+                    </div>
 
                     {/* CTA Section */}
                     <div className="mt-12 bg-gradient-to-br from-[#FFB800]/10 to-gray-50 rounded-2xl p-8 border border-[#FFB800]/30">

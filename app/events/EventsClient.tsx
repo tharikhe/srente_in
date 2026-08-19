@@ -4,64 +4,23 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, MapPin, Clock, ArrowRight, Share2, Users, Star } from 'lucide-react';
+import { urlFor } from '@/sanity/lib/image';
 
-const events = [
-    {
-        id: 1,
-        title: "Electronica South Asia 2026",
-        date: "September 16-18, 2026",
-        time: "09:00 AM - 06:00 PM",
-        location: "BEIC, Bengaluru, India",
-        description: "World's Leading Trade Fair for Electronics — Empowering Innovation. Come discover our newest innovations, solutions, and capabilities. Visit us at Booth H5.C125 to explore cutting-edge electronics and build the future of electronics together.",
-        image: "/images/electronica-south-asia-2026.jpg",
-        type: "Trade Fair",
-        attendees: "10000+"
-    },
-    {
-        id: 2,
-        title: "Global Electronics Sourcing Expo 2026",
-        date: "March 15-18, 2026",
-        time: "09:00 AM - 06:00 PM",
-        location: "Hong Kong Convention Center",
-        description: "Join over 5,000 industry leaders for the premier electronics sourcing event in Asia. Discover the latest in semiconductors, passives, and supply chain innovation.",
-        image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=2070",
-        type: "Expo",
-        attendees: "5000+"
-    },
-    {
-        id: 3,
-        title: "Future of EV Components Summit",
-        date: "April 22, 2026",
-        time: "10:00 AM - 04:00 PM",
-        location: "Shanghai Grand Hyatt, China",
-        description: "An exclusive deep dive into the evolving landscape of Electric Vehicle electronics. Learn about high-voltage connectors, power management ICs, and battery tech.",
-        image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=2072",
-        type: "Summit",
-        attendees: "800+"
-    },
-    {
-        id: 4,
-        title: "Serente Tech Workshop: Supply Chain Resilience",
-        date: "May 10, 2026",
-        time: "02:00 PM - 05:00 PM",
-        location: "Webinar (Online)",
-        description: "Our quarterly workshop focusing on strategies to mitigate shortage risks. Expert panel discussions on inventory forecasting and alternative part sourcing.",
-        image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=2070",
-        type: "Webinar",
-        attendees: "1200+"
-    },
-    {
-        id: 5,
-        title: "Shenzhen Electronics Fair",
-        date: "June 05-08, 2026",
-        time: "09:00 AM - 05:00 PM",
-        location: "Shenzhen Exhibition Center",
-        description: "Explore the heart of the electronics world. Meet our team at Booth 4A-12 to discuss your component needs and see our latest stock arrivals.",
-        image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=2664",
-        type: "Fair",
-        attendees: "10000+"
-    }
-];
+interface SanityEvent {
+    _id: string;
+    title: string;
+    date: string;
+    time: string;
+    location: string;
+    description: string;
+    image: any;
+    type: string;
+    attendees: string;
+}
+
+interface EventsClientProps {
+    events: SanityEvent[];
+}
 
 async function handleShare(eventTitle: string) {
     const url = window.location.href;
@@ -84,7 +43,7 @@ async function handleShare(eventTitle: string) {
     }
 }
 
-export default function EventsClient() {
+export default function EventsClient({ events }: EventsClientProps) {
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
             {/* Hero Section */}
@@ -109,81 +68,91 @@ export default function EventsClient() {
             {/* Events Grid */}
             <div className="container mx-auto px-4 -mt-16 relative z-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {events.map((event) => (
-                        <div key={event.id} className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full hover:-translate-y-1">
-                            {/* Image Section */}
-                            <div className="relative h-64 overflow-hidden">
-                                <Image
-                                    src={event.image}
-                                    alt={event.title}
-                                    fill
-                                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
-                                <div className="absolute top-4 left-4">
-                                    <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-gray-900 text-xs font-bold rounded-full shadow-lg uppercase tracking-wider">
-                                        {event.type}
-                                    </span>
-                                </div>
-                                <div className="absolute bottom-4 left-4 right-4 text-white">
-                                    <h3 className="text-2xl font-bold leading-tight mb-2 group-hover:text-brand-gold transition-colors">{event.title}</h3>
-                                    <div className="flex items-center gap-4 text-sm text-gray-200">
-                                        <div className="flex items-center gap-1.5">
-                                            <MapPin className="w-4 h-4 text-brand-teal" />
-                                            <span>{event.location}</span>
+                    {events.map((event) => {
+                        const imageUrl = event.image
+                            ? urlFor(event.image).width(800).height(500).url()
+                            : '';
+
+                        return (
+                            <div key={event._id} className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full hover:-translate-y-1">
+                                {/* Image Section */}
+                                <div className="relative h-64 overflow-hidden">
+                                    {imageUrl && (
+                                        <Image
+                                            src={imageUrl}
+                                            alt={event.title}
+                                            fill
+                                            className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                        />
+                                    )}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
+                                    <div className="absolute top-4 left-4">
+                                        <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-gray-900 text-xs font-bold rounded-full shadow-lg uppercase tracking-wider">
+                                            {event.type}
+                                        </span>
+                                    </div>
+                                    <div className="absolute bottom-4 left-4 right-4 text-white">
+                                        <h3 className="text-2xl font-bold leading-tight mb-2 group-hover:text-brand-gold transition-colors">{event.title}</h3>
+                                        <div className="flex items-center gap-4 text-sm text-gray-200">
+                                            <div className="flex items-center gap-1.5">
+                                                <MapPin className="w-4 h-4 text-brand-teal" />
+                                                <span>{event.location}</span>
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+
+                                {/* Content Section */}
+                                <div className="p-8 flex flex-col flex-grow">
+                                    <div className="flex items-start justify-between mb-6">
+                                        <div className="space-y-3">
+                                            <div className="flex items-center gap-3 text-gray-600">
+                                                <div className="p-2 bg-brand-teal/10 rounded-lg text-brand-teal">
+                                                    <Calendar className="w-5 h-5" />
+                                                </div>
+                                                <span className="font-semibold">{event.date}</span>
+                                            </div>
+                                            <div className="flex items-center gap-3 text-gray-600">
+                                                <div className="p-2 bg-brand-gold/10 rounded-lg text-brand-gold">
+                                                    <Clock className="w-5 h-5" />
+                                                </div>
+                                                <span className="font-medium">{event.time}</span>
+                                            </div>
+                                        </div>
+                                        {event.attendees && (
+                                            <div className="text-center bg-gray-50 p-3 rounded-xl border border-gray-100 min-w-[80px]">
+                                                <p className="text-xs text-gray-400 uppercase font-bold tracking-wide mb-1">Attendees</p>
+                                                <div className="flex items-center justify-center gap-1 text-gray-900 font-bold">
+                                                    <Users className="w-3.5 h-3.5 text-brand-teal" />
+                                                    <span>{event.attendees}</span>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <p className="text-gray-600 leading-relaxed mb-6 flex-grow border-t border-gray-100 pt-6">
+                                        {event.description}
+                                    </p>
+
+                                    <div className="flex items-center gap-4 pt-4 mt-auto">
+                                        <Link
+                                            href="/contact"
+                                            className="flex-grow bg-gray-900 text-white py-3.5 px-6 rounded-xl font-semibold hover:bg-brand-teal transition-colors flex items-center justify-center gap-2 group/btn"
+                                        >
+                                            <span>Register Now</span>
+                                            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                                        </Link>
+                                        <button
+                                            onClick={() => handleShare(event.title)}
+                                            className="p-3.5 rounded-xl border-2 border-gray-100 text-gray-400 hover:text-brand-gold hover:border-brand-gold transition-all duration-300"
+                                        >
+                                            <Share2 className="w-5 h-5" />
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-
-                            {/* Content Section */}
-                            <div className="p-8 flex flex-col flex-grow">
-                                <div className="flex items-start justify-between mb-6">
-                                    <div className="space-y-3">
-                                        <div className="flex items-center gap-3 text-gray-600">
-                                            <div className="p-2 bg-brand-teal/10 rounded-lg text-brand-teal">
-                                                <Calendar className="w-5 h-5" />
-                                            </div>
-                                            <span className="font-semibold">{event.date}</span>
-                                        </div>
-                                        <div className="flex items-center gap-3 text-gray-600">
-                                            <div className="p-2 bg-brand-gold/10 rounded-lg text-brand-gold">
-                                                <Clock className="w-5 h-5" />
-                                            </div>
-                                            <span className="font-medium">{event.time}</span>
-                                        </div>
-                                    </div>
-                                    <div className="text-center bg-gray-50 p-3 rounded-xl border border-gray-100 min-w-[80px]">
-                                        <p className="text-xs text-gray-400 uppercase font-bold tracking-wide mb-1">Attendees</p>
-                                        <div className="flex items-center justify-center gap-1 text-gray-900 font-bold">
-                                            <Users className="w-3.5 h-3.5 text-brand-teal" />
-                                            <span>{event.attendees}</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <p className="text-gray-600 leading-relaxed mb-6 flex-grow border-t border-gray-100 pt-6">
-                                    {event.description}
-                                </p>
-
-                                <div className="flex items-center gap-4 pt-4 mt-auto">
-                                    <Link
-                                        href="/contact"
-                                        className="flex-grow bg-gray-900 text-white py-3.5 px-6 rounded-xl font-semibold hover:bg-brand-teal transition-colors flex items-center justify-center gap-2 group/btn"
-                                    >
-                                        <span>Register Now</span>
-                                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                                    </Link>
-                                    <button
-                                        onClick={() => handleShare(event.title)}
-                                        className="p-3.5 rounded-xl border-2 border-gray-100 text-gray-400 hover:text-brand-gold hover:border-brand-gold transition-all duration-300"
-                                    >
-                                        <Share2 className="w-5 h-5" />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
 
                 {/* Bottom CTA */}

@@ -1,10 +1,8 @@
 import { MetadataRoute } from 'next';
-import { getAllPosts } from '@/data/blog';
-import { manufacturers } from '@/data/manufacturers';
+import { sanityFetch } from '@/sanity/lib/client';
+import { blogPostSlugsQuery, allManufacturersQuery } from '@/sanity/lib/queries';
 
-export const dynamic = 'force-static';
-
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://www.serente.in';
 
     // Static pages
@@ -77,18 +75,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
     ];
 
-    // Individual blog post pages
-    const blogPosts = getAllPosts();
-    const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-        url: `${baseUrl}/blog/${post.slug}`,
-        lastModified: new Date(post.date),
+    // Individual blog post pages from Sanity
+    const blogSlugs = await sanityFetch<{ slug: string }[]>(blogPostSlugsQuery, undefined, []);
+    const blogPages: MetadataRoute.Sitemap = (blogSlugs || []).map((item) => ({
+        url: `${baseUrl}/blog/${item.slug}`,
+        lastModified: new Date(),
         changeFrequency: 'daily' as const,
         priority: 0.7,
     }));
 
-    // Individual manufacturer pages
-    const manufacturerPages: MetadataRoute.Sitemap = manufacturers.map((manufacturer) => ({
-        url: `${baseUrl}/manufacturers/${manufacturer.slug}`,
+    // Individual manufacturer pages from Sanity
+    const manufacturers = await sanityFetch<any[]>(allManufacturersQuery, undefined, []);
+    const manufacturerPages: MetadataRoute.Sitemap = (manufacturers || []).map((manufacturer) => ({
+        url: `${baseUrl}/manufacturers/${manufacturer.slug?.current || manufacturer.slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly' as const,
         priority: 0.7,

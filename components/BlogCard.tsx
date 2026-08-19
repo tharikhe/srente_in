@@ -2,23 +2,48 @@
 
 import Link from 'next/link';
 import { ArrowRight, Calendar, User } from 'lucide-react';
-import { BlogPost } from '@/data/blog';
+import { urlFor } from '@/sanity/lib/image';
+
+interface SanityBlogPost {
+    _id: string;
+    title: string;
+    slug: { current: string };
+    excerpt: string;
+    date: string;
+    author: string;
+    image: any;
+    category: string;
+}
 
 interface BlogCardProps {
-    post: BlogPost;
+    post: SanityBlogPost;
 }
 
 export default function BlogCard({ post }: BlogCardProps) {
+    const imageUrl = post.image
+        ? urlFor(post.image).width(800).height(400).url()
+        : '';
+
+    const formattedDate = post.date
+        ? new Date(post.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+          })
+        : '';
+
     return (
-        <Link href={`/blog/${post.slug}`} className="group block h-full">
+        <Link href={`/blog/${post.slug.current}`} className="group block h-full">
             <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl hover:border-[#FFB800] transition-all duration-300 h-full flex flex-col">
                 {/* Image Container */}
                 <div className="relative h-48 overflow-hidden">
-                    <img
-                        src={post.image}
-                        alt={post.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                    {imageUrl && (
+                        <img
+                            src={imageUrl}
+                            alt={post.title}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                    )}
                     <div className="absolute top-4 left-4 bg-[#FFB800] text-[#1A1A1A] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                         {post.category}
                     </div>
@@ -29,7 +54,7 @@ export default function BlogCard({ post }: BlogCardProps) {
                     <div className="flex items-center gap-4 text-xs text-gray-500 mb-3">
                         <div className="flex items-center gap-1.5">
                             <Calendar className="w-3.5 h-3.5 text-[#1A1A1A]" />
-                            <span>{post.date}</span>
+                            <span>{formattedDate}</span>
                         </div>
                         <div className="flex items-center gap-1.5">
                             <User className="w-3.5 h-3.5 text-[#1A1A1A]" />

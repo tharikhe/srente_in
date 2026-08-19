@@ -1,5 +1,7 @@
-
 import { Metadata } from 'next';
+import { sanityFetch } from '@/sanity/lib/client';
+import { allEventsQuery } from '@/sanity/lib/queries';
+import EventsClient from './EventsClient';
 
 export const metadata: Metadata = {
     title: "Serente Electronics - Industry Events & Conferences",
@@ -10,8 +12,7 @@ export const metadata: Metadata = {
     },
 };
 
-import EventsClient from './EventsClient';
-
-export default function EventsPage() {
-    return <EventsClient />;
+export default async function EventsPage() {
+    const events = await sanityFetch<any[]>(allEventsQuery, undefined, []);
+    return <EventsClient events={events || []} />;
 }

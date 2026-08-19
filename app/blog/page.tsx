@@ -1,5 +1,5 @@
-
-import { getAllPosts } from '@/data/blog';
+import { sanityFetch } from '@/sanity/lib/client';
+import { allBlogPostsQuery } from '@/sanity/lib/queries';
 import BlogCard from '@/components/BlogCard';
 import { Newspaper } from 'lucide-react';
 
@@ -14,9 +14,8 @@ export const metadata: Metadata = {
     },
 };
 
-export default function BlogPage() {
-    const posts = getAllPosts();
-    // Latest blog posts fetched from data source
+export default async function BlogPage() {
+    const posts = await sanityFetch<any[]>(allBlogPostsQuery, undefined, []);
 
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
@@ -40,9 +39,15 @@ export default function BlogPage() {
             {/* Blog Grid */}
             <div className="container mx-auto px-4 -mt-10 relative z-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {posts.map((post) => (
-                        <BlogCard key={post.id} post={post} />
-                    ))}
+                    {posts && posts.length > 0 ? (
+                        posts.map((post: any) => (
+                            <BlogCard key={post._id} post={post} />
+                        ))
+                    ) : (
+                        <div className="col-span-full text-center py-12 text-gray-500 font-medium">
+                            No blog posts found. (If you haven't configured Sanity yet, please set up your environment variables).
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
