@@ -8,8 +8,19 @@ import { Calendar, MapPin, Clock, ArrowRight, Share2, Users, Star } from 'lucide
 const events = [
     {
         id: 1,
-        title: "Global Electronics Sourcing Expo 2025",
-        date: "March 15-18, 2025",
+        title: "Electronica South Asia 2026",
+        date: "September 16-18, 2026",
+        time: "09:00 AM - 06:00 PM",
+        location: "BEIC, Bengaluru, India",
+        description: "World's Leading Trade Fair for Electronics — Empowering Innovation. Come discover our newest innovations, solutions, and capabilities. Visit us at Booth H5.C125 to explore cutting-edge electronics and build the future of electronics together.",
+        image: "/images/electronica-south-asia-2026.jpg",
+        type: "Trade Fair",
+        attendees: "10000+"
+    },
+    {
+        id: 2,
+        title: "Global Electronics Sourcing Expo 2026",
+        date: "March 15-18, 2026",
         time: "09:00 AM - 06:00 PM",
         location: "Hong Kong Convention Center",
         description: "Join over 5,000 industry leaders for the premier electronics sourcing event in Asia. Discover the latest in semiconductors, passives, and supply chain innovation.",
@@ -18,9 +29,9 @@ const events = [
         attendees: "5000+"
     },
     {
-        id: 2,
+        id: 3,
         title: "Future of EV Components Summit",
-        date: "April 22, 2025",
+        date: "April 22, 2026",
         time: "10:00 AM - 04:00 PM",
         location: "Shanghai Grand Hyatt, China",
         description: "An exclusive deep dive into the evolving landscape of Electric Vehicle electronics. Learn about high-voltage connectors, power management ICs, and battery tech.",
@@ -29,9 +40,9 @@ const events = [
         attendees: "800+"
     },
     {
-        id: 3,
+        id: 4,
         title: "Serente Tech Workshop: Supply Chain Resilience",
-        date: "May 10, 2025",
+        date: "May 10, 2026",
         time: "02:00 PM - 05:00 PM",
         location: "Webinar (Online)",
         description: "Our quarterly workshop focusing on strategies to mitigate shortage risks. Expert panel discussions on inventory forecasting and alternative part sourcing.",
@@ -40,9 +51,9 @@ const events = [
         attendees: "1200+"
     },
     {
-        id: 4,
+        id: 5,
         title: "Shenzhen Electronics Fair",
-        date: "June 05-08, 2025",
+        date: "June 05-08, 2026",
         time: "09:00 AM - 05:00 PM",
         location: "Shenzhen Exhibition Center",
         description: "Explore the heart of the electronics world. Meet our team at Booth 4A-12 to discuss your component needs and see our latest stock arrivals.",
